@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILLPEDIA</title>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- Tailwind CSS untuk Styling Cepat & Bagus -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font utama: lebih jelas dan terasa seperti marketplace modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html,
+        body{
+            width:100%;
+            max-width:100%;
+            overflow-x:hidden;
+            font-family:"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+            font-synthesis:none;
+            text-rendering:optimizeLegibility;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        .gradient-bg{
+            /* Latar navy netral agar tampil seperti toko game, bukan tema AI neon. */
+            background-color:#0b1120;
+            background-image:linear-gradient(180deg,#0b1120 0%,#111827 48%,#0b1120 100%);
+        }
+
+        img{
+            display:block;
+            max-width:100%;
+        }
+
+        .scrollbar-hide{
+            -ms-overflow-style:none;
+            scrollbar-width:none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar{
+            display:none;
+        }
+
+        /* Scroll horizontal kategori game di mobile */
+        #pricelist{
+            width:100%;
+            min-width:0;
+        }
+
+        .game-tabs-scroll{
+            display:block;
+            position:relative;
+            width:100%;
+            min-width:0;
+            max-width:100%;
+            overflow-x:scroll !important;
+            overflow-y:hidden;
+            -webkit-overflow-scrolling:touch;
+            overscroll-behavior-x:contain;
+            touch-action:pan-y pinch-zoom;
+            scrollbar-width:none;
+            cursor:grab;
+            user-select:none;
+        }
+
+        .game-tabs-scroll.dragging{
+            cursor:grabbing;
+        }
+
+        .game-tabs-scroll::-webkit-scrollbar{
+            display:none;
+        }
+
+        .game-tabs-track{
+            display:inline-flex;
+            flex-wrap:nowrap;
+            width:max-content;
+            min-width:max-content;
+            padding-right:1rem;
+        }
+
+        .game-tabs-track > button{
+            flex:0 0 auto;
+            flex-shrink:0;
+            white-space:nowrap;
+            touch-action:manipulation;
+        }
+
+        /* Petunjuk navigasi kategori: hanya tampil saat masih ada tab tersembunyi. */
+        .game-tabs-wrapper{
+            position:relative;
+            width:100%;
+            min-width:0;
+        }
+
+        .game-tabs-arrow{
+            position:absolute;
+            top:calc(50% - .375rem);
+            z-index:10;
+            width:2.25rem;
+            height:2.25rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:9999px;
+            color:#67e8f9;
+            background:rgba(15,23,42,.9);
+            box-shadow:0 6px 18px rgba(2,6,23,.38);
+            backdrop-filter:blur(8px);
+            -webkit-backdrop-filter:blur(8px);
+            opacity:0;
+            visibility:hidden;
+            pointer-events:none;
+            transform:translateY(-50%) scale(.9);
+            transition:opacity .2s ease, transform .2s ease, visibility .2s ease, background .2s ease;
+            cursor:pointer;
+        }
+
+        .game-tabs-arrow:hover,
+        .game-tabs-arrow:active{
+            background:rgba(8,145,178,.95);
+            color:white;
+        }
+
+        .game-tabs-arrow.is-visible{
+            opacity:1;
+            visibility:visible;
+            pointer-events:auto;
+            transform:translateY(-50%) scale(1);
+        }
+
+        .game-tabs-arrow-left{ left:.15rem; }
+        .game-tabs-arrow-right{ right:.15rem; }
+
+        .game-tabs-arrow::before{
+            content:"";
+            position:absolute;
+            top:50%;
+            width:2.4rem;
+            height:3.2rem;
+            transform:translateY(-50%);
+            pointer-events:none;
+            z-index:-1;
+        }
+
+        .game-tabs-arrow-left::before{
+            left:-.2rem;
+            background:linear-gradient(to right, rgba(15,23,42,.98), rgba(15,23,42,0));
+        }
+
+        .game-tabs-arrow-right::before{
+            right:-.2rem;
+            background:linear-gradient(to left, rgba(15,23,42,.98), rgba(15,23,42,0));
+        }
+
+        @media (max-width:767px){
+            .game-tabs-track{
+                padding-right:3.25rem;
+            }
+        }
+
+        @media (min-width:768px){
+            .game-tabs-arrow{
+                display:none !important;
+            }
+        }
+
+        .product-card{
+            position:relative;
+            opacity:0;
+            transform:translateY(28px);
+            transform-origin:center;
+            will-change:transform;
+            transition:
+                opacity .5s ease,
+                transform .35s cubic-bezier(.2,.8,.2,1),
+                border-color .25s ease,
+                box-shadow .35s ease;
+        }
+
+        .product-card.show{
+            opacity:1;
+            transform:translateY(0) scale(1);
+        }
+
+        /* Saat cursor mendekat, kartu naik dan membesar secara halus. */
+        .product-card.show:hover{
+            z-index:20;
+            transform:translateY(-8px) scale(1.04);
+            border-color:rgba(34,211,238,.62);
+            box-shadow:0 20px 45px rgba(2,6,23,.55);
+        }
+
+        .product-image{
+            transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease;
+        }
+
+        .product-card.show:hover .product-image{
+            transform:scale(1.1);
+            filter:saturate(1.08) contrast(1.03);
+        }
+
+        .product-card.show:hover .product-title{
+            color:#ffffff;
+        }
+
+        @media (hover:none){
+            .product-card.show:hover{
+                transform:translateY(0) scale(1);
+                box-shadow:none;
+            }
+
+            .product-card.show:hover .product-image{
+                transform:none;
+                filter:none;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce){
+            .product-card,
+            .product-image{
+                transition:none !important;
+            }
+        }
+        
+
+
+        /* Panel pencarian dan kategori joki */
+        .joki-filter-panel{
+            position:relative;
+            border:1px solid rgba(148,163,184,.16);
+            border-radius:1.25rem;
+            background:rgba(15,23,42,.72);
+            box-shadow:0 18px 50px rgba(2,6,23,.24);
+            backdrop-filter:blur(14px);
+            -webkit-backdrop-filter:blur(14px);
+        }
+
+        .joki-filter-panel::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+            border-radius:inherit;
+            background:linear-gradient(135deg,rgba(34,211,238,.06),transparent 38%);
+        }
+
+        .joki-search-field{
+            position:relative;
+            display:flex;
+            align-items:center;
+            width:100%;
+            min-height:3rem;
+            padding-left:2.75rem;
+            border:1px solid rgba(100,116,139,.45);
+            border-radius:.9rem;
+            background:#0b1220;
+            transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+        }
+
+        .joki-search-field:focus-within{
+            border-color:rgba(34,211,238,.72);
+            background:#0d1628;
+            box-shadow:0 0 0 4px rgba(34,211,238,.1);
+        }
+
+        .joki-search-icon{
+            position:absolute;
+            left:1rem;
+            color:#64748b;
+            pointer-events:none;
+        }
+
+        .joki-search-input{
+            width:100%;
+            min-width:0;
+            padding:.8rem .5rem;
+            border:0;
+            outline:0;
+            color:#f8fafc;
+            background:transparent;
+            font-size:.84rem;
+            font-weight:500;
+        }
+
+        .joki-search-input::placeholder{
+            color:#64748b;
+        }
+
+        .joki-search-clear{
+            width:2.2rem;
+            height:2.2rem;
+            flex:0 0 2.2rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-right:.25rem;
+            border-radius:.7rem;
+            color:#94a3b8;
+            cursor:pointer;
+            transition:color .2s ease,background .2s ease;
+        }
+
+        .joki-search-clear:hover{
+            color:#f8fafc;
+            background:rgba(51,65,85,.72);
+        }
+
+        .joki-search-button{
+            min-height:3rem;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:.5rem;
+            padding:.75rem 1.15rem;
+            border-radius:.9rem;
+            color:#082f49;
+            background:#22d3ee;
+            font-size:.82rem;
+            font-weight:800;
+            cursor:pointer;
+            box-shadow:0 8px 20px rgba(6,182,212,.16);
+            transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+        }
+
+        .joki-search-button:hover{
+            transform:translateY(-1px);
+            background:#67e8f9;
+            box-shadow:0 12px 24px rgba(6,182,212,.22);
+        }
+
+        .joki-search-button:active{
+            transform:scale(.98);
+        }
+
+        .tab-btn{
+            position:relative;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:.45rem;
+            min-height:2.7rem;
+            padding:.65rem 1rem;
+            border:1px solid rgba(100,116,139,.28);
+            border-radius:.85rem;
+            color:#cbd5e1;
+            background:#182338;
+            font-size:.82rem;
+            font-weight:600;
+            box-shadow:0 4px 12px rgba(2,6,23,.12);
+            cursor:pointer;
+            transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+        }
+
+        .tab-btn:hover{
+            transform:translateY(-1px);
+            border-color:rgba(103,232,249,.4);
+            color:#f8fafc;
+            background:#22304a;
+        }
+
+        .tab-btn.active{
+            border-color:#67e8f9;
+            color:#082f49;
+            background:#22d3ee;
+            font-weight:800;
+            box-shadow:0 9px 22px rgba(6,182,212,.2);
+        }
+
+        .tab-btn.active::after{
+            content:"";
+            position:absolute;
+            left:50%;
+            bottom:-.45rem;
+            width:.32rem;
+            height:.32rem;
+            border-radius:9999px;
+            background:#67e8f9;
+            transform:translateX(-50%);
+            box-shadow:0 0 0 4px rgba(34,211,238,.08);
+        }
+
+        .search-result-info{
+            display:flex;
+            align-items:center;
+            justify-content:flex-start;
+            gap:1rem;
+            margin-top:.75rem;
+            padding:.75rem 1rem;
+            border:1px solid rgba(34,211,238,.16);
+            border-radius:.9rem;
+            color:#cbd5e1;
+            background:rgba(8,47,73,.22);
+            font-size:.78rem;
+        }
+
+        @media (max-width:640px){
+            .joki-search-button{
+                width:100%;
+            }
+
+            .tab-btn{
+                min-height:2.55rem;
+                padding:.6rem .9rem;
+                font-size:.78rem;
+            }
+        }
+
+        /* Pencarian dipindahkan ke navbar agar selalu mudah dijangkau. */
+        #product-container{
+            scroll-margin-top:9rem;
+        }
+
+        .navbar-search-form{
+            min-width:0;
+        }
+
+        .navbar-search-form .joki-search-field{
+            min-height:2.65rem;
+            border-color:rgba(100,116,139,.38);
+            background:rgba(2,6,23,.7);
+        }
+
+        .navbar-search-form .joki-search-input{
+            padding:.66rem .45rem;
+            font-size:.78rem;
+        }
+
+        .navbar-search-form .joki-search-button{
+            min-height:2.65rem;
+            padding:.65rem .9rem;
+            border-radius:.8rem;
+            white-space:nowrap;
+            box-shadow:none;
+        }
+
+        @media (max-width:767px){
+            #navbar{
+                padding:.4rem .55rem;
+                border-radius:1rem;
+            }
+
+            .navbar-search-form{
+                width:auto;
+                flex-basis:auto;
+            }
+
+            .navbar-search-form .joki-search-field{
+                min-height:2.25rem;
+                padding-left:2.15rem;
+                border-radius:.72rem;
+            }
+
+            .navbar-search-form .joki-search-icon{
+                left:.78rem;
+                font-size:.78rem;
+            }
+
+            .navbar-search-form .joki-search-input{
+                padding:.48rem .25rem;
+                font-size:.7rem;
+            }
+
+            .navbar-search-form .joki-search-clear{
+                width:1.75rem;
+                height:1.75rem;
+                flex-basis:1.75rem;
+                margin-right:.12rem;
+                border-radius:.55rem;
+                font-size:.72rem;
+            }
+
+            .navbar-search-form .joki-search-button{
+                width:auto;
+                min-height:2.25rem;
+                flex:0 0 2.25rem;
+                padding:.5rem;
+                border-radius:.72rem;
+                font-size:.75rem;
+            }
+
+            .navbar-search-form .joki-search-button span{
+                display:none;
+            }
+        }
+
+        @media (max-width:360px){
+            .navbar-search-form{
+                max-width:195px;
+            }
+
+            .navbar-search-form .joki-search-input{
+                font-size:.66rem;
+            }
+        }
+
+        /* Customer service WhatsApp mengambang */
+        .whatsapp-cs{
+            position:fixed;
+            left:1.5rem;
+            bottom:1.5rem;
+            z-index:55;
+            display:flex;
+            align-items:center;
+            gap:.75rem;
+            text-decoration:none;
+            color:inherit;
+            filter:drop-shadow(0 14px 24px rgba(2,6,23,.38));
+        }
+
+        .whatsapp-cs__bubble{
+            min-width:205px;
+            padding:.75rem .9rem;
+            border:1px solid rgba(148,163,184,.24);
+            border-radius:14px;
+            background:rgba(15,23,42,.96);
+            box-shadow:0 12px 30px rgba(2,6,23,.42);
+            transform:translateX(-4px);
+            transition:transform .25s ease,border-color .25s ease,background .25s ease;
+        }
+
+        .whatsapp-cs__title{
+            display:block;
+            color:#f8fafc;
+            font-size:.78rem;
+            font-weight:700;
+            line-height:1.2;
+        }
+
+        .whatsapp-cs__status{
+            display:flex;
+            align-items:center;
+            gap:.4rem;
+            margin-top:.25rem;
+            color:#94a3b8;
+            font-size:.68rem;
+            font-weight:500;
+        }
+
+        .whatsapp-cs__status::before{
+            content:"";
+            width:.45rem;
+            height:.45rem;
+            border-radius:9999px;
+            background:#22c55e;
+            box-shadow:0 0 0 3px rgba(34,197,94,.14);
+        }
+
+        .whatsapp-cs__icon{
+            position:relative;
+            width:3.75rem;
+            height:3.75rem;
+            flex:0 0 3.75rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border:3px solid rgba(255,255,255,.92);
+            border-radius:9999px;
+            background:#22c55e;
+            color:white;
+            font-size:1.8rem;
+            box-shadow:0 12px 28px rgba(34,197,94,.28);
+            transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
+        }
+
+        .whatsapp-cs__icon::before{
+            content:"";
+            position:absolute;
+            inset:-7px;
+            z-index:-1;
+            border:1px solid rgba(34,197,94,.5);
+            border-radius:9999px;
+            animation:whatsappPulse 2.2s ease-out infinite;
+        }
+
+        .whatsapp-cs:hover .whatsapp-cs__bubble{
+            transform:translateX(0);
+            border-color:rgba(34,197,94,.35);
+            background:#0f172a;
+        }
+
+        .whatsapp-cs:hover .whatsapp-cs__icon{
+            transform:translateY(-3px) scale(1.06);
+            background:#16a34a;
+            box-shadow:0 16px 32px rgba(34,197,94,.36);
+        }
+
+        .whatsapp-cs:focus-visible{
+            outline:3px solid rgba(34,197,94,.45);
+            outline-offset:5px;
+            border-radius:16px;
+        }
+
+        @keyframes whatsappPulse{
+            0%{ opacity:.6; transform:scale(.92); }
+            75%,100%{ opacity:0; transform:scale(1.28); }
+        }
+
+        @media (max-width:640px){
+            .whatsapp-cs{
+                left:1rem;
+                bottom:1rem;
+            }
+
+            .whatsapp-cs__bubble{
+                display:none;
+            }
+
+            .whatsapp-cs__icon{
+                width:3.5rem;
+                height:3.5rem;
+                flex-basis:3.5rem;
+                font-size:1.65rem;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce){
+            .whatsapp-cs__icon::before{
+                animation:none;
+            }
+
+            .whatsapp-cs__bubble,
+            .whatsapp-cs__icon{
+                transition:none;
+            }
+        }
+
+
+        /* =========================================================
+           MODAL ULASAN / KOMENTAR
+           ========================================================= */
+        .review-modal-panel{
+            width:min(960px,100%);
+            max-height:min(88vh,860px);
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
+            border:1px solid rgba(100,116,139,.34);
+            border-radius:1.25rem;
+            background:#0f172a;
+            box-shadow:0 30px 90px rgba(2,6,23,.72);
+        }
+
+        .review-scrollbar{
+            scrollbar-width:thin;
+            scrollbar-color:#334155 transparent;
+        }
+
+        .review-scrollbar::-webkit-scrollbar{
+            width:8px;
+        }
+
+        .review-scrollbar::-webkit-scrollbar-track{
+            background:transparent;
+        }
+
+        .review-scrollbar::-webkit-scrollbar-thumb{
+            border-radius:9999px;
+            background:#334155;
+        }
+
+        .review-star-button{
+            width:2.35rem;
+            height:2.35rem;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:.7rem;
+            color:#475569;
+            background:#111c30;
+            cursor:pointer;
+            transition:transform .16s ease,color .16s ease,background .16s ease;
+        }
+
+        .review-star-button:hover,
+        .review-star-button.is-active{
+            color:#facc15;
+            background:rgba(250,204,21,.1);
+            transform:translateY(-1px);
+        }
+
+        .review-star-button:focus-visible{
+            outline:2px solid #22d3ee;
+            outline-offset:2px;
+        }
+
+        .review-input{
+            width:100%;
+            border:1px solid rgba(100,116,139,.42);
+            border-radius:.8rem;
+            outline:0;
+            color:#f8fafc;
+            background:#0b1220;
+            transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+        }
+
+        .review-input:focus{
+            border-color:rgba(34,211,238,.72);
+            background:#0d1628;
+            box-shadow:0 0 0 3px rgba(34,211,238,.1);
+        }
+
+        .review-input::placeholder{
+            color:#64748b;
+        }
+
+        .review-avatar{
+            width:2.5rem;
+            height:2.5rem;
+            flex:0 0 2.5rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:9999px;
+            color:#a5f3fc;
+            background:rgba(8,145,178,.18);
+            font-size:.8rem;
+            font-weight:800;
+        }
+
+        body.modal-open{
+            overflow:hidden;
+        }
+
+        @media (max-width:767px){
+            .review-modal-panel{
+                max-height:92vh;
+                border-radius:1rem;
+            }
+
+            .review-star-button{
+                width:2.15rem;
+                height:2.15rem;
+            }
+        }
+
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- STICKY NAVBAR CONTAINER -->
+    <div class="fixed top-0 left-0 right-0 z-50 w-full px-4 pt-4">
+        <!-- NAV BAR -->
+         
+        <nav id="navbar" class="max-w-6xl mx-auto bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-2xl px-3 md:px-4 py-2 shadow-lg shadow-black/20 transition-all duration-300">
+            <div class="flex flex-nowrap items-center justify-between gap-2 md:gap-4">
+                <!-- Logo & Brand -->
+                <a href="#" class="order-1 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-xl font-extrabold tracking-wide text-white shrink-0">
+                    <img src="logo.png" alt="Logo Willpedia" class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain rounded-lg" onerror="this.src='https://via.placeholder.com/150'">
+                    <span>WILLPEDIA</span>
+                </a>
+
+                <!-- Pencarian paket joki: menggantikan posisi tombol Hubungi Admin -->
+                <form id="joki-search-form" class="navbar-search-form order-2 ml-auto flex flex-1 min-w-0 max-w-[220px] sm:max-w-[320px] md:flex-none md:w-[480px] lg:w-[560px] xl:w-[640px] items-center gap-1.5 md:gap-2" role="search">
+                    <label for="joki-search-input" class="sr-only">Cari paket joki</label>
+
+                    <div class="joki-search-field flex-1">
+                        <i class="joki-search-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+
+                        <input
+                            id="joki-search-input"
+                            class="joki-search-input"
+                            type="search"
+                            autocomplete="off"
+                            placeholder="Cari paket joki..."
+                        >
+
+                        <button
+                            id="joki-search-clear"
+                            type="button"
+                            class="joki-search-clear hidden"
+                            aria-label="Hapus pencarian"
+                            title="Hapus pencarian"
+                        >
+                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="joki-search-button" aria-label="Cari paket joki">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <span>Cari</span>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+        <!-- MAIN CONTENT WRAPPER -->
+    <main class="flex-1 w-full">
+
+        <!-- HERO -->
+        <section class="relative h-[430px] sm:h-[450px] md:h-[480px] lg:h-[500px] overflow-hidden">
+
+            <img
+                src="hebat.png"
+                alt="Hero Banner"
+                class="absolute inset-0 w-full h-full object-cover
+                    object-[center_20%]
+                    sm:object-[center_18%]
+                    md:object-[center_20%]
+                    select-none pointer-events-none"
+            >
+
+            <div class="absolute inset-0 bg-gradient-to-b
+                from-slate-950/25
+                via-slate-900/45
+                to-slate-900">
+            </div>
+
+            <div class="relative z-10 max-w-6xl mx-auto h-full px-4
+                        pt-32 sm:pt-32 md:pt-24
+                        pb-7 md:pb-10 flex items-center">
+
+                <div class="flex flex-col lg:flex-row items-center
+                            justify-center lg:justify-between
+                            w-full gap-5 md:gap-7">
+
+                    <div class="max-w-xl text-center lg:text-left">
+
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl
+                                font-extrabold leading-[1.12] text-white">
+                            Jasa Joki Game
+                            <br>
+                            <span class="text-cyan-400">Aman & Cepat</span>
+                        </h1>
+
+                        <p class="mt-3 text-slate-300 text-sm sm:text-base md:text-lg">
+                            Semua Kebutuhan Jokimu Ada Disini!
+                        </p>
+
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 w-full max-w-md lg:max-w-[430px]">
+
+                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10
+                                    rounded-xl md:rounded-2xl px-2 py-2.5
+                                    sm:px-3 sm:py-3 md:px-5 md:py-4 text-center">
+
+                            <div class="text-lg sm:text-xl md:text-2xl font-extrabold">
+                                1000+
+                            </div>
+
+                            <div class="text-[10px] sm:text-xs md:text-sm text-slate-300 mt-1">
+                                Pelanggan
+                            </div>
+
+                        </div>
+
+                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
+                            <div class="text-xl md:text-2xl font-extrabold text-white">
+                                2 Thn
+                            </div>
+                            <div class="text-[10px] md:text-xs text-slate-300 mt-1">
+                                Berdiri
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
+                            <div class="text-xl md:text-2xl font-extrabold text-white flex justify-center items-center gap-1">
+                                4.9
+                                <i class="fa-solid fa-star text-yellow-400 text-sm"></i>
+                            </div>
+                            <div class="text-[10px] md:text-xs text-slate-300 mt-1">
+                                Rating
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="absolute bottom-0 left-0 right-0 h-16 md:h-20 bg-gradient-to-t from-slate-900 to-transparent"></div>
+
+        </section>
+
+    </main>
+
+        <!-- PENCARIAN DAN TAB GAME -->
+    <section id="pricelist" class="max-w-6xl mx-auto px-4 mb-5 scroll-mt-28">
+
+        <div class="joki-filter-panel p-3.5 md:p-5">
+
+            <div class="relative z-[1]">
+
+                <div class="flex items-center gap-2 mb-2.5 text-xs text-slate-400">
+                    <i class="fa-solid fa-gamepad text-cyan-400" aria-hidden="true"></i>
+                    <span class="font-semibold">Filter berdasarkan game</span>
+                </div>
+
+                <div class="game-tabs-wrapper">
+
+                    <button id="game-tabs-prev" type="button" class="game-tabs-arrow game-tabs-arrow-left" aria-label="Geser kategori ke kiri">
+                        <i class="fa-solid fa-chevron-left text-xs" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="game-tabs-scroll scrollbar-hide" role="region" aria-label="Kategori game" tabindex="0">
+
+                        <div class="game-tabs-track gap-2 pb-3 pr-4">
+
+                            <button onclick="filterGame('Semua', this)" class="tab-btn flex-none active">
+                                <i class="fa-solid fa-border-all text-[11px]" aria-hidden="true"></i>
+                                Semua
+                            </button>
+
+                            <button onclick="filterGame('Genshin Impact', this)" class="tab-btn flex-none">
+                                Genshin Impact
+                            </button>
+
+                            <button onclick="filterGame('Honkai Star Rail', this)" class="tab-btn flex-none">
+                                Honkai Star Rail
+                            </button>
+
+                            <button onclick="filterGame('Zenless Zone Zero', this)" class="tab-btn flex-none">
+                                Zenless Zone Zero
+                            </button>
+
+                            <button onclick="filterGame('Wuthering Waves', this)" class="tab-btn flex-none">
+                                Wuthering Waves
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button id="game-tabs-next" type="button" class="game-tabs-arrow game-tabs-arrow-right" aria-label="Geser kategori ke kanan">
+                        <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+        <!-- WADAH SUB-KATEGORI DINAMIS -->
+    <div class="max-w-6xl mx-auto px-4 mb-6">
+            <div id="sub-category-container" class="flex flex-wrap gap-2 transition-all duration-300"></div>
+        </div>
+
+        <!-- LIST PRODUK / PRICELIST -->
+    <div class="max-w-6xl mx-auto px-4 mb-20">
+            <div id="product-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+                <div class="col-span-full text-center py-10 text-slate-400"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat pricelist...</div>
+            </div>
+    </div>    
+
+    <!-- MODAL RINGKASAN KERANJANG -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[85vh]">
+            <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+                <h3 class="font-bold text-slate-100 text-base flex items-center">
+                    <i class="fa-solid fa-shopping-cart text-cyan-400 mr-2"></i> Detail Keranjang Belanja
+                </h3>
+                <button onclick="closeCartModal()" class="text-slate-400 hover:text-rose-400 p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="modal-cart-items" class="p-4 overflow-y-auto space-y-3 flex-1 min-h-[150px]"></div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs md:text-sm text-slate-400 font-medium">Total Pembayaran:</span>
+                    <span id="modal-total-price" class="text-lg font-extrabold text-cyan-400">Rp 0</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="closeCartModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-3 rounded-xl transition cursor-pointer">
+                        Kembali Pilih
+                    </button>
+                    <button onclick="processCheckoutWA()" class="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold text-xs py-3 rounded-xl transition cursor-pointer flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp text-xs md:text-sm mr-1.5"></i> Order via WA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL ULASAN / KOMENTAR PRODUK -->
+    <div
+        id="review-modal"
+        class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/85 p-3 md:p-6 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="review-modal-title"
+    >
+        <div class="review-modal-panel">
+
+            <!-- Header modal -->
+            <div class="flex items-start justify-between gap-4 border-b border-slate-800 px-4 py-4 md:px-6">
+                <div class="min-w-0">
+                    <p class="mb-1 text-[11px] font-bold uppercase tracking-[.16em] text-cyan-400">
+                        Ulasan pelanggan
+                    </p>
+                    <h2 id="review-modal-title" class="truncate text-base font-extrabold text-white md:text-xl">
+                        Paket Joki
+                    </h2>
+                    <p id="review-product-meta" class="mt-1 truncate text-xs text-slate-400"></p>
+                </div>
+
+                <button
+                    id="review-modal-close"
+                    type="button"
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-800 hover:text-white cursor-pointer"
+                    aria-label="Tutup ulasan"
+                >
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="review-scrollbar grid min-h-0 flex-1 overflow-y-auto md:grid-cols-[330px_minmax(0,1fr)]">
+
+                <!-- Form komentar -->
+                <aside class="border-b border-slate-800 bg-slate-950/35 p-4 md:border-b-0 md:border-r md:p-6">
+                    <div class="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+                        <div class="flex items-end gap-2">
+                            <strong id="review-average" class="text-3xl font-extrabold text-white">0.0</strong>
+                            <span class="mb-1 text-xs text-slate-400">dari 5</span>
+                        </div>
+                        <div id="review-summary-stars" class="mt-1 flex gap-1 text-sm text-slate-600" aria-label="Rata-rata rating"></div>
+                        <p id="review-total" class="mt-2 text-xs text-slate-400">Belum ada ulasan</p>
+                    </div>
+
+                    <form id="review-form" class="mt-5 space-y-4">
+                        <input id="review-product-id" type="hidden">
+
+                        <div>
+                            <label for="review-name" class="mb-1.5 block text-xs font-bold text-slate-200">
+                                Nama kamu
+                            </label>
+                            <input
+                                id="review-name"
+                                name="nama"
+                                type="text"
+                                maxlength="50"
+                                autocomplete="name"
+                                class="review-input px-3 py-2.5 text-sm"
+                                placeholder="Contoh: Andi"
+                                required
+                            >
+                        </div>
+
+                        <fieldset>
+                            <legend class="mb-2 text-xs font-bold text-slate-200">Berikan rating</legend>
+                            <div id="review-star-input" class="flex gap-1.5" aria-label="Pilih rating 1 sampai 5">
+                                <button type="button" class="review-star-button" data-rating="1" aria-label="1 bintang"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" class="review-star-button" data-rating="2" aria-label="2 bintang"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" class="review-star-button" data-rating="3" aria-label="3 bintang"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" class="review-star-button" data-rating="4" aria-label="4 bintang"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" class="review-star-button" data-rating="5" aria-label="5 bintang"><i class="fa-solid fa-star"></i></button>
+                            </div>
+                            <input id="review-rating" name="rating" type="hidden" value="0">
+                            <p id="review-rating-label" class="mt-1.5 text-[11px] text-slate-500">Belum memilih rating</p>
+                        </fieldset>
+
+                        <div>
+                            <div class="mb-1.5 flex items-center justify-between gap-3">
+                                <label for="review-comment" class="text-xs font-bold text-slate-200">
+                                    Komentar
+                                </label>
+                                <span id="review-character-count" class="text-[10px] text-slate-500">0/300</span>
+                            </div>
+                            <textarea
+                                id="review-comment"
+                                name="komentar"
+                                rows="4"
+                                minlength="5"
+                                maxlength="300"
+                                class="review-input resize-none px-3 py-2.5 text-sm leading-relaxed"
+                                placeholder="Ceritakan pengalaman menggunakan layanan ini..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div id="review-form-notice" class="hidden rounded-lg border px-3 py-2.5 text-xs leading-relaxed" role="status"></div>
+
+                        <button
+                            id="review-submit-button"
+                            type="submit"
+                            class="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-400 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                        >
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                            <span>Kirim Ulasan</span>
+                        </button>
+                    </form>
+                </aside>
+
+                <!-- Daftar komentar -->
+                <section class="min-w-0 p-4 md:p-6">
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                        <h3 class="text-sm font-extrabold text-white md:text-base">Komentar pelanggan</h3>
+                        <button
+                            id="review-refresh-button"
+                            type="button"
+                            class="flex items-center gap-1.5 rounded-lg border border-slate-700 px-2.5 py-1.5 text-[11px] font-bold text-slate-300 transition hover:border-cyan-500/50 hover:text-cyan-300 cursor-pointer"
+                        >
+                            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                            Muat ulang
+                        </button>
+                    </div>
+
+                    <div id="review-list" class="space-y-3" aria-live="polite">
+                        <div class="flex items-center justify-center py-12 text-sm text-slate-400">
+                            <i class="fa-solid fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                            Memuat ulasan...
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FLOATING CART BUTTON -->
+    <div id="cart-float" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 hidden">
+        <button onclick="openCartModal()" class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-4 rounded-full shadow-2xl flex items-center gap-2 transition duration-300 transform hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-shopping-cart text-xl"></i>
+            <span id="cart-count" class="bg-white text-green-600 text-xs px-2 py-0.5 rounded-full font-black">0</span>
+            <span>Lihat Keranjang</span>
+        </button>
+    </div>
+
+
+
+    <!-- CUSTOMER SERVICE WHATSAPP MENGAMBANG -->
+    <a
+        class="whatsapp-cs"
+        href="https://wa.me/6281357706121?text=Halo%20Admin%20WILLPEDIA%2C%20saya%20butuh%20bantuan%20untuk%20memilih%20paket%20joki."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat Customer Service WILLPEDIA melalui WhatsApp"
+        title="Chat Customer Service"
+    >
+        <span class="whatsapp-cs__bubble" aria-hidden="true">
+            <span class="whatsapp-cs__title">Butuh bantuan memilih joki?</span>
+            <span class="whatsapp-cs__status">Customer Service siap membantu</span>
+        </span>
+
+        <span class="whatsapp-cs__icon" aria-hidden="true">
+            <i class="fa-brands fa-whatsapp"></i>
+        </span>
+    </a>
+
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed top-24 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+
+        const API_URL = "https://script.google.com/macros/s/AKfycbwHfinT9dRq9_ker8iCknUIoWoVLhG6BwGjY0FAJm-M2kcOrAC0SGaZMEJLyl8id-NX_Q/exec";
+        const WHATSAPP_NUMBER = '6281357706121'; 
+        
+        let allProducts = [];
+        let cart = [];
+        let currentGameFilter = 'Semua';
+        let currentSearchQuery = '';
+        let currentReviewProductId = '';
+        let selectedReviewRating = 0;
+        const reviewCache = new Map();
+
+        // Memastikan tab kategori bisa di-swipe pada HP dan di-drag pada emulator/desktop.
+        function enableGameTabsDrag() {
+            const scroller = document.querySelector('.game-tabs-scroll');
+            if (!scroller) return;
+
+            let activePointerId = null;
+            let startX = 0;
+            let startY = 0;
+            let startScrollLeft = 0;
+            let isDragging = false;
+            let suppressNextClick = false;
+
+            scroller.addEventListener('pointerdown', (event) => {
+                if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+                activePointerId = event.pointerId;
+                startX = event.clientX;
+                startY = event.clientY;
+                startScrollLeft = scroller.scrollLeft;
+                isDragging = false;
+            });
+
+            scroller.addEventListener('pointermove', (event) => {
+                if (event.pointerId !== activePointerId) return;
+
+                const deltaX = event.clientX - startX;
+                const deltaY = event.clientY - startY;
+
+                if (!isDragging) {
+                    if (Math.abs(deltaX) < 6 && Math.abs(deltaY) < 6) return;
+
+                    // Biarkan halaman tetap dapat digulir secara vertikal.
+                    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                        activePointerId = null;
+                        return;
+                    }
+
+                    isDragging = true;
+                    scroller.classList.add('dragging');
+
+                    try {
+                        scroller.setPointerCapture(event.pointerId);
+                    } catch (_) {}
+                }
+
+                scroller.scrollLeft = startScrollLeft - deltaX;
+                event.preventDefault();
+            });
+
+            const finishDrag = (event) => {
+                if (event.pointerId !== activePointerId) return;
+
+                if (isDragging) {
+                    suppressNextClick = true;
+                    window.setTimeout(() => {
+                        suppressNextClick = false;
+                    }, 120);
+                }
+
+                scroller.classList.remove('dragging');
+
+                try {
+                    if (scroller.hasPointerCapture(event.pointerId)) {
+                        scroller.releasePointerCapture(event.pointerId);
+                    }
+                } catch (_) {}
+
+                activePointerId = null;
+                isDragging = false;
+            };
+
+            scroller.addEventListener('pointerup', finishDrag);
+            scroller.addEventListener('pointercancel', finishDrag);
+
+            scroller.addEventListener('click', (event) => {
+                if (!suppressNextClick) return;
+                event.preventDefault();
+                event.stopPropagation();
+            }, true);
+        }
+
+        // Panah navigasi muncul hanya ketika masih ada tab di luar area yang terlihat.
+        function setupGameTabsNavigation() {
+            const scroller = document.querySelector('.game-tabs-scroll');
+            const previousButton = document.getElementById('game-tabs-prev');
+            const nextButton = document.getElementById('game-tabs-next');
+
+            if (!scroller || !previousButton || !nextButton) return;
+
+            let updateFrame = null;
+
+            const updateArrows = () => {
+                const maxScrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+                const hasOverflow = maxScrollLeft > 4;
+                const isAtStart = scroller.scrollLeft <= 4;
+                const isAtEnd = scroller.scrollLeft >= maxScrollLeft - 4;
+
+                previousButton.classList.toggle('is-visible', hasOverflow && !isAtStart);
+                nextButton.classList.toggle('is-visible', hasOverflow && !isAtEnd);
+            };
+
+            const requestArrowUpdate = () => {
+                if (updateFrame) cancelAnimationFrame(updateFrame);
+                updateFrame = requestAnimationFrame(updateArrows);
+            };
+
+            const getScrollDistance = () => Math.max(170, Math.round(scroller.clientWidth * 0.72));
+
+            previousButton.addEventListener('click', () => {
+                scroller.scrollBy({ left: -getScrollDistance(), behavior: 'smooth' });
+            });
+
+            nextButton.addEventListener('click', () => {
+                scroller.scrollBy({ left: getScrollDistance(), behavior: 'smooth' });
+            });
+
+            scroller.addEventListener('scroll', requestArrowUpdate, { passive: true });
+            window.addEventListener('resize', requestArrowUpdate, { passive: true });
+
+            if ('ResizeObserver' in window) {
+                const resizeObserver = new ResizeObserver(requestArrowUpdate);
+                resizeObserver.observe(scroller);
+                const track = scroller.querySelector('.game-tabs-track');
+                if (track) resizeObserver.observe(track);
+            }
+
+            requestArrowUpdate();
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark', 'text-cyan-400');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark', 'text-cyan-400');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 80) {
+
+                navbar.classList.remove(
+                    "bg-white/5",
+                    "backdrop-blur-md",
+                    "border-white/10"
+                );
+
+                navbar.classList.add(
+                    "bg-slate-950/95",
+                    "border-slate-800",
+                    "shadow-xl"
+                );
+
+            } else {
+
+                navbar.classList.remove(
+                    "bg-slate-950/95",
+                    "border-slate-800",
+                    "shadow-xl"
+                );
+
+                navbar.classList.add(
+                    "bg-white/5",
+                    "backdrop-blur-md",
+                    "border-white/10"
+                );
+
+            }
+
+        });
+
+        async function loadData() {
+            try {
+                const response = await fetch(API_URL);
+
+                allProducts = await response.json();
+
+                console.log(allProducts);
+
+                renderProducts(getHomeProducts());
+
+            } catch(err) {
+                console.error(err);
+            }
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            return shuffled;
+        }
+         
+
+        function getHomeProducts() {
+
+            const limitPerGame = 6;
+
+            const games = [...new Set(allProducts.map(p => p.Game))];
+
+            let result = [];
+
+            games.forEach(game => {
+
+                const products = allProducts.filter(p =>
+                    p.Game === game &&
+                    p.Status === "Ready"
+                );
+
+                result.push(...shuffleArray(products).slice(0, limitPerGame));
+
+            });
+
+            return shuffleArray(result);
+        }
+
+        function normalizeSearchText(value) {
+            return String(value || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .trim();
+        }
+
+        function escapeHTML(value) {
+            return String(value || "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function setActiveGameTab(activeButton) {
+            document.querySelectorAll(".tab-btn").forEach(button => {
+                button.classList.toggle("active", button === activeButton);
+            });
+        }
+
+        function resetSearchDisplay() {
+            currentSearchQuery = "";
+
+            const input = document.getElementById("joki-search-input");
+            const clearButton = document.getElementById("joki-search-clear");
+            const resultInfo = document.getElementById("search-result-info");
+
+            if (input) input.value = "";
+            if (clearButton) clearButton.classList.add("hidden");
+            if (resultInfo) resultInfo.classList.add("hidden");
+        }
+
+        function updateSearchResultInfo(total, query) {
+            const resultInfo = document.getElementById("search-result-info");
+            const resultText = document.getElementById("search-result-text");
+
+            if (!resultInfo || !resultText) return;
+
+            resultText.textContent = `${total} paket joki ditemukan untuk “${query}”`;
+            resultInfo.classList.remove("hidden");
+        }
+
+        function performJokiSearch(rawQuery) {
+            const query = String(rawQuery || "").trim();
+            const normalizedQuery = normalizeSearchText(query);
+
+            if (!normalizedQuery) {
+                clearJokiSearch();
+                return;
+            }
+
+            currentSearchQuery = query;
+            currentGameFilter = "Semua";
+
+            const allTab = document.querySelector(".tab-btn");
+            setActiveGameTab(allTab);
+            document.getElementById("sub-category-container").innerHTML = "";
+
+            const results = allProducts.filter(product => {
+                if (!product.ID || product.Status !== "Ready") return false;
+
+                const searchableContent = [
+                    product.Nama_Paket,
+                    product.Nama,
+                    product.Game,
+                    product.Kategori,
+                    product.Deskripsi,
+                    product.Rincian,
+                    product.ID
+                ].map(normalizeSearchText).join(" ");
+
+                return searchableContent.includes(normalizedQuery);
+            });
+
+            renderProducts(results);
+            updateSearchResultInfo(results.length, query);
+
+            document.getElementById("product-container")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function clearJokiSearch() {
+            resetSearchDisplay();
+            currentGameFilter = "Semua";
+
+            const allTab = document.querySelector(".tab-btn");
+            setActiveGameTab(allTab);
+            document.getElementById("sub-category-container").innerHTML = "";
+
+            renderProducts(getHomeProducts());
+        }
+
+        function setupJokiSearch() {
+            const form = document.getElementById("joki-search-form");
+            const input = document.getElementById("joki-search-input");
+            const clearButton = document.getElementById("joki-search-clear");
+
+            if (!form || !input || !clearButton) return;
+
+            form.addEventListener("submit", event => {
+                event.preventDefault();
+                performJokiSearch(input.value);
+            });
+
+            input.addEventListener("input", () => {
+                clearButton.classList.toggle("hidden", input.value.trim() === "");
+
+                if (input.value.trim() === "" && currentSearchQuery) {
+                    clearJokiSearch();
+                }
+            });
+
+            clearButton.addEventListener("click", () => {
+                clearJokiSearch();
+                input.focus();
+            });
+        }
+
+        function renderProducts(products) {
+
+        const container = document.getElementById("product-container");
+        container.innerHTML = "";
+
+        const validProducts = products.filter(p => p.ID);
+
+        if (validProducts.length === 0) {
+            const emptyMessage = currentSearchQuery
+                ? `Paket joki untuk pencarian <strong class="text-slate-200">“${escapeHTML(currentSearchQuery)}”</strong> belum ditemukan.`
+                : "Tidak ada paket joki yang berstatus Ready.";
+
+            container.innerHTML = `
+                <div class="col-span-full rounded-2xl border border-dashed border-slate-700 bg-slate-900/45 px-5 py-12 text-center">
+                    <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <p class="text-sm text-slate-400">${emptyMessage}</p>
+                    ${currentSearchQuery ? `
+                        <button type="button" onclick="clearJokiSearch()" class="mt-4 text-sm font-bold text-cyan-400 hover:text-cyan-300 cursor-pointer">
+                            Lihat semua paket
+                        </button>
+                    ` : ""}
+                </div>
+            `;
+            return;
+        }
+
+        validProducts.forEach(p => {
+
+            // Skip jika bukan Ready
+            if (p.Status !== "Ready") return;
+
+            const namaPaket = p.Nama_Paket || p.Nama || "Paket Joki";
+            const kategori = p.Kategori || "-";
+            const game = p.Game || "-";
+            const rincian = p.Deskripsi || p.Rincian || "Proses cepat & amanah.";
+            const gambar = p.Gambar || "https://via.placeholder.com/300";
+
+            const hargaAsli = parseFloat(p.Harga_Asli) || 0;
+            const hargaDiskon = parseFloat(p.Harga_Diskon) || 0;
+
+            const diskonPct =
+                hargaAsli > 0
+                    ? Math.round(((hargaAsli - hargaDiskon) / hargaAsli) * 100)
+                    : 0;
+
+            container.innerHTML += `
+                <article class="product-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between group">
+
+                    <div class="relative overflow-hidden">
+
+                        <img
+                            src="${gambar}"
+                            alt="${namaPaket}"
+                            class="product-image w-full h-32 md:h-40 object-cover"
+                            onerror="this.src='https://via.placeholder.com/300'">
+
+                        ${
+                            diskonPct > 0
+                            ? `
+                            <span class="absolute top-2 left-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                                -${diskonPct}%
+                            </span>
+                            `
+                            : ""
+                        }
+
+                        <span class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[10px] font-semibold px-2 py-1 rounded-lg">
+                            ${game}
+                        </span>
+
+                    </div>
+
+                    <div class="p-3 md:p-4 flex-1 flex flex-col justify-between gap-4">
+
+                        <div>
+
+                            <h3 class="product-title font-bold text-sm md:text-base leading-snug line-clamp-2 min-h-[42px] text-slate-100 transition-colors duration-200">
+                                ${namaPaket}
+                            </h3>
+
+                            <p class="text-xs text-slate-400 mt-1.5">
+                                <i class="fa-solid fa-tags text-cyan-500 mr-1"></i>
+                                ${kategori}
+                            </p>
+
+                            <div class="mt-2 pt-2 border-t border-slate-800/60">
+
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    <i class="fa-solid fa-circle-info text-cyan-500/70 mr-1"></i>
+                                    ${rincian}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            ${
+                                hargaAsli > 0
+                                ? `
+                                <p class="text-xs line-through text-slate-500">
+                                    Rp ${hargaAsli.toLocaleString("id-ID")}
+                                </p>
+                                `
+                                : ""
+                            }
+
+                            <p class="text-cyan-400 font-extrabold text-base md:text-lg">
+                                Rp ${hargaDiskon.toLocaleString("id-ID")}
+                            </p>
+
+                            <button
+                                type="button"
+                                data-review-id="${escapeHTML(String(p.ID))}"
+                                class="w-full mt-3 flex items-center justify-center gap-1.5 border border-slate-700 bg-slate-800/70 hover:border-yellow-400/50 hover:bg-slate-800 text-slate-200 hover:text-yellow-300 font-bold text-xs md:text-sm py-2.5 rounded-xl transition-all duration-200 cursor-pointer">
+
+                                <i class="fa-solid fa-star text-yellow-400" aria-hidden="true"></i>
+                                <span class="review-button-label">Lihat / Tulis Ulasan</span>
+
+                            </button>
+
+                            <button
+                                onclick="addToCart('${p.ID}')"
+                                class="w-full mt-2 bg-cyan-500 hover:bg-cyan-400 active:scale-[.98] text-slate-950 font-bold text-xs md:text-sm py-2.5 rounded-xl shadow-sm transition-all duration-200 cursor-pointer">
+
+                                <i class="fa-solid fa-cart-plus mr-1"></i>
+
+                                Tambah ke Keranjang
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            `;
+
+        });
+
+        // Jalankan animasi setelah semua card selesai dirender
+        animateCards();
+
+    }
+
+        function animateCards() {
+
+            const cards = document.querySelectorAll(".product-card");
+
+            const observer = new IntersectionObserver((entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            }, {
+                threshold: 0.15
+            });
+
+            cards.forEach((card, index) => {
+
+                card.style.transitionDelay = `${index * 70}ms`;
+
+                observer.observe(card);
+
+            });
+
+        }
+
+        function filterGame(gameName, element) {
+            resetSearchDisplay();
+            currentGameFilter = gameName;
+            setActiveGameTab(element);
+
+            if (gameName === "Semua") {
+                document.getElementById("sub-category-container").innerHTML = "";
+                renderProducts(getHomeProducts());
+            } else {
+                const filtered = allProducts.filter(product =>
+                    product.Game === gameName &&
+                    product.Status === "Ready"
+                );
+
+                renderSubCategories(filtered);
+                renderProducts(filtered);
+            }
+        }
+
+        
+        function renderSubCategories(products) {
+            const container = document.getElementById('sub-category-container');
+            container.innerHTML = '';
+            const categories = [...new Set(products.map(p => p.Kategori))].filter(c => c && c.trim() !== '');
+            if (categories.length <= 1) return;
+
+            container.innerHTML += `
+                <button onclick="filterSubCategory('Semua', this)" class="sub-tab-btn active bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer">
+                    Semua ${currentGameFilter}
+                </button>
+            `;
+            categories.forEach(cat => {
+                container.innerHTML += `
+                    <button onclick="filterSubCategory('${cat}', this)" class="sub-tab-btn bg-slate-900/60 text-slate-400 border border-slate-800 text-xs px-3 py-1.5 rounded-lg font-medium hover:text-white hover:border-slate-700 transition cursor-pointer">
+                        ${cat}
+                    </button>
+                `;
+            });
+        }
+
+        function filterSubCategory(categoryName, element) {
+            resetSearchDisplay();
+
+            document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500/30', 'font-semibold');
+                btn.classList.add('bg-slate-900/60', 'text-slate-400', 'border-slate-800', 'font-medium');
+            });
+            if (element) {
+                element.classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500/30', 'font-semibold');
+                element.classList.remove('bg-slate-900/60', 'text-slate-400', 'border-slate-800', 'font-medium');
+            }
+            const baseProducts = allProducts.filter(p => p.Game === currentGameFilter);
+            if (categoryName === 'Semua') {
+                renderProducts(baseProducts);
+            } else {
+                const deeplyFiltered = baseProducts.filter(p => p.Kategori === categoryName);
+                renderProducts(deeplyFiltered);
+            }
+        }
+
+
+
+        /* =========================================================
+           FITUR ULASAN / KOMENTAR
+           ========================================================= */
+
+        function getProductById(productId) {
+            return allProducts.find(product => String(product.ID || '') === String(productId || ''));
+        }
+
+        function createStarsHTML(rating) {
+            const roundedRating = Math.round(Number(rating) || 0);
+            let stars = '';
+
+            for (let number = 1; number <= 5; number += 1) {
+                const activeClass = number <= roundedRating ? 'text-yellow-400' : 'text-slate-700';
+                stars += `<i class="fa-solid fa-star ${activeClass}" aria-hidden="true"></i>`;
+            }
+
+            return stars;
+        }
+
+        function getReviewInitial(name) {
+            const normalizedName = String(name || 'P').trim();
+            return escapeHTML((normalizedName.charAt(0) || 'P').toUpperCase());
+        }
+
+        function updateReviewSummary(comments) {
+            const validRatings = comments
+                .map(comment => Number(comment.Rating || 0))
+                .filter(rating => rating >= 1 && rating <= 5);
+
+            const total = comments.length;
+            const average = validRatings.length
+                ? validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length
+                : 0;
+
+            document.getElementById('review-average').textContent = average.toFixed(1);
+            document.getElementById('review-summary-stars').innerHTML = createStarsHTML(average);
+            document.getElementById('review-total').textContent = total
+                ? `${total} ulasan telah disetujui`
+                : 'Belum ada ulasan yang disetujui';
+
+            document.querySelectorAll('[data-review-id]').forEach(button => {
+                if (button.dataset.reviewId !== currentReviewProductId) return;
+
+                const label = button.querySelector('.review-button-label');
+                if (label) {
+                    label.textContent = total ? `${total} Ulasan` : 'Jadi Pengulas Pertama';
+                }
+            });
+        }
+
+        function renderReviewList(comments) {
+            const container = document.getElementById('review-list');
+            if (!container) return;
+
+            updateReviewSummary(comments);
+
+            if (!comments.length) {
+                container.innerHTML = `
+                    <div class="rounded-2xl border border-dashed border-slate-700 bg-slate-900/45 px-5 py-12 text-center">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-yellow-400">
+                            <i class="fa-regular fa-star" aria-hidden="true"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-200">Belum ada ulasan</h4>
+                        <p class="mt-1 text-xs leading-relaxed text-slate-500">
+                            Jadilah pelanggan pertama yang memberikan pengalaman untuk game ini.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = comments.map(comment => {
+                const name = escapeHTML(comment.Nama || 'Pengguna');
+                const reviewText = escapeHTML(comment.Komentar || '');
+                const date = escapeHTML(comment.Tanggal || '');
+                const rating = Math.min(5, Math.max(0, Number(comment.Rating || 0)));
+
+                return `
+                    <article class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+                        <div class="flex items-start gap-3">
+                            <div class="review-avatar" aria-hidden="true">${getReviewInitial(name)}</div>
+
+                            <div class="min-w-0 flex-1">
+                                <div class="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+                                    <div>
+                                        <h4 class="text-sm font-bold text-slate-100">${name}</h4>
+                                        <div class="mt-1 flex gap-1 text-[11px]" aria-label="Rating ${rating} dari 5">
+                                            ${createStarsHTML(rating)}
+                                        </div>
+                                    </div>
+                                    <time class="text-[10px] text-slate-500">${date}</time>
+                                </div>
+
+                                <p class="mt-3 break-words text-xs leading-relaxed text-slate-300">${reviewText}</p>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function showReviewLoading() {
+            const container = document.getElementById('review-list');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="flex items-center justify-center py-12 text-sm text-slate-400">
+                    <i class="fa-solid fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                    Memuat ulasan...
+                </div>
+            `;
+        }
+
+        function showReviewLoadError(message) {
+            const container = document.getElementById('review-list');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="rounded-xl border border-rose-500/25 bg-rose-500/5 px-4 py-8 text-center">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-400" aria-hidden="true"></i>
+                    <p class="mt-2 text-sm font-bold text-slate-200">Ulasan belum dapat dimuat</p>
+                    <p class="mt-1 text-xs text-slate-500">${escapeHTML(message || 'Periksa koneksi lalu coba lagi.')}</p>
+                    <button type="button" onclick="loadProductReviews(currentReviewProductId, true)" class="mt-4 rounded-lg border border-slate-700 px-3 py-2 text-xs font-bold text-slate-300 hover:border-cyan-500/50 hover:text-cyan-300 cursor-pointer">
+                        Coba lagi
+                    </button>
+                </div>
+            `;
+        }
+
+        async function loadProductReviews(productId, forceRefresh = false) {
+            if (!productId) return;
+
+            if (!forceRefresh && reviewCache.has(productId)) {
+                renderReviewList(reviewCache.get(productId));
+                return;
+            }
+
+            showReviewLoading();
+
+            try {
+                const url = new URL(API_URL);
+                url.searchParams.set('action', 'comments');
+                url.searchParams.set('id_produk', productId);
+                url.searchParams.set('_', Date.now().toString());
+
+                const response = await fetch(url.toString(), { cache: 'no-store' });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message || 'API menolak permintaan ulasan.');
+                }
+
+                const comments = Array.isArray(result.comments) ? result.comments : [];
+                reviewCache.set(productId, comments);
+                renderReviewList(comments);
+
+            } catch (error) {
+                console.error('Gagal mengambil ulasan:', error);
+                showReviewLoadError('Pastikan Apps Script terbaru sudah di-deploy.');
+            }
+        }
+
+        function selectReviewRating(rating) {
+            const value = Number(rating);
+            if (!Number.isInteger(value) || value < 1 || value > 5) return;
+
+            selectedReviewRating = value;
+            document.getElementById('review-rating').value = String(value);
+
+            const ratingLabels = {
+                1: 'Sangat kurang',
+                2: 'Kurang',
+                3: 'Cukup',
+                4: 'Bagus',
+                5: 'Sangat bagus'
+            };
+
+            document.getElementById('review-rating-label').textContent = `${value}/5 — ${ratingLabels[value]}`;
+
+            document.querySelectorAll('.review-star-button').forEach(button => {
+                const buttonRating = Number(button.dataset.rating);
+                button.classList.toggle('is-active', buttonRating <= value);
+                button.setAttribute('aria-pressed', buttonRating <= value ? 'true' : 'false');
+            });
+        }
+
+        function resetReviewForm() {
+            const form = document.getElementById('review-form');
+            if (form) form.reset();
+
+            selectedReviewRating = 0;
+            document.getElementById('review-rating').value = '0';
+            document.getElementById('review-rating-label').textContent = 'Belum memilih rating';
+            document.getElementById('review-character-count').textContent = '0/300';
+            document.querySelectorAll('.review-star-button').forEach(button => {
+                button.classList.remove('is-active');
+                button.setAttribute('aria-pressed', 'false');
+            });
+            hideReviewNotice();
+        }
+
+        function showReviewNotice(message, type = 'success') {
+            const notice = document.getElementById('review-form-notice');
+            if (!notice) return;
+
+            notice.className = 'rounded-lg border px-3 py-2.5 text-xs leading-relaxed';
+
+            if (type === 'error') {
+                notice.classList.add('border-rose-500/30', 'bg-rose-500/10', 'text-rose-200');
+            } else {
+                notice.classList.add('border-emerald-500/30', 'bg-emerald-500/10', 'text-emerald-200');
+            }
+
+            notice.textContent = message;
+            notice.classList.remove('hidden');
+        }
+
+        function hideReviewNotice() {
+            const notice = document.getElementById('review-form-notice');
+            if (notice) notice.classList.add('hidden');
+        }
+
+        function setReviewSubmitting(isSubmitting) {
+            const button = document.getElementById('review-submit-button');
+            if (!button) return;
+
+            button.disabled = isSubmitting;
+            button.innerHTML = isSubmitting
+                ? '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i><span>Mengirim...</span>'
+                : '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i><span>Kirim Ulasan</span>';
+        }
+
+        function openReviewModal(productId) {
+            const product = getProductById(productId);
+            if (!product) {
+                showToast('Paket joki tidak ditemukan.');
+                return;
+            }
+
+            currentReviewProductId = String(productId);
+
+            const modal = document.getElementById('review-modal');
+            const gameName =product.Game || 'Game';
+
+            document.getElementById('review-modal-title').textContent = gameName;
+            document.getElementById('review-product-meta').textContent =`Ulasan berlaku untuk semua paket joki ${gameName}`;
+
+            resetReviewForm();
+            document.getElementById('review-product-id').value = currentReviewProductId;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('modal-open');
+
+            loadProductReviews(currentReviewProductId);
+
+            window.setTimeout(() => {
+                document.getElementById('review-name')?.focus();
+            }, 100);
+        }
+
+        function closeReviewModal() {
+            const modal = document.getElementById('review-modal');
+            if (!modal) return;
+
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('modal-open');
+            currentReviewProductId = '';
+        }
+
+        async function submitReview(event) {
+            event.preventDefault();
+            hideReviewNotice();
+
+            const productId = currentReviewProductId;
+            const name = document.getElementById('review-name').value.trim();
+            const comment = document.getElementById('review-comment').value.trim();
+
+            if (!productId) {
+                showReviewNotice('ID produk tidak ditemukan. Tutup modal lalu coba lagi.', 'error');
+                return;
+            }
+
+            if (name.length < 2) {
+                showReviewNotice('Nama minimal 2 karakter.', 'error');
+                document.getElementById('review-name').focus();
+                return;
+            }
+
+            if (selectedReviewRating < 1 || selectedReviewRating > 5) {
+                showReviewNotice('Silakan pilih rating 1 sampai 5 bintang.', 'error');
+                return;
+            }
+
+            if (comment.length < 5) {
+                showReviewNotice('Komentar minimal 5 karakter.', 'error');
+                document.getElementById('review-comment').focus();
+                return;
+            }
+
+            const body = new URLSearchParams({
+                action: 'add_comment',
+                id_produk: productId,
+                nama: name,
+                rating: String(selectedReviewRating),
+                komentar: comment
+            });
+
+            setReviewSubmitting(true);
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.message || 'Komentar gagal disimpan.');
+                }
+
+                showReviewNotice(result.message || 'Ulasan berhasil dikirim dan menunggu persetujuan admin.');
+
+                document.getElementById('review-comment').value = '';
+                document.getElementById('review-character-count').textContent = '0/300';
+                selectedReviewRating = 0;
+                document.getElementById('review-rating').value = '0';
+                document.getElementById('review-rating-label').textContent = 'Belum memilih rating';
+                document.querySelectorAll('.review-star-button').forEach(button => {
+                    button.classList.remove('is-active');
+                    button.setAttribute('aria-pressed', 'false');
+                });
+
+                // Hapus cache agar komentar yang sudah disetujui admin dapat dimuat ulang.
+                reviewCache.delete(productId);
+
+            } catch (error) {
+                console.error('Gagal mengirim ulasan:', error);
+                showReviewNotice('Ulasan gagal dikirim. Pastikan Apps Script terbaru sudah di-deploy dan akses web app diatur untuk semua pengguna.', 'error');
+            } finally {
+                setReviewSubmitting(false);
+            }
+        }
+
+        function setupReviewFeature() {
+            const modal = document.getElementById('review-modal');
+            const closeButton = document.getElementById('review-modal-close');
+            const refreshButton = document.getElementById('review-refresh-button');
+            const form = document.getElementById('review-form');
+            const commentInput = document.getElementById('review-comment');
+            const productContainer = document.getElementById('product-container');
+
+            if (!modal || !closeButton || !refreshButton || !form || !commentInput || !productContainer) return;
+
+            productContainer.addEventListener('click', event => {
+                const reviewButton = event.target.closest('[data-review-id]');
+                if (!reviewButton) return;
+                openReviewModal(reviewButton.dataset.reviewId);
+            });
+
+            document.querySelectorAll('.review-star-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    selectReviewRating(button.dataset.rating);
+                });
+            });
+
+            commentInput.addEventListener('input', () => {
+                document.getElementById('review-character-count').textContent = `${commentInput.value.length}/300`;
+            });
+
+            form.addEventListener('submit', submitReview);
+            closeButton.addEventListener('click', closeReviewModal);
+            refreshButton.addEventListener('click', () => {
+                if (currentReviewProductId) {
+                    reviewCache.delete(currentReviewProductId);
+                    loadProductReviews(currentReviewProductId, true);
+                }
+            });
+
+            modal.addEventListener('click', event => {
+                if (event.target === modal) closeReviewModal();
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeReviewModal();
+                }
+            });
+        }
+
+
+        function addToCart(id) {
+            const prod = allProducts.find(p => p.ID === id);
+            if (prod) {
+                cart.push(prod);
+                updateCartUI();
+                showToast(`🛒 ${prod.Nama_Paket} berhasil ditambahkan!`);
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 text-slate-100 text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transform translate-x-full opacity-0 transition-all duration-300 ease-out pointer-events-auto min-w-[200px] max-w-sm";
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-cyan-400 text-xs md:text-sm"></i>
+                <span class="flex-1 truncate">${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-x-full', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 3000);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            renderModalCart();
+        }
+
+        document.getElementById("product-container").className ="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4";
+
+        function updateCartUI() {
+            const cartCountElements = document.querySelectorAll('#cart-count');
+            const cartFloat = document.getElementById('cart-float');
+            cartCountElements.forEach(el => { el.innerText = cart.length; });
+            if (cart.length > 0) { cartFloat.classList.remove('hidden'); } 
+            else { cartFloat.classList.add('hidden'); closeCartModal(); }
+        }
+
+        function openCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.remove('hidden');
+            renderModalCart();
+        }
+
+        function closeCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.add('hidden');
+        }
+
+        function renderModalCart() {
+            const itemsContainer = document.getElementById('modal-cart-items');
+            const modalTotal = document.getElementById('modal-total-price');
+            itemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-10 text-center">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-slate-700 mb-2"></i>
+                        <p class="text-xs md:text-sm text-slate-500">Keranjang belanja kamu masih kosong.</p>
+                    </div>
+                `;
+                modalTotal.innerText = 'Rp 0';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                const harga = parseFloat(item.Harga_Diskon) || 0;
+                total += harga;
+                itemsContainer.innerHTML += `
+                    <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-xl flex items-center justify-between gap-3">
+                        <img src="${item.Gambar || 'https://via.placeholder.com/100'}" alt="${item.Nama_Paket}" class="w-12 h-12 rounded-lg object-cover border border-slate-800 flex-shrink-0" onerror="this.src='https://via.placeholder.com/100'">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-slate-200 truncate">${item.Nama_Paket}</h4>
+                            <p class="text-[10px] text-cyan-400 mt-0.5">${item.Game} • ${item.Kategori}</p>
+                            <p class="text-xs font-extrabold text-slate-100 mt-1">Rp ${harga.toLocaleString('id-ID')}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-slate-500 hover:text-rose-500 p-2 rounded-lg hover:bg-slate-900 transition flex-shrink-0 cursor-pointer">
+                            <i class="fa-solid fa-trash-can text-xs md:text-sm"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            modalTotal.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function processCheckoutWA() {
+            if (cart.length === 0) { alert("Keranjang kosong!"); return; }
+            let message = `*HALO ADMIN, SAYA MAU ORDER JOKI* 🛒\n\nRincian pesanan:\n===============================\n\n`;
+            let totalSemua = 0;
+            cart.forEach((item, index) => {
+                const harga = parseFloat(item.Harga_Diskon) || 0;
+                totalSemua += harga;
+                message += `*${index + 1}. ${item.Nama_Paket}*\n   • Game: ${item.Game}\n   • Harga: Rp ${harga.toLocaleString('id-ID')}\n\n`;
+            });
+            message += `===============================\n*Total:* Rp ${totalSemua.toLocaleString('id-ID')}\n\nMohon langkah selanjutnya min.`;
+            window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function renderQueue(data) {
+            const container = document.getElementById('queue-container');
+            const validQueue = data.filter(q => q.Nickname && q.Nickname.trim() !== '');
+            if (validQueue.length === 0) {
+                container.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Belum ada antrian saat ini.</td></tr>`;
+                return;
+            }
+            container.innerHTML = '';
+            validQueue.forEach(q => {
+                container.innerHTML += `
+                    <tr class="border-b border-slate-800/50 hover:bg-slate-800/30">
+                        <td class="p-4">${q.No || '-'}</td>
+                        <td class="p-4 font-semibold">${q.Nickname}</td>
+                        <td class="p-4 text-slate-400">${q.Game || '-'}</td>
+                        <td class="p-4"><span class="px-2 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-cyan-400">${q.Status || 'Proses'}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        window.addEventListener('load', () => {
+            enableGameTabsDrag();
+            setupGameTabsNavigation();
+            setupJokiSearch();
+            setupReviewFeature();
+            loadData();
+        });
+    </script>
+    <!-- FOOTER -->
+        <footer class="bg-slate-950 border-t border-slate-800 mt-20">
+            <div class="max-w-6xl mx-auto px-6 py-12">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+                    <!-- Brand -->
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <img src="logo.png"
+                                    alt="Logo Willpedia"
+                                    class="h-12 md:h-16 w-auto mt-1"
+                                    onerror="this.src='https://via.placeholder.com/150'">
+                            <div>
+                                <h3 class="text-xl font-black text-white">
+                                    WILLPEDIA
+                                </h3>
+                                <p class="text-xs md:text-sm text-cyan-400">
+                                    Joki Game Terpercaya Sejak 2024
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-400 text-xs md:text-sm mt-4 leading-relaxed">
+                            Melayani berbagai kebutuhan joki game dengan proses cepat,
+                            aman, dan harga terbaik.
+                        </p>
+                    </div>
+
+                    <!-- Kontak -->
+                    <div>
+                        <h4 class="text-white font-bold mb-4">
+                            Kontak
+                        </h4>
+
+                        <div class="space-y-3">
+
+                            <a href="https://wa.me/6281357706121"
+                            target="_blank"
+                            class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition">
+
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                WhatsApp
+                            </a>
+
+                            <a href="mailto:willpedia.id@gmail.com"
+                            class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition">
+
+                                <i class="fas fa-envelope text-xl"></i>
+                                Email
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <!-- Sosial Media -->
+                    <div>
+                        <h4 class="text-white font-bold mb-4">
+                            Ikuti Kami
+                        </h4>
+
+                        <div class="flex gap-4 text-2xl">
+
+                            <a href="https://tiktok.com/@willpedia.id"
+                            target="_blank"
+                            class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+
+                            <a href="https://instagram.com/willpedia.id"
+                            target="_blank"
+                            class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+
+                            <a href="https://www.youtube.com/@willpedia"
+                            target="_blank"
+                            class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="border-t border-slate-800 mt-10 pt-6 text-center text-slate-500 text-xs md:text-sm">
+                    © 2025 <span class="text-cyan-400 font-bold">WILLPEDIA</span>.
+                    All Rights Reserved.
+                </div>
+
+            </div>
+        </footer>
+</body>
+</html>
