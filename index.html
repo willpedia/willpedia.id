@@ -4,747 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WILLPEDIA</title>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <!-- Tailwind CSS untuk Styling Cepat & Bagus -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Font utama: lebih jelas dan terasa seperti marketplace modern -->
+    <link rel="icon" type="image/png" href="logowill.png">
+    <link rel="shortcut icon" href="logowill.png">
+    <link rel="apple-touch-icon" href="logowill.png">
+<!-- Font utama: lebih jelas dan terasa seperti marketplace modern -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome untuk Icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS dikompilasi statis agar browser tidak menjalankan Tailwind compiler -->
+    <style>/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-translate-x:0;--tw-translate-y:0;--tw-translate-z:0;--tw-rotate-x:initial;--tw-rotate-y:initial;--tw-rotate-z:initial;--tw-skew-x:initial;--tw-skew-y:initial;--tw-space-y-reverse:0;--tw-border-style:solid;--tw-gradient-position:initial;--tw-gradient-from:#0000;--tw-gradient-via:#0000;--tw-gradient-to:#0000;--tw-gradient-stops:initial;--tw-gradient-via-stops:initial;--tw-gradient-from-position:0%;--tw-gradient-via-position:50%;--tw-gradient-to-position:100%;--tw-leading:initial;--tw-font-weight:initial;--tw-tracking:initial;--tw-shadow:0 0 #0000;--tw-shadow-color:initial;--tw-shadow-alpha:100%;--tw-inset-shadow:0 0 #0000;--tw-inset-shadow-color:initial;--tw-inset-shadow-alpha:100%;--tw-ring-color:initial;--tw-ring-shadow:0 0 #0000;--tw-inset-ring-color:initial;--tw-inset-ring-shadow:0 0 #0000;--tw-ring-inset:initial;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-offset-shadow:0 0 #0000;--tw-duration:initial;--tw-ease:initial;--tw-scale-x:1;--tw-scale-y:1;--tw-scale-z:1}}}@layer theme{:root,:host{--font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font-mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;--color-yellow-300:oklch(90.5% .182 98.111);--color-yellow-400:oklch(85.2% .199 91.936);--color-green-500:oklch(72.3% .219 149.579);--color-green-600:oklch(62.7% .194 149.214);--color-emerald-200:oklch(90.5% .093 164.15);--color-emerald-500:oklch(69.6% .17 162.48);--color-cyan-300:oklch(86.5% .127 207.078);--color-cyan-400:oklch(78.9% .154 211.53);--color-cyan-500:oklch(71.5% .143 215.221);--color-cyan-600:oklch(60.9% .126 221.723);--color-rose-200:oklch(89.2% .058 10.001);--color-rose-400:oklch(71.2% .194 13.428);--color-rose-500:oklch(64.5% .246 16.439);--color-slate-100:oklch(96.8% .007 247.896);--color-slate-200:oklch(92.9% .013 255.508);--color-slate-300:oklch(86.9% .022 252.894);--color-slate-400:oklch(70.4% .04 256.788);--color-slate-500:oklch(55.4% .046 257.417);--color-slate-600:oklch(44.6% .043 257.281);--color-slate-700:oklch(37.2% .044 257.287);--color-slate-800:oklch(27.9% .041 260.031);--color-slate-900:oklch(20.8% .042 265.755);--color-slate-950:oklch(12.9% .042 264.695);--color-black:#000;--color-white:#fff;--spacing:.25rem;--container-sm:24rem;--container-md:28rem;--container-xl:36rem;--container-6xl:72rem;--text-xs:.75rem;--text-xs--line-height:calc(1 / .75);--text-sm:.875rem;--text-sm--line-height:calc(1.25 / .875);--text-base:1rem;--text-base--line-height:calc(1.5 / 1);--text-lg:1.125rem;--text-lg--line-height:calc(1.75 / 1.125);--text-xl:1.25rem;--text-xl--line-height:calc(1.75 / 1.25);--text-2xl:1.5rem;--text-2xl--line-height:calc(2 / 1.5);--text-3xl:1.875rem;--text-3xl--line-height:calc(2.25 / 1.875);--text-4xl:2.25rem;--text-4xl--line-height:calc(2.5 / 2.25);--text-5xl:3rem;--text-5xl--line-height:1;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;--font-weight-black:900;--tracking-wide:.025em;--leading-snug:1.375;--leading-relaxed:1.625;--radius-md:.375rem;--radius-lg:.5rem;--radius-xl:.75rem;--radius-2xl:1rem;--ease-out:cubic-bezier(0, 0, .2, 1);--default-transition-duration:.15s;--default-transition-timing-function:cubic-bezier(.4, 0, .2, 1);--default-font-family:var(--font-sans);--default-mono-font-family:var(--font-mono)}}@layer base{*,:after,:before,::backdrop{box-sizing:border-box;border:0 solid;margin:0;padding:0}::file-selector-button{box-sizing:border-box;border:0 solid;margin:0;padding:0}html,:host{-webkit-text-size-adjust:100%;tab-size:4;line-height:1.5;font-family:var(--default-font-family,ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");font-feature-settings:var(--default-font-feature-settings,normal);font-variation-settings:var(--default-font-variation-settings,normal);-webkit-tap-highlight-color:transparent}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,samp,pre{font-family:var(--default-mono-font-family,ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);font-feature-settings:var(--default-mono-font-feature-settings,normal);font-variation-settings:var(--default-mono-font-variation-settings,normal);font-size:1em}small{font-size:80%}sub,sup{vertical-align:baseline;font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}:-moz-focusring{outline:auto}progress{vertical-align:baseline}summary{display:list-item}ol,ul,menu{list-style:none}img,svg,video,canvas,audio,iframe,embed,object{vertical-align:middle;display:block}img,video{max-width:100%;height:auto}button,input,select,optgroup,textarea{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}::file-selector-button{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}:where(select:is([multiple],[size])) optgroup{font-weight:bolder}:where(select:is([multiple],[size])) optgroup option{padding-inline-start:20px}::file-selector-button{margin-inline-end:4px}::placeholder{opacity:1}@supports (not ((-webkit-appearance:-apple-pay-button))) or (contain-intrinsic-size:1px){::placeholder{color:currentColor}@supports (color:color-mix(in lab, red, red)){::placeholder{color:color-mix(in oklab, currentcolor 50%, transparent)}}}textarea{resize:vertical}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-date-and-time-value{min-height:1lh;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-datetime-edit{padding-block:0}::-webkit-datetime-edit-year-field{padding-block:0}::-webkit-datetime-edit-month-field{padding-block:0}::-webkit-datetime-edit-day-field{padding-block:0}::-webkit-datetime-edit-hour-field{padding-block:0}::-webkit-datetime-edit-minute-field{padding-block:0}::-webkit-datetime-edit-second-field{padding-block:0}::-webkit-datetime-edit-millisecond-field{padding-block:0}::-webkit-datetime-edit-meridiem-field{padding-block:0}:-moz-ui-invalid{box-shadow:none}button,input:where([type=button],[type=reset],[type=submit]){appearance:button}::file-selector-button{appearance:button}::-webkit-inner-spin-button{height:auto}::-webkit-outer-spin-button{height:auto}[hidden]:where(:not([hidden=until-found])){display:none!important}}@layer components;@layer utilities{.pointer-events-auto{pointer-events:auto}.pointer-events-none{pointer-events:none}.sr-only{clip-path:inset(50%);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}.absolute{position:absolute}.fixed{position:fixed}.relative{position:relative}.inset-0{inset:0}.top-0{top:0}.top-2{top:calc(var(--spacing) * 2)}.top-24{top:calc(var(--spacing) * 24)}.right-0{right:0}.right-2{right:calc(var(--spacing) * 2)}.right-4{right:calc(var(--spacing) * 4)}.right-6{right:calc(var(--spacing) * 6)}.bottom-0{bottom:0}.bottom-2{bottom:calc(var(--spacing) * 2)}.bottom-4{bottom:calc(var(--spacing) * 4)}.left-0{left:0}.left-2{left:calc(var(--spacing) * 2)}.z-10{z-index:10}.z-50{z-index:50}.z-\[1\]{z-index:1}.z-\[70\]{z-index:70}.order-1{order:1}.order-2{order:2}.col-span-full{grid-column:1/-1}.container{width:100%}@media (min-width:40rem){.container{max-width:40rem}}@media (min-width:48rem){.container{max-width:48rem}}@media (min-width:64rem){.container{max-width:64rem}}@media (min-width:80rem){.container{max-width:80rem}}@media (min-width:96rem){.container{max-width:96rem}}.mx-auto{margin-inline:auto}.mt-0\.5{margin-top:calc(var(--spacing) * .5)}.mt-1{margin-top:var(--spacing)}.mt-1\.5{margin-top:calc(var(--spacing) * 1.5)}.mt-2{margin-top:calc(var(--spacing) * 2)}.mt-3{margin-top:calc(var(--spacing) * 3)}.mt-4{margin-top:calc(var(--spacing) * 4)}.mt-5{margin-top:calc(var(--spacing) * 5)}.mt-10{margin-top:calc(var(--spacing) * 10)}.mt-20{margin-top:calc(var(--spacing) * 20)}.mr-1{margin-right:var(--spacing)}.mr-1\.5{margin-right:calc(var(--spacing) * 1.5)}.mr-2{margin-right:calc(var(--spacing) * 2)}.mb-1{margin-bottom:var(--spacing)}.mb-1\.5{margin-bottom:calc(var(--spacing) * 1.5)}.mb-2{margin-bottom:calc(var(--spacing) * 2)}.mb-2\.5{margin-bottom:calc(var(--spacing) * 2.5)}.mb-3{margin-bottom:calc(var(--spacing) * 3)}.mb-4{margin-bottom:calc(var(--spacing) * 4)}.mb-5{margin-bottom:calc(var(--spacing) * 5)}.mb-6{margin-bottom:calc(var(--spacing) * 6)}.mb-20{margin-bottom:calc(var(--spacing) * 20)}.ml-auto{margin-left:auto}.line-clamp-2{-webkit-line-clamp:2;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-8{height:calc(var(--spacing) * 8)}.h-9{height:calc(var(--spacing) * 9)}.h-12{height:calc(var(--spacing) * 12)}.h-16{height:calc(var(--spacing) * 16)}.h-32{height:calc(var(--spacing) * 32)}.h-\[430px\]{height:430px}.h-full{height:100%}.max-h-\[85vh\]{max-height:85vh}.min-h-0{min-height:0}.min-h-\[42px\]{min-height:42px}.min-h-\[150px\]{min-height:150px}.min-h-screen{min-height:100vh}.w-8{width:calc(var(--spacing) * 8)}.w-9{width:calc(var(--spacing) * 9)}.w-12{width:calc(var(--spacing) * 12)}.w-auto{width:auto}.w-full{width:100%}.max-w-6xl{max-width:var(--container-6xl)}.max-w-\[220px\]{max-width:220px}.max-w-md{max-width:var(--container-md)}.max-w-sm{max-width:var(--container-sm)}.max-w-xl{max-width:var(--container-xl)}.min-w-0{min-width:0}.min-w-\[200px\]{min-width:200px}.flex-1{flex:1}.flex-none{flex:none}.flex-shrink-0,.shrink-0{flex-shrink:0}.translate-x-full{--tw-translate-x:100%;translate:var(--tw-translate-x) var(--tw-translate-y)}.transform{transform:var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,)}.cursor-pointer{cursor:pointer}.resize{resize:both}.resize-none{resize:none}.scroll-mt-28{scroll-margin-top:calc(var(--spacing) * 28)}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-nowrap{flex-wrap:nowrap}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.items-end{align-items:flex-end}.items-start{align-items:flex-start}.justify-between{justify-content:space-between}.justify-center{justify-content:center}.gap-1{gap:var(--spacing)}.gap-1\.5{gap:calc(var(--spacing) * 1.5)}.gap-2{gap:calc(var(--spacing) * 2)}.gap-3{gap:calc(var(--spacing) * 3)}.gap-4{gap:calc(var(--spacing) * 4)}.gap-5{gap:calc(var(--spacing) * 5)}.gap-10{gap:calc(var(--spacing) * 10)}:where(.space-y-3>:not(:last-child)){--tw-space-y-reverse:0;margin-block-start:calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));margin-block-end:calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)))}:where(.space-y-4>:not(:last-child)){--tw-space-y-reverse:0;margin-block-start:calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));margin-block-end:calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)))}.gap-x-3{column-gap:calc(var(--spacing) * 3)}.gap-y-1{row-gap:var(--spacing)}.truncate{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.overflow-hidden{overflow:hidden}.overflow-x-hidden{overflow-x:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:var(--radius-2xl)}.rounded-full{border-radius:3.40282e38px}.rounded-lg{border-radius:var(--radius-lg)}.rounded-md{border-radius:var(--radius-md)}.rounded-xl{border-radius:var(--radius-xl)}.border{border-style:var(--tw-border-style);border-width:1px}.border-t{border-top-style:var(--tw-border-style);border-top-width:1px}.border-b{border-bottom-style:var(--tw-border-style);border-bottom-width:1px}.border-dashed{--tw-border-style:dashed;border-style:dashed}.border-cyan-500\/30{border-color:#00b7d74d}@supports (color:color-mix(in lab, red, red)){.border-cyan-500\/30{border-color:color-mix(in oklab, var(--color-cyan-500) 30%, transparent)}}.border-emerald-500\/30{border-color:#00bb7f4d}@supports (color:color-mix(in lab, red, red)){.border-emerald-500\/30{border-color:color-mix(in oklab, var(--color-emerald-500) 30%, transparent)}}.border-rose-500\/20{border-color:#ff235733}@supports (color:color-mix(in lab, red, red)){.border-rose-500\/20{border-color:color-mix(in oklab, var(--color-rose-500) 20%, transparent)}}.border-rose-500\/25{border-color:#ff235740}@supports (color:color-mix(in lab, red, red)){.border-rose-500\/25{border-color:color-mix(in oklab, var(--color-rose-500) 25%, transparent)}}.border-rose-500\/30{border-color:#ff23574d}@supports (color:color-mix(in lab, red, red)){.border-rose-500\/30{border-color:color-mix(in oklab, var(--color-rose-500) 30%, transparent)}}.border-slate-700{border-color:var(--color-slate-700)}.border-slate-800{border-color:var(--color-slate-800)}.border-slate-800\/50{border-color:#1d293d80}@supports (color:color-mix(in lab, red, red)){.border-slate-800\/50{border-color:color-mix(in oklab, var(--color-slate-800) 50%, transparent)}}.border-slate-800\/60{border-color:#1d293d99}@supports (color:color-mix(in lab, red, red)){.border-slate-800\/60{border-color:color-mix(in oklab, var(--color-slate-800) 60%, transparent)}}.border-white\/10{border-color:#ffffff1a}@supports (color:color-mix(in lab, red, red)){.border-white\/10{border-color:color-mix(in oklab, var(--color-white) 10%, transparent)}}.bg-cyan-500{background-color:var(--color-cyan-500)}.bg-cyan-500\/20{background-color:#00b7d733}@supports (color:color-mix(in lab, red, red)){.bg-cyan-500\/20{background-color:color-mix(in oklab, var(--color-cyan-500) 20%, transparent)}}.bg-emerald-500\/10{background-color:#00bb7f1a}@supports (color:color-mix(in lab, red, red)){.bg-emerald-500\/10{background-color:color-mix(in oklab, var(--color-emerald-500) 10%, transparent)}}.bg-green-500{background-color:var(--color-green-500)}.bg-rose-500{background-color:var(--color-rose-500)}.bg-rose-500\/5{background-color:#ff23570d}@supports (color:color-mix(in lab, red, red)){.bg-rose-500\/5{background-color:color-mix(in oklab, var(--color-rose-500) 5%, transparent)}}.bg-rose-500\/10{background-color:#ff23571a}@supports (color:color-mix(in lab, red, red)){.bg-rose-500\/10{background-color:color-mix(in oklab, var(--color-rose-500) 10%, transparent)}}.bg-slate-800{background-color:var(--color-slate-800)}.bg-slate-800\/70{background-color:#1d293db3}@supports (color:color-mix(in lab, red, red)){.bg-slate-800\/70{background-color:color-mix(in oklab, var(--color-slate-800) 70%, transparent)}}.bg-slate-900{background-color:var(--color-slate-900)}.bg-slate-900\/45{background-color:#0f172b73}@supports (color:color-mix(in lab, red, red)){.bg-slate-900\/45{background-color:color-mix(in oklab, var(--color-slate-900) 45%, transparent)}}.bg-slate-900\/50{background-color:#0f172b80}@supports (color:color-mix(in lab, red, red)){.bg-slate-900\/50{background-color:color-mix(in oklab, var(--color-slate-900) 50%, transparent)}}.bg-slate-900\/60{background-color:#0f172b99}@supports (color:color-mix(in lab, red, red)){.bg-slate-900\/60{background-color:color-mix(in oklab, var(--color-slate-900) 60%, transparent)}}.bg-slate-900\/70{background-color:#0f172bb3}@supports (color:color-mix(in lab, red, red)){.bg-slate-900\/70{background-color:color-mix(in oklab, var(--color-slate-900) 70%, transparent)}}.bg-slate-900\/90{background-color:#0f172be6}@supports (color:color-mix(in lab, red, red)){.bg-slate-900\/90{background-color:color-mix(in oklab, var(--color-slate-900) 90%, transparent)}}.bg-slate-950{background-color:var(--color-slate-950)}.bg-slate-950\/35{background-color:#02061859}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/35{background-color:color-mix(in oklab, var(--color-slate-950) 35%, transparent)}}.bg-slate-950\/40{background-color:#02061866}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/40{background-color:color-mix(in oklab, var(--color-slate-950) 40%, transparent)}}.bg-slate-950\/55{background-color:#0206188c}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/55{background-color:color-mix(in oklab, var(--color-slate-950) 55%, transparent)}}.bg-slate-950\/60{background-color:#02061899}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/60{background-color:color-mix(in oklab, var(--color-slate-950) 60%, transparent)}}.bg-slate-950\/85{background-color:#020618d9}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/85{background-color:color-mix(in oklab, var(--color-slate-950) 85%, transparent)}}.bg-slate-950\/90{background-color:#020618e6}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/90{background-color:color-mix(in oklab, var(--color-slate-950) 90%, transparent)}}.bg-slate-950\/95{background-color:#020618f2}@supports (color:color-mix(in lab, red, red)){.bg-slate-950\/95{background-color:color-mix(in oklab, var(--color-slate-950) 95%, transparent)}}.bg-white{background-color:var(--color-white)}.bg-white\/5{background-color:#ffffff0d}@supports (color:color-mix(in lab, red, red)){.bg-white\/5{background-color:color-mix(in oklab, var(--color-white) 5%, transparent)}}.bg-gradient-to-b{--tw-gradient-position:to bottom in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.bg-gradient-to-t{--tw-gradient-position:to top in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.from-slate-900{--tw-gradient-from:var(--color-slate-900);--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.from-slate-950\/25{--tw-gradient-from:#02061840}@supports (color:color-mix(in lab, red, red)){.from-slate-950\/25{--tw-gradient-from:color-mix(in oklab, var(--color-slate-950) 25%, transparent)}}.from-slate-950\/25{--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.via-slate-900\/45{--tw-gradient-via:#0f172b73}@supports (color:color-mix(in lab, red, red)){.via-slate-900\/45{--tw-gradient-via:color-mix(in oklab, var(--color-slate-900) 45%, transparent)}}.via-slate-900\/45{--tw-gradient-via-stops:var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-via-stops)}.to-slate-900{--tw-gradient-to:var(--color-slate-900);--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.to-transparent{--tw-gradient-to:transparent;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position))}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.object-\[center_20\%\]{object-position:center 20%}.p-1{padding:var(--spacing)}.p-2{padding:calc(var(--spacing) * 2)}.p-3{padding:calc(var(--spacing) * 3)}.p-3\.5{padding:calc(var(--spacing) * 3.5)}.p-4{padding:calc(var(--spacing) * 4)}.px-2{padding-inline:calc(var(--spacing) * 2)}.px-2\.5{padding-inline:calc(var(--spacing) * 2.5)}.px-3{padding-inline:calc(var(--spacing) * 3)}.px-4{padding-inline:calc(var(--spacing) * 4)}.px-5{padding-inline:calc(var(--spacing) * 5)}.px-6{padding-inline:calc(var(--spacing) * 6)}.py-0\.5{padding-block:calc(var(--spacing) * .5)}.py-1{padding-block:var(--spacing)}.py-1\.5{padding-block:calc(var(--spacing) * 1.5)}.py-2{padding-block:calc(var(--spacing) * 2)}.py-2\.5{padding-block:calc(var(--spacing) * 2.5)}.py-3{padding-block:calc(var(--spacing) * 3)}.py-4{padding-block:calc(var(--spacing) * 4)}.py-6{padding-block:calc(var(--spacing) * 6)}.py-8{padding-block:calc(var(--spacing) * 8)}.py-10{padding-block:calc(var(--spacing) * 10)}.py-12{padding-block:calc(var(--spacing) * 12)}.pt-2{padding-top:calc(var(--spacing) * 2)}.pt-4{padding-top:calc(var(--spacing) * 4)}.pt-6{padding-top:calc(var(--spacing) * 6)}.pt-32{padding-top:calc(var(--spacing) * 32)}.pr-4{padding-right:calc(var(--spacing) * 4)}.pb-3{padding-bottom:calc(var(--spacing) * 3)}.pb-7{padding-bottom:calc(var(--spacing) * 7)}.text-center{text-align:center}.text-2xl{font-size:var(--text-2xl);line-height:var(--tw-leading,var(--text-2xl--line-height))}.text-3xl{font-size:var(--text-3xl);line-height:var(--tw-leading,var(--text-3xl--line-height))}.text-4xl{font-size:var(--text-4xl);line-height:var(--tw-leading,var(--text-4xl--line-height))}.text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.text-lg{font-size:var(--text-lg);line-height:var(--tw-leading,var(--text-lg--line-height))}.text-sm{font-size:var(--text-sm);line-height:var(--tw-leading,var(--text-sm--line-height))}.text-xl{font-size:var(--text-xl);line-height:var(--tw-leading,var(--text-xl--line-height))}.text-xs{font-size:var(--text-xs);line-height:var(--tw-leading,var(--text-xs--line-height))}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.leading-\[1\.12\]{--tw-leading:1.12;line-height:1.12}.leading-relaxed{--tw-leading:var(--leading-relaxed);line-height:var(--leading-relaxed)}.leading-snug{--tw-leading:var(--leading-snug);line-height:var(--leading-snug)}.font-black{--tw-font-weight:var(--font-weight-black);font-weight:var(--font-weight-black)}.font-bold{--tw-font-weight:var(--font-weight-bold);font-weight:var(--font-weight-bold)}.font-extrabold{--tw-font-weight:var(--font-weight-extrabold);font-weight:var(--font-weight-extrabold)}.font-medium{--tw-font-weight:var(--font-weight-medium);font-weight:var(--font-weight-medium)}.font-semibold{--tw-font-weight:var(--font-weight-semibold);font-weight:var(--font-weight-semibold)}.tracking-\[\.16em\]{--tw-tracking:.16em;letter-spacing:.16em}.tracking-wide{--tw-tracking:var(--tracking-wide);letter-spacing:var(--tracking-wide)}.break-words{overflow-wrap:break-word}.text-cyan-400{color:var(--color-cyan-400)}.text-cyan-500{color:var(--color-cyan-500)}.text-cyan-500\/70{color:#00b7d7b3}@supports (color:color-mix(in lab, red, red)){.text-cyan-500\/70{color:color-mix(in oklab, var(--color-cyan-500) 70%, transparent)}}.text-emerald-200{color:var(--color-emerald-200)}.text-green-600{color:var(--color-green-600)}.text-rose-200{color:var(--color-rose-200)}.text-rose-400{color:var(--color-rose-400)}.text-slate-100{color:var(--color-slate-100)}.text-slate-200{color:var(--color-slate-200)}.text-slate-300{color:var(--color-slate-300)}.text-slate-400{color:var(--color-slate-400)}.text-slate-500{color:var(--color-slate-500)}.text-slate-600{color:var(--color-slate-600)}.text-slate-700{color:var(--color-slate-700)}.text-slate-950{color:var(--color-slate-950)}.text-white{color:var(--color-white)}.text-yellow-400{color:var(--color-yellow-400)}.uppercase{text-transform:uppercase}.line-through{text-decoration-line:line-through}.opacity-0{opacity:0}.shadow{--tw-shadow:0 1px 3px 0 var(--tw-shadow-color,#0000001a), 0 1px 2px -1px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px var(--tw-shadow-color,#00000040);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px var(--tw-shadow-color,#0000001a), 0 4px 6px -4px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 3px 0 var(--tw-shadow-color,#0000001a), 0 1px 2px -1px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px var(--tw-shadow-color,#0000001a), 0 8px 10px -6px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}.shadow-black\/20{--tw-shadow-color:#0003}@supports (color:color-mix(in lab, red, red)){.shadow-black\/20{--tw-shadow-color:color-mix(in oklab, color-mix(in oklab, var(--color-black) 20%, transparent) var(--tw-shadow-alpha), transparent)}}.transition{transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to,opacity,box-shadow,transform,translate,scale,rotate,filter,-webkit-backdrop-filter,backdrop-filter,display,content-visibility,overlay,pointer-events;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration))}.transition-all{transition-property:all;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration))}.transition-colors{transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;transition-timing-function:var(--tw-ease,var(--default-transition-timing-function));transition-duration:var(--tw-duration,var(--default-transition-duration))}.duration-200{--tw-duration:.2s;transition-duration:.2s}.duration-300{--tw-duration:.3s;transition-duration:.3s}.ease-out{--tw-ease:var(--ease-out);transition-timing-function:var(--ease-out)}.select-none{-webkit-user-select:none;user-select:none}@media (hover:hover){.hover\:scale-105:hover{--tw-scale-x:105%;--tw-scale-y:105%;--tw-scale-z:105%;scale:var(--tw-scale-x) var(--tw-scale-y)}.hover\:border-cyan-500\/50:hover{border-color:#00b7d780}@supports (color:color-mix(in lab, red, red)){.hover\:border-cyan-500\/50:hover{border-color:color-mix(in oklab, var(--color-cyan-500) 50%, transparent)}}.hover\:border-slate-700:hover{border-color:var(--color-slate-700)}.hover\:border-yellow-400\/50:hover{border-color:#fac80080}@supports (color:color-mix(in lab, red, red)){.hover\:border-yellow-400\/50:hover{border-color:color-mix(in oklab, var(--color-yellow-400) 50%, transparent)}}.hover\:bg-cyan-400:hover{background-color:var(--color-cyan-400)}.hover\:bg-cyan-500:hover{background-color:var(--color-cyan-500)}.hover\:bg-cyan-600:hover{background-color:var(--color-cyan-600)}.hover\:bg-green-600:hover{background-color:var(--color-green-600)}.hover\:bg-slate-700:hover{background-color:var(--color-slate-700)}.hover\:bg-slate-800:hover{background-color:var(--color-slate-800)}.hover\:bg-slate-800\/30:hover{background-color:#1d293d4d}@supports (color:color-mix(in lab, red, red)){.hover\:bg-slate-800\/30:hover{background-color:color-mix(in oklab, var(--color-slate-800) 30%, transparent)}}.hover\:bg-slate-900:hover{background-color:var(--color-slate-900)}.hover\:text-cyan-300:hover{color:var(--color-cyan-300)}.hover\:text-cyan-400:hover{color:var(--color-cyan-400)}.hover\:text-rose-400:hover{color:var(--color-rose-400)}.hover\:text-rose-500:hover{color:var(--color-rose-500)}.hover\:text-slate-950:hover{color:var(--color-slate-950)}.hover\:text-white:hover{color:var(--color-white)}.hover\:text-yellow-300:hover{color:var(--color-yellow-300)}}.active\:scale-\[\.98\]:active{scale:.98}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-60:disabled{opacity:.6}@media (min-width:40rem){.sm\:h-10{height:calc(var(--spacing) * 10)}.sm\:h-\[450px\]{height:450px}.sm\:w-10{width:calc(var(--spacing) * 10)}.sm\:max-w-\[320px\]{max-width:320px}.sm\:gap-2{gap:calc(var(--spacing) * 2)}.sm\:object-\[center_18\%\]{object-position:center 18%}.sm\:px-3{padding-inline:calc(var(--spacing) * 3)}.sm\:py-3{padding-block:calc(var(--spacing) * 3)}.sm\:pt-32{padding-top:calc(var(--spacing) * 32)}.sm\:text-4xl{font-size:var(--text-4xl);line-height:var(--tw-leading,var(--text-4xl--line-height))}.sm\:text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.sm\:text-xl{font-size:var(--text-xl);line-height:var(--tw-leading,var(--text-xl--line-height))}.sm\:text-xs{font-size:var(--text-xs);line-height:var(--tw-leading,var(--text-xs--line-height))}}@media (min-width:48rem){.md\:right-6{right:calc(var(--spacing) * 6)}.md\:bottom-6{bottom:calc(var(--spacing) * 6)}.md\:h-14{height:calc(var(--spacing) * 14)}.md\:h-16{height:calc(var(--spacing) * 16)}.md\:h-20{height:calc(var(--spacing) * 20)}.md\:h-40{height:calc(var(--spacing) * 40)}.md\:h-\[480px\]{height:480px}.md\:w-14{width:calc(var(--spacing) * 14)}.md\:w-\[480px\]{width:480px}.md\:flex-none{flex:none}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-\[330px_minmax\(0\,1fr\)\]{grid-template-columns:330px minmax(0,1fr)}.md\:gap-2{gap:calc(var(--spacing) * 2)}.md\:gap-4{gap:calc(var(--spacing) * 4)}.md\:gap-7{gap:calc(var(--spacing) * 7)}.md\:rounded-2xl{border-radius:var(--radius-2xl)}.md\:border-r{border-right-style:var(--tw-border-style);border-right-width:1px}.md\:border-b-0{border-bottom-style:var(--tw-border-style);border-bottom-width:0}.md\:object-\[center_20\%\]{object-position:center 20%}.md\:p-4{padding:calc(var(--spacing) * 4)}.md\:p-5{padding:calc(var(--spacing) * 5)}.md\:p-6{padding:calc(var(--spacing) * 6)}.md\:px-4{padding-inline:calc(var(--spacing) * 4)}.md\:px-5{padding-inline:calc(var(--spacing) * 5)}.md\:px-6{padding-inline:calc(var(--spacing) * 6)}.md\:py-4{padding-block:calc(var(--spacing) * 4)}.md\:pt-24{padding-top:calc(var(--spacing) * 24)}.md\:pb-10{padding-bottom:calc(var(--spacing) * 10)}.md\:text-2xl{font-size:var(--text-2xl);line-height:var(--tw-leading,var(--text-2xl--line-height))}.md\:text-5xl{font-size:var(--text-5xl);line-height:var(--tw-leading,var(--text-5xl--line-height))}.md\:text-base{font-size:var(--text-base);line-height:var(--tw-leading,var(--text-base--line-height))}.md\:text-lg{font-size:var(--text-lg);line-height:var(--tw-leading,var(--text-lg--line-height))}.md\:text-sm{font-size:var(--text-sm);line-height:var(--tw-leading,var(--text-sm--line-height))}.md\:text-xl{font-size:var(--text-xl);line-height:var(--tw-leading,var(--text-xl--line-height))}.md\:text-xs{font-size:var(--text-xs);line-height:var(--tw-leading,var(--text-xs--line-height))}}@media (min-width:64rem){.lg\:h-\[500px\]{height:500px}.lg\:w-\[560px\]{width:560px}.lg\:max-w-\[430px\]{max-width:430px}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:flex-row{flex-direction:row}.lg\:justify-between{justify-content:space-between}.lg\:text-left{text-align:left}}@media (min-width:80rem){.xl\:w-\[640px\]{width:640px}}}html,body{font-synthesis:none;text-rendering:optimizelegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;width:100%;max-width:100%;font-family:Plus Jakarta Sans,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;overflow-x:hidden}*{box-sizing:border-box}.gradient-bg{background-color:#0b1120;background-image:linear-gradient(#0b1120 0%,#111827 48%,#0b1120 100%)}img{max-width:100%;display:block}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}.scrollbar-hide::-webkit-scrollbar{display:none}#pricelist{width:100%;min-width:0}.game-tabs-scroll{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-y pinch-zoom;scrollbar-width:none;cursor:grab;-webkit-user-select:none;user-select:none;width:100%;min-width:0;max-width:100%;display:block;position:relative;overflow-y:hidden;overflow-x:scroll!important}.game-tabs-scroll.dragging{cursor:grabbing}.game-tabs-scroll::-webkit-scrollbar{display:none}.game-tabs-track{flex-wrap:nowrap;width:max-content;min-width:max-content;padding-right:1rem;display:inline-flex}.game-tabs-track>button{white-space:nowrap;touch-action:manipulation;flex:none}.game-tabs-wrapper{width:100%;min-width:0;position:relative}.game-tabs-arrow{z-index:10;color:#67e8f9;opacity:0;visibility:hidden;pointer-events:none;cursor:pointer;background:#0f172ae6;border:1px solid #ffffff1f;border-radius:9999px;justify-content:center;align-items:center;width:2.25rem;height:2.25rem;transition:opacity .2s,transform .2s,visibility .2s,background .2s;display:flex;position:absolute;top:calc(50% - .375rem);transform:translateY(-50%)scale(.9);box-shadow:0 6px 18px #02061761}.game-tabs-arrow:hover,.game-tabs-arrow:active{color:#fff;background:#0891b2f2}.game-tabs-arrow.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(-50%)scale(1)}.game-tabs-arrow-left{left:.15rem}.game-tabs-arrow-right{right:.15rem}.game-tabs-arrow:before{content:"";pointer-events:none;z-index:-1;width:2.4rem;height:3.2rem;position:absolute;top:50%;transform:translateY(-50%)}.game-tabs-arrow-left:before{background:linear-gradient(90deg,#0f172afa,#0f172a00);left:-.2rem}.game-tabs-arrow-right:before{background:linear-gradient(270deg,#0f172afa,#0f172a00);right:-.2rem}@media (max-width:767px){.game-tabs-track{padding-right:3.25rem}}@media (min-width:768px){.game-tabs-arrow{display:none!important}}.product-card{content-visibility:auto;contain-intrinsic-size:360px 470px;opacity:0;transform-origin:50%;transition:opacity .5s,transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s;position:relative;transform:translateY(28px)}.product-card.show{opacity:1;transform:translateY(0)scale(1)}.product-card.show:hover{z-index:20;border-color:#22d3ee9e;transform:translateY(-8px)scale(1.04);box-shadow:0 20px 45px #0206178c}.product-image{transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s}.product-card.show:hover .product-image{filter:saturate(1.08)contrast(1.03);transform:scale(1.1)}.product-card.show:hover .product-title{color:#fff}@media (hover:none){.product-card.show:hover{box-shadow:none;transform:translateY(0)scale(1)}.product-card.show:hover .product-image{filter:none;transform:none}}@media (prefers-reduced-motion:reduce){.product-card,.product-image{transition:none!important}}.joki-filter-panel{background:#0f172ab8;border:1px solid #94a3b829;border-radius:1.25rem;position:relative;box-shadow:0 18px 50px #0206173d}.joki-filter-panel:before{content:"";pointer-events:none;border-radius:inherit;background:linear-gradient(135deg,#22d3ee0f,#0000 38%);position:absolute;inset:0}.joki-search-field{background:#0b1220;border:1px solid #64748b73;border-radius:.9rem;align-items:center;width:100%;min-height:3rem;padding-left:2.75rem;transition:border-color .2s,box-shadow .2s,background .2s;display:flex;position:relative}.joki-search-field:focus-within{background:#0d1628;border-color:#22d3eeb8;box-shadow:0 0 0 4px #22d3ee1a}.joki-search-icon{color:#64748b;pointer-events:none;position:absolute;left:1rem}.joki-search-input{color:#f8fafc;background:0 0;border:0;outline:0;width:100%;min-width:0;padding:.8rem .5rem;font-size:.84rem;font-weight:500}.joki-search-input::placeholder{color:#64748b}.joki-search-clear{color:#94a3b8;cursor:pointer;border-radius:.7rem;flex:0 0 2.2rem;justify-content:center;align-items:center;width:2.2rem;height:2.2rem;margin-right:.25rem;transition:color .2s,background .2s;display:flex}.joki-search-clear:hover{color:#f8fafc;background:#334155b8}.joki-search-button{color:#082f49;cursor:pointer;background:#22d3ee;border-radius:.9rem;justify-content:center;align-items:center;gap:.5rem;min-height:3rem;padding:.75rem 1.15rem;font-size:.82rem;font-weight:800;transition:transform .2s,background .2s,box-shadow .2s;display:inline-flex;box-shadow:0 8px 20px #06b6d429}.joki-search-button:hover{background:#67e8f9;transform:translateY(-1px);box-shadow:0 12px 24px #06b6d438}.joki-search-button:active{transform:scale(.98)}.tab-btn{color:#cbd5e1;cursor:pointer;background:#182338;border:1px solid #64748b47;border-radius:.85rem;justify-content:center;align-items:center;gap:.45rem;min-height:2.7rem;padding:.65rem 1rem;font-size:.82rem;font-weight:600;transition:transform .2s,border-color .2s,background .2s,color .2s,box-shadow .2s;display:inline-flex;position:relative;box-shadow:0 4px 12px #0206171f}.tab-btn:hover{color:#f8fafc;background:#22304a;border-color:#67e8f966;transform:translateY(-1px)}.tab-btn.active{color:#082f49;background:#22d3ee;border-color:#67e8f9;font-weight:800;box-shadow:0 9px 22px #06b6d433}.tab-btn.active:after{content:"";background:#67e8f9;border-radius:9999px;width:.32rem;height:.32rem;position:absolute;bottom:-.45rem;left:50%;transform:translate(-50%);box-shadow:0 0 0 4px #22d3ee14}.search-result-info{color:#cbd5e1;background:#082f4938;border:1px solid #22d3ee29;border-radius:.9rem;justify-content:flex-start;align-items:center;gap:1rem;margin-top:.75rem;padding:.75rem 1rem;font-size:.78rem;display:flex}@media (max-width:640px){.joki-search-button{width:100%}.tab-btn{min-height:2.55rem;padding:.6rem .9rem;font-size:.78rem}}#product-container{scroll-margin-top:9rem}.navbar-search-form{min-width:0}.navbar-search-form .joki-search-field{background:#020617b3;border-color:#64748b61;min-height:2.65rem}.navbar-search-form .joki-search-input{padding:.66rem .45rem;font-size:.78rem}.navbar-search-form .joki-search-button{white-space:nowrap;min-height:2.65rem;box-shadow:none;border-radius:.8rem;padding:.65rem .9rem}@media (max-width:767px){#navbar{border-radius:1rem;padding:.4rem .55rem}.navbar-search-form{flex-basis:auto;width:auto}.navbar-search-form .joki-search-field{border-radius:.72rem;min-height:2.25rem;padding-left:2.15rem}.navbar-search-form .joki-search-icon{font-size:.78rem;left:.78rem}.navbar-search-form .joki-search-input{padding:.48rem .25rem;font-size:.7rem}.navbar-search-form .joki-search-clear{border-radius:.55rem;flex-basis:1.75rem;width:1.75rem;height:1.75rem;margin-right:.12rem;font-size:.72rem}.navbar-search-form .joki-search-button{border-radius:.72rem;flex:0 0 2.25rem;width:auto;min-height:2.25rem;padding:.5rem;font-size:.75rem}.navbar-search-form .joki-search-button span{display:none}}@media (max-width:360px){.navbar-search-form{max-width:195px}.navbar-search-form .joki-search-input{font-size:.66rem}}.whatsapp-cs{z-index:55;color:inherit;filter:drop-shadow(0 14px 24px #02061761);align-items:center;gap:.75rem;text-decoration:none;display:flex;position:fixed;bottom:1.5rem;left:1.5rem}.whatsapp-cs__bubble{background:#0f172af5;border:1px solid #94a3b83d;border-radius:14px;min-width:205px;padding:.75rem .9rem;transition:transform .25s,border-color .25s,background .25s;transform:translate(-4px);box-shadow:0 12px 30px #0206176b}.whatsapp-cs__title{color:#f8fafc;font-size:.78rem;font-weight:700;line-height:1.2;display:block}.whatsapp-cs__status{color:#94a3b8;align-items:center;gap:.4rem;margin-top:.25rem;font-size:.68rem;font-weight:500;display:flex}.whatsapp-cs__status:before{content:"";background:#22c55e;border-radius:9999px;width:.45rem;height:.45rem;box-shadow:0 0 0 3px #22c55e24}.whatsapp-cs__icon{color:#fff;background:#22c55e;border:3px solid #ffffffeb;border-radius:9999px;flex:0 0 3.75rem;justify-content:center;align-items:center;width:3.75rem;height:3.75rem;font-size:1.8rem;transition:transform .25s,background .25s,box-shadow .25s;display:flex;position:relative;box-shadow:0 12px 28px #22c55e47}.whatsapp-cs__icon:before{content:"";z-index:-1;border:1px solid #22c55e80;border-radius:9999px;animation:2.2s ease-out infinite whatsappPulse;position:absolute;inset:-7px}.whatsapp-cs:hover .whatsapp-cs__bubble{background:#0f172a;border-color:#22c55e59;transform:translate(0)}.whatsapp-cs:hover .whatsapp-cs__icon{background:#16a34a;transform:translateY(-3px)scale(1.06);box-shadow:0 16px 32px #22c55e5c}.whatsapp-cs:focus-visible{outline-offset:5px;border-radius:16px;outline:3px solid #22c55e73}@keyframes whatsappPulse{0%{opacity:.6;transform:scale(.92)}75%,to{opacity:0;transform:scale(1.28)}}@media (max-width:640px){.whatsapp-cs{bottom:1rem;left:1rem}.whatsapp-cs__bubble{display:none}.whatsapp-cs__icon{flex-basis:3.5rem;width:3.5rem;height:3.5rem;font-size:1.65rem}}@media (prefers-reduced-motion:reduce){.whatsapp-cs__icon:before{animation:none}.whatsapp-cs__bubble,.whatsapp-cs__icon{transition:none}}.review-modal-panel{background:#0f172a;border:1px solid #64748b57;border-radius:1.25rem;flex-direction:column;width:min(960px,100%);max-height:min(88vh,860px);display:flex;overflow:hidden;box-shadow:0 30px 90px #020617b8}.review-scrollbar{scrollbar-width:thin;scrollbar-color:#334155 transparent}.review-scrollbar::-webkit-scrollbar{width:8px}.review-scrollbar::-webkit-scrollbar-track{background:0 0}.review-scrollbar::-webkit-scrollbar-thumb{background:#334155;border-radius:9999px}.review-star-button{color:#475569;cursor:pointer;background:#111c30;border-radius:.7rem;justify-content:center;align-items:center;width:2.35rem;height:2.35rem;transition:transform .16s,color .16s,background .16s;display:inline-flex}.review-star-button:hover,.review-star-button.is-active{color:#facc15;background:#facc151a;transform:translateY(-1px)}.review-star-button:focus-visible{outline-offset:2px;outline:2px solid #22d3ee}.review-input{color:#f8fafc;background:#0b1220;border:1px solid #64748b6b;border-radius:.8rem;outline:0;width:100%;transition:border-color .2s,box-shadow .2s,background .2s}.review-input:focus{background:#0d1628;border-color:#22d3eeb8;box-shadow:0 0 0 3px #22d3ee1a}.review-input::placeholder{color:#64748b}.review-avatar{color:#a5f3fc;background:#0891b22e;border-radius:9999px;flex:0 0 2.5rem;justify-content:center;align-items:center;width:2.5rem;height:2.5rem;font-size:.8rem;font-weight:800;display:flex}body.modal-open{overflow:hidden}@media (max-width:767px){.review-modal-panel{border-radius:1rem;max-height:92vh}.review-star-button{width:2.15rem;height:2.15rem}.product-card{box-shadow:none}.whatsapp-cs__icon:before{animation-iteration-count:3}}@property --tw-translate-x{syntax:"*";inherits:false;initial-value:0}@property --tw-translate-y{syntax:"*";inherits:false;initial-value:0}@property --tw-translate-z{syntax:"*";inherits:false;initial-value:0}@property --tw-rotate-x{syntax:"*";inherits:false}@property --tw-rotate-y{syntax:"*";inherits:false}@property --tw-rotate-z{syntax:"*";inherits:false}@property --tw-skew-x{syntax:"*";inherits:false}@property --tw-skew-y{syntax:"*";inherits:false}@property --tw-space-y-reverse{syntax:"*";inherits:false;initial-value:0}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid}@property --tw-gradient-position{syntax:"*";inherits:false}@property --tw-gradient-from{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-via{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-to{syntax:"<color>";inherits:false;initial-value:#0000}@property --tw-gradient-stops{syntax:"*";inherits:false}@property --tw-gradient-via-stops{syntax:"*";inherits:false}@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}@property --tw-gradient-via-position{syntax:"<length-percentage>";inherits:false;initial-value:50%}@property --tw-gradient-to-position{syntax:"<length-percentage>";inherits:false;initial-value:100%}@property --tw-leading{syntax:"*";inherits:false}@property --tw-font-weight{syntax:"*";inherits:false}@property --tw-tracking{syntax:"*";inherits:false}@property --tw-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-shadow-color{syntax:"*";inherits:false}@property --tw-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-inset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-shadow-color{syntax:"*";inherits:false}@property --tw-inset-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-ring-color{syntax:"*";inherits:false}@property --tw-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-ring-color{syntax:"*";inherits:false}@property --tw-inset-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-ring-inset{syntax:"*";inherits:false}@property --tw-ring-offset-width{syntax:"<length>";inherits:false;initial-value:0}@property --tw-ring-offset-color{syntax:"*";inherits:false;initial-value:#fff}@property --tw-ring-offset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-duration{syntax:"*";inherits:false}@property --tw-ease{syntax:"*";inherits:false}@property --tw-scale-x{syntax:"*";inherits:false;initial-value:1}@property --tw-scale-y{syntax:"*";inherits:false;initial-value:1}@property --tw-scale-z{syntax:"*";inherits:false;initial-value:1}</style>
+    <!-- Hanya keluarga ikon yang dipakai -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+
+
     <style>
-        html,
-        body{
-            width:100%;
-            max-width:100%;
-            overflow-x:hidden;
-            font-family:"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-            font-synthesis:none;
-            text-rendering:optimizeLegibility;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
+        /* Logo: hanya ikon pada mobile, nama brand tampil mulai 640px. */
+        .willpedia-text {
+            display: none;
+            margin-left: -20px;
         }
 
-        *{
-            box-sizing:border-box;
-        }
-
-        .gradient-bg{
-            /* Latar navy netral agar tampil seperti toko game, bukan tema AI neon. */
-            background-color:#0b1120;
-            background-image:linear-gradient(180deg,#0b1120 0%,#111827 48%,#0b1120 100%);
-        }
-
-        img{
-            display:block;
-            max-width:100%;
-        }
-
-        .scrollbar-hide{
-            -ms-overflow-style:none;
-            scrollbar-width:none;
-        }
-
-        .scrollbar-hide::-webkit-scrollbar{
-            display:none;
-        }
-
-        /* Scroll horizontal kategori game di mobile */
-        #pricelist{
-            width:100%;
-            min-width:0;
-        }
-
-        .game-tabs-scroll{
-            display:block;
-            position:relative;
-            width:100%;
-            min-width:0;
-            max-width:100%;
-            overflow-x:scroll !important;
-            overflow-y:hidden;
-            -webkit-overflow-scrolling:touch;
-            overscroll-behavior-x:contain;
-            touch-action:pan-y pinch-zoom;
-            scrollbar-width:none;
-            cursor:grab;
-            user-select:none;
-        }
-
-        .game-tabs-scroll.dragging{
-            cursor:grabbing;
-        }
-
-        .game-tabs-scroll::-webkit-scrollbar{
-            display:none;
-        }
-
-        .game-tabs-track{
-            display:inline-flex;
-            flex-wrap:nowrap;
-            width:max-content;
-            min-width:max-content;
-            padding-right:1rem;
-        }
-
-        .game-tabs-track > button{
-            flex:0 0 auto;
-            flex-shrink:0;
-            white-space:nowrap;
-            touch-action:manipulation;
-        }
-
-        /* Petunjuk navigasi kategori: hanya tampil saat masih ada tab tersembunyi. */
-        .game-tabs-wrapper{
-            position:relative;
-            width:100%;
-            min-width:0;
-        }
-
-        .game-tabs-arrow{
-            position:absolute;
-            top:calc(50% - .375rem);
-            z-index:10;
-            width:2.25rem;
-            height:2.25rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border:1px solid rgba(255,255,255,.12);
-            border-radius:9999px;
-            color:#67e8f9;
-            background:rgba(15,23,42,.9);
-            box-shadow:0 6px 18px rgba(2,6,23,.38);
-            backdrop-filter:blur(8px);
-            -webkit-backdrop-filter:blur(8px);
-            opacity:0;
-            visibility:hidden;
-            pointer-events:none;
-            transform:translateY(-50%) scale(.9);
-            transition:opacity .2s ease, transform .2s ease, visibility .2s ease, background .2s ease;
-            cursor:pointer;
-        }
-
-        .game-tabs-arrow:hover,
-        .game-tabs-arrow:active{
-            background:rgba(8,145,178,.95);
-            color:white;
-        }
-
-        .game-tabs-arrow.is-visible{
-            opacity:1;
-            visibility:visible;
-            pointer-events:auto;
-            transform:translateY(-50%) scale(1);
-        }
-
-        .game-tabs-arrow-left{ left:.15rem; }
-        .game-tabs-arrow-right{ right:.15rem; }
-
-        .game-tabs-arrow::before{
-            content:"";
-            position:absolute;
-            top:50%;
-            width:2.4rem;
-            height:3.2rem;
-            transform:translateY(-50%);
-            pointer-events:none;
-            z-index:-1;
-        }
-
-        .game-tabs-arrow-left::before{
-            left:-.2rem;
-            background:linear-gradient(to right, rgba(15,23,42,.98), rgba(15,23,42,0));
-        }
-
-        .game-tabs-arrow-right::before{
-            right:-.2rem;
-            background:linear-gradient(to left, rgba(15,23,42,.98), rgba(15,23,42,0));
-        }
-
-        @media (max-width:767px){
-            .game-tabs-track{
-                padding-right:3.25rem;
+        @media (min-width: 640px) {
+            .willpedia-text {
+                display: inline;
             }
         }
 
-        @media (min-width:768px){
-            .game-tabs-arrow{
-                display:none !important;
-            }
+        /* Animasi ringan saat produk ditambahkan ke keranjang. */
+        .add-cart-button {
+            position: relative;
+            overflow: hidden;
         }
 
-        .product-card{
-            position:relative;
-            opacity:0;
-            transform:translateY(28px);
-            transform-origin:center;
-            will-change:transform;
-            transition:
-                opacity .5s ease,
-                transform .35s cubic-bezier(.2,.8,.2,1),
-                border-color .25s ease,
-                box-shadow .35s ease;
+        .add-cart-button.is-added {
+            color: #ffffff !important;
+            background: #22c55e !important;
+            animation: addCartSuccess .55s cubic-bezier(.2,.9,.25,1);
         }
 
-        .product-card.show{
-            opacity:1;
-            transform:translateY(0) scale(1);
+        .cart-fly-image {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            object-fit: cover;
+            border: 2px solid rgba(103, 232, 249, .9);
+            border-radius: 14px;
+            opacity: .96;
+            box-shadow: 0 18px 45px rgba(2, 6, 23, .55);
+            will-change: transform, opacity;
         }
 
-        /* Saat cursor mendekat, kartu naik dan membesar secara halus. */
-        .product-card.show:hover{
-            z-index:20;
-            transform:translateY(-8px) scale(1.04);
-            border-color:rgba(34,211,238,.62);
-            box-shadow:0 20px 45px rgba(2,6,23,.55);
+        #cart-float.cart-enter {
+            animation: cartEnter .42s cubic-bezier(.2,.9,.25,1);
         }
 
-        .product-image{
-            transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease;
+        #cart-float.cart-bump .cart-float-button {
+            animation: cartBump .58s cubic-bezier(.2,.9,.25,1);
         }
 
-        .product-card.show:hover .product-image{
-            transform:scale(1.1);
-            filter:saturate(1.08) contrast(1.03);
+        #cart-count.cart-count-pop {
+            animation: cartCountPop .5s cubic-bezier(.2,.9,.25,1);
         }
 
-        .product-card.show:hover .product-title{
-            color:#ffffff;
+        @keyframes addCartSuccess {
+            0%   { transform: scale(1); }
+            38%  { transform: scale(.95); }
+            72%  { transform: scale(1.045); }
+            100% { transform: scale(1); }
         }
 
-        @media (hover:none){
-            .product-card.show:hover{
-                transform:translateY(0) scale(1);
-                box-shadow:none;
-            }
-
-            .product-card.show:hover .product-image{
-                transform:none;
-                filter:none;
-            }
+        @keyframes cartEnter {
+            0%   { opacity: 0; transform: translateY(24px) scale(.7); }
+            70%  { opacity: 1; transform: translateY(-4px) scale(1.06); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        @media (prefers-reduced-motion:reduce){
-            .product-card,
-            .product-image{
-                transition:none !important;
-            }
-        }
-        
-
-
-        /* Panel pencarian dan kategori joki */
-        .joki-filter-panel{
-            position:relative;
-            border:1px solid rgba(148,163,184,.16);
-            border-radius:1.25rem;
-            background:rgba(15,23,42,.72);
-            box-shadow:0 18px 50px rgba(2,6,23,.24);
-            backdrop-filter:blur(14px);
-            -webkit-backdrop-filter:blur(14px);
+        @keyframes cartBump {
+            0%, 100% { transform: scale(1) rotate(0); }
+            28%      { transform: scale(1.14) rotate(-4deg); }
+            58%      { transform: scale(.96) rotate(3deg); }
+            78%      { transform: scale(1.06) rotate(-1deg); }
         }
 
-        .joki-filter-panel::before{
-            content:"";
-            position:absolute;
-            inset:0;
-            pointer-events:none;
-            border-radius:inherit;
-            background:linear-gradient(135deg,rgba(34,211,238,.06),transparent 38%);
+        @keyframes cartCountPop {
+            0%   { transform: scale(1); }
+            45%  { transform: scale(1.55); }
+            100% { transform: scale(1); }
         }
 
-        .joki-search-field{
-            position:relative;
-            display:flex;
-            align-items:center;
-            width:100%;
-            min-height:3rem;
-            padding-left:2.75rem;
-            border:1px solid rgba(100,116,139,.45);
-            border-radius:.9rem;
-            background:#0b1220;
-            transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
-        }
-
-        .joki-search-field:focus-within{
-            border-color:rgba(34,211,238,.72);
-            background:#0d1628;
-            box-shadow:0 0 0 4px rgba(34,211,238,.1);
-        }
-
-        .joki-search-icon{
-            position:absolute;
-            left:1rem;
-            color:#64748b;
-            pointer-events:none;
-        }
-
-        .joki-search-input{
-            width:100%;
-            min-width:0;
-            padding:.8rem .5rem;
-            border:0;
-            outline:0;
-            color:#f8fafc;
-            background:transparent;
-            font-size:.84rem;
-            font-weight:500;
-        }
-
-        .joki-search-input::placeholder{
-            color:#64748b;
-        }
-
-        .joki-search-clear{
-            width:2.2rem;
-            height:2.2rem;
-            flex:0 0 2.2rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin-right:.25rem;
-            border-radius:.7rem;
-            color:#94a3b8;
-            cursor:pointer;
-            transition:color .2s ease,background .2s ease;
-        }
-
-        .joki-search-clear:hover{
-            color:#f8fafc;
-            background:rgba(51,65,85,.72);
-        }
-
-        .joki-search-button{
-            min-height:3rem;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:.5rem;
-            padding:.75rem 1.15rem;
-            border-radius:.9rem;
-            color:#082f49;
-            background:#22d3ee;
-            font-size:.82rem;
-            font-weight:800;
-            cursor:pointer;
-            box-shadow:0 8px 20px rgba(6,182,212,.16);
-            transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
-        }
-
-        .joki-search-button:hover{
-            transform:translateY(-1px);
-            background:#67e8f9;
-            box-shadow:0 12px 24px rgba(6,182,212,.22);
-        }
-
-        .joki-search-button:active{
-            transform:scale(.98);
-        }
-
-        .tab-btn{
-            position:relative;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:.45rem;
-            min-height:2.7rem;
-            padding:.65rem 1rem;
-            border:1px solid rgba(100,116,139,.28);
-            border-radius:.85rem;
-            color:#cbd5e1;
-            background:#182338;
-            font-size:.82rem;
-            font-weight:600;
-            box-shadow:0 4px 12px rgba(2,6,23,.12);
-            cursor:pointer;
-            transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
-        }
-
-        .tab-btn:hover{
-            transform:translateY(-1px);
-            border-color:rgba(103,232,249,.4);
-            color:#f8fafc;
-            background:#22304a;
-        }
-
-        .tab-btn.active{
-            border-color:#67e8f9;
-            color:#082f49;
-            background:#22d3ee;
-            font-weight:800;
-            box-shadow:0 9px 22px rgba(6,182,212,.2);
-        }
-
-        .tab-btn.active::after{
-            content:"";
-            position:absolute;
-            left:50%;
-            bottom:-.45rem;
-            width:.32rem;
-            height:.32rem;
-            border-radius:9999px;
-            background:#67e8f9;
-            transform:translateX(-50%);
-            box-shadow:0 0 0 4px rgba(34,211,238,.08);
-        }
-
-        .search-result-info{
-            display:flex;
-            align-items:center;
-            justify-content:flex-start;
-            gap:1rem;
-            margin-top:.75rem;
-            padding:.75rem 1rem;
-            border:1px solid rgba(34,211,238,.16);
-            border-radius:.9rem;
-            color:#cbd5e1;
-            background:rgba(8,47,73,.22);
-            font-size:.78rem;
-        }
-
-        @media (max-width:640px){
-            .joki-search-button{
-                width:100%;
+        @media (prefers-reduced-motion: reduce) {
+            .add-cart-button.is-added,
+            #cart-float.cart-enter,
+            #cart-float.cart-bump .cart-float-button,
+            #cart-count.cart-count-pop {
+                animation: none !important;
             }
 
-            .tab-btn{
-                min-height:2.55rem;
-                padding:.6rem .9rem;
-                font-size:.78rem;
+            .cart-fly-image {
+                display: none !important;
             }
         }
-
-        /* Pencarian dipindahkan ke navbar agar selalu mudah dijangkau. */
-        #product-container{
-            scroll-margin-top:9rem;
-        }
-
-        .navbar-search-form{
-            min-width:0;
-        }
-
-        .navbar-search-form .joki-search-field{
-            min-height:2.65rem;
-            border-color:rgba(100,116,139,.38);
-            background:rgba(2,6,23,.7);
-        }
-
-        .navbar-search-form .joki-search-input{
-            padding:.66rem .45rem;
-            font-size:.78rem;
-        }
-
-        .navbar-search-form .joki-search-button{
-            min-height:2.65rem;
-            padding:.65rem .9rem;
-            border-radius:.8rem;
-            white-space:nowrap;
-            box-shadow:none;
-        }
-
-        @media (max-width:767px){
-            #navbar{
-                padding:.4rem .55rem;
-                border-radius:1rem;
-            }
-
-            .navbar-search-form{
-                width:auto;
-                flex-basis:auto;
-            }
-
-            .navbar-search-form .joki-search-field{
-                min-height:2.25rem;
-                padding-left:2.15rem;
-                border-radius:.72rem;
-            }
-
-            .navbar-search-form .joki-search-icon{
-                left:.78rem;
-                font-size:.78rem;
-            }
-
-            .navbar-search-form .joki-search-input{
-                padding:.48rem .25rem;
-                font-size:.7rem;
-            }
-
-            .navbar-search-form .joki-search-clear{
-                width:1.75rem;
-                height:1.75rem;
-                flex-basis:1.75rem;
-                margin-right:.12rem;
-                border-radius:.55rem;
-                font-size:.72rem;
-            }
-
-            .navbar-search-form .joki-search-button{
-                width:auto;
-                min-height:2.25rem;
-                flex:0 0 2.25rem;
-                padding:.5rem;
-                border-radius:.72rem;
-                font-size:.75rem;
-            }
-
-            .navbar-search-form .joki-search-button span{
-                display:none;
-            }
-        }
-
-        @media (max-width:360px){
-            .navbar-search-form{
-                max-width:195px;
-            }
-
-            .navbar-search-form .joki-search-input{
-                font-size:.66rem;
-            }
-        }
-
-        /* Customer service WhatsApp mengambang */
-        .whatsapp-cs{
-            position:fixed;
-            left:1.5rem;
-            bottom:1.5rem;
-            z-index:55;
-            display:flex;
-            align-items:center;
-            gap:.75rem;
-            text-decoration:none;
-            color:inherit;
-            filter:drop-shadow(0 14px 24px rgba(2,6,23,.38));
-        }
-
-        .whatsapp-cs__bubble{
-            min-width:205px;
-            padding:.75rem .9rem;
-            border:1px solid rgba(148,163,184,.24);
-            border-radius:14px;
-            background:rgba(15,23,42,.96);
-            box-shadow:0 12px 30px rgba(2,6,23,.42);
-            transform:translateX(-4px);
-            transition:transform .25s ease,border-color .25s ease,background .25s ease;
-        }
-
-        .whatsapp-cs__title{
-            display:block;
-            color:#f8fafc;
-            font-size:.78rem;
-            font-weight:700;
-            line-height:1.2;
-        }
-
-        .whatsapp-cs__status{
-            display:flex;
-            align-items:center;
-            gap:.4rem;
-            margin-top:.25rem;
-            color:#94a3b8;
-            font-size:.68rem;
-            font-weight:500;
-        }
-
-        .whatsapp-cs__status::before{
-            content:"";
-            width:.45rem;
-            height:.45rem;
-            border-radius:9999px;
-            background:#22c55e;
-            box-shadow:0 0 0 3px rgba(34,197,94,.14);
-        }
-
-        .whatsapp-cs__icon{
-            position:relative;
-            width:3.75rem;
-            height:3.75rem;
-            flex:0 0 3.75rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border:3px solid rgba(255,255,255,.92);
-            border-radius:9999px;
-            background:#22c55e;
-            color:white;
-            font-size:1.8rem;
-            box-shadow:0 12px 28px rgba(34,197,94,.28);
-            transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
-        }
-
-        .whatsapp-cs__icon::before{
-            content:"";
-            position:absolute;
-            inset:-7px;
-            z-index:-1;
-            border:1px solid rgba(34,197,94,.5);
-            border-radius:9999px;
-            animation:whatsappPulse 2.2s ease-out infinite;
-        }
-
-        .whatsapp-cs:hover .whatsapp-cs__bubble{
-            transform:translateX(0);
-            border-color:rgba(34,197,94,.35);
-            background:#0f172a;
-        }
-
-        .whatsapp-cs:hover .whatsapp-cs__icon{
-            transform:translateY(-3px) scale(1.06);
-            background:#16a34a;
-            box-shadow:0 16px 32px rgba(34,197,94,.36);
-        }
-
-        .whatsapp-cs:focus-visible{
-            outline:3px solid rgba(34,197,94,.45);
-            outline-offset:5px;
-            border-radius:16px;
-        }
-
-        @keyframes whatsappPulse{
-            0%{ opacity:.6; transform:scale(.92); }
-            75%,100%{ opacity:0; transform:scale(1.28); }
-        }
-
-        @media (max-width:640px){
-            .whatsapp-cs{
-                left:1rem;
-                bottom:1rem;
-            }
-
-            .whatsapp-cs__bubble{
-                display:none;
-            }
-
-            .whatsapp-cs__icon{
-                width:3.5rem;
-                height:3.5rem;
-                flex-basis:3.5rem;
-                font-size:1.65rem;
-            }
-        }
-
-        @media (prefers-reduced-motion:reduce){
-            .whatsapp-cs__icon::before{
-                animation:none;
-            }
-
-            .whatsapp-cs__bubble,
-            .whatsapp-cs__icon{
-                transition:none;
-            }
-        }
-
-
-        /* =========================================================
-           MODAL ULASAN / KOMENTAR
-           ========================================================= */
-        .review-modal-panel{
-            width:min(960px,100%);
-            max-height:min(88vh,860px);
-            display:flex;
-            flex-direction:column;
-            overflow:hidden;
-            border:1px solid rgba(100,116,139,.34);
-            border-radius:1.25rem;
-            background:#0f172a;
-            box-shadow:0 30px 90px rgba(2,6,23,.72);
-        }
-
-        .review-scrollbar{
-            scrollbar-width:thin;
-            scrollbar-color:#334155 transparent;
-        }
-
-        .review-scrollbar::-webkit-scrollbar{
-            width:8px;
-        }
-
-        .review-scrollbar::-webkit-scrollbar-track{
-            background:transparent;
-        }
-
-        .review-scrollbar::-webkit-scrollbar-thumb{
-            border-radius:9999px;
-            background:#334155;
-        }
-
-        .review-star-button{
-            width:2.35rem;
-            height:2.35rem;
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:.7rem;
-            color:#475569;
-            background:#111c30;
-            cursor:pointer;
-            transition:transform .16s ease,color .16s ease,background .16s ease;
-        }
-
-        .review-star-button:hover,
-        .review-star-button.is-active{
-            color:#facc15;
-            background:rgba(250,204,21,.1);
-            transform:translateY(-1px);
-        }
-
-        .review-star-button:focus-visible{
-            outline:2px solid #22d3ee;
-            outline-offset:2px;
-        }
-
-        .review-input{
-            width:100%;
-            border:1px solid rgba(100,116,139,.42);
-            border-radius:.8rem;
-            outline:0;
-            color:#f8fafc;
-            background:#0b1220;
-            transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
-        }
-
-        .review-input:focus{
-            border-color:rgba(34,211,238,.72);
-            background:#0d1628;
-            box-shadow:0 0 0 3px rgba(34,211,238,.1);
-        }
-
-        .review-input::placeholder{
-            color:#64748b;
-        }
-
-        .review-avatar{
-            width:2.5rem;
-            height:2.5rem;
-            flex:0 0 2.5rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:9999px;
-            color:#a5f3fc;
-            background:rgba(8,145,178,.18);
-            font-size:.8rem;
-            font-weight:800;
-        }
-
-        body.modal-open{
-            overflow:hidden;
-        }
-
-        @media (max-width:767px){
-            .review-modal-panel{
-                max-height:92vh;
-                border-radius:1rem;
-            }
-
-            .review-star-button{
-                width:2.15rem;
-                height:2.15rem;
-            }
-        }
-
     </style>
+
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
 
@@ -752,12 +117,12 @@
     <div class="fixed top-0 left-0 right-0 z-50 w-full px-4 pt-4">
         <!-- NAV BAR -->
          
-        <nav id="navbar" class="max-w-6xl mx-auto bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-2xl px-3 md:px-4 py-2 shadow-lg shadow-black/20 transition-all duration-300">
+        <nav id="navbar" class="max-w-6xl mx-auto bg-slate-950/90  border border-slate-800 rounded-2xl px-3 md:px-4 py-2 shadow-lg shadow-black/20 transition-all duration-300">
             <div class="flex flex-nowrap items-center justify-between gap-2 md:gap-4">
                 <!-- Logo & Brand -->
-                <a href="#" class="order-1 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs md:text-xl font-extrabold tracking-wide text-white shrink-0">
-                    <img src="logo.png" alt="Logo Willpedia" class="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain rounded-lg" onerror="this.src='https://via.placeholder.com/150'">
-                    <span>WILLPEDIA</span>
+                <a href="#" class="order-1 flex items-center gap-1 text-base sm:text-lg md:text-2xl font-extrabold tracking-wide text-white shrink-0">
+                    <img src="logo.png" alt="Logo Willpedia" height="56" decoding="async" fetchpriority="high" class="h-8 w-auto sm:h-10 md:h-14 object-contain rounded-lg shrink-0" onerror="this.src='https://via.placeholder.com/150'">
+                    <span class="willpedia-text">WILLPEDIA</span>
                 </a>
 
                 <!-- Pencarian paket joki: menggantikan posisi tombol Hubungi Admin -->
@@ -772,7 +137,7 @@
                             class="joki-search-input"
                             type="search"
                             autocomplete="off"
-                            placeholder="Cari paket joki..."
+                            placeholder="Cari Joki"
                         >
 
                         <button
@@ -804,6 +169,9 @@
             <img
                 src="hebat.png"
                 alt="Hero Banner"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
                 class="absolute inset-0 w-full h-full object-cover
                     object-[center_20%]
                     sm:object-[center_18%]
@@ -842,7 +210,7 @@
 
                     <div class="grid grid-cols-3 gap-2 w-full max-w-md lg:max-w-[430px]">
 
-                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10
+                        <div class="bg-slate-950/55  border border-white/10
                                     rounded-xl md:rounded-2xl px-2 py-2.5
                                     sm:px-3 sm:py-3 md:px-5 md:py-4 text-center">
 
@@ -856,7 +224,7 @@
 
                         </div>
 
-                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
+                        <div class="bg-slate-950/55  border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
                             <div class="text-xl md:text-2xl font-extrabold text-white">
                                 2 Thn
                             </div>
@@ -865,7 +233,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-slate-950/55 backdrop-blur-xl border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
+                        <div class="bg-slate-950/55  border border-white/10 rounded-xl px-2 py-2.5 md:px-4 md:py-4 text-center">
                             <div class="text-xl md:text-2xl font-extrabold text-white flex justify-center items-center gap-1">
                                 4.9
                                 <i class="fa-solid fa-star text-yellow-400 text-sm"></i>
@@ -959,7 +327,7 @@
     </div>    
 
     <!-- MODAL RINGKASAN KERANJANG -->
-    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85  flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[85vh]">
             <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
                 <h3 class="font-bold text-slate-100 text-base flex items-center">
@@ -994,7 +362,7 @@
     <!-- MODAL ULASAN / KOMENTAR PRODUK -->
     <div
         id="review-modal"
-        class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/85 p-3 md:p-6 backdrop-blur-sm"
+        class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/85 p-3 md:p-6 "
         role="dialog"
         aria-modal="true"
         aria-labelledby="review-modal-title"
@@ -1129,7 +497,7 @@
 
     <!-- FLOATING CART BUTTON -->
     <div id="cart-float" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 hidden">
-        <button onclick="openCartModal()" class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-4 rounded-full shadow-2xl flex items-center gap-2 transition duration-300 transform hover:scale-105 cursor-pointer">
+        <button onclick="openCartModal()" class="cart-float-button bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-4 rounded-full shadow-2xl flex items-center gap-2 transition duration-300 transform hover:scale-105 cursor-pointer">
             <i class="fa-solid fa-shopping-cart text-xl"></i>
             <span id="cart-count" class="bg-white text-green-600 text-xs px-2 py-0.5 rounded-full font-black">0</span>
             <span>Lihat Keranjang</span>
@@ -1174,6 +542,9 @@
         let currentReviewProductId = '';
         let selectedReviewRating = 0;
         const reviewCache = new Map();
+        let cardObserver = null;
+        const PRODUCTS_CACHE_KEY = "willpedia-products-v1";
+        const PRODUCTS_CACHE_TTL = 5 * 60 * 1000;
 
         // Memastikan tab kategori bisa di-swipe pada HP dan di-drag pada emulator/desktop.
         function enableGameTabsDrag() {
@@ -1318,55 +689,77 @@
             }
         }
 
-
         const navbar = document.getElementById("navbar");
+        let navbarScrolled = null;
+        let navbarScrollFrame = 0;
+
+        function updateNavbarState() {
+            navbarScrollFrame = 0;
+            const nextState = window.scrollY > 80;
+            if (nextState === navbarScrolled) return;
+            navbarScrolled = nextState;
+
+            navbar.classList.toggle("bg-slate-950/95", nextState);
+            navbar.classList.toggle("border-slate-800", nextState);
+            navbar.classList.toggle("shadow-xl", nextState);
+            navbar.classList.toggle("bg-white/5", !nextState);
+            navbar.classList.toggle("border-white/10", !nextState);
+        }
 
         window.addEventListener("scroll", () => {
+            if (navbarScrollFrame) return;
+            navbarScrollFrame = requestAnimationFrame(updateNavbarState);
+        }, { passive: true });
 
-            if (window.scrollY > 80) {
-
-                navbar.classList.remove(
-                    "bg-white/5",
-                    "backdrop-blur-md",
-                    "border-white/10"
-                );
-
-                navbar.classList.add(
-                    "bg-slate-950/95",
-                    "border-slate-800",
-                    "shadow-xl"
-                );
-
-            } else {
-
-                navbar.classList.remove(
-                    "bg-slate-950/95",
-                    "border-slate-800",
-                    "shadow-xl"
-                );
-
-                navbar.classList.add(
-                    "bg-white/5",
-                    "backdrop-blur-md",
-                    "border-white/10"
-                );
-
+        function readCachedProducts() {
+            try {
+                const cached = JSON.parse(sessionStorage.getItem(PRODUCTS_CACHE_KEY) || "null");
+                if (!cached || !Array.isArray(cached.data)) return null;
+                if (Date.now() - cached.savedAt > PRODUCTS_CACHE_TTL) return null;
+                return cached.data;
+            } catch (_) {
+                return null;
             }
+        }
 
-        });
+        function showProductLoadError() {
+            const container = document.getElementById("product-container");
+            if (!container) return;
+            container.innerHTML = `
+                <div class="col-span-full rounded-2xl border border-rose-500/20 bg-slate-900/60 px-5 py-12 text-center">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                    <p class="mt-2 text-sm font-bold text-slate-200">Pricelist belum dapat dimuat</p>
+                    <p class="mt-1 text-xs text-slate-500">Periksa koneksi atau coba muat ulang halaman.</p>
+                </div>
+            `;
+        }
 
         async function loadData() {
-            try {
-                const response = await fetch(API_URL);
+            let hasRenderedCache = false;
+            const cachedProducts = readCachedProducts();
 
-                allProducts = await response.json();
-
-                console.log(allProducts);
-
+            if (cachedProducts) {
+                allProducts = cachedProducts;
                 renderProducts(getHomeProducts());
+                hasRenderedCache = true;
+            }
 
-            } catch(err) {
+            try {
+                const response = await fetch(API_URL, { cache: "no-store" });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const products = await response.json();
+                if (!Array.isArray(products)) throw new Error("Format data produk tidak valid");
+
+                allProducts = products;
+                sessionStorage.setItem(PRODUCTS_CACHE_KEY, JSON.stringify({
+                    savedAt: Date.now(),
+                    data: products
+                }));
+                renderProducts(getHomeProducts());
+            } catch (err) {
                 console.error(err);
+                if (!hasRenderedCache) showProductLoadError();
             }
         }
 
@@ -1529,183 +922,131 @@
         }
 
         function renderProducts(products) {
+            const container = document.getElementById("product-container");
+            const validProducts = products.filter(product => product.ID && product.Status === "Ready");
 
-        const container = document.getElementById("product-container");
-        container.innerHTML = "";
+            if (cardObserver) cardObserver.disconnect();
 
-        const validProducts = products.filter(p => p.ID);
+            if (validProducts.length === 0) {
+                const emptyMessage = currentSearchQuery
+                    ? `Paket joki untuk pencarian <strong class="text-slate-200">“${escapeHTML(currentSearchQuery)}”</strong> belum ditemukan.`
+                    : "Tidak ada paket joki yang berstatus Ready.";
 
-        if (validProducts.length === 0) {
-            const emptyMessage = currentSearchQuery
-                ? `Paket joki untuk pencarian <strong class="text-slate-200">“${escapeHTML(currentSearchQuery)}”</strong> belum ditemukan.`
-                : "Tidak ada paket joki yang berstatus Ready.";
-
-            container.innerHTML = `
-                <div class="col-span-full rounded-2xl border border-dashed border-slate-700 bg-slate-900/45 px-5 py-12 text-center">
-                    <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-slate-400">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                container.innerHTML = `
+                    <div class="col-span-full rounded-2xl border border-dashed border-slate-700 bg-slate-900/45 px-5 py-12 text-center">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <p class="text-sm text-slate-400">${emptyMessage}</p>
+                        ${currentSearchQuery ? `
+                            <button type="button" onclick="clearJokiSearch()" class="mt-4 text-sm font-bold text-cyan-400 hover:text-cyan-300 cursor-pointer">
+                                Lihat semua paket
+                            </button>
+                        ` : ""}
                     </div>
-                    <p class="text-sm text-slate-400">${emptyMessage}</p>
-                    ${currentSearchQuery ? `
-                        <button type="button" onclick="clearJokiSearch()" class="mt-4 text-sm font-bold text-cyan-400 hover:text-cyan-300 cursor-pointer">
-                            Lihat semua paket
-                        </button>
-                    ` : ""}
-                </div>
-            `;
-            return;
-        }
+                `;
+                return;
+            }
 
-        validProducts.forEach(p => {
+            container.innerHTML = validProducts.map(product => {
+                const namaPaket = escapeHTML(product.Nama_Paket || product.Nama || "Paket Joki");
+                const kategori = escapeHTML(product.Kategori || "-");
+                const game = escapeHTML(product.Game || "-");
+                const rincian = escapeHTML(product.Deskripsi || product.Rincian || "Proses cepat & amanah.");
+                const gambar = escapeHTML(product.Gambar || "https://via.placeholder.com/300");
+                const productId = escapeHTML(String(product.ID));
 
-            // Skip jika bukan Ready
-            if (p.Status !== "Ready") return;
-
-            const namaPaket = p.Nama_Paket || p.Nama || "Paket Joki";
-            const kategori = p.Kategori || "-";
-            const game = p.Game || "-";
-            const rincian = p.Deskripsi || p.Rincian || "Proses cepat & amanah.";
-            const gambar = p.Gambar || "https://via.placeholder.com/300";
-
-            const hargaAsli = parseFloat(p.Harga_Asli) || 0;
-            const hargaDiskon = parseFloat(p.Harga_Diskon) || 0;
-
-            const diskonPct =
-                hargaAsli > 0
+                const hargaAsli = parseFloat(product.Harga_Asli) || 0;
+                const hargaDiskon = parseFloat(product.Harga_Diskon) || 0;
+                const diskonPct = hargaAsli > 0
                     ? Math.round(((hargaAsli - hargaDiskon) / hargaAsli) * 100)
                     : 0;
 
-            container.innerHTML += `
-                <article class="product-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between group">
+                return `
+                    <article class="product-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between group">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="${gambar}"
+                                alt="${namaPaket}"
+                                loading="lazy"
+                                decoding="async"
+                                class="product-image w-full h-32 md:h-40 object-cover"
+                                onerror="this.onerror=null;this.src='https://via.placeholder.com/300'">
 
-                    <div class="relative overflow-hidden">
+                            ${diskonPct > 0 ? `
+                                <span class="absolute top-2 left-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                                    -${diskonPct}%
+                                </span>
+                            ` : ""}
 
-                        <img
-                            src="${gambar}"
-                            alt="${namaPaket}"
-                            class="product-image w-full h-32 md:h-40 object-cover"
-                            onerror="this.src='https://via.placeholder.com/300'">
-
-                        ${
-                            diskonPct > 0
-                            ? `
-                            <span class="absolute top-2 left-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
-                                -${diskonPct}%
+                            <span class="absolute bottom-2 right-2 bg-slate-950/90 text-cyan-400 text-[10px] font-semibold px-2 py-1 rounded-lg">
+                                ${game}
                             </span>
-                            `
-                            : ""
-                        }
+                        </div>
 
-                        <span class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[10px] font-semibold px-2 py-1 rounded-lg">
-                            ${game}
-                        </span>
-
-                    </div>
-
-                    <div class="p-3 md:p-4 flex-1 flex flex-col justify-between gap-4">
-
-                        <div>
-
-                            <h3 class="product-title font-bold text-sm md:text-base leading-snug line-clamp-2 min-h-[42px] text-slate-100 transition-colors duration-200">
-                                ${namaPaket}
-                            </h3>
-
-                            <p class="text-xs text-slate-400 mt-1.5">
-                                <i class="fa-solid fa-tags text-cyan-500 mr-1"></i>
-                                ${kategori}
-                            </p>
-
-                            <div class="mt-2 pt-2 border-t border-slate-800/60">
-
-                                <p class="text-xs text-slate-400 leading-relaxed">
-                                    <i class="fa-solid fa-circle-info text-cyan-500/70 mr-1"></i>
-                                    ${rincian}
+                        <div class="p-3 md:p-4 flex-1 flex flex-col justify-between gap-4">
+                            <div>
+                                <h3 class="product-title font-bold text-sm md:text-base leading-snug line-clamp-2 min-h-[42px] text-slate-100 transition-colors duration-200">
+                                    ${namaPaket}
+                                </h3>
+                                <p class="text-xs text-slate-400 mt-1.5">
+                                    <i class="fa-solid fa-tags text-cyan-500 mr-1"></i>${kategori}
                                 </p>
-
+                                <div class="mt-2 pt-2 border-t border-slate-800/60">
+                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                        <i class="fa-solid fa-circle-info text-cyan-500/70 mr-1"></i>${rincian}
+                                    </p>
+                                </div>
                             </div>
 
+                            <div>
+                                ${hargaAsli > 0 ? `
+                                    <p class="text-xs line-through text-slate-500">Rp ${hargaAsli.toLocaleString("id-ID")}</p>
+                                ` : ""}
+                                <p class="text-cyan-400 font-extrabold text-base md:text-lg">Rp ${hargaDiskon.toLocaleString("id-ID")}</p>
+
+                                <button type="button" data-review-id="${productId}"
+                                    class="w-full mt-3 flex items-center justify-center gap-1.5 border border-slate-700 bg-slate-800/70 hover:border-yellow-400/50 hover:bg-slate-800 text-slate-200 hover:text-yellow-300 font-bold text-xs md:text-sm py-2.5 rounded-xl transition-all duration-200 cursor-pointer">
+                                    <i class="fa-solid fa-star text-yellow-400" aria-hidden="true"></i>
+                                    <span class="review-button-label">Lihat / Tulis Ulasan</span>
+                                </button>
+
+                                <button type="button" onclick="addToCart('${productId}', this)"
+                                    class="add-cart-button w-full mt-2 bg-cyan-500 hover:bg-cyan-400 active:scale-[.98] text-slate-950 font-bold text-xs md:text-sm py-2.5 rounded-xl shadow-sm transition-all duration-200 cursor-pointer">
+                                    <i class="add-cart-icon fa-solid fa-cart-plus mr-1"></i><span class="add-cart-label">Tambah ke Keranjang</span>
+                                </button>
+                            </div>
                         </div>
+                    </article>
+                `;
+            }).join("");
 
-                        <div>
-
-                            ${
-                                hargaAsli > 0
-                                ? `
-                                <p class="text-xs line-through text-slate-500">
-                                    Rp ${hargaAsli.toLocaleString("id-ID")}
-                                </p>
-                                `
-                                : ""
-                            }
-
-                            <p class="text-cyan-400 font-extrabold text-base md:text-lg">
-                                Rp ${hargaDiskon.toLocaleString("id-ID")}
-                            </p>
-
-                            <button
-                                type="button"
-                                data-review-id="${escapeHTML(String(p.ID))}"
-                                class="w-full mt-3 flex items-center justify-center gap-1.5 border border-slate-700 bg-slate-800/70 hover:border-yellow-400/50 hover:bg-slate-800 text-slate-200 hover:text-yellow-300 font-bold text-xs md:text-sm py-2.5 rounded-xl transition-all duration-200 cursor-pointer">
-
-                                <i class="fa-solid fa-star text-yellow-400" aria-hidden="true"></i>
-                                <span class="review-button-label">Lihat / Tulis Ulasan</span>
-
-                            </button>
-
-                            <button
-                                onclick="addToCart('${p.ID}')"
-                                class="w-full mt-2 bg-cyan-500 hover:bg-cyan-400 active:scale-[.98] text-slate-950 font-bold text-xs md:text-sm py-2.5 rounded-xl shadow-sm transition-all duration-200 cursor-pointer">
-
-                                <i class="fa-solid fa-cart-plus mr-1"></i>
-
-                                Tambah ke Keranjang
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-            `;
-
-        });
-
-        // Jalankan animasi setelah semua card selesai dirender
-        animateCards();
-
-    }
+            animateCards();
+        }
 
         function animateCards() {
-
             const cards = document.querySelectorAll(".product-card");
 
-            const observer = new IntersectionObserver((entries) => {
+            if (!("IntersectionObserver" in window)) {
+                cards.forEach(card => card.classList.add("show"));
+                return;
+            }
 
-                entries.forEach((entry) => {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("show");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
+            cardObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("show");
+                    cardObserver.unobserve(entry.target);
                 });
-
             }, {
-                threshold: 0.15
+                rootMargin: "120px 0px",
+                threshold: 0.05
             });
 
             cards.forEach((card, index) => {
-
-                card.style.transitionDelay = `${index * 70}ms`;
-
-                observer.observe(card);
-
+                card.style.transitionDelay = `${Math.min(index, 8) * 35}ms`;
+                cardObserver.observe(card);
             });
-
         }
 
         function filterGame(gameName, element) {
@@ -1727,24 +1068,30 @@
             }
         }
 
-        
         function renderSubCategories(products) {
             const container = document.getElementById('sub-category-container');
-            container.innerHTML = '';
-            const categories = [...new Set(products.map(p => p.Kategori))].filter(c => c && c.trim() !== '');
-            if (categories.length <= 1) return;
+            const categories = [...new Set(products.map(product => product.Kategori))]
+                .filter(category => category && category.trim() !== '');
 
-            container.innerHTML += `
+            if (categories.length <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const allButton = `
                 <button onclick="filterSubCategory('Semua', this)" class="sub-tab-btn active bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer">
-                    Semua ${currentGameFilter}
+                    Semua ${escapeHTML(currentGameFilter)}
                 </button>
             `;
-            categories.forEach(cat => {
-                container.innerHTML += `
-                    <button onclick="filterSubCategory('${cat}', this)" class="sub-tab-btn bg-slate-900/60 text-slate-400 border border-slate-800 text-xs px-3 py-1.5 rounded-lg font-medium hover:text-white hover:border-slate-700 transition cursor-pointer">
-                        ${cat}
-                    </button>
-                `;
+
+            container.innerHTML = allButton + categories.map(category => `
+                <button data-category="${escapeHTML(category)}" class="sub-tab-btn bg-slate-900/60 text-slate-400 border border-slate-800 text-xs px-3 py-1.5 rounded-lg font-medium hover:text-white hover:border-slate-700 transition cursor-pointer">
+                    ${escapeHTML(category)}
+                </button>
+            `).join('');
+
+            container.querySelectorAll('[data-category]').forEach(button => {
+                button.addEventListener('click', () => filterSubCategory(button.dataset.category, button));
             });
         }
 
@@ -2172,19 +1519,140 @@
         }
 
 
-        function addToCart(id) {
-            const prod = allProducts.find(p => p.ID === id);
-            if (prod) {
-                cart.push(prod);
-                updateCartUI();
-                showToast(`🛒 ${prod.Nama_Paket} berhasil ditambahkan!`);
+        function restartAnimationClass(element, className) {
+            if (!element) return;
+            element.classList.remove(className);
+            void element.offsetWidth;
+            element.classList.add(className);
+        }
+
+        function animateCartTarget(showEntrance = false) {
+            const cartFloat = document.getElementById('cart-float');
+            const cartCount = document.getElementById('cart-count');
+            if (!cartFloat) return;
+
+            if (showEntrance) restartAnimationClass(cartFloat, 'cart-enter');
+            restartAnimationClass(cartFloat, 'cart-bump');
+            restartAnimationClass(cartCount, 'cart-count-pop');
+
+            window.setTimeout(() => {
+                cartFloat.classList.remove('cart-enter', 'cart-bump');
+                cartCount?.classList.remove('cart-count-pop');
+            }, 650);
+        }
+
+        function animateAddButton(button) {
+            if (!button) return;
+
+            const icon = button.querySelector('.add-cart-icon');
+            const label = button.querySelector('.add-cart-label');
+
+            window.clearTimeout(button._cartAnimationTimer);
+            restartAnimationClass(button, 'is-added');
+
+            if (icon) {
+                icon.classList.remove('fa-cart-plus');
+                icon.classList.add('fa-check');
             }
+            if (label) label.textContent = 'Ditambahkan';
+
+            button._cartAnimationTimer = window.setTimeout(() => {
+                button.classList.remove('is-added');
+                if (icon) {
+                    icon.classList.remove('fa-check');
+                    icon.classList.add('fa-cart-plus');
+                }
+                if (label) label.textContent = 'Tambah ke Keranjang';
+            }, 850);
+        }
+
+        function flyProductToCart(triggerElement, product, showEntrance = false) {
+            const cartButton = document.querySelector('#cart-float .cart-float-button');
+            const sourceImage = triggerElement?.closest('.product-card')?.querySelector('.product-image');
+
+            if (!cartButton || !sourceImage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                animateCartTarget(showEntrance);
+                return;
+            }
+
+            const sourceRect = sourceImage.getBoundingClientRect();
+            const targetRect = cartButton.getBoundingClientRect();
+
+            if (!sourceRect.width || !sourceRect.height || !targetRect.width || !targetRect.height) {
+                animateCartTarget(showEntrance);
+                return;
+            }
+
+            const flyingImage = document.createElement('img');
+            flyingImage.className = 'cart-fly-image';
+            flyingImage.src = sourceImage.currentSrc || sourceImage.src || product?.Gambar || '';
+            flyingImage.alt = '';
+            flyingImage.setAttribute('aria-hidden', 'true');
+
+            const startWidth = Math.min(sourceRect.width, 150);
+            const startHeight = Math.min(sourceRect.height, 105);
+            const startLeft = sourceRect.left + (sourceRect.width - startWidth) / 2;
+            const startTop = sourceRect.top + (sourceRect.height - startHeight) / 2;
+
+            flyingImage.style.left = `${startLeft}px`;
+            flyingImage.style.top = `${startTop}px`;
+            flyingImage.style.width = `${startWidth}px`;
+            flyingImage.style.height = `${startHeight}px`;
+            document.body.appendChild(flyingImage);
+
+            const startCenterX = startLeft + startWidth / 2;
+            const startCenterY = startTop + startHeight / 2;
+            const targetCenterX = targetRect.left + targetRect.width / 2;
+            const targetCenterY = targetRect.top + targetRect.height / 2;
+            const deltaX = targetCenterX - startCenterX;
+            const deltaY = targetCenterY - startCenterY;
+
+            const animation = flyingImage.animate([
+                {
+                    transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)',
+                    opacity: .96,
+                    offset: 0
+                },
+                {
+                    transform: `translate3d(${deltaX * .52}px, ${deltaY * .28 - 75}px, 0) scale(.72) rotate(8deg)`,
+                    opacity: .9,
+                    offset: .55
+                },
+                {
+                    transform: `translate3d(${deltaX}px, ${deltaY}px, 0) scale(.12) rotate(18deg)`,
+                    opacity: .12,
+                    offset: 1
+                }
+            ], {
+                duration: 680,
+                easing: 'cubic-bezier(.22,.85,.3,1)',
+                fill: 'forwards'
+            });
+
+            animation.addEventListener('finish', () => {
+                flyingImage.remove();
+                animateCartTarget(showEntrance);
+            }, { once: true });
+
+            animation.addEventListener('cancel', () => flyingImage.remove(), { once: true });
+        }
+
+        function addToCart(id, triggerElement = null) {
+            const prod = allProducts.find(p => p.ID === id);
+            if (!prod) return;
+
+            const wasEmpty = cart.length === 0;
+            cart.push(prod);
+            updateCartUI();
+            animateAddButton(triggerElement);
+            flyProductToCart(triggerElement, prod, wasEmpty);
+            showToast(`🛒 ${prod.Nama_Paket} berhasil ditambahkan!`);
         }
 
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = "bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 text-slate-100 text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transform translate-x-full opacity-0 transition-all duration-300 ease-out pointer-events-auto min-w-[200px] max-w-sm";
+            toast.className = "bg-slate-900/90  border border-cyan-500/30 text-slate-100 text-xs font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transform translate-x-full opacity-0 transition-all duration-300 ease-out pointer-events-auto min-w-[200px] max-w-sm";
             toast.innerHTML = `
                 <i class="fa-solid fa-circle-check text-cyan-400 text-xs md:text-sm"></i>
                 <span class="flex-1 truncate">${message}</span>
@@ -2227,8 +1695,7 @@
         function renderModalCart() {
             const itemsContainer = document.getElementById('modal-cart-items');
             const modalTotal = document.getElementById('modal-total-price');
-            itemsContainer.innerHTML = '';
-            
+
             if (cart.length === 0) {
                 itemsContainer.innerHTML = `
                     <div class="flex flex-col items-center justify-center py-10 text-center">
@@ -2241,15 +1708,19 @@
             }
 
             let total = 0;
-            cart.forEach((item, index) => {
+            itemsContainer.innerHTML = cart.map((item, index) => {
                 const harga = parseFloat(item.Harga_Diskon) || 0;
                 total += harga;
-                itemsContainer.innerHTML += `
+                return `
                     <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-xl flex items-center justify-between gap-3">
-                        <img src="${item.Gambar || 'https://via.placeholder.com/100'}" alt="${item.Nama_Paket}" class="w-12 h-12 rounded-lg object-cover border border-slate-800 flex-shrink-0" onerror="this.src='https://via.placeholder.com/100'">
+                        <img src="${escapeHTML(item.Gambar || 'https://via.placeholder.com/100')}"
+                            alt="${escapeHTML(item.Nama_Paket || 'Paket joki')}"
+                            loading="lazy" decoding="async"
+                            class="w-12 h-12 rounded-lg object-cover border border-slate-800 flex-shrink-0"
+                            onerror="this.onerror=null;this.src='https://via.placeholder.com/100'">
                         <div class="flex-1 min-w-0">
-                            <h4 class="text-xs font-bold text-slate-200 truncate">${item.Nama_Paket}</h4>
-                            <p class="text-[10px] text-cyan-400 mt-0.5">${item.Game} • ${item.Kategori}</p>
+                            <h4 class="text-xs font-bold text-slate-200 truncate">${escapeHTML(item.Nama_Paket || 'Paket joki')}</h4>
+                            <p class="text-[10px] text-cyan-400 mt-0.5">${escapeHTML(item.Game || '-')} • ${escapeHTML(item.Kategori || '-')}</p>
                             <p class="text-xs font-extrabold text-slate-100 mt-1">Rp ${harga.toLocaleString('id-ID')}</p>
                         </div>
                         <button onclick="removeFromCart(${index})" class="text-slate-500 hover:text-rose-500 p-2 rounded-lg hover:bg-slate-900 transition flex-shrink-0 cursor-pointer">
@@ -2257,7 +1728,8 @@
                         </button>
                     </div>
                 `;
-            });
+            }).join('');
+
             modalTotal.innerText = `Rp ${total.toLocaleString('id-ID')}`;
         }
 
@@ -2276,25 +1748,26 @@
 
         function renderQueue(data) {
             const container = document.getElementById('queue-container');
-            const validQueue = data.filter(q => q.Nickname && q.Nickname.trim() !== '');
+            if (!container) return;
+
+            const validQueue = data.filter(item => item.Nickname && item.Nickname.trim() !== '');
             if (validQueue.length === 0) {
                 container.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Belum ada antrian saat ini.</td></tr>`;
                 return;
             }
-            container.innerHTML = '';
-            validQueue.forEach(q => {
-                container.innerHTML += `
-                    <tr class="border-b border-slate-800/50 hover:bg-slate-800/30">
-                        <td class="p-4">${q.No || '-'}</td>
-                        <td class="p-4 font-semibold">${q.Nickname}</td>
-                        <td class="p-4 text-slate-400">${q.Game || '-'}</td>
-                        <td class="p-4"><span class="px-2 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-cyan-400">${q.Status || 'Proses'}</span></td>
-                    </tr>
-                `;
-            });
+
+            container.innerHTML = validQueue.map(item => `
+                <tr class="border-b border-slate-800/50 hover:bg-slate-800/30">
+                    <td class="p-4">${escapeHTML(item.No || '-')}</td>
+                    <td class="p-4 font-semibold">${escapeHTML(item.Nickname)}</td>
+                    <td class="p-4 text-slate-400">${escapeHTML(item.Game || '-')}</td>
+                    <td class="p-4"><span class="px-2 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-cyan-400">${escapeHTML(item.Status || 'Proses')}</span></td>
+                </tr>
+            `).join('');
         }
 
-        window.addEventListener('load', () => {
+        window.addEventListener('DOMContentLoaded', () => {
+            updateNavbarState();
             enableGameTabsDrag();
             setupGameTabsNavigation();
             setupJokiSearch();
@@ -2313,6 +1786,8 @@
                         <div class="flex items-center gap-3">
                             <img src="logo.png"
                                     alt="Logo Willpedia"
+                                    width="160" height="64"
+                                    loading="lazy" decoding="async"
                                     class="h-12 md:h-16 w-auto mt-1"
                                     onerror="this.src='https://via.placeholder.com/150'">
                             <div>
