@@ -557,13 +557,40 @@
         let allProducts = [];
         let cart = [];
         let currentGameFilter = 'Semua';
+        let currentSubCategoryFilter = 'Semua';
         let currentSearchQuery = '';
         let currentReviewProductId = '';
         let selectedReviewRating = 0;
         const reviewCache = new Map();
         let cardObserver = null;
-        const PRODUCTS_CACHE_KEY = "willpedia-products-v1";
+        const PRODUCTS_CACHE_KEY = "willpedia-products-v2";
         const PRODUCTS_CACHE_TTL = 5 * 60 * 1000;
+
+        /*
+         * Fallback berbentuk SVG inline sehingga tetap tampil walaupun
+         * layanan placeholder eksternal sedang tidak dapat diakses.
+         */
+        const PRODUCT_IMAGE_FALLBACK = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+                <defs>
+                    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0f172a"/>
+                        <stop offset="100%" stop-color="#1e293b"/>
+                    </linearGradient>
+                </defs>
+                <rect width="900" height="600" fill="url(#background)"/>
+                <circle cx="450" cy="245" r="86" fill="#22d3ee" opacity=".15"/>
+                <path d="M405 258h90M450 213v90" stroke="#67e8f9" stroke-width="18" stroke-linecap="round" opacity=".85"/>
+                <text x="450" y="395" text-anchor="middle" fill="#cbd5e1"
+                      font-family="Arial, sans-serif" font-size="34" font-weight="700">
+                    WILLPEDIA
+                </text>
+                <text x="450" y="440" text-anchor="middle" fill="#64748b"
+                      font-family="Arial, sans-serif" font-size="22">
+                    Gambar belum tersedia
+                </text>
+            </svg>
+        `);
 
         // Swipe HP memakai scroll native; drag JavaScript hanya digunakan untuk mouse desktop.
         function enableGameTabsDrag() {
@@ -735,7 +762,7 @@
                 const cached = JSON.parse(sessionStorage.getItem(PRODUCTS_CACHE_KEY) || "null");
                 if (!cached || !Array.isArray(cached.data)) return null;
                 if (Date.now() - cached.savedAt > PRODUCTS_CACHE_TTL) return null;
-                return cached.data;
+                return cached.data.map(normalizeProductRecord);
             } catch (_) {
                 return null;
             }
@@ -759,7 +786,7 @@
 
             if (cachedProducts) {
                 allProducts = cachedProducts;
-                renderProducts(getHomeProducts());
+                renderCurrentProductView();
                 hasRenderedCache = true;
             }
 
@@ -770,12 +797,18 @@
                 const products = await response.json();
                 if (!Array.isArray(products)) throw new Error("Format data produk tidak valid");
 
-                allProducts = products;
+                const normalizedProducts = products.map(normalizeProductRecord);
+                allProducts = normalizedProducts;
                 sessionStorage.setItem(PRODUCTS_CACHE_KEY, JSON.stringify({
                     savedAt: Date.now(),
-                    data: products
+                    data: normalizedProducts
                 }));
-                renderProducts(getHomeProducts());
+
+                /*
+                 * Jangan selalu kembali ke tampilan Semua setelah fetch selesai.
+                 * Pertahankan game, subkategori, atau pencarian yang sedang aktif.
+                 */
+                renderCurrentProductView();
             } catch (err) {
                 console.error(err);
                 if (!hasRenderedCache) showProductLoadError();
@@ -834,6 +867,103 @@
                 .replaceAll("'", "&#039;");
         }
 
+        /*
+         * Membersihkan nama properti dari Apps Script/Google Sheets.
+         * Ini mencegah kolom seperti "Gambar " atau " Status" gagal terbaca.
+         */
+        function normalizeProductRecord(product) {
+            if (!product || typeof product !== "object") return {};
+
+            return Object.entries(product).reduce((result, [key, value]) => {
+                result[String(key).trim()] = value;
+                return result;
+            }, {});
+        }
+
+        function cleanImageUrl(value) {
+            let url = String(value || "").trim();
+
+            // Hapus tanda kutip yang kadang ikut tersimpan di sel spreadsheet.
+            url = url.replace(/^["']+|["']+$/g, "");
+
+            if (!url) return "";
+
+            // Ubah tautan Google Drive berbagi menjadi tautan file langsung.
+            const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([a-zA-Z0-9_-]+)/i);
+            if (driveMatch) {
+                return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+            }
+
+            // Paksa HTTP menjadi HTTPS agar tidak diblokir pada GitHub Pages.
+            if (/^http:\/\//i.test(url)) {
+                url = url.replace(/^http:\/\//i, "https://");
+            }
+
+            // Hanya izinkan URL web, data image, atau path lokal.
+            const isAllowed =
+                /^https?:\/\//i.test(url) ||
+                /^data:image\//i.test(url) ||
+                /^(?:\.\.?\/|\/)?[a-zA-Z0-9_-][^\s]*$/i.test(url);
+
+            return isAllowed ? url : "";
+        }
+
+        /*
+         * Fandom memakai redirect dan kadang menolak hotlink langsung.
+         * Untuk URL Fandom, gambar terlebih dahulu dimuat melalui proxy gambar.
+         * URL asli tetap disimpan sebagai percobaan kedua.
+         */
+        function createPrimaryImageUrl(originalUrl) {
+            if (!originalUrl) return PRODUCT_IMAGE_FALLBACK;
+
+            if (/honkai-star-rail\.fandom\.com/i.test(originalUrl)) {
+                const sourceWithoutProtocol = originalUrl.replace(/^https?:\/\//i, "");
+                return `https://images.weserv.nl/?url=${encodeURIComponent(sourceWithoutProtocol)}&w=900&h=600&fit=cover&output=webp`;
+            }
+
+            return originalUrl;
+        }
+
+        function getProductImageInfo(product = {}) {
+            const originalUrl = cleanImageUrl(
+                product.Gambar ||
+                product.gambar ||
+                product.Image ||
+                product.image ||
+                product["Link Gambar Langsung"] ||
+                ""
+            );
+
+            return {
+                originalUrl,
+                primaryUrl: createPrimaryImageUrl(originalUrl)
+            };
+        }
+
+        function handleProductImageError(imageElement) {
+            if (!imageElement) return;
+
+            const originalUrl = cleanImageUrl(imageElement.dataset.originalSrc || "");
+            const currentUrl = imageElement.currentSrc || imageElement.src || "";
+
+            /*
+             * Bila proxy gagal, coba URL asli satu kali.
+             * Sesudah itu gunakan fallback SVG inline.
+             */
+            if (
+                originalUrl &&
+                imageElement.dataset.originalAttempted !== "true" &&
+                currentUrl !== originalUrl
+            ) {
+                imageElement.dataset.originalAttempted = "true";
+                imageElement.src = originalUrl;
+                return;
+            }
+
+            imageElement.onerror = null;
+            imageElement.src = PRODUCT_IMAGE_FALLBACK;
+        }
+
         function setActiveGameTab(activeButton) {
             document.querySelectorAll(".tab-btn").forEach(button => {
                 button.classList.toggle("active", button === activeButton);
@@ -873,26 +1003,13 @@
 
             currentSearchQuery = query;
             currentGameFilter = "Semua";
+            currentSubCategoryFilter = "Semua";
 
             const allTab = document.querySelector(".tab-btn");
             setActiveGameTab(allTab);
             document.getElementById("sub-category-container").innerHTML = "";
 
-            const results = allProducts.filter(product => {
-                if (!product.ID || product.Status !== "Ready") return false;
-
-                const searchableContent = [
-                    product.Nama_Paket,
-                    product.Nama,
-                    product.Game,
-                    product.Kategori,
-                    product.Deskripsi,
-                    product.Rincian,
-                    product.ID
-                ].map(normalizeSearchText).join(" ");
-
-                return searchableContent.includes(normalizedQuery);
-            });
+            const results = getSearchResults(query);
 
             renderProducts(results);
             updateSearchResultInfo(results.length, query);
@@ -906,12 +1023,13 @@
         function clearJokiSearch() {
             resetSearchDisplay();
             currentGameFilter = "Semua";
+            currentSubCategoryFilter = "Semua";
 
             const allTab = document.querySelector(".tab-btn");
             setActiveGameTab(allTab);
             document.getElementById("sub-category-container").innerHTML = "";
 
-            renderProducts(getHomeProducts());
+            renderCurrentProductView();
         }
 
         function setupJokiSearch() {
@@ -972,7 +1090,9 @@
                 const kategori = escapeHTML(product.Kategori || "-");
                 const game = escapeHTML(product.Game || "-");
                 const rincian = escapeHTML(product.Deskripsi || product.Rincian || "Proses cepat & amanah.");
-                const gambar = escapeHTML(product.Gambar || "https://via.placeholder.com/300");
+                const imageInfo = getProductImageInfo(product);
+                const gambar = escapeHTML(imageInfo.primaryUrl);
+                const gambarAsli = escapeHTML(imageInfo.originalUrl);
                 const productId = escapeHTML(String(product.ID));
 
                 const hargaAsli = parseFloat(product.Harga_Asli) || 0;
@@ -986,11 +1106,13 @@
                         <div class="relative overflow-hidden">
                             <img
                                 src="${gambar}"
+                                data-original-src="${gambarAsli}"
                                 alt="${namaPaket}"
                                 loading="lazy"
                                 decoding="async"
+                                referrerpolicy="no-referrer"
                                 class="product-image w-full h-32 md:h-40 object-cover"
-                                onerror="this.onerror=null;this.src='https://via.placeholder.com/300'">
+                                onerror="handleProductImageError(this)">
 
                             ${diskonPct > 0 ? `
                                 <span class="absolute top-2 left-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
@@ -1068,72 +1190,172 @@
             });
         }
 
+        function getSearchResults(query) {
+            const normalizedQuery = normalizeSearchText(query);
+            if (!normalizedQuery) return [];
+
+            return allProducts.filter(product => {
+                if (!product.ID || product.Status !== "Ready") return false;
+
+                const searchableContent = [
+                    product.Nama_Paket,
+                    product.Nama,
+                    product.Game,
+                    product.Kategori,
+                    product.Deskripsi,
+                    product.Rincian,
+                    product.ID
+                ].map(normalizeSearchText).join(" ");
+
+                return searchableContent.includes(normalizedQuery);
+            });
+        }
+
+        /*
+         * Render ulang data tanpa kehilangan filter aktif.
+         * Fungsi ini juga dipakai ketika request API selesai setelah pengguna
+         * lebih dahulu menekan tab game.
+         */
+        function renderCurrentProductView(options = {}) {
+            const rebuildSubCategories = options.rebuildSubCategories !== false;
+            const subCategoryContainer = document.getElementById("sub-category-container");
+
+            if (currentSearchQuery) {
+                const results = getSearchResults(currentSearchQuery);
+                if (subCategoryContainer) subCategoryContainer.innerHTML = "";
+                renderProducts(results);
+                updateSearchResultInfo(results.length, currentSearchQuery);
+                return;
+            }
+
+            if (currentGameFilter === "Semua") {
+                currentSubCategoryFilter = "Semua";
+                if (subCategoryContainer) subCategoryContainer.innerHTML = "";
+                renderProducts(getHomeProducts());
+                return;
+            }
+
+            const gameProducts = allProducts.filter(product =>
+                product.Game === currentGameFilter &&
+                product.Status === "Ready"
+            );
+
+            const availableCategories = new Set(
+                gameProducts
+                    .map(product => String(product.Kategori || "").trim())
+                    .filter(Boolean)
+            );
+
+            if (
+                currentSubCategoryFilter !== "Semua" &&
+                !availableCategories.has(currentSubCategoryFilter)
+            ) {
+                currentSubCategoryFilter = "Semua";
+            }
+
+            if (rebuildSubCategories) {
+                renderSubCategories(gameProducts);
+            }
+
+            const visibleProducts = currentSubCategoryFilter === "Semua"
+                ? gameProducts
+                : gameProducts.filter(product =>
+                    product.Kategori === currentSubCategoryFilter
+                );
+
+            renderProducts(visibleProducts);
+        }
+
         function filterGame(gameName, element) {
             resetSearchDisplay();
             currentGameFilter = gameName;
+            currentSubCategoryFilter = "Semua";
             setActiveGameTab(element);
-
-            if (gameName === "Semua") {
-                document.getElementById("sub-category-container").innerHTML = "";
-                renderProducts(getHomeProducts());
-            } else {
-                const filtered = allProducts.filter(product =>
-                    product.Game === gameName &&
-                    product.Status === "Ready"
-                );
-
-                renderSubCategories(filtered);
-                renderProducts(filtered);
-            }
+            renderCurrentProductView();
         }
 
         function renderSubCategories(products) {
             const container = document.getElementById('sub-category-container');
+            if (!container) return;
+
             const categories = [...new Set(products.map(product => product.Kategori))]
                 .filter(category => category && category.trim() !== '');
 
             if (categories.length <= 1) {
+                currentSubCategoryFilter = 'Semua';
                 container.innerHTML = '';
                 return;
             }
 
+            const activeClasses = 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30 font-semibold';
+            const inactiveClasses = 'bg-slate-900/60 text-slate-400 border-slate-800 font-medium';
+            const allIsActive = currentSubCategoryFilter === 'Semua';
+
             const allButton = `
-                <button onclick="filterSubCategory('Semua', this)" class="sub-tab-btn active bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer">
+                <button
+                    onclick="filterSubCategory('Semua', this)"
+                    class="sub-tab-btn ${allIsActive ? activeClasses : inactiveClasses} border text-xs px-3 py-1.5 rounded-lg transition cursor-pointer"
+                >
                     Semua ${escapeHTML(currentGameFilter)}
                 </button>
             `;
 
-            container.innerHTML = allButton + categories.map(category => `
-                <button data-category="${escapeHTML(category)}" class="sub-tab-btn bg-slate-900/60 text-slate-400 border border-slate-800 text-xs px-3 py-1.5 rounded-lg font-medium hover:text-white hover:border-slate-700 transition cursor-pointer">
-                    ${escapeHTML(category)}
-                </button>
-            `).join('');
+            container.innerHTML = allButton + categories.map(category => {
+                const isActive = currentSubCategoryFilter === category;
+
+                return `
+                    <button
+                        data-category="${escapeHTML(category)}"
+                        class="sub-tab-btn ${isActive ? activeClasses : inactiveClasses} border text-xs px-3 py-1.5 rounded-lg hover:text-white hover:border-slate-700 transition cursor-pointer"
+                    >
+                        ${escapeHTML(category)}
+                    </button>
+                `;
+            }).join('');
 
             container.querySelectorAll('[data-category]').forEach(button => {
-                button.addEventListener('click', () => filterSubCategory(button.dataset.category, button));
+                button.addEventListener('click', () =>
+                    filterSubCategory(button.dataset.category, button)
+                );
             });
         }
 
         function filterSubCategory(categoryName, element) {
             resetSearchDisplay();
+            currentSubCategoryFilter = categoryName;
 
             document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-                btn.classList.remove('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500/30', 'font-semibold');
-                btn.classList.add('bg-slate-900/60', 'text-slate-400', 'border-slate-800', 'font-medium');
+                btn.classList.remove(
+                    'bg-cyan-500/20',
+                    'text-cyan-400',
+                    'border-cyan-500/30',
+                    'font-semibold'
+                );
+                btn.classList.add(
+                    'bg-slate-900/60',
+                    'text-slate-400',
+                    'border-slate-800',
+                    'font-medium'
+                );
             });
-            if (element) {
-                element.classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500/30', 'font-semibold');
-                element.classList.remove('bg-slate-900/60', 'text-slate-400', 'border-slate-800', 'font-medium');
-            }
-            const baseProducts = allProducts.filter(p => p.Game === currentGameFilter);
-            if (categoryName === 'Semua') {
-                renderProducts(baseProducts);
-            } else {
-                const deeplyFiltered = baseProducts.filter(p => p.Kategori === categoryName);
-                renderProducts(deeplyFiltered);
-            }
-        }
 
+            if (element) {
+                element.classList.add(
+                    'bg-cyan-500/20',
+                    'text-cyan-400',
+                    'border-cyan-500/30',
+                    'font-semibold'
+                );
+                element.classList.remove(
+                    'bg-slate-900/60',
+                    'text-slate-400',
+                    'border-slate-800',
+                    'font-medium'
+                );
+            }
+
+            renderCurrentProductView({ rebuildSubCategories: false });
+        }
 
 
         /* =========================================================
@@ -1604,7 +1826,13 @@
 
             const flyingImage = document.createElement('img');
             flyingImage.className = 'cart-fly-image';
-            flyingImage.src = sourceImage.currentSrc || sourceImage.src || product?.Gambar || '';
+            const flyingImageInfo = getProductImageInfo(product || {});
+            flyingImage.src =
+                sourceImage.currentSrc ||
+                sourceImage.src ||
+                flyingImageInfo.primaryUrl;
+            flyingImage.dataset.originalSrc = flyingImageInfo.originalUrl;
+            flyingImage.onerror = () => handleProductImageError(flyingImage);
             flyingImage.alt = '';
             flyingImage.setAttribute('aria-hidden', 'true');
 
@@ -1729,14 +1957,21 @@
             let total = 0;
             itemsContainer.innerHTML = cart.map((item, index) => {
                 const harga = parseFloat(item.Harga_Diskon) || 0;
+                const imageInfo = getProductImageInfo(item);
+                const gambar = escapeHTML(imageInfo.primaryUrl);
+                const gambarAsli = escapeHTML(imageInfo.originalUrl);
                 total += harga;
                 return `
                     <div class="bg-slate-950/60 border border-slate-800 p-3 rounded-xl flex items-center justify-between gap-3">
-                        <img src="${escapeHTML(item.Gambar || 'https://via.placeholder.com/100')}"
+                        <img
+                            src="${gambar}"
+                            data-original-src="${gambarAsli}"
                             alt="${escapeHTML(item.Nama_Paket || 'Paket joki')}"
-                            loading="lazy" decoding="async"
+                            loading="lazy"
+                            decoding="async"
+                            referrerpolicy="no-referrer"
                             class="w-12 h-12 rounded-lg object-cover border border-slate-800 flex-shrink-0"
-                            onerror="this.onerror=null;this.src='https://via.placeholder.com/100'">
+                            onerror="handleProductImageError(this)">
                         <div class="flex-1 min-w-0">
                             <h4 class="text-xs font-bold text-slate-200 truncate">${escapeHTML(item.Nama_Paket || 'Paket joki')}</h4>
                             <p class="text-[10px] text-cyan-400 mt-0.5">${escapeHTML(item.Game || '-')} • ${escapeHTML(item.Kategori || '-')}</p>
