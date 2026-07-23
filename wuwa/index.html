@@ -11,64 +11,77 @@
     <link rel="apple-touch-icon" href="logowill.png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-oura-nav-comments-demand-1">
+    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-storefront-two-row-2">
     <link rel="preload" href="data/wuwa.json" as="fetch" crossorigin="anonymous">
-    <script src="assets/js/willpedia.min.js?v=20260724-oura-nav-comments-demand-1" defer></script>
+    <script src="assets/js/willpedia.min.js?v=20260724-storefront-two-row-2" defer></script>
 </head>
 <body data-page="game" data-game="wuwa" class="gradient-bg text-white min-h-screen flex flex-col justify-between">
     <div id="navbar-shell" class="fixed top-0 left-0 right-0 z-50 w-full">
-        <nav id="navbar" class="oura-navbar" aria-label="Navigasi utama">
-            <div class="oura-desktop-navbar">
-                <a href="index.html" class="oura-navbar-brand" aria-label="Beranda Willpedia">
-                    <img src="logo.webp" alt="Logo Willpedia" width="88" height="54" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
-                    <span class="oura-navbar-brand-copy">
-                        <strong>WILLPEDIA</strong>
-                        <small>Joki Game Terpercaya</small>
-                    </span>
-                </a>
-                <div class="oura-navbar-links" aria-label="Menu utama">
-                    <a class="oura-navbar-link nav-home" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Beranda</span></a>
-                    <a class="oura-navbar-link nav-games" href="index.html#game-menu-view"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>Semua Game</span></a>
-                    <a class="oura-navbar-link" href="index.html#home-how-to-order"><i class="fa-solid fa-list-check" aria-hidden="true"></i><span>Cara Order</span></a>
-                    <a class="oura-navbar-link" href="index.html#all-game-ratings-section"><i class="fa-solid fa-star" aria-hidden="true"></i><span>Ulasan</span></a>
-                </div>
-                <form id="joki-search-form" class="navbar-search-form oura-navbar-search" role="search">
-                    <label for="joki-search-input" class="sr-only">Cari paket joki</label>
-                    <div class="joki-search-field">
-                        <i class="joki-search-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                        <input id="joki-search-input" class="joki-search-input" type="search" autocomplete="off" placeholder="Cari paket...">
-                        <button id="joki-search-clear" type="button" class="joki-search-clear hidden" aria-label="Hapus pencarian" title="Hapus pencarian"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <nav id="navbar" class="storefront-navbar" aria-label="Navigasi utama">
+            <div class="storefront-desktop-navbar">
+                <div class="storefront-top-row">
+                    <div class="storefront-top-inner">
+                        <a href="index.html" class="storefront-brand" aria-label="Beranda Willpedia">
+                            <img src="logo.webp" alt="Logo Willpedia" width="82" height="56" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
+                            <span class="storefront-brand-copy">
+                                <strong>WILLPEDIA</strong>
+                                <small>Joki Game Terpercaya</small>
+                            </span>
+                        </a>
+                        <form id="joki-search-form" class="navbar-search-form storefront-search-form" role="search">
+                            <label for="joki-search-input" class="sr-only">Cari game atau paket joki</label>
+                            <div class="joki-search-field storefront-search-field">
+                                <button type="submit" class="storefront-search-icon-button" aria-label="Cari paket joki">
+                                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                </button>
+                                <input id="joki-search-input" class="joki-search-input" type="search" autocomplete="off" placeholder="Cari game atau paket joki">
+                                <button id="joki-search-clear" type="button" class="joki-search-clear hidden" aria-label="Hapus pencarian" title="Hapus pencarian"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
+                        <button id="desktop-currency-button" type="button" class="currency-selector-button desktop-currency-button currency-active-button storefront-currency-button" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
+                            <img id="desktop-currency-flag" class="currency-navbar-flag" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%203%202%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h3v2H0z%22%2F%3E%3Cpath%20fill%3D%22%23ce1126%22%20d%3D%22M0%200h3v1H0z%22%2F%3E%3C%2Fsvg%3E" alt="" aria-hidden="true">
+                            <span id="desktop-currency-code" class="currency-selector-code">ID / IDR</span>
+                            <span class="currency-selector-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                        </button>
                     </div>
-                    <button type="submit" class="joki-search-button" aria-label="Cari paket joki"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>Cari</span></button>
-                </form>
-                <div class="oura-navbar-actions">
-                    <button id="desktop-currency-button" type="button" class="currency-selector-button desktop-currency-button currency-active-button oura-currency-button" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
-                        <img id="desktop-currency-flag" class="currency-navbar-flag" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%203%202%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h3v2H0z%22%2F%3E%3Cpath%20fill%3D%22%23ce1126%22%20d%3D%22M0%200h3v1H0z%22%2F%3E%3C%2Fsvg%3E" alt="" aria-hidden="true">
-                        <span id="desktop-currency-code" class="currency-selector-code">ID / IDR</span>
-                        <span class="currency-selector-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                    </button>
-                    <button type="button" class="oura-order-button" onclick="openMobileOrderFromMenu()" aria-label="Buka pesanan saya">
-                        <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i><span>Pesanan</span>
-                    </button>
+                </div>
+                <div class="storefront-bottom-row">
+                    <div class="storefront-bottom-inner">
+                        <div class="storefront-menu-left" aria-label="Menu utama">
+                            <a class="storefront-nav-link nav-home" href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Beranda</span></a>
+                            <a class="storefront-nav-link nav-games" href="index.html#game-menu-view"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>Semua Game</span></a>
+                            <a class="storefront-nav-link" href="index.html#home-how-to-order"><i class="fa-solid fa-list-check" aria-hidden="true"></i><span>Cara Order</span></a>
+                            <a class="storefront-nav-link" href="index.html#all-game-ratings-section"><i class="fa-solid fa-star" aria-hidden="true"></i><span>Rating &amp; Ulasan</span></a>
+                        </div>
+                        <div class="storefront-menu-right">
+                            <button type="button" class="storefront-nav-action" onclick="openMobileOrderFromMenu()" aria-label="Buka pesanan saya"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i><span>Pesanan Saya</span></button>
+                            <a class="storefront-nav-action storefront-help-action" href="https://api.whatsapp.com/send?phone=6281357706121&amp;text=Halo%20Admin%20Willpedia%2C%20saya%20butuh%20bantuan." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Hubungi Admin</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mobile-navbar-content oura-mobile-navbar">
-                <a href="index.html" class="mobile-navbar-brand" aria-label="Beranda Willpedia">
-                    <img src="logo.webp" alt="Logo Willpedia" width="68" height="46" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
-                    <span class="mobile-navbar-brand-copy">
-                        <strong class="mobile-navbar-wordmark">WILLPEDIA</strong>
-                        <small>Joki Game</small>
-                    </span>
-                </a>
-                <div class="mobile-navbar-actions">
-                    <button type="button" class="mobile-navbar-action mobile-navbar-search-button" onclick="openMobileSearch()" aria-label="Buka pencarian" aria-controls="mobile-search-overlay"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
-                    <button id="mobile-currency-button" type="button" class="mobile-navbar-action currency-selector-button mobile-currency-button currency-active-button" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
-                        <img id="mobile-currency-flag" class="currency-navbar-flag" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%203%202%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h3v2H0z%22%2F%3E%3Cpath%20fill%3D%22%23ce1126%22%20d%3D%22M0%200h3v1H0z%22%2F%3E%3C%2Fsvg%3E" alt="" aria-hidden="true">
-                        <span id="mobile-currency-code" class="currency-selector-code">ID / IDR</span>
-                        <span class="currency-selector-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                    </button>
-                    <button id="mobile-menu-button" type="button" class="mobile-navbar-action" onclick="toggleMobileNavMenu()" aria-label="Buka menu" aria-controls="mobile-nav-menu" aria-expanded="false"><i id="mobile-menu-icon" class="fa-solid fa-bars" aria-hidden="true"></i></button>
+            <div class="storefront-mobile-navbar">
+                <div class="storefront-mobile-top">
+                    <a href="index.html" class="mobile-navbar-brand storefront-mobile-brand" aria-label="Beranda Willpedia">
+                        <img src="logo.webp" alt="Logo Willpedia" width="72" height="50" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
+                        <span class="mobile-navbar-brand-copy">
+                            <strong class="mobile-navbar-wordmark">WILLPEDIA</strong>
+                            <small>Joki Game Terpercaya</small>
+                        </span>
+                    </a>
+                    <div class="mobile-navbar-actions">
+                        <button id="mobile-currency-button" type="button" class="mobile-navbar-action currency-selector-button mobile-currency-button currency-active-button" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
+                            <img id="mobile-currency-flag" class="currency-navbar-flag" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%203%202%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h3v2H0z%22%2F%3E%3Cpath%20fill%3D%22%23ce1126%22%20d%3D%22M0%200h3v1H0z%22%2F%3E%3C%2Fsvg%3E" alt="" aria-hidden="true">
+                            <span id="mobile-currency-code" class="currency-selector-code">ID / IDR</span>
+                            <span class="currency-selector-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                        </button>
+                        <button id="mobile-menu-button" type="button" class="mobile-navbar-action" onclick="toggleMobileNavMenu()" aria-label="Buka menu" aria-controls="mobile-nav-menu" aria-expanded="false"><i id="mobile-menu-icon" class="fa-solid fa-bars" aria-hidden="true"></i></button>
+                    </div>
                 </div>
+                <button type="button" class="storefront-mobile-search-trigger" onclick="openMobileSearch()" aria-label="Buka pencarian game atau paket" aria-controls="mobile-search-overlay">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <span>Cari game atau paket joki</span>
+                </button>
             </div>
         </nav>
         <div id="currency-menu" class="currency-menu hidden" aria-hidden="true">
