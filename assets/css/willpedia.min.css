@@ -1117,3 +1117,230 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
   .comments-on-demand .all-game-comments-heading{align-items:stretch!important;flex-direction:column!important;}
   .home-comments-toggle{width:100%;}
 }
+
+
+/* ==========================================================
+   NAVBAR KOMPAK FINAL
+   Mobile: logo ikon + cari + mata uang + menu dalam satu baris.
+   Desktop: dua baris dengan warna sama dan tinggi lebih ringkas.
+   Semua fungsi lama tetap memakai handler/ID yang sama.
+   ========================================================== */
+#navbar.storefront-navbar{
+  background:#012f39!important;
+  background-image:none!important;
+}
+.storefront-top-row,
+.storefront-bottom-row{
+  background:#012f39!important;
+}
+.storefront-top-row{
+  border-bottom:1px solid rgba(184,215,223,.10)!important;
+}
+.storefront-top-inner{
+  height:64px!important;
+  gap:16px!important;
+}
+.storefront-bottom-inner{
+  height:42px!important;
+}
+.storefront-brand{
+  min-width:176px!important;
+  gap:9px!important;
+}
+.storefront-brand img{
+  width:58px!important;
+  height:43px!important;
+  flex-basis:58px!important;
+  border-radius:8px!important;
+}
+.storefront-brand-copy strong{
+  font-size:18px!important;
+}
+.storefront-brand-copy small{
+  margin-top:5px!important;
+  font-size:8px!important;
+}
+.storefront-search-field{
+  height:40px!important;
+  min-height:40px!important;
+  border-radius:10px!important;
+}
+.storefront-currency-button.currency-active-button{
+  min-width:118px!important;
+  height:40px!important;
+  min-height:40px!important;
+  border-radius:10px!important;
+}
+.storefront-nav-link,
+.storefront-nav-action{
+  min-height:42px!important;
+  padding:0 12px!important;
+  gap:7px!important;
+  font-size:11px!important;
+}
+.storefront-nav-link i,
+.storefront-nav-action i{
+  font-size:13px!important;
+}
+
+/* Mobile satu baris, tanpa kolom pencarian kedua. */
+.storefront-mobile-navbar{
+  display:flex!important;
+  width:100%!important;
+  min-height:64px!important;
+  height:64px!important;
+  margin:0!important;
+  padding:7px 12px!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+.storefront-mobile-top{
+  display:flex!important;
+  width:100%!important;
+  min-height:50px!important;
+  height:50px!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+}
+.compact-mobile-brand,
+.storefront-mobile-brand{
+  min-width:0!important;
+  width:auto!important;
+  flex:0 0 auto!important;
+  gap:0!important;
+}
+.compact-mobile-brand img,
+.storefront-mobile-brand img{
+  width:62px!important;
+  height:46px!important;
+  max-width:none!important;
+  flex:0 0 62px!important;
+  margin:0!important;
+  border-radius:8px!important;
+  object-fit:contain!important;
+}
+.storefront-mobile-brand .mobile-navbar-brand-copy,
+.storefront-mobile-brand .mobile-navbar-wordmark{
+  display:none!important;
+}
+.compact-mobile-actions,
+.storefront-mobile-navbar .mobile-navbar-actions{
+  display:flex!important;
+  margin-left:auto!important;
+  align-items:center!important;
+  gap:7px!important;
+}
+.storefront-mobile-navbar .mobile-navbar-action{
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  flex:0 0 42px!important;
+  padding:0!important;
+  border:1px solid rgba(184,215,223,.18)!important;
+  border-radius:10px!important;
+  color:var(--gi-white,#f8fafc)!important;
+  background:rgba(0,23,29,.58)!important;
+  box-shadow:none!important;
+}
+.storefront-mobile-navbar .mobile-navbar-action i{
+  font-size:18px!important;
+}
+.storefront-mobile-navbar .compact-mobile-currency.currency-active-button{
+  width:auto!important;
+  min-width:116px!important;
+  height:42px!important;
+  min-height:42px!important;
+  flex:0 0 auto!important;
+  padding:0 11px!important;
+  gap:8px!important;
+}
+.storefront-mobile-navbar .compact-mobile-currency .currency-navbar-flag{
+  width:25px!important;
+  height:25px!important;
+  flex:0 0 25px!important;
+}
+.storefront-mobile-navbar .compact-mobile-currency .currency-selector-code{
+  display:inline-flex!important;
+  color:var(--gi-white,#f8fafc)!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+}
+.storefront-mobile-navbar .currency-selector-chevron,
+.storefront-mobile-search-trigger{
+  display:none!important;
+}
+.mobile-nav-menu{
+  top:64px!important;
+}
+.currency-menu{
+  top:58px!important;
+}
+.mobile-search-panel{
+  top:64px!important;
+  max-height:calc(100dvh - 64px)!important;
+}
+:root{
+  --fixed-navbar-clearance:calc(72px + env(safe-area-inset-top))!important;
+}
+
+@media(min-width:1024px){
+  :root{
+    --fixed-navbar-clearance:calc(114px + env(safe-area-inset-top))!important;
+  }
+  .currency-menu{
+    top:58px!important;
+  }
+  .game-summary-sticky{
+    top:7.4rem!important;
+    max-height:calc(100vh - 8.2rem)!important;
+  }
+}
+@media(min-width:1024px) and (max-width:1160px){
+  .storefront-top-inner{gap:10px!important;}
+  .storefront-brand{min-width:144px!important;}
+  .storefront-brand img{width:52px!important;height:40px!important;flex-basis:52px!important;}
+  .storefront-nav-link,.storefront-nav-action{padding:0 8px!important;font-size:10px!important;gap:5px!important;}
+}
+@media(max-width:380px){
+  .storefront-mobile-navbar{padding-right:8px!important;padding-left:8px!important;}
+  .compact-mobile-brand img,
+  .storefront-mobile-brand img{
+    width:54px!important;
+    height:42px!important;
+    flex-basis:54px!important;
+  }
+  .compact-mobile-actions,
+  .storefront-mobile-navbar .mobile-navbar-actions{gap:5px!important;}
+  .storefront-mobile-navbar .mobile-navbar-action{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    flex-basis:40px!important;
+  }
+  .storefront-mobile-navbar .compact-mobile-currency.currency-active-button{
+    min-width:106px!important;
+    height:40px!important;
+    min-height:40px!important;
+    padding:0 9px!important;
+  }
+  .storefront-mobile-navbar .compact-mobile-currency .currency-selector-code{
+    font-size:10px!important;
+  }
+}
+@media(max-width:320px){
+  .compact-mobile-brand img,
+  .storefront-mobile-brand img{
+    width:48px!important;
+    flex-basis:48px!important;
+  }
+  .storefront-mobile-navbar .compact-mobile-currency.currency-active-button{
+    min-width:100px!important;
+    padding:0 7px!important;
+    gap:6px!important;
+  }
+}
