@@ -1,0 +1,55 @@
+name: Sinkronkan Sheet ke JSON
+
+on:
+  schedule:
+    # GitHub menjalankan cron dalam UTC. Sinkronisasi diminta setiap 5 menit.
+    # Eksekusi terjadwal bisa terlambat beberapa menit saat GitHub sedang sibuk.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "scripts/sync_sheet_json.py"
+      - ".github/workflows/sync-sheet-json.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: willpedia-sheet-json-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ambil repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Siapkan Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ambil data Sheet dan buat JSON
+        env:
+          # Opsional: buat Repository variable bernama APPS_SCRIPT_URL untuk mengganti URL bawaan.
+          APPS_SCRIPT_URL: ${{ vars.APPS_SCRIPT_URL }}
+        run: |
+          if [ -z "$APPS_SCRIPT_URL" ]; then unset APPS_SCRIPT_URL; fi
+          python scripts/sync_sheet_json.py
+
+      - name: Commit hanya bila data berubah
+        run: |
+          if git diff --quiet -- data/*.json; then
+            echo "Tidak ada perubahan produk atau rating."
+            exit 0
+          fi
+          git config user.name "willpedia-sheet-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git commit -m "chore: sinkronkan pricelist dan rating dari Google Sheet"
+          git push
