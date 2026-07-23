@@ -1356,3 +1356,77 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
   .storefront-desktop-navbar{display:none!important;}
   .storefront-mobile-navbar{display:flex!important;}
 }
+
+
+/* ==========================================================
+   NAVBAR DESKTOP: LOGO LEBIH BESAR + INDIKATOR HOVER BERGESER
+   Mobile tidak berubah. Animasi hanya memakai transform/width.
+   ========================================================== */
+@media (min-width:1024px){
+  .storefront-top-inner{
+    gap:12px!important;
+  }
+  .storefront-brand{
+    width:96px!important;
+    min-width:96px!important;
+    flex-basis:96px!important;
+    gap:0!important;
+  }
+  .storefront-brand-copy{
+    display:none!important;
+  }
+  .storefront-brand img{
+    width:88px!important;
+    height:54px!important;
+    max-width:88px!important;
+    flex:0 0 88px!important;
+    border-radius:8px!important;
+    object-fit:contain!important;
+  }
+  .storefront-search-form{
+    margin-left:0!important;
+  }
+  .storefront-menu-left{
+    position:relative!important;
+  }
+  .storefront-nav-link::after{
+    display:none!important;
+  }
+  .storefront-nav-indicator{
+    position:absolute;
+    z-index:3;
+    bottom:0;
+    left:0;
+    width:24px;
+    height:3px;
+    border-radius:9999px 9999px 0 0;
+    opacity:0;
+    pointer-events:none;
+    background:var(--gi-gold,#f4c64e);
+    box-shadow:0 0 10px rgba(244,198,78,.22);
+    transform:translate3d(0,0,0);
+    transition:
+      transform .28s cubic-bezier(.22,.8,.24,1),
+      width .28s cubic-bezier(.22,.8,.24,1),
+      opacity .12s ease;
+    will-change:transform,width;
+  }
+}
+@media (min-width:1024px) and (max-width:1160px){
+  .storefront-brand{
+    width:88px!important;
+    min-width:88px!important;
+    flex-basis:88px!important;
+  }
+  .storefront-brand img{
+    width:80px!important;
+    height:50px!important;
+    max-width:80px!important;
+    flex-basis:80px!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .storefront-nav-indicator{
+    transition:none!important;
+  }
+}
