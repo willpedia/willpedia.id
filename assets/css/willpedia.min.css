@@ -609,3 +609,123 @@ body[data-page="game"] #all-game-ratings-section {
 /* JSON statis: placeholder ringan saat file lokal sedang disiapkan browser. */
 .product-placeholder-card{pointer-events:none;min-height:260px;overflow:hidden}.product-placeholder-image{width:100%;aspect-ratio:16/10;border-radius:14px;background:rgba(15,45,58,.72);border:1px solid rgba(56,189,248,.08)}.product-placeholder-line{height:11px;width:62%;margin-top:14px;border-radius:999px;background:rgba(148,163,184,.13)}.product-placeholder-line-wide{width:88%;height:14px}.product-placeholder-button{height:40px;margin-top:18px;border-radius:13px;background:rgba(8,145,178,.12);border:1px solid rgba(34,211,238,.1)}
 @media(max-width:767px){.product-placeholder-card{min-height:220px}.product-placeholder-image{border-radius:12px}.product-placeholder-button{height:36px}}
+
+/* ==========================================================
+   LOADING BAR LEBIH TERLIHAT + BRAND NAVBAR LEBIH BESAR
+   Hanya mengubah ukuran; warna dan tema Willpedia tetap sama.
+   ========================================================== */
+#willpedia-page-progress{
+  height:5px!important;
+  z-index:2147483000!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.18)!important;
+  will-change:transform,opacity;
+}
+.mobile-navbar-brand{gap:12px!important;}
+.mobile-navbar-brand img{
+  width:68px!important;
+  height:46px!important;
+  max-width:none!important;
+  flex:0 0 68px!important;
+  object-fit:contain!important;
+}
+.mobile-navbar-wordmark{
+  display:block!important;
+  font-size:18px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  letter-spacing:.08em!important;
+}
+@media (min-width:768px){
+  .mobile-navbar-brand img{
+    width:84px!important;
+    height:54px!important;
+    flex-basis:84px!important;
+  }
+  .mobile-navbar-wordmark{font-size:22px!important;}
+}
+@media (max-width:520px){
+  #navbar{padding-right:10px!important;padding-left:10px!important;}
+  .mobile-navbar-content{gap:8px!important;}
+  .mobile-navbar-brand{gap:6px!important;}
+  .mobile-navbar-brand img{
+    width:58px!important;
+    height:42px!important;
+    flex-basis:58px!important;
+  }
+  .mobile-navbar-wordmark{
+    display:block!important;
+    font-size:14px!important;
+    letter-spacing:.055em!important;
+  }
+  .mobile-navbar-actions{gap:6px!important;}
+  .mobile-navbar-action{
+    width:38px!important;
+    height:38px!important;
+    flex-basis:38px!important;
+  }
+  .mobile-currency-button.currency-active-button{
+    width:38px!important;
+    min-width:38px!important;
+    height:38px!important;
+    min-height:38px!important;
+    padding:0!important;
+  }
+  .mobile-currency-button .currency-selector-code,
+  .mobile-currency-button .currency-selector-chevron{display:none!important;}
+  .mobile-currency-button .currency-navbar-flag{
+    width:24px!important;
+    height:24px!important;
+    flex-basis:24px!important;
+  }
+}
+@media (max-width:350px){
+  .mobile-navbar-brand img{
+    width:52px!important;
+    height:40px!important;
+    flex-basis:52px!important;
+  }
+  .mobile-navbar-wordmark{font-size:12.5px!important;}
+}
+
+
+/* Komentar homepage versi ringan: statis dan digeser manual. */
+body .all-game-comments-viewport {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scrollbar-width: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+body .all-game-comments-viewport::-webkit-scrollbar {
+  display: none;
+}
+body .all-game-comments-track.is-manual-scroll,
+body .all-game-comments-track.is-manual-scroll.is-static {
+  display: flex !important;
+  width: max-content !important;
+  animation: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+body .all-game-comments-track.is-manual-scroll .all-game-comments-group {
+  display: flex !important;
+  grid-template-columns: none !important;
+  width: max-content !important;
+  gap: .75rem !important;
+  padding: 0 .75rem .35rem !important;
+}
+body .all-game-comments-track.is-manual-scroll .all-game-comment-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+@media (max-width: 767px) {
+  body .all-game-comments-track.is-manual-scroll .all-game-comment-card {
+    flex: 0 0 min(82vw, 310px) !important;
+    width: min(82vw, 310px) !important;
+    min-height: 0 !important;
+  }
+}
