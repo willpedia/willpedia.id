@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="logowill.png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-navbar-compact-4">
+    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-navbar-hover-logo-5">
     <link rel="preload" href="data/hsr.json" as="fetch" crossorigin="anonymous">
     <script src="assets/js/willpedia.min.js?v=20260724-navbar-compact-4" defer></script>
 </head>
@@ -23,9 +23,6 @@
                     <div class="storefront-top-inner">
                         <a href="index.html" class="storefront-brand" aria-label="Beranda Willpedia">
                             <img src="logo.webp" alt="Logo Willpedia" width="82" height="56" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
-                            <span class="storefront-brand-copy">
-                                <strong>WILLPEDIA</strong>
-                            </span>
                         </a>
                         <form id="joki-search-form" class="navbar-search-form storefront-search-form" role="search">
                             <label for="joki-search-input" class="sr-only">Cari game atau paket joki</label>
@@ -51,6 +48,7 @@
                             <a class="storefront-nav-link nav-games" href="index.html#game-menu-view"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>Semua Game</span></a>
                             <a class="storefront-nav-link" href="index.html#home-how-to-order"><i class="fa-solid fa-list-check" aria-hidden="true"></i><span>Cara Order</span></a>
                             <a class="storefront-nav-link" href="index.html#all-game-ratings-section"><i class="fa-solid fa-star" aria-hidden="true"></i><span>Rating &amp; Ulasan</span></a>
+                            <span class="storefront-nav-indicator" aria-hidden="true"></span>
                         </div>
                         <div class="storefront-menu-right">
                             <button type="button" class="storefront-nav-action" onclick="openMobileOrderFromMenu()" aria-label="Buka pesanan saya"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i><span>Pesanan Saya</span></button>
@@ -711,5 +709,58 @@
                 </div>
             </div>
         </footer>
+
+    <script>
+    (() => {
+      const setupDesktopNavIndicator = () => {
+        document.querySelectorAll('.storefront-menu-left').forEach((menu) => {
+          const links = Array.from(menu.querySelectorAll('.storefront-nav-link'));
+          const indicator = menu.querySelector('.storefront-nav-indicator');
+          if (!links.length || !indicator || menu.dataset.indicatorReady === 'true') return;
+
+          menu.dataset.indicatorReady = 'true';
+          const activeLink = document.body.dataset.page === 'game'
+            ? menu.querySelector('.nav-games')
+            : menu.querySelector('.nav-home');
+
+          const moveIndicator = (link, instant = false) => {
+            if (!link || window.innerWidth < 1024) return;
+            const menuRect = menu.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            const inset = 12;
+            const targetWidth = Math.max(24, linkRect.width - (inset * 2));
+            indicator.style.transitionDuration = instant ? '0ms' : '';
+            indicator.style.width = `${targetWidth}px`;
+            indicator.style.transform = `translate3d(${linkRect.left - menuRect.left + inset}px,0,0)`;
+            indicator.style.opacity = '1';
+            if (instant) requestAnimationFrame(() => { indicator.style.transitionDuration = ''; });
+          };
+
+          links.forEach((link) => {
+            link.addEventListener('mouseenter', () => moveIndicator(link));
+            link.addEventListener('focus', () => moveIndicator(link));
+          });
+          menu.addEventListener('mouseleave', () => moveIndicator(activeLink));
+          menu.addEventListener('focusout', (event) => {
+            if (!menu.contains(event.relatedTarget)) moveIndicator(activeLink);
+          });
+
+          let resizeFrame = 0;
+          window.addEventListener('resize', () => {
+            cancelAnimationFrame(resizeFrame);
+            resizeFrame = requestAnimationFrame(() => moveIndicator(activeLink, true));
+          }, { passive: true });
+
+          requestAnimationFrame(() => moveIndicator(activeLink, true));
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupDesktopNavIndicator, { once: true });
+      } else {
+        setupDesktopNavIndicator();
+      }
+    })();
+    </script>
 </body>
 </html>
