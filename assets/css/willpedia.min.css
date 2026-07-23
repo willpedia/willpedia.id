@@ -729,3 +729,97 @@ body .all-game-comments-track.is-manual-scroll .all-game-comment-card {
     min-height: 0 !important;
   }
 }
+
+
+/* ==========================================================
+   NAVBAR INSPIRED BY MODERN GAME STOREFRONT LAYOUT
+   Struktur dikelompokkan seperti storefront: brand, menu,
+   search, currency, dan pesanan. Warna Willpedia dipertahankan.
+   ========================================================== */
+#navbar-shell{padding:10px 12px 0!important;pointer-events:none!important;}
+#navbar.oura-navbar{pointer-events:auto!important;width:min(100%,1180px)!important;height:74px!important;min-height:74px!important;margin:0 auto!important;padding:0 14px!important;border:1px solid rgba(244,198,78,.2)!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(1,44,54,.985),rgba(0,23,29,.985))!important;box-shadow:0 16px 42px rgba(0,9,13,.52),inset 0 1px rgba(255,255,255,.035)!important;backdrop-filter:none!important;}
+.oura-desktop-navbar{display:none;height:100%;align-items:center;gap:12px;}
+.oura-navbar-brand{display:flex;flex:0 0 auto;align-items:center;gap:9px;min-width:174px;color:var(--gi-white);text-decoration:none;}
+.oura-navbar-brand img{width:70px;height:48px;object-fit:contain;border-radius:12px;}
+.oura-navbar-brand-copy{display:flex;min-width:0;flex-direction:column;line-height:1;}
+.oura-navbar-brand-copy strong{font-size:17px;font-weight:950;letter-spacing:.075em;}
+.oura-navbar-brand-copy small{margin-top:6px;color:var(--gi-muted);font-size:9px;font-weight:750;letter-spacing:.03em;white-space:nowrap;}
+.oura-navbar-links{display:flex;flex:0 0 auto;align-items:center;gap:3px;padding:4px;border:1px solid rgba(184,215,223,.11);border-radius:15px;background:rgba(0,23,29,.52);}
+.oura-navbar-link{display:inline-flex;min-height:38px;align-items:center;gap:6px;padding:0 10px;border-radius:11px;color:var(--gi-ice-soft);font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap;transition:background .16s ease,color .16s ease,transform .16s ease;}
+.oura-navbar-link i{color:var(--gi-gold);font-size:10px;}
+.oura-navbar-link:hover,.oura-navbar-link:focus-visible,body[data-page="home"] .oura-navbar-link.nav-home,body[data-page="game"] .oura-navbar-link.nav-games{color:var(--gi-white);background:rgba(244,198,78,.1);}
+.oura-navbar-link:active{transform:scale(.97);}
+.oura-navbar-search{display:flex!important;min-width:170px;max-width:250px;flex:1 1 220px;align-items:center;gap:6px;margin:0!important;}
+.oura-navbar-search .joki-search-field{height:42px!important;min-height:42px!important;border-radius:13px!important;background:rgba(0,23,29,.72)!important;}
+.oura-navbar-search .joki-search-button{width:42px!important;height:42px!important;min-height:42px!important;flex:0 0 42px!important;padding:0!important;border-radius:13px!important;}
+.oura-navbar-search .joki-search-button span{display:none!important;}
+.oura-navbar-actions{display:flex;flex:0 0 auto;align-items:center;gap:7px;}
+.oura-currency-button.currency-active-button{min-width:108px!important;height:42px!important;min-height:42px!important;border-radius:13px!important;}
+.oura-order-button{display:inline-flex;height:42px;align-items:center;justify-content:center;gap:7px;padding:0 12px;border:1px solid rgba(244,198,78,.46);border-radius:13px;color:#102028;background:linear-gradient(135deg,#ffe58a,#f4c64e);font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(244,198,78,.1);transition:transform .16s ease,filter .16s ease;}
+.oura-order-button:active{transform:scale(.96);}
+.oura-mobile-navbar{display:flex!important;height:100%!important;}
+.mobile-navbar-brand-copy{display:flex;min-width:0;flex-direction:column;line-height:1;}
+.mobile-navbar-brand-copy small{margin-top:5px;color:var(--gi-muted);font-size:8px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;}
+.mobile-navbar-wordmark{font-size:15px!important;letter-spacing:.075em!important;}
+.mobile-navbar-brand img{width:60px!important;height:44px!important;flex-basis:60px!important;border-radius:11px!important;}
+.mobile-navbar-action{border-color:rgba(184,215,223,.14)!important;border-radius:12px!important;background:rgba(0,56,68,.48)!important;}
+.mobile-navbar-search-button{color:#112126!important;border-color:var(--gi-gold)!important;background:var(--gi-gold)!important;}
+.mobile-currency-button.currency-active-button{background:rgba(0,56,68,.48)!important;}
+.mobile-nav-menu{top:82px!important;border-color:rgba(244,198,78,.18)!important;background:linear-gradient(160deg,rgba(1,45,55,.995),rgba(0,20,26,.995))!important;}
+.currency-menu{top:92px!important;}
+.mobile-search-panel{top:0!important;padding-top:102px!important;}
+:root{--fixed-navbar-clearance:calc(96px + env(safe-area-inset-top));}
+#game-menu-view,#home-how-to-order,#all-game-ratings-section,#weekly-popular-section{scroll-margin-top:calc(var(--fixed-navbar-clearance) + 10px)!important;}
+@media(min-width:1024px){
+  #navbar-shell{padding-top:10px!important;}
+  #navbar.oura-navbar{height:76px!important;min-height:76px!important;}
+  .oura-desktop-navbar{display:flex!important;}
+  .oura-mobile-navbar{display:none!important;}
+  .currency-menu{top:96px!important;right:max(16px,calc((100vw - 1180px)/2 + 116px))!important;}
+  :root{--fixed-navbar-clearance:calc(100px + env(safe-area-inset-top));}
+}
+@media(min-width:1024px) and (max-width:1180px){
+  .oura-navbar-brand{min-width:145px;}
+  .oura-navbar-brand-copy small{display:none;}
+  .oura-navbar-links{gap:1px;}
+  .oura-navbar-link{padding:0 7px;font-size:10px;}
+  .oura-navbar-link i{display:none;}
+  .oura-navbar-search{min-width:150px;max-width:190px;}
+  .oura-order-button span{display:none;}
+  .oura-order-button{width:42px;padding:0;}
+}
+@media(max-width:1023px){
+  #navbar-shell{padding:8px 9px 0!important;}
+  #navbar.oura-navbar{height:68px!important;min-height:68px!important;padding:0 10px!important;border-radius:17px!important;}
+  .mobile-nav-menu{top:78px!important;right:9px!important;left:9px!important;width:calc(100% - 18px)!important;}
+  .currency-menu{top:84px!important;right:9px!important;}
+  .mobile-search-panel{padding-top:90px!important;}
+  :root{--fixed-navbar-clearance:calc(84px + env(safe-area-inset-top));}
+}
+@media(max-width:480px){
+  .mobile-navbar-brand{gap:6px!important;}
+  .mobile-navbar-brand img{width:48px!important;height:40px!important;flex-basis:48px!important;}
+  .mobile-navbar-wordmark{font-size:12.5px!important;}
+  .mobile-navbar-brand-copy small{font-size:7px;}
+  .mobile-navbar-actions{gap:5px!important;}
+  .mobile-navbar-action{width:36px!important;height:36px!important;flex-basis:36px!important;}
+  .mobile-currency-button.currency-active-button{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important;padding:0!important;}
+  .mobile-currency-button .currency-selector-code,.mobile-currency-button .currency-selector-chevron{display:none!important;}
+  .mobile-currency-button .currency-navbar-flag{width:22px!important;height:22px!important;flex-basis:22px!important;}
+}
+@media(max-width:350px){.mobile-navbar-brand-copy small{display:none;}.mobile-navbar-wordmark{font-size:11px!important;}.mobile-navbar-brand img{width:44px!important;flex-basis:44px!important;}}
+
+/* Komentar homepage benar-benar on demand. */
+.comments-on-demand{overflow:visible!important;}
+.comments-on-demand .all-game-comments-heading{gap:12px;}
+.home-comments-toggle{display:inline-flex;flex:0 0 auto;min-height:38px;align-items:center;justify-content:center;gap:7px;padding:0 12px;border:1px solid rgba(244,198,78,.34);border-radius:12px;color:var(--gi-gold);background:rgba(244,198,78,.08);font-size:11px;font-weight:900;cursor:pointer;transition:background .16s ease,transform .16s ease;}
+.home-comments-toggle:hover{background:rgba(244,198,78,.13);}
+.home-comments-toggle:active{transform:scale(.97);}
+.home-comments-toggle-chevron{font-size:9px;transition:transform .18s ease;}
+.home-comments-toggle-chevron.is-open{transform:rotate(180deg);}
+.all-game-comments-body{margin-top:.75rem;}
+.all-game-comments-body.hidden{display:none!important;}
+@media(max-width:639px){
+  .comments-on-demand .all-game-comments-heading{align-items:stretch!important;flex-direction:column!important;}
+  .home-comments-toggle{width:100%;}
+}
