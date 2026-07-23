@@ -1430,3 +1430,59 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
     transition:none!important;
   }
 }
+
+/* ==========================================================
+   OVERRIDE FINAL: LOGO DESKTOP LEBIH BESAR + SEARCH LEBIH PANJANG
+   ========================================================== */
+@media (min-width:1024px){
+  .storefront-top-inner{
+    gap:10px!important;
+  }
+
+  .storefront-brand{
+    width:105px!important;
+    min-width:105px!important;
+    flex:0 0 105px!important;
+    gap:0!important;
+  }
+
+  .storefront-brand-copy{
+    display:none!important;
+  }
+
+  .storefront-brand img{
+    width:96px!important;
+    height:58px!important;
+    max-width:96px!important;
+    flex:0 0 96px!important;
+    object-fit:contain!important;
+  }
+
+  .storefront-search-form{
+    flex:1 1 auto!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin-left:0!important;
+  }
+
+  .storefront-search-field{
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+
+@media (min-width:1024px) and (max-width:1160px){
+  .storefront-brand{
+    width:96px!important;
+    min-width:96px!important;
+    flex-basis:96px!important;
+  }
+
+  .storefront-brand img{
+    width:88px!important;
+    height:54px!important;
+    max-width:88px!important;
+    flex-basis:88px!important;
+  }
+}
