@@ -1344,3 +1344,15 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
     gap:6px!important;
   }
 }
+
+/* ==========================================================
+   FIX: NAVBAR MOBILE TIDAK BOLEH TAMPIL DI DESKTOP
+   Penyebab sebelumnya: aturan display:flex mobile berada setelah
+   media desktop sehingga menimpa display:none pada layar besar.
+   ========================================================== */
+.storefront-desktop-navbar{display:block!important;}
+.storefront-mobile-navbar{display:none!important;}
+@media (max-width:1023px){
+  .storefront-desktop-navbar{display:none!important;}
+  .storefront-mobile-navbar{display:flex!important;}
+}
