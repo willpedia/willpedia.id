@@ -11,9 +11,9 @@
     <link rel="apple-touch-icon" href="logowill.png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-storefront-two-row-2">
+    <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-navbar-compact-3">
     <link rel="preload" href="data/zzz.json" as="fetch" crossorigin="anonymous">
-    <script src="assets/js/willpedia.min.js?v=20260724-storefront-two-row-2" defer></script>
+    <script src="assets/js/willpedia.min.js?v=20260724-navbar-compact-3" defer></script>
 </head>
 <body data-page="game" data-game="zzz" class="gradient-bg text-white min-h-screen flex flex-col justify-between">
     <div id="navbar-shell" class="fixed top-0 left-0 right-0 z-50 w-full">
@@ -62,26 +62,23 @@
             </div>
             <div class="storefront-mobile-navbar">
                 <div class="storefront-mobile-top">
-                    <a href="index.html" class="mobile-navbar-brand storefront-mobile-brand" aria-label="Beranda Willpedia">
+                    <a href="../index.html" class="mobile-navbar-brand storefront-mobile-brand compact-mobile-brand" aria-label="Beranda Willpedia">
                         <img src="logo.webp" alt="Logo Willpedia" width="72" height="50" decoding="async" fetchpriority="high" onerror="this.src='logowill.png'">
-                        <span class="mobile-navbar-brand-copy">
-                            <strong class="mobile-navbar-wordmark">WILLPEDIA</strong>
-                            <small>Joki Game Terpercaya</small>
-                        </span>
+                        <span class="sr-only">WILLPEDIA</span>
                     </a>
-                    <div class="mobile-navbar-actions">
-                        <button id="mobile-currency-button" type="button" class="mobile-navbar-action currency-selector-button mobile-currency-button currency-active-button" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
+                    <div class="mobile-navbar-actions compact-mobile-actions">
+                        <button type="button" class="mobile-navbar-action compact-mobile-search" onclick="openMobileSearch()" aria-label="Buka pencarian game atau paket" aria-controls="mobile-search-overlay">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        </button>
+                        <button id="mobile-currency-button" type="button" class="mobile-navbar-action currency-selector-button mobile-currency-button currency-active-button compact-mobile-currency" onclick="toggleCurrencyMenu()" aria-label="Pilih negara dan mata uang" aria-controls="currency-menu" aria-expanded="false">
                             <img id="mobile-currency-flag" class="currency-navbar-flag" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%203%202%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h3v2H0z%22%2F%3E%3Cpath%20fill%3D%22%23ce1126%22%20d%3D%22M0%200h3v1H0z%22%2F%3E%3C%2Fsvg%3E" alt="" aria-hidden="true">
                             <span id="mobile-currency-code" class="currency-selector-code">ID / IDR</span>
-                            <span class="currency-selector-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
                         </button>
-                        <button id="mobile-menu-button" type="button" class="mobile-navbar-action" onclick="toggleMobileNavMenu()" aria-label="Buka menu" aria-controls="mobile-nav-menu" aria-expanded="false"><i id="mobile-menu-icon" class="fa-solid fa-bars" aria-hidden="true"></i></button>
+                        <button id="mobile-menu-button" type="button" class="mobile-navbar-action compact-mobile-menu" onclick="toggleMobileNavMenu()" aria-label="Buka menu" aria-controls="mobile-nav-menu" aria-expanded="false">
+                            <i id="mobile-menu-icon" class="fa-solid fa-bars" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
-                <button type="button" class="storefront-mobile-search-trigger" onclick="openMobileSearch()" aria-label="Buka pencarian game atau paket" aria-controls="mobile-search-overlay">
-                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                    <span>Cari game atau paket joki</span>
-                </button>
             </div>
         </nav>
         <div id="currency-menu" class="currency-menu hidden" aria-hidden="true">
