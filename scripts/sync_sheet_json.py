@@ -22,7 +22,7 @@ from typing import Any
 
 DEFAULT_APPS_SCRIPT_URL = (
     "https://script.google.com/macros/s/"
-    "AKfycbyzVtkIaOI6qbrlrlKJAKzON3V5upOrgx_TeDAVAmCG-_gh5JwM9Ngrc4krPqrrut-ulA/exec"
+    "AKfycbwWfP0jLzMPt1w5F2s5e_XxTrpy90jYET9M-KoNke5vY-nv8s7dL_jTysmcL5YIkLuAYA/exec"
 )
 BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
