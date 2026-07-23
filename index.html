@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00171d">
-    <base href="../">
-    <title>Joki Genshin Impact | WILLPEDIA</title>
+    <title>WILLPEDIA</title>
     <link rel="icon" type="image/png" href="logowill.png">
     <link rel="shortcut icon" href="logowill.png">
     <link rel="apple-touch-icon" href="logowill.png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" as="image" href="banner-mobile.webp" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="banner-desktop.webp" media="(min-width: 768px)" fetchpriority="high">
     <link rel="stylesheet" href="assets/css/willpedia.min.css?v=20260724-oura-nav-comments-demand-1">
-    <link rel="preload" href="data/genshin.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/popular.json" as="fetch" crossorigin="anonymous">
     <script src="assets/js/willpedia.min.js?v=20260724-oura-nav-comments-demand-1" defer></script>
 </head>
-<body data-page="game" data-game="genshin" class="gradient-bg text-white min-h-screen flex flex-col justify-between">
+<body data-page="home" class="gradient-bg text-white min-h-screen flex flex-col justify-between">
     <div id="navbar-shell" class="fixed top-0 left-0 right-0 z-50 w-full">
         <nav id="navbar" class="oura-navbar" aria-label="Navigasi utama">
             <div class="oura-desktop-navbar">
@@ -276,10 +277,9 @@
             <div id="game-detail-layout" class="game-detail-layout">
                 <div class="min-w-0">
                     <div id="product-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                        <article class="product-card nominal-card product-placeholder-card" aria-hidden="true"><div class="product-placeholder-image"></div><div class="product-placeholder-line product-placeholder-line-wide"></div><div class="product-placeholder-line"></div><div class="product-placeholder-button"></div></article>
-                        <article class="product-card nominal-card product-placeholder-card" aria-hidden="true"><div class="product-placeholder-image"></div><div class="product-placeholder-line product-placeholder-line-wide"></div><div class="product-placeholder-line"></div><div class="product-placeholder-button"></div></article>
-                        <article class="product-card nominal-card product-placeholder-card" aria-hidden="true"><div class="product-placeholder-image"></div><div class="product-placeholder-line product-placeholder-line-wide"></div><div class="product-placeholder-line"></div><div class="product-placeholder-button"></div></article>
-                        <article class="product-card nominal-card product-placeholder-card" aria-hidden="true"><div class="product-placeholder-image"></div><div class="product-placeholder-line product-placeholder-line-wide"></div><div class="product-placeholder-line"></div><div class="product-placeholder-button"></div></article>
+                        <div class="col-span-full text-center py-10 text-slate-400">
+                            <i class="fas fa-spinner fa-spin mr-2"></i> Memuat pricelist...
+                        </div>
                     </div>
                 </div>
                 <aside id="selected-game-summary" class="game-summary-sticky"></aside>
@@ -609,24 +609,26 @@
                 Memuat rating seluruh game...
             </div>
         </div>
-        <div id="all-game-comments-panel" class="all-game-comments-panel">
+        <div id="all-game-comments-panel" class="all-game-comments-panel comments-on-demand">
             <div class="all-game-comments-heading">
                 <div class="all-game-comments-heading-main">
-                    <span class="all-game-comments-icon" aria-hidden="true">
-                        <i class="fa-solid fa-comment-dots"></i>
-                    </span>
+                    <span class="all-game-comments-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></span>
                     <span class="min-w-0">
                         <span class="all-game-comments-title">Komentar Pelanggan</span>
-                        <span class="all-game-comments-subtitle">Pengalaman asli dari ulasan dari pelanggan.</span>
+                        <span class="all-game-comments-subtitle">Dimuat hanya saat kamu membukanya agar homepage tetap ringan.</span>
                     </span>
                 </div>
+                <button id="home-comments-toggle" type="button" class="home-comments-toggle" onclick="toggleHomeCommentsPanel()" aria-controls="all-game-comments-body" aria-expanded="false">
+                    <i class="fa-regular fa-comments" aria-hidden="true"></i><span>Lihat Komentar</span><i class="fa-solid fa-chevron-down home-comments-toggle-chevron" aria-hidden="true"></i>
+                </button>
             </div>
-            <div id="all-game-comments-state" class="all-game-comments-state" role="status">
-                <i class="fa-solid fa-spinner fa-spin mr-2" aria-hidden="true"></i>
-                Memuat komentar pelanggan...
-            </div>
-            <div id="all-game-comments-viewport" class="all-game-comments-viewport hidden" aria-live="off">
-                <div id="all-game-comments-track" class="all-game-comments-track"></div>
+            <div id="all-game-comments-body" class="all-game-comments-body hidden" aria-hidden="true">
+                <div id="all-game-comments-state" class="all-game-comments-state" role="status">
+                    <i class="fa-regular fa-comment-dots mr-2" aria-hidden="true"></i>Komentar belum dimuat.
+                </div>
+                <div id="all-game-comments-viewport" class="all-game-comments-viewport hidden" aria-live="off">
+                    <div id="all-game-comments-track" class="all-game-comments-track"></div>
+                </div>
             </div>
         </div>
     </section>
