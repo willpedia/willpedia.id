@@ -2377,7 +2377,7 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     position: absolute !important;
     inset: 0 !important;
     pointer-events: none !important;
-    background: linear-gradient(180deg, rgba(0, 23, 29, .02) 0%, rgba(0, 23, 29, .10) 32%, rgba(0, 23, 29, .78) 76%, rgba(0, 23, 29, .96) 100%) !important;
+    background: linear-gradient(180deg, rgba(0, 23, 29, .02) 0%, rgba(0, 23, 29, .06) 42%, rgba(0, 23, 29, .22) 78%, rgba(0, 23, 29, .36) 100%) !important;
   }
 
   .game-menu-card:active {
@@ -2399,19 +2399,20 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
   .game-menu-content {
     position: absolute !important;
-    z-index: 1 !important;
-    right: .7rem !important;
-    bottom: .68rem !important;
-    left: .7rem !important;
+    z-index: 2 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
     display: flex !important;
-    width: auto !important;
-    min-height: 0 !important;
-    align-items: flex-end !important;
+    width: 100% !important;
+    min-height: 3.45rem !important;
+    align-items: center !important;
     justify-content: flex-start !important;
     gap: 0 !important;
-    padding: 0 !important;
-    color: #f8fafc !important;
-    background: transparent !important;
+    padding: .62rem .72rem !important;
+    color: #172126 !important;
+    background: linear-gradient(135deg, #ffe58a 0%, #f4c64e 58%, #d99a1d 100%) !important;
+    border-top: 1px solid rgba(255, 229, 138, .14) !important;
   }
 
   .game-menu-content > span:first-child {
@@ -2424,25 +2425,25 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     display: -webkit-box !important;
     width: 100% !important;
     overflow: hidden !important;
-    color: #ffffff !important;
+    color: #172126 !important;
     font-size: .78rem !important;
     font-weight: 900 !important;
-    line-height: 1.2 !important;
+    line-height: 1.16 !important;
     letter-spacing: .01em !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, .28) !important;
+    text-shadow: none !important;
     -webkit-box-orient: vertical !important;
     -webkit-line-clamp: 2 !important;
   }
 
   .game-menu-meta {
     display: block !important;
-    margin-top: .22rem !important;
-    color: #f4c64e !important;
-    font-size: .58rem !important;
+    margin-top: .18rem !important;
+    color: rgba(23, 33, 38, .82) !important;
+    font-size: .56rem !important;
     font-weight: 800 !important;
-    line-height: 1.15 !important;
+    line-height: 1.1 !important;
     letter-spacing: .01em !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, .22) !important;
+    text-shadow: none !important;
   }
 
   .game-menu-arrow {
@@ -2465,9 +2466,8 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 
   .game-menu-content {
-    right: .58rem !important;
-    left: .58rem !important;
-    bottom: .58rem !important;
+    min-height: 3.25rem !important;
+    padding: .56rem .62rem !important;
   }
 
   .game-menu-name {
@@ -2475,6 +2475,6 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 
   .game-menu-meta {
-    font-size: .54rem !important;
+    font-size: .52rem !important;
   }
 }
