@@ -42,14 +42,14 @@
 <link href="logowill.png" rel="shortcut icon"/>
 <link href="logowill.png" rel="apple-touch-icon"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="preload" onload="this.onload=null;this.rel='stylesheet'"/><noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/></noscript>
 
 
-<link href="assets/css/willpedia.min.css?v=20260724-mobile-ultralite-6" rel="stylesheet"/>
+<link href="assets/css/willpedia.min.css?v=20260724-performance-1" rel="stylesheet"/>
 
 
 
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-mobile-ultralite-6"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-1"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="ratings">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -256,7 +256,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 <div>
 <div class="flex items-center gap-3">
-<img alt="Logo Willpedia" class="h-12 md:h-16 w-auto mt-1" decoding="async" height="64" loading="lazy" onerror="this.src='https://via.placeholder.com/150'" src="logo.webp" width="160"/>
+<img alt="Logo Willpedia" class="h-12 md:h-16 w-auto mt-1" decoding="async" height="64" loading="lazy" onerror="this.onerror=null;this.src='logowill.png'" src="logo.webp" width="160"/>
 <div>
 <h3 class="text-xl font-black text-white">
                                     WILLPEDIA
@@ -276,7 +276,7 @@
                             Kontak
                         </h4>
 <div class="space-y-3">
-<a class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition" href="https://wa.me/6281357706121" target="_blank">
+<a class="flex items-center gap-3 text-slate-300 hover:text-cyan-400 transition" href="https://wa.me/6281357706121" target="_blank" rel="noopener noreferrer">
 <i class="fab fa-whatsapp text-xl"></i>
                                 WhatsApp
                             </a>
@@ -291,13 +291,13 @@
                             Ikuti Kami
                         </h4>
 <div class="flex gap-4 text-2xl">
-<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://tiktok.com/@willpedia.id" target="_blank">
+<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://tiktok.com/@willpedia.id" target="_blank" rel="noopener noreferrer" aria-label="TikTok Willpedia">
 <i class="fab fa-tiktok"></i>
 </a>
-<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://instagram.com/willpedia.id" target="_blank">
+<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://instagram.com/willpedia.id" target="_blank" rel="noopener noreferrer" aria-label="Instagram Willpedia">
 <i class="fab fa-instagram"></i>
 </a>
-<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://www.youtube.com/@willpedia" target="_blank">
+<a class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-cyan-500 hover:text-slate-950 transition" href="https://www.youtube.com/@willpedia" target="_blank" rel="noopener noreferrer" aria-label="YouTube Willpedia">
 <i class="fab fa-youtube"></i>
 </a>
 </div>
