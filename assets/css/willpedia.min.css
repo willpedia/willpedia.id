@@ -2478,3 +2478,63 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     font-size: .52rem !important;
   }
 }
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-13 — MOBILE NAVBAR + HERO SCROLL LITE
+   The mobile navbar no longer changes visual state during
+   scrolling. Hero and fixed navbar use simpler paint layers.
+   ========================================================== */
+@media (max-width: 767px) {
+  #navbar-shell {
+    contain: layout paint style !important;
+    backface-visibility: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #navbar.storefront-navbar,
+  .storefront-mobile-navbar {
+    background-color: #00212a !important;
+    background-image: none !important;
+    border-bottom: 1px solid rgba(244, 198, 78, .16) !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  #navbar.storefront-navbar.bg-slate-950\/95,
+  #navbar.storefront-navbar.bg-white\/5,
+  #navbar.storefront-navbar.shadow-xl {
+    background-color: #00212a !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  #main-hero-banner {
+    isolation: auto !important;
+    contain: layout paint style !important;
+    border: 1px solid rgba(244, 198, 78, .16) !important;
+    border-radius: .8rem !important;
+    box-shadow: none !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+  }
+
+  #main-hero-banner .hero-static-picture,
+  #main-hero-banner .hero-static-picture > img,
+  #main-hero-banner .hero-image-carousel-picture {
+    contain: paint !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+    backface-visibility: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #main-hero-banner::before,
+  #main-hero-banner::after,
+  #main-hero-banner .hero-image-carousel-progress,
+  #main-hero-banner .hero-image-carousel-dots {
+    display: none !important;
+  }
+}
