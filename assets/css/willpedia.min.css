@@ -2331,10 +2331,12 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   #game-menu-view {
     margin-top: 1.4rem !important;
     margin-bottom: 3.25rem !important;
+    padding-left: .75rem !important;
+    padding-right: .75rem !important;
   }
 
   #game-menu-view > .mb-5 {
-    margin-bottom: .85rem !important;
+    margin-bottom: .78rem !important;
   }
 
   #game-menu-view .home-section-description,
@@ -2344,7 +2346,7 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
   .game-menu-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: .7rem !important;
+    gap: .6rem !important;
     align-items: start !important;
   }
 
@@ -2363,7 +2365,7 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     transition: none !important;
     content-visibility: auto !important;
     contain: layout paint style !important;
-    contain-intrinsic-size: 150px 136px !important;
+    contain-intrinsic-size: 158px 144px !important;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
@@ -2379,15 +2381,17 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
   .game-menu-image {
     display: block !important;
-    flex: 0 0 88px !important;
+    flex: 0 0 98px !important;
     width: 100% !important;
-    height: 88px !important;
-    min-height: 88px !important;
-    object-fit: cover !important;
+    height: 98px !important;
+    min-height: 98px !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
     filter: none !important;
     transform: none !important;
     transition: none !important;
-    background: #00171d !important;
+    background: radial-gradient(circle at 50% 18%, rgba(255,255,255,.12), transparent 45%), #00171d !important;
   }
 
   .game-menu-content {
@@ -2432,10 +2436,19 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 }
 
 @media (max-width: 360px) {
+  #game-menu-view {
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+
+  .game-menu-grid {
+    gap: .52rem !important;
+  }
+
   .game-menu-image {
-    flex-basis: 80px !important;
-    height: 80px !important;
-    min-height: 80px !important;
+    flex-basis: 92px !important;
+    height: 92px !important;
+    min-height: 92px !important;
   }
 
   .game-menu-content {
