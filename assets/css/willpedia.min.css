@@ -2675,3 +2675,350 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     white-space: nowrap !important;
   }
 }
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-15 — TAP CARD + SHOWCASE GAME HERO
+   Mobile package cards add directly to cart when the card is
+   tapped. The old top review panel is removed. Game pages use
+   a lightweight image-first showcase hero inspired by storefront
+   banners, with Willpedia teal/gold styling.
+   ========================================================== */
+.game-showcase-hero {
+  overflow: hidden;
+  border: 1px solid rgba(244, 198, 78, .2);
+  border-radius: 1.25rem;
+  background: #001f28;
+  box-shadow: 0 16px 38px rgba(0, 8, 12, .24);
+}
+
+.game-showcase-banner {
+  position: relative;
+  min-height: 270px;
+  overflow: hidden;
+  background: #101517;
+}
+
+.game-showcase-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 13, 18, .03) 0%, rgba(0, 13, 18, .2) 38%, rgba(0, 13, 18, .93) 72%, rgba(0, 13, 18, .98) 100%);
+}
+
+.game-showcase-banner-image {
+  width: 100%;
+  height: 100%;
+  min-height: 270px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.game-showcase-copy {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 4.5%;
+  width: min(42%, 430px);
+  transform: translateY(-50%);
+}
+
+.game-showcase-kicker {
+  display: block;
+  color: #cbd5e1;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.game-showcase-title {
+  margin-top: .32rem;
+  color: #f4c64e;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 950;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+
+.game-showcase-description {
+  margin-top: .55rem;
+  color: #dbe5e8;
+  font-size: .76rem;
+  font-weight: 550;
+  line-height: 1.55;
+}
+
+.game-showcase-cta {
+  display: inline-flex;
+  margin-top: .72rem;
+  padding-bottom: .12rem;
+  border-bottom: 2px solid #f4c64e;
+  color: #ffe58a;
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+.game-showcase-bottom {
+  display: grid;
+  grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  align-items: stretch;
+  background: #00212a;
+}
+
+.game-showcase-identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem 1rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  background: #001a21;
+}
+
+.game-showcase-logo {
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  object-fit: cover;
+  border: 1px solid rgba(244,198,78,.3);
+  border-radius: .9rem;
+  background: #00171d;
+}
+
+.game-showcase-brand-copy {
+  display: block;
+  min-width: 0;
+}
+
+.game-showcase-brand-copy strong {
+  display: block;
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: .84rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-showcase-brand-copy > span {
+  display: block;
+  margin-top: .22rem;
+  color: #94a3b8;
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.game-showcase-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: .4rem;
+  padding: .72rem .9rem;
+}
+
+.game-showcase-benefit {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: .42rem;
+  color: #e6f4f7;
+  font-size: .62rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.game-showcase-benefit i {
+  flex: 0 0 auto;
+  color: #f4c64e;
+}
+
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    padding-right: .65rem !important;
+    padding-left: .65rem !important;
+  }
+
+  .game-showcase-hero {
+    border-radius: .95rem;
+    box-shadow: none;
+    contain: layout paint style;
+  }
+
+  .game-showcase-banner {
+    min-height: 172px;
+  }
+
+  .game-showcase-banner::after {
+    background: linear-gradient(90deg, rgba(0, 13, 18, .03) 0%, rgba(0, 13, 18, .24) 42%, rgba(0, 13, 18, .9) 72%, rgba(0, 13, 18, .97) 100%);
+  }
+
+  .game-showcase-banner-image {
+    min-height: 172px;
+    object-position: 34% center;
+    filter: none;
+  }
+
+  .game-showcase-copy {
+    right: .68rem;
+    width: 46%;
+  }
+
+  .game-showcase-kicker {
+    font-size: .48rem;
+    letter-spacing: .08em;
+  }
+
+  .game-showcase-title {
+    margin-top: .18rem;
+    font-size: .88rem;
+    line-height: 1.05;
+  }
+
+  .game-showcase-description {
+    display: -webkit-box;
+    margin-top: .34rem;
+    overflow: hidden;
+    font-size: .52rem;
+    line-height: 1.38;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .game-showcase-cta {
+    margin-top: .42rem;
+    font-size: .5rem;
+  }
+
+  .game-showcase-bottom {
+    display: block;
+  }
+
+  .game-showcase-identity {
+    gap: .62rem;
+    padding: .62rem .7rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .game-showcase-logo {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: .68rem;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .68rem;
+  }
+
+  .game-showcase-brand-copy > span {
+    font-size: .52rem;
+  }
+
+  .game-showcase-benefits {
+    gap: .18rem;
+    padding: .56rem .42rem;
+  }
+
+  .game-showcase-benefit {
+    gap: .24rem;
+    font-size: .46rem;
+    line-height: 1.2;
+  }
+
+  .game-showcase-benefit i {
+    font-size: .55rem;
+  }
+
+  body[data-page="game"] .mobile-game-review-panel {
+    display: none !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 6.8rem !important;
+    max-height: 6.8rem !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  #product-container .mobile-compact-product-card:active {
+    transform: scale(.985) !important;
+  }
+
+  #product-container .mobile-compact-product-card:focus-visible {
+    outline: 2px solid rgba(244,198,78,.8) !important;
+    outline-offset: 2px !important;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart {
+    border-color: rgba(244,198,78,.7) !important;
+    background: linear-gradient(150deg, rgba(5, 80, 91, .98), rgba(0, 31, 39, .99)) !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 4.95rem !important;
+    padding: .43rem .48rem .3rem !important;
+  }
+
+  #product-container .mobile-compact-product-footer {
+    min-height: 1.85rem !important;
+    height: 1.85rem !important;
+    flex-basis: 1.85rem !important;
+    padding: .22rem .3rem !important;
+  }
+
+  #product-container .mobile-compact-card-status {
+    display: inline-flex !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: .22rem !important;
+    color: #d9e9ed !important;
+    font-size: .44rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart .mobile-compact-card-status {
+    color: #ffe58a !important;
+  }
+
+  #product-container .mobile-compact-card-status i {
+    font-size: .45rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-showcase-banner,
+  .game-showcase-banner-image {
+    min-height: 162px;
+  }
+
+  .game-showcase-copy {
+    right: .55rem;
+    width: 47%;
+  }
+
+  .game-showcase-title {
+    font-size: .8rem;
+  }
+
+  .game-showcase-description {
+    font-size: .48rem;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 6.55rem !important;
+    max-height: 6.55rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 4.7rem !important;
+  }
+}
