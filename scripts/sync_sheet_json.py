@@ -51,7 +51,7 @@ def request_json(params: dict[str, str]) -> dict[str, Any]:
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Willpedia-GitHub-Sync/2.0",
+            "User-Agent": "Willpedia-GitHub-Sync/3.0",
             "Accept": "application/json",
         },
     )
@@ -82,16 +82,37 @@ def _first_list(*values: Any) -> list[Any]:
     return []
 
 
+def _canonical_game_name(value: Any) -> str:
+    raw = str(value or "").strip().upper()
+    token = "".join(character for character in raw if character.isalnum())
+    aliases: dict[str, str] = {}
+    for game_key, game_name in GAME_NAMES.items():
+        aliases["".join(character for character in game_key.upper() if character.isalnum())] = game_name
+        aliases["".join(character for character in game_name if character.isalnum())] = game_name
+    aliases.update({
+        "GI": "GENSHIN IMPACT",
+        "GENSHIN": "GENSHIN IMPACT",
+        "HONKAISTARRAIL": "HONKAI STAR RAIL",
+        "STARRAIL": "HONKAI STAR RAIL",
+        "HSR": "HONKAI STAR RAIL",
+        "ZENLESSZONEZERO": "ZENLESS ZONE ZERO",
+        "ZZZ": "ZENLESS ZONE ZERO",
+        "WUTHERINGWAVES": "WUTHERING WAVES",
+        "WUWA": "WUTHERING WAVES",
+    })
+    return aliases.get(token, raw or "GAME")
+
+
 def _normalize_review(item: Any, game_name: str = "") -> dict[str, Any] | None:
     if not isinstance(item, dict):
         return None
-    normalized_game = str(
+    normalized_game = _canonical_game_name(
         item.get("Game")
         or item.get("game")
         or item.get("__gameName")
         or game_name
         or "Game"
-    ).strip().upper()
+    )
     return {
         **item,
         "Nama": item.get("Nama") or item.get("nama") or item.get("name") or "Pengguna",
@@ -104,44 +125,37 @@ def _normalize_review(item: Any, game_name: str = "") -> dict[str, Any] | None:
 
 
 def fetch_review_data() -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
-    """Ambil ringkasan rating dan komentar yang tersedia dari Apps Script."""
+    """Ambil rating dan komentar dari satu sumber, lalu hitung ulang agar selalu sinkron."""
     payload = request_json({"action": "all_game_reviews"})
     raw_games = payload.get("games")
     if not isinstance(raw_games, dict):
-        raise ValueError("Respons rating tidak memiliki object games.")
+        raw_games = {}
 
-    summaries: dict[str, dict[str, Any]] = {}
-    reviews: list[dict[str, Any]] = []
-    for game_key, game_name in GAME_NAMES.items():
-        raw = raw_games.get(game_name, {})
-        if not isinstance(raw, dict):
-            raw = {}
+    normalized_games: dict[str, dict[str, Any]] = {}
+    collected_reviews: list[dict[str, Any]] = []
+    for raw_game_name, raw_value in raw_games.items():
+        canonical_name = _canonical_game_name(raw_game_name)
+        raw = raw_value if isinstance(raw_value, dict) else {}
+        normalized_games[canonical_name] = raw
         raw_comments = _first_list(
             raw.get("comments"), raw.get("komentar"), raw.get("ulasan"), raw.get("reviews")
         )
-        normalized_comments = [
+        collected_reviews.extend(
             review for item in raw_comments
-            if (review := _normalize_review(item, game_name)) is not None
-        ]
-        reviews.extend(normalized_comments)
-        total = int(float(raw.get("jumlah_ulasan") or raw.get("total") or len(normalized_comments) or 0))
-        average = float(raw.get("rata_rata") or raw.get("average") or raw.get("rating") or 0)
-        summaries[game_key] = {
-            "average": round(average, 1),
-            "total": max(0, total),
-        }
+            if (review := _normalize_review(item, canonical_name)) is not None
+        )
 
     top_level_comments = _first_list(
         payload.get("comments"), payload.get("reviews"), payload.get("ulasan")
     )
-    reviews.extend(
+    collected_reviews.extend(
         review for item in top_level_comments
         if (review := _normalize_review(item)) is not None
     )
 
     deduplicated: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str, str]] = set()
-    for review in reviews:
+    for review in collected_reviews:
         key = (
             str(review.get("Game", "")).lower(),
             str(review.get("Nama", "")).lower(),
@@ -152,6 +166,29 @@ def fetch_review_data() -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]
             continue
         seen.add(key)
         deduplicated.append(review)
+
+    summaries: dict[str, dict[str, Any]] = {}
+    for game_key, game_name in GAME_NAMES.items():
+        raw = normalized_games.get(game_name, {})
+        game_reviews = [review for review in deduplicated if review.get("Game") == game_name]
+        valid_ratings: list[float] = []
+        for review in game_reviews:
+            try:
+                rating = float(review.get("Rating") or 0)
+            except (TypeError, ValueError):
+                rating = 0
+            if 1 <= rating <= 5:
+                valid_ratings.append(rating)
+
+        raw_total = int(float(raw.get("jumlah_ulasan") or raw.get("total") or raw.get("total_reviews") or 0))
+        raw_average = float(raw.get("rata_rata") or raw.get("average") or raw.get("rating") or 0)
+        total = max(raw_total, len(valid_ratings), len(game_reviews))
+        average = sum(valid_ratings) / len(valid_ratings) if valid_ratings else raw_average
+        summaries[game_key] = {
+            "average": round(max(0.0, min(5.0, average)), 1),
+            "total": max(0, total),
+        }
+
     return summaries, deduplicated
 
 
@@ -207,7 +244,7 @@ def main() -> int:
 
         popular = fetch_products({"action": "popular"})
         popular["ratings"] = ratings
-        changed += int(write_if_changed(DATA_DIR / "reviews.json", serialize({"success": True, "reviews": reviews})))
+        changed += int(write_if_changed(DATA_DIR / "reviews.json", serialize({"success": True, "ratings": ratings, "reviews": reviews})))
         changed += int(write_if_changed(DATA_DIR / "popular.json", serialize(popular)))
         changed += int(embed_popular_payload(popular))
 

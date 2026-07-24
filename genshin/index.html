@@ -978,11 +978,15 @@ body .all-game-comments-track.is-manual-scroll .all-game-comment-card {
   background:rgba(244,198,78,.055);
 }
 body[data-page="home"] .storefront-nav-link.nav-home,
-body[data-page="game"] .storefront-nav-link.nav-games{
+body[data-page="game"] .storefront-nav-link.nav-games,
+body[data-page="howto"] .storefront-nav-link.nav-howto,
+body[data-page="ratings"] .storefront-nav-link.nav-ratings{
   color:var(--gi-white,#f8fafc);
 }
 body[data-page="home"] .storefront-nav-link.nav-home::after,
-body[data-page="game"] .storefront-nav-link.nav-games::after{
+body[data-page="game"] .storefront-nav-link.nav-games::after,
+body[data-page="howto"] .storefront-nav-link.nav-howto::after,
+body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   background:var(--gi-gold,#f4c64e);
 }
 .storefront-help-action i{color:#5ee7a0;}
@@ -1098,6 +1102,16 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
   padding-top:14px!important;
 }
 :root{--fixed-navbar-clearance:calc(126px + env(safe-area-inset-top));}
+.standalone-page-main{
+  width:100%;
+  padding-top:calc(var(--fixed-navbar-clearance,126px) + 1rem);
+  padding-bottom:2rem;
+}
+.standalone-page-main>.home-discovery-section,
+.standalone-page-main>.all-game-ratings-section{
+  margin-top:0!important;
+}
+
 #game-menu-view,
 #home-how-to-order,
 #all-game-ratings-section,
@@ -1560,14 +1574,14 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
 @media (prefers-reduced-motion:no-preference){.popular-skeleton-media{animation:willpediaSkeletonSweep 1.7s ease-in-out infinite}}
 @keyframes willpediaSkeletonSweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
 
-/* WILLPEDIA performance-2 interaction fixes */
+/* WILLPEDIA performance-3 interaction and standalone-page fixes */
 #navbar-shell>.mobile-nav-menu,#navbar-shell>.currency-menu{pointer-events:auto!important;touch-action:manipulation;z-index:180!important}
 #review-modal.hidden{display:none!important}
 #review-modal:not(.hidden){display:flex!important}
 .mobile-nav-menu-item,.currency-option{pointer-events:auto!important;touch-action:manipulation}
 </style>
 <link as="fetch" crossorigin="anonymous" href="data/genshin.json" rel="preload"/>
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-2"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-3"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-game="genshin" data-page="game">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -1600,8 +1614,8 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
 <div aria-label="Menu utama" class="storefront-menu-left">
 <a class="storefront-nav-link nav-home" href="/"><i aria-hidden="true" class="fa-solid fa-house"></i><span>Beranda</span></a>
 <a class="storefront-nav-link nav-games" href="/#game-menu-view"><i aria-hidden="true" class="fa-solid fa-gamepad"></i><span>Semua Game</span></a>
-<a class="storefront-nav-link" href="/cara-order/"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span>Cara Order</span></a>
-<a class="storefront-nav-link" href="/rating/"><i aria-hidden="true" class="fa-solid fa-star"></i><span>Rating &amp; Ulasan</span></a>
+<a class="storefront-nav-link nav-howto" href="/cara-order/"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span>Cara Order</span></a>
+<a class="storefront-nav-link nav-ratings" href="/rating/"><i aria-hidden="true" class="fa-solid fa-star"></i><span>Rating &amp; Ulasan</span></a>
 <span aria-hidden="true" class="storefront-nav-indicator"></span>
 </div>
 <div class="storefront-menu-right">

@@ -1010,11 +1010,15 @@ body .all-game-comments-track.is-manual-scroll .all-game-comment-card {
   background:rgba(244,198,78,.055);
 }
 body[data-page="home"] .storefront-nav-link.nav-home,
-body[data-page="game"] .storefront-nav-link.nav-games{
+body[data-page="game"] .storefront-nav-link.nav-games,
+body[data-page="howto"] .storefront-nav-link.nav-howto,
+body[data-page="ratings"] .storefront-nav-link.nav-ratings{
   color:var(--gi-white,#f8fafc);
 }
 body[data-page="home"] .storefront-nav-link.nav-home::after,
-body[data-page="game"] .storefront-nav-link.nav-games::after{
+body[data-page="game"] .storefront-nav-link.nav-games::after,
+body[data-page="howto"] .storefront-nav-link.nav-howto::after,
+body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   background:var(--gi-gold,#f4c64e);
 }
 .storefront-help-action i{color:#5ee7a0;}
@@ -1130,6 +1134,16 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
   padding-top:14px!important;
 }
 :root{--fixed-navbar-clearance:calc(126px + env(safe-area-inset-top));}
+.standalone-page-main{
+  width:100%;
+  padding-top:calc(var(--fixed-navbar-clearance,126px) + 1rem);
+  padding-bottom:2rem;
+}
+.standalone-page-main>.home-discovery-section,
+.standalone-page-main>.all-game-ratings-section{
+  margin-top:0!important;
+}
+
 #game-menu-view,
 #home-how-to-order,
 #all-game-ratings-section,
@@ -1592,16 +1606,16 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
 @media (prefers-reduced-motion:no-preference){.popular-skeleton-media{animation:willpediaSkeletonSweep 1.7s ease-in-out infinite}}
 @keyframes willpediaSkeletonSweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
 
-/* WILLPEDIA performance-2 interaction fixes */
+/* WILLPEDIA performance-3 interaction and standalone-page fixes */
 #navbar-shell>.mobile-nav-menu,#navbar-shell>.currency-menu{pointer-events:auto!important;touch-action:manipulation;z-index:180!important}
 #review-modal.hidden{display:none!important}
 #review-modal:not(.hidden){display:flex!important}
 .mobile-nav-menu-item,.currency-option{pointer-events:auto!important;touch-action:manipulation}
 </style>
 <!-- WILLPEDIA_POPULAR_DATA_START -->
-    <script id="willpedia-popular-data" type="application/json">{"products":[{"Deskripsi":"Daily Task, Broadcast, Spend Waveplate, Fantasies","Gambar":"https://cdn2.steamgriddb.com/icon_thumb/77875aea8d863f84d40b43f1d9b1e4f4.png","Game":"WUTHERING WAVES","Game_Key":"wuwa","Harga_Asli":70000,"Harga_Diskon":65000,"ID":"WUWA-P003","Kategori":"Daily","Nama_Paket":"Rawat Akun 1 Bulan (LITE)","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""},{"Deskripsi":"Spend Battery, Daily Errands, Eridu City Fund, Claim Weekly Stamp","Gambar":"https://cdn2.steamgriddb.com/icon_thumb/64d79c921b451019fc7997d5d1ffd181.png","Game":"ZENLESS ZONE ZERO","Game_Key":"zzz","Harga_Asli":69000,"Harga_Diskon":65000,"ID":"ZZZ-P003","Kategori":"Daily","Nama_Paket":"Rawat Akun 1 Bulan (LITE)","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""},{"Deskripsi":"Daily Assignment, Nameless Honor, Spend Trailblazer","Gambar":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBbfbo99tE5UrA3Pj_LJBGoJ6QQNeTge4uu7qPEYyXjICjwWZElCid9c&s=12","Game":"HONKAI STAR RAIL","Game_Key":"hsr","Harga_Asli":43000,"Harga_Diskon":40000,"ID":"HSR-P003","Kategori":"Daily","Nama_Paket":"Rawat Akun 1 Bulan (LITE)","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""},{"Deskripsi":"Spend Resin, Daily Commision, Claim Battle Pass","Gambar":"https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O","Game":"GENSHIN IMPACT","Game_Key":"genshin","Harga_Asli":80000,"Harga_Diskon":60000,"ID":"GI-P004","Kategori":"Rawat Akun","Nama_Paket":"Rawat Akun LITE","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""},{"Deskripsi":"Nodkrai 100% Exploration ","Gambar":"https://upload-os-bbs.hoyolab.com/upload/2025/07/28/82478191/b4e495d29a3d25ab2788c696968b6cd0_6705514118288432263.webp?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70","Game":"GENSHIN IMPACT","Game_Key":"genshin","Harga_Asli":600000,"Harga_Diskon":560000,"ID":"GI-P026","Kategori":"Explore","Nama_Paket":"Explore Nodkrai","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""},{"Deskripsi":"Lahai Roi","Gambar":"https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Giant's%20Gaze.png","Game":"WUTHERING WAVES","Game_Key":"wuwa","Harga_Asli":25000,"Harga_Diskon":23000,"ID":"WUWA-P047","Kategori":"Explore","Nama_Paket":"Explore Giant's Gaze","Posisi_Gambar":"","Status":"Ready","Tampilan_Gambar":""}],"ratings":{"genshin":{"average":0.0,"total":0},"hsr":{"average":0.0,"total":0},"wuwa":{"average":0.0,"total":0},"zzz":{"average":0.0,"total":0}},"success":true}</script>
-    <!-- WILLPEDIA_POPULAR_DATA_END -->
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-2"></script>
+<script id="willpedia-popular-data" type="application/json">{"message":"Menunggu sinkronisasi GitHub Actions pertama.","products":[],"ratings":{"genshin":{"average":0,"total":0},"hsr":{"average":0,"total":0},"wuwa":{"average":0,"total":0},"zzz":{"average":0,"total":0}},"success":false}</script>
+<!-- WILLPEDIA_POPULAR_DATA_END -->
+<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-3"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="home">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -1634,8 +1648,8 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
 <div aria-label="Menu utama" class="storefront-menu-left">
 <a class="storefront-nav-link nav-home" href="/"><i aria-hidden="true" class="fa-solid fa-house"></i><span>Beranda</span></a>
 <a class="storefront-nav-link nav-games" href="/#game-menu-view"><i aria-hidden="true" class="fa-solid fa-gamepad"></i><span>Semua Game</span></a>
-<a class="storefront-nav-link" href="/cara-order/"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span>Cara Order</span></a>
-<a class="storefront-nav-link" href="/rating/"><i aria-hidden="true" class="fa-solid fa-star"></i><span>Rating &amp; Ulasan</span></a>
+<a class="storefront-nav-link nav-howto" href="/cara-order/"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span>Cara Order</span></a>
+<a class="storefront-nav-link nav-ratings" href="/rating/"><i aria-hidden="true" class="fa-solid fa-star"></i><span>Rating &amp; Ulasan</span></a>
 <span aria-hidden="true" class="storefront-nav-indicator"></span>
 </div>
 <div class="storefront-menu-right">
