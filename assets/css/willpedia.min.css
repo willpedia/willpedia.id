@@ -2312,3 +2312,138 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     font-size: .64rem !important;
   }
 }
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-9 — MOBILE HOME SIMPLIFICATION
+   Mobile removes Paket Joki Terlaris completely. The static
+   Semua Game menu adopts the former compact favorite-card look.
+   Desktop keeps the complete popular-package section unchanged.
+   ========================================================== */
+@media (max-width: 767px) {
+  #weekly-popular-section,
+  #weekly-popular-section.is-mobile-disabled {
+    display: none !important;
+    content-visibility: hidden !important;
+    contain: strict !important;
+  }
+
+  #game-menu-view {
+    margin-top: 1.4rem !important;
+    margin-bottom: 3.25rem !important;
+  }
+
+  #game-menu-view > .mb-5 {
+    margin-bottom: .85rem !important;
+  }
+
+  #game-menu-view .home-section-description,
+  #game-menu-view > .mb-5 > p {
+    display: none !important;
+  }
+
+  .game-menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .7rem !important;
+    align-items: start !important;
+  }
+
+  .game-menu-card {
+    display: flex !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    border: 1px solid rgba(244, 198, 78, .28) !important;
+    border-radius: .9rem !important;
+    background: #00212a !important;
+    box-shadow: 0 7px 16px rgba(0, 8, 12, .18) !important;
+    transform: none !important;
+    transition: none !important;
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: 150px 136px !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .game-menu-card::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .game-menu-card:active {
+    transform: scale(.985) !important;
+  }
+
+  .game-menu-image {
+    display: block !important;
+    flex: 0 0 88px !important;
+    width: 100% !important;
+    height: 88px !important;
+    min-height: 88px !important;
+    object-fit: cover !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    background: #00171d !important;
+  }
+
+  .game-menu-content {
+    position: static !important;
+    z-index: auto !important;
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    padding: .58rem .68rem !important;
+    color: #172126 !important;
+    background: linear-gradient(135deg, #ffe58a, #f4c64e 58%, #d99a1d) !important;
+  }
+
+  .game-menu-content > span:first-child {
+    display: block !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .game-menu-name {
+    display: -webkit-box !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    color: #172126 !important;
+    font-size: .72rem !important;
+    font-weight: 900 !important;
+    line-height: 1.25 !important;
+    overflow-wrap: anywhere !important;
+    text-shadow: none !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .game-menu-meta,
+  .game-menu-arrow {
+    display: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-menu-image {
+    flex-basis: 80px !important;
+    height: 80px !important;
+    min-height: 80px !important;
+  }
+
+  .game-menu-content {
+    min-height: 46px !important;
+    padding: .52rem .58rem !important;
+  }
+
+  .game-menu-name {
+    font-size: .67rem !important;
+  }
+}
