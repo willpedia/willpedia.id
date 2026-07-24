@@ -2315,10 +2315,10 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
 
 /* ==========================================================
-   WILLPEDIA PERFORMANCE-9 — MOBILE HOME SIMPLIFICATION
-   Mobile removes Paket Joki Terlaris completely. The static
-   Semua Game menu adopts the former compact favorite-card look.
-   Desktop keeps the complete popular-package section unchanged.
+   WILLPEDIA PERFORMANCE-11 — MOBILE HOME GAME CARDS REFINE
+   Mobile removes Paket Joki Terlaris. Semua Game becomes a
+   full-image portrait card with overlay text, but still keeps
+   the Willpedia / paket-joki visual language.
    ========================================================== */
 @media (max-width: 767px) {
   #weekly-popular-section,
@@ -2346,33 +2346,38 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
   .game-menu-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: .6rem !important;
+    gap: .65rem !important;
     align-items: start !important;
   }
 
   .game-menu-card {
-    display: flex !important;
+    position: relative !important;
+    display: block !important;
     min-width: 0 !important;
     min-height: 0 !important;
-    aspect-ratio: auto !important;
+    aspect-ratio: 10 / 12.6 !important;
     overflow: hidden !important;
-    flex-direction: column !important;
-    border: 1px solid rgba(244, 198, 78, .28) !important;
-    border-radius: .9rem !important;
-    background: #00212a !important;
-    box-shadow: 0 7px 16px rgba(0, 8, 12, .18) !important;
+    border: 1px solid rgba(244, 198, 78, .24) !important;
+    border-radius: 1rem !important;
+    background: radial-gradient(circle at 50% 0%, rgba(14, 105, 124, .22), transparent 38%),
+                linear-gradient(160deg, rgba(0, 40, 49, .98), rgba(0, 18, 24, .98)) !important;
+    box-shadow: 0 10px 24px rgba(0, 8, 12, .22) !important;
     transform: none !important;
     transition: none !important;
     content-visibility: auto !important;
     contain: layout paint style !important;
-    contain-intrinsic-size: 158px 144px !important;
+    contain-intrinsic-size: 160px 202px !important;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
 
   .game-menu-card::after {
-    display: none !important;
-    content: none !important;
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background: linear-gradient(180deg, rgba(0, 23, 29, .02) 0%, rgba(0, 23, 29, .10) 32%, rgba(0, 23, 29, .78) 76%, rgba(0, 23, 29, .96) 100%) !important;
   }
 
   .game-menu-card:active {
@@ -2381,32 +2386,32 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 
   .game-menu-image {
     display: block !important;
-    flex: 0 0 98px !important;
     width: 100% !important;
-    height: 98px !important;
-    min-height: 98px !important;
-    padding: 0 !important;
-    object-fit: contain !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
     object-position: center center !important;
-    filter: none !important;
+    filter: saturate(1.02) contrast(1.03) !important;
     transform: none !important;
     transition: none !important;
-    background: radial-gradient(circle at 50% 18%, rgba(255,255,255,.12), transparent 45%), #00171d !important;
+    background: #00171d !important;
   }
 
   .game-menu-content {
-    position: static !important;
-    z-index: auto !important;
+    position: absolute !important;
+    z-index: 1 !important;
+    right: .7rem !important;
+    bottom: .68rem !important;
+    left: .7rem !important;
     display: flex !important;
-    flex: 1 1 auto !important;
-    width: 100% !important;
-    min-height: 48px !important;
-    align-items: center !important;
+    width: auto !important;
+    min-height: 0 !important;
+    align-items: flex-end !important;
     justify-content: flex-start !important;
     gap: 0 !important;
-    padding: .58rem .68rem !important;
-    color: #172126 !important;
-    background: linear-gradient(135deg, #ffe58a, #f4c64e 58%, #d99a1d) !important;
+    padding: 0 !important;
+    color: #f8fafc !important;
+    background: transparent !important;
   }
 
   .game-menu-content > span:first-child {
@@ -2419,17 +2424,27 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     display: -webkit-box !important;
     width: 100% !important;
     overflow: hidden !important;
-    color: #172126 !important;
-    font-size: .72rem !important;
+    color: #ffffff !important;
+    font-size: .78rem !important;
     font-weight: 900 !important;
-    line-height: 1.25 !important;
-    overflow-wrap: anywhere !important;
-    text-shadow: none !important;
+    line-height: 1.2 !important;
+    letter-spacing: .01em !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .28) !important;
     -webkit-box-orient: vertical !important;
     -webkit-line-clamp: 2 !important;
   }
 
-  .game-menu-meta,
+  .game-menu-meta {
+    display: block !important;
+    margin-top: .22rem !important;
+    color: #f4c64e !important;
+    font-size: .58rem !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: .01em !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .22) !important;
+  }
+
   .game-menu-arrow {
     display: none !important;
   }
@@ -2442,21 +2457,24 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 
   .game-menu-grid {
-    gap: .52rem !important;
+    gap: .55rem !important;
   }
 
-  .game-menu-image {
-    flex-basis: 92px !important;
-    height: 92px !important;
-    min-height: 92px !important;
+  .game-menu-card {
+    aspect-ratio: 10 / 12.2 !important;
   }
 
   .game-menu-content {
-    min-height: 46px !important;
-    padding: .52rem .58rem !important;
+    right: .58rem !important;
+    left: .58rem !important;
+    bottom: .58rem !important;
   }
 
   .game-menu-name {
-    font-size: .67rem !important;
+    font-size: .72rem !important;
+  }
+
+  .game-menu-meta {
+    font-size: .54rem !important;
   }
 }
