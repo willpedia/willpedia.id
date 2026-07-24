@@ -1579,6 +1579,92 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 #review-modal.hidden{display:none!important}
 #review-modal:not(.hidden){display:flex!important}
 .mobile-nav-menu-item,.currency-option{pointer-events:auto!important;touch-action:manipulation}
+
+/* ==========================================================
+   WILLPEDIA MOBILE GPU-LITE V5
+   Mengurangi repaint berat tanpa mengubah fungsi atau desktop.
+   ========================================================== */
+@media (max-width: 767px) {
+  /* Pastikan tidak ada blur baru dari komponen atau utility class. */
+  *,
+  *::before,
+  *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Lapisan tetap dibuat lebih solid agar tetap terbaca tanpa blur. */
+  #navbar.storefront-navbar,
+  .storefront-mobile-navbar,
+  .currency-menu,
+  .mobile-nav-menu,
+  .mobile-search-panel,
+  .mobile-order-dock-inner,
+  .mobile-order-sheet,
+  .review-modal-panel {
+    background-image: none !important;
+  }
+
+  #navbar.storefront-navbar,
+  .storefront-mobile-navbar {
+    background-color: #00212a !important;
+    box-shadow: 0 5px 14px rgba(0, 8, 12, .24) !important;
+  }
+
+  .currency-menu,
+  .mobile-nav-menu,
+  .mobile-search-panel {
+    background-color: #071923 !important;
+    box-shadow: 0 10px 22px rgba(0, 8, 12, .28) !important;
+  }
+
+  .mobile-order-dock-inner,
+  .mobile-order-sheet {
+    background-color: #070c1a !important;
+    box-shadow: 0 -6px 18px rgba(2, 6, 23, .30) !important;
+  }
+
+  .review-modal-panel,
+  .detail-hero-card,
+  .selected-game-summary,
+  .order-summary-panel,
+  .all-game-rating-overall {
+    box-shadow: 0 8px 20px rgba(2, 6, 23, .20) !important;
+  }
+
+  .hero-image-carousel-arrow,
+  .weekly-popular-game,
+  .game-tabs-arrow,
+  .joki-filter-panel {
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  .hero-image-carousel-arrow {
+    background-color: rgba(0, 28, 35, .94) !important;
+  }
+
+  .weekly-popular-game {
+    background-color: rgba(0, 23, 29, .96) !important;
+  }
+
+  /* Hindari filter GPU pada elemen yang ikut bergerak saat scroll. */
+  #navbar-shell,
+  #navbar,
+  .currency-menu,
+  .mobile-nav-menu,
+  .mobile-search-overlay,
+  .mobile-search-panel,
+  .mobile-order-dock,
+  .mobile-order-dock-inner,
+  .whatsapp-cs,
+  .review-modal,
+  .review-modal-panel,
+  .hero-image-carousel-arrow,
+  .weekly-popular-game {
+    filter: none !important;
+  }
+}
 </style>
 <link as="fetch" crossorigin="anonymous" href="data/wuwa.json" rel="preload"/>
 <script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-3"></script>
