@@ -13,11 +13,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
 
-<link href="assets/css/willpedia.min.css?v=20260724-home-split-pages-4" rel="stylesheet"/>
+<link href="assets/css/willpedia.min.css?v=20260724-mobile-ultralite-6" rel="stylesheet"/>
 
 
 
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-home-split-pages-4"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260724-mobile-ultralite-6"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="ratings">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -107,11 +107,11 @@
 <span><strong>Beranda</strong><small>Kembali ke halaman utama</small></span>
 <i aria-hidden="true" class="fa-solid fa-chevron-right mobile-nav-menu-chevron"></i>
 </a>
-<button class="mobile-nav-menu-item" onclick="goToMobileGameMenu()" type="button">
+<a class="mobile-nav-menu-item" href="index.html#game-menu-view" onclick="setMobileMenuState(false)">
 <span class="mobile-nav-menu-icon"><i aria-hidden="true" class="fa-solid fa-gamepad"></i></span>
 <span><strong>Semua Game</strong><small>Pilih layanan game</small></span>
 <i aria-hidden="true" class="fa-solid fa-chevron-right mobile-nav-menu-chevron"></i>
-</button>
+</a>
 <a class="mobile-nav-menu-item" href="cara-order/" onclick="setMobileMenuState(false)">
 <span class="mobile-nav-menu-icon"><i aria-hidden="true" class="fa-solid fa-list-check"></i></span>
 <span><strong>Cara Order</strong><small>Panduan pemesanan joki</small></span>
@@ -162,7 +162,12 @@
                     Berdasarkan ulasan
                 </div>
 <h2 class="all-game-ratings-title" id="all-game-ratings-title">RATING SELURUH GAME</h2>
-<p class="all-game-ratings-description">Nilai dihitung dari data rating pelanggan pada setiap game.</p>
+<p class="all-game-ratings-description" id="all-game-ratings-description">Nilai dihitung dari data rating pelanggan pada setiap game. Ketuk salah satu game untuk melihat ringkasannya.</p>
+</div>
+<div class="all-game-rating-overall" id="all-game-rating-overall">
+<span class="all-game-rating-overall-label" id="all-game-rating-overall-label">Rating seluruh game</span>
+<span class="all-game-rating-overall-main"><strong id="all-game-rating-overall-score">—</strong><span>/ 5</span></span>
+<span class="all-game-rating-overall-meta" id="all-game-rating-overall-meta">Memuat ringkasan rating...</span>
 </div>
 </div>
 <div aria-live="polite" class="all-game-ratings-grid" id="all-game-ratings-container">

@@ -12,9 +12,9 @@
 <link href="logowill.png" rel="apple-touch-icon"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="assets/css/willpedia.min.css?v=20260724-home-split-pages-4" rel="stylesheet"/>
+<link href="assets/css/willpedia.min.css?v=20260724-mobile-ultralite-6" rel="stylesheet"/>
 <link as="fetch" crossorigin="anonymous" href="data/genshin.json" rel="preload"/>
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-home-split-pages-4"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260724-mobile-ultralite-6"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-game="genshin" data-page="game">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -104,11 +104,11 @@
 <span><strong>Beranda</strong><small>Kembali ke halaman utama</small></span>
 <i aria-hidden="true" class="fa-solid fa-chevron-right mobile-nav-menu-chevron"></i>
 </a>
-<button class="mobile-nav-menu-item" onclick="goToMobileGameMenu()" type="button">
+<a class="mobile-nav-menu-item" href="index.html#game-menu-view" onclick="setMobileMenuState(false)">
 <span class="mobile-nav-menu-icon"><i aria-hidden="true" class="fa-solid fa-gamepad"></i></span>
 <span><strong>Semua Game</strong><small>Pilih layanan game</small></span>
 <i aria-hidden="true" class="fa-solid fa-chevron-right mobile-nav-menu-chevron"></i>
-</button>
+</a>
 <a class="mobile-nav-menu-item" href="cara-order/" onclick="setMobileMenuState(false)">
 <span class="mobile-nav-menu-icon"><i aria-hidden="true" class="fa-solid fa-list-check"></i></span>
 <span><strong>Cara Order</strong><small>Panduan pemesanan joki</small></span>

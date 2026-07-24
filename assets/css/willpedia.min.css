@@ -1720,3 +1720,145 @@ body[data-page="howto"] .storefront-nav-link[href="cara-order/"]::after,
 body[data-page="ratings"] .storefront-nav-link[href="rating/"]::after{
   background:var(--gi-gold,#f4c64e)!important;
 }
+
+
+/* ==========================================================
+   WILLPEDIA V5 — FIX KLIK MENU MOBILE + KARTU TERLARIS RINGKAS
+   ========================================================== */
+/* #navbar-shell memakai pointer-events:none agar area kosong tidak menutup halaman.
+   Menu dropdown adalah sibling dari nav, sehingga harus menerima klik secara eksplisit. */
+#navbar-shell > #mobile-nav-menu,
+#mobile-nav-menu,
+.mobile-nav-menu,
+.mobile-nav-menu-item,
+.mobile-nav-menu a,
+.mobile-nav-menu button {
+  pointer-events: auto !important;
+}
+#mobile-nav-menu {
+  z-index: 175 !important;
+  touch-action: manipulation;
+}
+.mobile-nav-menu-item {
+  position: relative;
+  z-index: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Kartu paket terlaris dibuat lebih pendek. Selain area paint lebih kecil,
+   JS v5 juga meminta thumbnail khusus yang lebih kecil dari server gambar. */
+.weekly-popular-grid {
+  gap: .65rem !important;
+}
+.weekly-popular-media {
+  aspect-ratio: 2 / 1 !important;
+}
+.weekly-popular-content {
+  min-height: 106px !important;
+  padding: .68rem !important;
+}
+.weekly-popular-name {
+  min-height: 2.4em !important;
+  font-size: .72rem !important;
+  line-height: 1.2 !important;
+}
+.weekly-popular-meta {
+  margin-top: .25rem !important;
+  font-size: .58rem !important;
+  line-height: 1.35 !important;
+  -webkit-line-clamp: 1 !important;
+}
+.weekly-popular-bottom {
+  padding-top: .5rem !important;
+}
+.weekly-popular-price {
+  font-size: .72rem !important;
+}
+.weekly-popular-arrow {
+  width: 25px !important;
+  height: 25px !important;
+  flex-basis: 25px !important;
+  font-size: .62rem !important;
+}
+.weekly-popular-game {
+  top: .42rem !important;
+  left: .42rem !important;
+  max-width: calc(100% - .84rem) !important;
+  padding: .23rem .42rem !important;
+  font-size: .51rem !important;
+}
+@media (min-width: 640px) {
+  .weekly-popular-grid {
+    gap: .75rem !important;
+  }
+  .weekly-popular-content {
+    min-height: 116px !important;
+    padding: .78rem !important;
+  }
+  .weekly-popular-name {
+    font-size: .75rem !important;
+  }
+  .weekly-popular-meta {
+    font-size: .6rem !important;
+  }
+}
+@media (max-width: 767px) {
+  /* Hindari efek sentuh/hover semu pada daftar menu dan kartu populer. */
+  .mobile-nav-menu-item,
+  .weekly-popular-card,
+  .weekly-popular-image,
+  .weekly-popular-arrow {
+    transition: none !important;
+  }
+  .weekly-popular-card:active {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA V6 — MENU MOBILE, NAV AKTIF, RATING INTERAKTIF
+   ========================================================== */
+/* Shell hanya setinggi navbar/menu, jadi aman menerima pointer secara langsung.
+   Ini menghilangkan bug dropdown terlihat tetapi link tidak bisa ditap. */
+#navbar-shell{
+  pointer-events:auto!important;
+}
+#navbar-shell > #mobile-nav-menu,
+#mobile-nav-menu,
+.mobile-nav-menu,
+.mobile-nav-menu:not(.hidden),
+.mobile-nav-menu-item,
+.mobile-nav-menu a,
+.mobile-nav-menu button{
+  pointer-events:auto!important;
+}
+.mobile-nav-menu:not(.hidden){
+  visibility:visible!important;
+}
+
+/* Warna menu aktif mengikuti posisi indikator kuning desktop. */
+.storefront-nav-link.is-current{
+  color:var(--gi-white,#f8fafc)!important;
+  background:rgba(244,198,78,.055);
+}
+
+/* Kartu rating yang dipilih tetap jelas tanpa animasi atau efek GPU berat. */
+.all-game-rating-card.is-selected{
+  border-color:rgba(244,198,78,.72)!important;
+  background:linear-gradient(145deg,rgba(7,79,96,.82),rgba(0,36,45,.96))!important;
+  box-shadow:0 0 0 2px rgba(244,198,78,.12),0 12px 28px rgba(0,9,13,.22)!important;
+}
+.all-game-rating-card.is-selected .all-game-rating-name,
+.all-game-rating-card.is-selected .all-game-rating-score{
+  color:var(--gi-gold-light,#ffe58a)!important;
+}
+@media (max-width:767px){
+  .all-game-rating-card.is-selected{
+    box-shadow:0 0 0 1px rgba(244,198,78,.14)!important;
+  }
+  .all-game-rating-card,
+  .all-game-rating-card *{
+    transition:none!important;
+  }
+}
