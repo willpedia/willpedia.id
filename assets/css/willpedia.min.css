@@ -1716,14 +1716,153 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 }
 
-/* WILLPEDIA PERFORMANCE-5 — POPULAR PACKAGE LIMIT
-   Mobile menampilkan 4 kartu (2x2), desktop tetap 6 kartu. */
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-6 — COMPACT POPULAR CARDS ON MOBILE
+   4 cards, 2x2, image + title only. Desktop remains unchanged.
+   ========================================================== */
 @media (max-width: 767px) {
   #weekly-popular-container {
-    min-height: 34rem !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: start !important;
+    min-height: 0 !important;
+    gap: .7rem !important;
   }
 
-  #weekly-popular-container > .popular-skeleton-card:nth-child(n + 5) {
+  #weekly-popular-container[data-popular-layout="compact"] {
+    content-visibility: visible !important;
+    contain: layout paint style !important;
+  }
+
+  #weekly-popular-container > .popular-skeleton-card:nth-child(n+5) {
     display: none !important;
+  }
+
+  .weekly-popular-compact-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(244, 198, 78, .28);
+    border-radius: .9rem;
+    background: #00212a;
+    box-shadow: 0 7px 16px rgba(0, 8, 12, .18);
+    content-visibility: auto;
+    contain: layout paint style;
+  }
+
+  .weekly-popular-compact-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border: 0;
+    border-radius: inherit;
+    color: inherit;
+    background: transparent;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .weekly-popular-compact-button:active {
+    transform: scale(.985);
+  }
+
+  .weekly-popular-compact-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 88px;
+    overflow: hidden;
+    background: #00171d;
+  }
+
+  .weekly-popular-compact-media::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 28px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 23, 29, .34), transparent);
+  }
+
+  .weekly-popular-compact-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .weekly-popular-compact-image.is-contain {
+    object-fit: contain;
+    padding: .3rem;
+    background: #00171d;
+  }
+
+  .weekly-popular-compact-title {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: .58rem .68rem;
+    color: #172126;
+    background: linear-gradient(135deg, #ffe58a, #f4c64e 58%, #d99a1d);
+  }
+
+  .weekly-popular-compact-title > span {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    font-size: .72rem;
+    font-weight: 900;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Skeleton follows the same compact 2x2 footprint before data is ready. */
+  #weekly-popular-container > .popular-skeleton-card {
+    min-height: 136px !important;
+    border-radius: .9rem !important;
+    box-shadow: none !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-media {
+    height: 88px !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-body {
+    display: block !important;
+    min-height: 48px !important;
+    padding: .68rem !important;
+    background: linear-gradient(135deg, rgba(255, 229, 138, .72), rgba(244, 198, 78, .72));
+  }
+
+  #weekly-popular-container .popular-skeleton-line.is-title {
+    width: 78% !important;
+    height: .72rem !important;
+    background: rgba(23, 33, 38, .28) !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-line:not(.is-title),
+  #weekly-popular-container .popular-skeleton-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .weekly-popular-compact-media {
+    height: 80px;
+  }
+
+  .weekly-popular-compact-title {
+    min-height: 46px;
+    padding: .52rem .58rem;
+  }
+
+  .weekly-popular-compact-title > span {
+    font-size: .67rem;
   }
 }
