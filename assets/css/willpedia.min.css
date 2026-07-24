@@ -1497,3 +1497,145 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
     contain-intrinsic-size: 1px 720px;
   }
 }
+
+/* WILLPEDIA MOBILE ULTRA-LITE FINAL OVERRIDES */
+/* Diletakkan paling akhir agar tidak tertimpa aturan tema sebelumnya. */
+@media (max-width: 767px) {
+  /* Blur transparan pada elemen fixed adalah salah satu beban GPU terbesar. */
+  *,
+  *::before,
+  *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Tetap memakai warna/gradient tema, tetapi tanpa bayangan berlapis. */
+  #navbar,
+  #main-hero-banner,
+  .currency-menu,
+  .mobile-nav-menu,
+  .mobile-search-panel,
+  .mobile-order-dock-inner,
+  .mobile-order-sheet,
+  .product-card,
+  .nominal-card,
+  .weekly-popular-card,
+  .game-menu-card,
+  .how-order-card,
+  .all-game-rating-card,
+  .all-game-rating-overall,
+  .all-game-comment-card,
+  .detail-hero-card,
+  .order-summary-panel,
+  .game-rating-panel,
+  .game-help-panel,
+  .game-reviews-inner,
+  .inline-review-card,
+  .review-modal-panel,
+  .joki-filter-panel,
+  .category-filter-shell,
+  .game-stepbar,
+  #toast-container > div,
+  .toast {
+    box-shadow: none !important;
+  }
+
+  /* Tidak ada filter gambar saat disentuh/di-scroll. */
+  .product-image,
+  .nominal-card-image,
+  .weekly-popular-image,
+  .game-menu-image,
+  .all-game-rating-image,
+  .whatsapp-cs {
+    filter: none !important;
+  }
+
+  /* Animasi dekoratif dihapus; fungsi klik dan buka/tutup tetap bekerja. */
+  .product-card,
+  .nominal-card,
+  .product-image,
+  .nominal-card-image,
+  .weekly-popular-card,
+  .weekly-popular-image,
+  .game-menu-card,
+  .game-menu-image,
+  .how-order-card,
+  .all-game-rating-card,
+  .all-game-comment-card,
+  .detail-hero-card,
+  .inline-review-card,
+  .mobile-order-sheet,
+  .mobile-order-toggle,
+  .mobile-order-toggle i,
+  .mobile-order-action,
+  .mobile-game-review-panel,
+  .currency-menu,
+  .mobile-nav-menu,
+  .mobile-search-overlay,
+  .mobile-search-panel,
+  .add-cart-button,
+  .nominal-select-button,
+  .tab-btn,
+  .sub-tab-btn,
+  .joki-search-button,
+  .storefront-nav-indicator,
+  #toast-container > div,
+  .toast {
+    transition: none !important;
+  }
+
+  .add-cart-button.is-added,
+  .order-receive-bump,
+  #cart-float.cart-enter,
+  #cart-float.cart-bump .cart-float-button,
+  #cart-count.cart-count-pop,
+  .popular-target-highlight,
+  .review-marquee-track,
+  .all-game-comments-track,
+  .whatsapp-cs__icon::before,
+  [data-hero-progress] {
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  /* JS tidak membuatnya lagi pada mobile; aturan ini menjadi pengaman tambahan. */
+  .cart-fly-image {
+    display: none !important;
+  }
+
+  /* Hilangkan tekstur dekoratif kecil pada header game di layar sempit. */
+  .detail-hero-card::before {
+    display: none !important;
+  }
+
+  /* Kompositor lebih mudah mengisolasi tiap kartu saat scrolling. */
+  .product-card,
+  .nominal-card,
+  .weekly-popular-card,
+  .game-menu-card,
+  .all-game-rating-card,
+  .all-game-comment-card,
+  .inline-review-card {
+    contain: layout paint style;
+  }
+
+  /* Panel bawah tetap memiliki latar solid yang sama, tanpa blur dan glow. */
+  .mobile-order-dock-inner {
+    background: #001a21 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Tombol dan badge tetap memiliki warna tema, tanpa glow tambahan. */
+  .nominal-select-button,
+  .mobile-order-action,
+  .inline-review-submit,
+  .add-cart-button,
+  .how-order-icon,
+  .all-game-comments-icon,
+  .game-menu-arrow,
+  .whatsapp-cs__icon {
+    box-shadow: none !important;
+  }
+}
+
