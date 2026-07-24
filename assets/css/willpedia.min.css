@@ -3022,3 +3022,199 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     height: 4.7rem !important;
   }
 }
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-16 — GAME HERO SIZE + STYLE TUNING
+   Fix oversized mobile hero by forcing explicit banner height,
+   and restyle to match the reference with a shorter top banner,
+   overlapping thumbnail, and a tighter info section.
+   ========================================================== */
+.game-showcase-banner {
+  height: 270px !important;
+  min-height: 0 !important;
+}
+
+.game-showcase-banner-image {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+
+  .game-showcase-hero {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+
+  .game-showcase-banner {
+    height: 138px !important;
+    min-height: 138px !important;
+  }
+
+  .game-showcase-banner::after {
+    background: linear-gradient(90deg, rgba(0, 10, 14, .05) 0%, rgba(0, 10, 14, .16) 32%, rgba(0, 10, 14, .72) 68%, rgba(0, 10, 14, .92) 100%) !important;
+  }
+
+  .game-showcase-banner-image {
+    width: 100% !important;
+    height: 138px !important;
+    min-height: 138px !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .game-showcase-copy {
+    top: 50% !important;
+    right: .72rem !important;
+    left: auto !important;
+    width: 43% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .game-showcase-kicker {
+    font-size: .42rem !important;
+    letter-spacing: .08em !important;
+  }
+
+  .game-showcase-title {
+    margin-top: .15rem !important;
+    font-size: .88rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .game-showcase-description {
+    display: -webkit-box !important;
+    margin-top: .24rem !important;
+    overflow: hidden !important;
+    font-size: .49rem !important;
+    line-height: 1.26 !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .game-showcase-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-top: .32rem !important;
+    padding: .18rem .48rem !important;
+    border: 1px solid rgba(244, 198, 78, .82) !important;
+    border-radius: 999px !important;
+    background: rgba(244, 198, 78, .12) !important;
+    color: #ffe58a !important;
+    font-size: .48rem !important;
+    font-weight: 900 !important;
+    line-height: 1.1 !important;
+  }
+
+  .game-showcase-bottom {
+    position: relative !important;
+    display: block !important;
+    background: linear-gradient(180deg, #062028 0%, #001c24 100%) !important;
+  }
+
+  .game-showcase-identity {
+    position: relative !important;
+    display: block !important;
+    min-height: 84px !important;
+    padding: .78rem .72rem .42rem .72rem !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
+  }
+
+  .game-showcase-logo {
+    position: absolute !important;
+    top: -24px !important;
+    left: .72rem !important;
+    width: 68px !important;
+    height: 68px !important;
+    flex-basis: 68px !important;
+    border-radius: .95rem !important;
+    box-shadow: 0 8px 18px rgba(0, 8, 12, .22) !important;
+  }
+
+  .game-showcase-brand-copy {
+    display: block !important;
+    padding-left: 84px !important;
+    padding-top: .02rem !important;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .84rem !important;
+    line-height: 1.12 !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+  }
+
+  .game-showcase-brand-copy > span {
+    margin-top: .18rem !important;
+    font-size: .56rem !important;
+    color: #d6e0e3 !important;
+  }
+
+  .game-showcase-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: .28rem !important;
+    padding: .2rem .48rem .56rem !important;
+  }
+
+  .game-showcase-benefit {
+    justify-content: flex-start !important;
+    gap: .24rem !important;
+    padding: .34rem .34rem !important;
+    border: 1px solid rgba(255, 255, 255, .07) !important;
+    border-radius: .72rem !important;
+    background: rgba(255, 255, 255, .02) !important;
+    font-size: .46rem !important;
+    line-height: 1.15 !important;
+    text-align: left !important;
+  }
+
+  .game-showcase-benefit span {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .game-showcase-benefit i {
+    font-size: .56rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-showcase-banner {
+    height: 132px !important;
+    min-height: 132px !important;
+  }
+
+  .game-showcase-banner-image {
+    height: 132px !important;
+    min-height: 132px !important;
+  }
+
+  .game-showcase-copy {
+    right: .62rem !important;
+    width: 44% !important;
+  }
+
+  .game-showcase-title {
+    font-size: .82rem !important;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .78rem !important;
+  }
+
+  .game-showcase-benefit {
+    font-size: .43rem !important;
+  }
+}
