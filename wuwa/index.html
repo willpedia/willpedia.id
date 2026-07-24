@@ -1665,6 +1665,31 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     filter: none !important;
   }
 }
+
+
+/* =============================================
+   WILLPEDIA LOADING LITE V6
+   Mengurangi repaint skeleton khusus mobile.
+   Warna loading tetap dipertahankan.
+   ============================================= */
+@media (max-width: 767px) {
+  .popular-skeleton-media {
+    animation: none !important;
+    background-position: 0 0 !important;
+  }
+
+  .popular-skeleton-card {
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popular-skeleton-media {
+    animation: none !important;
+    background-position: 0 0 !important;
+  }
+}
+
 </style>
 <link as="fetch" crossorigin="anonymous" href="data/wuwa.json" rel="preload"/>
 <script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-3"></script>
