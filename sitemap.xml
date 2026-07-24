@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://willpedia.com/</loc>
   </url>
+
+  <url>
+    <loc>https://willpedia.com/genshin/</loc>
+  </url>
+
+  <url>
+    <loc>https://willpedia.com/hsr/</loc>
+  </url>
+
+  <url>
+    <loc>https://willpedia.com/zzz/</loc>
+  </url>
+
+  <url>
+    <loc>https://willpedia.com/wuwa/</loc>
+  </url>
+
+  <url>
+    <loc>https://willpedia.com/cara-order/</loc>
+  </url>
+
+  <url>
+    <loc>https://willpedia.com/rating/</loc>
+  </url>
+
 </urlset>
