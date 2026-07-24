@@ -5,18 +5,32 @@ Hasil sinkronisasi:
 - data/popular.json: enam produk populer + ringkasan rating seluruh game.
 - data/<game>.json: produk satu game + ringkasan rating game tersebut.
 - data/reviews.json: komentar pelanggan yang sudah tersedia dari Apps Script.
+- data/product-images.json: manifest cache gambar produk lokal.
+- assets/images/products/: thumbnail WebP produk yang dioptimalkan.
+
+Gambar produk tetap bersumber dari URL di Google Sheet, tetapi GitHub Actions akan
+mengunduh, mengecilkan, mengonversi ke WebP, dan memakai file lokal apabila proses
+berhasil. Jika satu gambar gagal diunduh, URL asli tetap dipakai sehingga produk
+tidak hilang atau rusak.
 """
 from __future__ import annotations
 
+import hashlib
+import io
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 DEFAULT_APPS_SCRIPT_URL = (
     "https://script.google.com/macros/s/"
@@ -26,8 +40,20 @@ BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 HOME_FILE = ROOT / "index.html"
+IMAGE_ROOT = ROOT / "assets" / "images" / "products"
+IMAGE_MANIFEST_FILE = DATA_DIR / "product-images.json"
 POPULAR_DATA_START = "<!-- WILLPEDIA_POPULAR_DATA_START -->"
 POPULAR_DATA_END = "<!-- WILLPEDIA_POPULAR_DATA_END -->"
+
+IMAGE_MAX_DIMENSION = max(240, int(os.environ.get("IMAGE_MAX_DIMENSION", "480")))
+IMAGE_QUALITY = max(45, min(90, int(os.environ.get("IMAGE_QUALITY", "76"))))
+IMAGE_DOWNLOAD_WORKERS = max(1, min(16, int(os.environ.get("IMAGE_DOWNLOAD_WORKERS", "8"))))
+IMAGE_DOWNLOAD_TIMEOUT = max(5, min(60, int(os.environ.get("IMAGE_DOWNLOAD_TIMEOUT", "20"))))
+IMAGE_MAX_BYTES = max(1_000_000, int(os.environ.get("IMAGE_MAX_BYTES", "15000000")))
+IMAGE_REFRESH_DAYS = max(1, int(os.environ.get("IMAGE_REFRESH_DAYS", "30")))
+
+# Perlindungan tambahan terhadap gambar dengan dimensi ekstrem.
+Image.MAX_IMAGE_PIXELS = 50_000_000
 
 GAME_FILES: dict[str, str] = {
     "genshin": "genshin.json",
@@ -43,6 +69,20 @@ GAME_NAMES: dict[str, str] = {
     "wuwa": "WUTHERING WAVES",
 }
 
+PRODUCT_ID_KEYS = ("ID", "Id", "id", "Kode", "kode")
+PRODUCT_NAME_KEYS = ("Nama_Paket", "Nama Paket", "nama_paket", "name", "Nama")
+PRODUCT_IMAGE_KEYS = (
+    "Gambar",
+    "gambar",
+    "Image",
+    "image",
+    "Link Gambar Langsung",
+    "Link Gambar",
+    "URL Gambar",
+    "Image URL",
+)
+SOURCE_IMAGE_KEYS = ("Gambar_Sumber", "gambar_sumber", "Source_Image", "source_image")
+
 
 def request_json(params: dict[str, str]) -> dict[str, Any]:
     query = dict(params)
@@ -51,7 +91,7 @@ def request_json(params: dict[str, str]) -> dict[str, Any]:
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Willpedia-GitHub-Sync/3.0",
+            "User-Agent": "Willpedia-GitHub-Sync/4.0",
             "Accept": "application/json",
         },
     )
@@ -65,12 +105,35 @@ def request_json(params: dict[str, str]) -> dict[str, Any]:
     return payload
 
 
-def fetch_products(params: dict[str, str]) -> dict[str, Any]:
-    payload = request_json(params)
-    products = payload.get("products")
+def _first_value(record: dict[str, Any], keys: tuple[str, ...]) -> Any:
+    for key in keys:
+        value = record.get(key)
+        if value is not None and str(value).strip() != "":
+            return value
+    return None
+
+
+def _clean_products(products: Any) -> list[dict[str, Any]]:
+    """Hilangkan baris kosong seperti ID placeholder tanpa nama paket."""
     if not isinstance(products, list):
         raise ValueError("Respons Apps Script tidak memiliki array products.")
-    payload["products"] = [item for item in products if isinstance(item, dict)]
+    cleaned: list[dict[str, Any]] = []
+    for item in products:
+        if not isinstance(item, dict):
+            continue
+        product_name = _first_value(item, PRODUCT_NAME_KEYS)
+        product_id = _first_value(item, PRODUCT_ID_KEYS)
+        if not product_name:
+            if product_id:
+                print(f"Lewati baris produk kosong: {product_id}")
+            continue
+        cleaned.append(item)
+    return cleaned
+
+
+def fetch_products(params: dict[str, str]) -> dict[str, Any]:
+    payload = request_json(params)
+    payload["products"] = _clean_products(payload.get("products"))
     payload["success"] = True
     return payload
 
@@ -192,6 +255,299 @@ def fetch_review_data() -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]
     return summaries, deduplicated
 
 
+def _normalize_source_url(value: Any) -> str:
+    url = str(value or "").strip().strip('"\'')
+    if not url:
+        return ""
+    if url.startswith("//"):
+        url = "https:" + url
+    if url.startswith("http://"):
+        url = "https://" + url[7:]
+    if not re.match(r"^https://", url, flags=re.I):
+        return ""
+    return url
+
+
+def _canonical_image_url(url: str) -> str:
+    """Buang fragmen dan parameter ukuran/versi agar URL duplikat memakai satu cache."""
+    parsed = urllib.parse.urlsplit(url)
+    query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+    ignored = {
+        "cb", "version", "width", "height", "w", "h", "fit", "output", "quality",
+        "format", "fm", "dpr", "s",
+    }
+    filtered = [(key, value) for key, value in query if key.lower() not in ignored]
+    return urllib.parse.urlunsplit((
+        parsed.scheme.lower(),
+        parsed.netloc.lower(),
+        parsed.path,
+        urllib.parse.urlencode(filtered, doseq=True),
+        "",
+    ))
+
+
+def _load_image_manifest() -> dict[str, Any]:
+    if not IMAGE_MANIFEST_FILE.exists():
+        return {"version": 1, "images": {}}
+    try:
+        payload = json.loads(IMAGE_MANIFEST_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"version": 1, "images": {}}
+    if not isinstance(payload, dict) or not isinstance(payload.get("images"), dict):
+        return {"version": 1, "images": {}}
+    payload["version"] = 1
+    return payload
+
+
+def _manifest_entry_is_fresh(entry: Any, target: Path) -> bool:
+    if not isinstance(entry, dict) or not target.exists() or target.stat().st_size <= 0:
+        return False
+    checked_at = str(entry.get("checked_at") or "")
+    try:
+        checked = datetime.fromisoformat(checked_at.replace("Z", "+00:00"))
+        if checked.tzinfo is None:
+            checked = checked.replace(tzinfo=timezone.utc)
+    except ValueError:
+        return False
+    return datetime.now(timezone.utc) - checked < timedelta(days=IMAGE_REFRESH_DAYS)
+
+
+def _read_limited_response(response: Any) -> bytes:
+    content_length = response.headers.get("Content-Length")
+    if content_length:
+        try:
+            if int(content_length) > IMAGE_MAX_BYTES:
+                raise ValueError(f"Gambar melebihi batas {IMAGE_MAX_BYTES} byte.")
+        except ValueError as exc:
+            if "melebihi" in str(exc):
+                raise
+    chunks: list[bytes] = []
+    total = 0
+    while True:
+        chunk = response.read(64 * 1024)
+        if not chunk:
+            break
+        total += len(chunk)
+        if total > IMAGE_MAX_BYTES:
+            raise ValueError(f"Gambar melebihi batas {IMAGE_MAX_BYTES} byte.")
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+def _download_image_bytes(url: str) -> tuple[bytes, str]:
+    parsed = urllib.parse.urlsplit(url)
+    referer = f"{parsed.scheme}://{parsed.netloc}/"
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
+            ),
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+            "Referer": referer,
+            "Cache-Control": "no-cache",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=IMAGE_DOWNLOAD_TIMEOUT) as response:
+        final_url = response.geturl()
+        data = _read_limited_response(response)
+    if not data:
+        raise ValueError("Respons gambar kosong.")
+    return data, final_url
+
+
+def _convert_to_webp(data: bytes) -> tuple[bytes, int, int]:
+    try:
+        with Image.open(io.BytesIO(data)) as source:
+            source.seek(0)
+            image = ImageOps.exif_transpose(source).copy()
+    except (UnidentifiedImageError, OSError) as exc:
+        raise ValueError("Respons bukan gambar raster yang didukung.") from exc
+
+    if image.width < 2 or image.height < 2:
+        raise ValueError("Dimensi gambar tidak valid.")
+
+    has_alpha = image.mode in {"RGBA", "LA"} or (
+        image.mode == "P" and "transparency" in image.info
+    )
+    image = image.convert("RGBA" if has_alpha else "RGB")
+    image.thumbnail((IMAGE_MAX_DIMENSION, IMAGE_MAX_DIMENSION), Image.Resampling.LANCZOS)
+
+    output = io.BytesIO()
+    image.save(
+        output,
+        format="WEBP",
+        quality=IMAGE_QUALITY,
+        method=6,
+        optimize=True,
+    )
+    encoded = output.getvalue()
+    if not encoded:
+        raise ValueError("Konversi WebP menghasilkan file kosong.")
+    return encoded, image.width, image.height
+
+
+def _cache_key(url: str) -> str:
+    return hashlib.sha256(_canonical_image_url(url).encode("utf-8")).hexdigest()[:20]
+
+
+def _relative_image_path(game_key: str, cache_key: str) -> str:
+    safe_game = game_key if game_key in GAME_FILES else "shared"
+    return f"assets/images/products/{safe_game}/{cache_key}.webp"
+
+
+def _download_and_cache_image(
+    source_url: str,
+    game_key: str,
+    old_entry: dict[str, Any] | None,
+) -> tuple[str, dict[str, Any], bool]:
+    key = _cache_key(source_url)
+    relative_path = _relative_image_path(game_key, key)
+    target = ROOT / relative_path
+    if _manifest_entry_is_fresh(old_entry, target):
+        return relative_path, old_entry or {}, False
+
+    data, final_url = _download_image_bytes(source_url)
+    webp, width, height = _convert_to_webp(data)
+    content_hash = hashlib.sha256(webp).hexdigest()
+    changed = True
+    if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() == content_hash:
+        changed = False
+    else:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_suffix(".webp.tmp")
+        temporary.write_bytes(webp)
+        temporary.replace(target)
+
+    entry = {
+        "source": source_url,
+        "final_url": final_url,
+        "path": relative_path,
+        "width": width,
+        "height": height,
+        "bytes": len(webp),
+        "sha256": content_hash,
+        "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+    }
+    return relative_path, entry, changed
+
+
+def _product_source_image(product: dict[str, Any]) -> str:
+    source = _first_value(product, SOURCE_IMAGE_KEYS)
+    if source:
+        return _normalize_source_url(source)
+    current = _first_value(product, PRODUCT_IMAGE_KEYS)
+    return _normalize_source_url(current)
+
+
+def _infer_product_game_key(product: dict[str, Any], fallback: str) -> str:
+    if fallback in GAME_FILES:
+        return fallback
+    raw_game = str(product.get("Game") or product.get("game") or product.get("__gameName") or "")
+    canonical_name = _canonical_game_name(raw_game)
+    for game_key, game_name in GAME_NAMES.items():
+        if canonical_name == game_name:
+            return game_key
+    product_id = str(_first_value(product, PRODUCT_ID_KEYS) or "").upper()
+    if product_id.startswith("GI-"):
+        return "genshin"
+    if product_id.startswith("HSR-"):
+        return "hsr"
+    if product_id.startswith("ZZZ-"):
+        return "zzz"
+    if product_id.startswith("WUWA-"):
+        return "wuwa"
+    return "shared"
+
+
+def _apply_local_product_images(
+    payloads: dict[str, dict[str, Any]],
+) -> tuple[dict[str, Any], int, int, int]:
+    """Cache URL unik secara paralel lalu tulis path lokal ke seluruh payload."""
+    manifest = _load_image_manifest()
+    images = manifest.setdefault("images", {})
+    if not isinstance(images, dict):
+        images = {}
+        manifest["images"] = images
+
+    # URL yang sama dalam satu game hanya diunduh sekali.
+    jobs: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for game_key, payload in payloads.items():
+        products = payload.get("products")
+        if not isinstance(products, list):
+            continue
+        for product in products:
+            if not isinstance(product, dict):
+                continue
+            source_url = _product_source_image(product)
+            if not source_url:
+                continue
+            canonical = _canonical_image_url(source_url)
+            effective_game_key = _infer_product_game_key(product, game_key)
+            jobs.setdefault((effective_game_key, canonical), []).append(product)
+            product["Gambar_Sumber"] = source_url
+
+    downloaded = 0
+    reused = 0
+    failed = 0
+    results: dict[tuple[str, str], tuple[str | None, dict[str, Any] | None]] = {}
+
+    def run_job(job_key: tuple[str, str]) -> tuple[tuple[str, str], str, dict[str, Any], bool]:
+        game_key, canonical = job_key
+        products = jobs[job_key]
+        source_url = _product_source_image(products[0])
+        manifest_key = f"{game_key}:{_cache_key(source_url)}"
+        old_entry = images.get(manifest_key)
+        relative_path, entry, changed = _download_and_cache_image(
+            source_url,
+            game_key,
+            old_entry if isinstance(old_entry, dict) else None,
+        )
+        return job_key, relative_path, {"manifest_key": manifest_key, **entry}, changed
+
+    with ThreadPoolExecutor(max_workers=IMAGE_DOWNLOAD_WORKERS) as executor:
+        future_map = {executor.submit(run_job, job_key): job_key for job_key in jobs}
+        for future in as_completed(future_map):
+            job_key = future_map[future]
+            try:
+                completed_key, relative_path, entry_with_key, changed = future.result()
+                manifest_key = str(entry_with_key.pop("manifest_key"))
+                images[manifest_key] = entry_with_key
+                results[completed_key] = (relative_path, entry_with_key)
+                if changed:
+                    downloaded += 1
+                    print(f"Gambar lokal diperbarui: {relative_path}")
+                else:
+                    reused += 1
+            except Exception as exc:  # Gagal satu gambar tidak boleh menggagalkan semua data.
+                failed += 1
+                results[job_key] = (None, None)
+                game_key, _ = job_key
+                sample = jobs[job_key][0]
+                source_url = _product_source_image(sample)
+                print(f"Peringatan gambar {game_key}: {source_url} -> {exc}", file=sys.stderr)
+
+    for job_key, products in jobs.items():
+        relative_path, _ = results.get(job_key, (None, None))
+        for product in products:
+            source_url = _product_source_image(product)
+            product["Gambar_Sumber"] = source_url
+            if relative_path:
+                product["Gambar"] = relative_path
+            elif source_url:
+                # Fallback aman: tetap gunakan URL sumber bila cache belum berhasil.
+                product["Gambar"] = source_url
+
+    manifest["version"] = 1
+    manifest["settings"] = {
+        "max_dimension": IMAGE_MAX_DIMENSION,
+        "quality": IMAGE_QUALITY,
+        "refresh_days": IMAGE_REFRESH_DAYS,
+    }
+    return manifest, downloaded, reused, failed
+
+
 def serialize(payload: dict[str, Any]) -> str:
     # Deterministik: file tidak berubah jika produk/rating tidak berubah.
     return json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n"
@@ -202,6 +558,7 @@ def write_if_changed(path: Path, content: str) -> bool:
     if old == content:
         print(f"Tidak berubah: {path.relative_to(ROOT)}")
         return False
+    path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + ".tmp")
     temp.write_text(content, encoding="utf-8")
     temp.replace(path)
@@ -237,21 +594,36 @@ def main() -> int:
         return 2
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    IMAGE_ROOT.mkdir(parents=True, exist_ok=True)
     changed = 0
 
     try:
         ratings, reviews = fetch_review_data()
 
+        # Ambil semua payload dahulu agar cache gambar dapat dibuat satu kali per URL unik.
         popular = fetch_products({"action": "popular"})
         popular["ratings"] = ratings
-        changed += int(write_if_changed(DATA_DIR / "reviews.json", serialize({"success": True, "ratings": ratings, "reviews": reviews})))
+        game_payloads: dict[str, dict[str, Any]] = {}
+        for game_key in GAME_FILES:
+            payload = fetch_products({"action": "products", "game": game_key})
+            payload["rating"] = ratings.get(game_key, {"average": 0, "total": 0})
+            game_payloads[game_key] = payload
+
+        # Popular diproses sebagai grup tersendiri, tetapi URL yang sudah ada di game tetap
+        # memakai file yang sama bila canonical URL-nya identik.
+        all_payloads = {**game_payloads, "popular": popular}
+        manifest, downloaded, reused, failed = _apply_local_product_images(all_payloads)
+
+        changed += int(write_if_changed(
+            DATA_DIR / "reviews.json",
+            serialize({"success": True, "ratings": ratings, "reviews": reviews}),
+        ))
         changed += int(write_if_changed(DATA_DIR / "popular.json", serialize(popular)))
+        changed += int(write_if_changed(IMAGE_MANIFEST_FILE, serialize(manifest)))
         changed += int(embed_popular_payload(popular))
 
         for game_key, filename in GAME_FILES.items():
-            payload = fetch_products({"action": "products", "game": game_key})
-            payload["rating"] = ratings.get(game_key, {"average": 0, "total": 0})
-            changed += int(write_if_changed(DATA_DIR / filename, serialize(payload)))
+            changed += int(write_if_changed(DATA_DIR / filename, serialize(game_payloads[game_key])))
 
     except (
         urllib.error.URLError,
@@ -263,7 +635,11 @@ def main() -> int:
         print(f"Sinkronisasi gagal: {exc}", file=sys.stderr)
         return 1
 
-    print(f"Sinkronisasi selesai. {changed} file berubah (termasuk index.html bila data populer berubah).")
+    print(
+        "Sinkronisasi selesai. "
+        f"{changed} file data berubah; gambar baru/diperbarui={downloaded}, "
+        f"cache digunakan={reused}, gagal={failed}."
+    )
     return 0
 
 
