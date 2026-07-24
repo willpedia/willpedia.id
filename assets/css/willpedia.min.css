@@ -3218,3 +3218,11 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     font-size: .43rem !important;
   }
 }
+
+
+/* PERFORMANCE-18 responsive game hero banners */
+.game-showcase-banner-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
