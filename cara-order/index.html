@@ -5,18 +5,21 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="#00171d" name="theme-color"/>
-<base href="../"/>
-<title>Joki Wuthering Waves | WILLPEDIA</title>
+<base href="../"/><title>Cara Order | WILLPEDIA</title>
 <link href="logowill.png" rel="icon" type="image/png"/>
 <link href="logowill.png" rel="shortcut icon"/>
 <link href="logowill.png" rel="apple-touch-icon"/>
 <link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+
 <link href="assets/css/willpedia.min.css?v=20260724-home-split-pages-4" rel="stylesheet"/>
-<link as="fetch" crossorigin="anonymous" href="data/wuwa.json" rel="preload"/>
+
+
+
 <script defer="" src="assets/js/willpedia.min.js?v=20260724-home-split-pages-4"></script>
 </head>
-<body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-game="wuwa" data-page="game">
+<body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="howto">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
 <nav aria-label="Navigasi utama" class="storefront-navbar" id="navbar">
 <div class="storefront-desktop-navbar">
@@ -60,7 +63,7 @@
 </div>
 <div class="storefront-mobile-navbar">
 <div class="storefront-mobile-top">
-<a aria-label="Beranda Willpedia" class="mobile-navbar-brand storefront-mobile-brand compact-mobile-brand" href="../index.html">
+<a aria-label="Beranda Willpedia" class="mobile-navbar-brand storefront-mobile-brand compact-mobile-brand" href="index.html">
 <img alt="Logo Willpedia" decoding="async" fetchpriority="high" height="50" onerror="this.src='logowill.png'" src="logo.webp" width="72"/>
 <span class="sr-only">WILLPEDIA</span>
 </a>
@@ -151,242 +154,55 @@
 <div aria-live="polite" class="mobile-popular-games" id="mobile-popular-games"></div>
 </section>
 </div>
-<section class="hidden scroll-mt-24" id="game-detail-view">
-<div class="max-w-6xl mx-auto px-4 mb-5" id="selected-game-hero"></div>
-<div class="category-filter-section hidden max-w-6xl mx-auto px-4 mb-5" id="category-filter-section">
-<div class="category-filter-shell">
-<div class="category-filter-label">
-<i aria-hidden="true" class="fa-solid fa-sliders"></i>
-<span>Kategori</span>
-</div>
-<div class="category-filter-track-wrap">
-<div aria-label="Kategori paket joki" class="category-filter-track" id="sub-category-container" role="tablist"></div>
-</div>
-</div>
-</div>
-<div class="max-w-6xl mx-auto px-4 mb-20 game-detail-content-shell">
-<div class="game-detail-layout" id="game-detail-layout">
-<div class="min-w-0">
-<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" id="product-container">
-</div>
-</div>
-<aside class="game-summary-sticky" id="selected-game-summary"></aside>
-</div>
-</div>
-</section>
-<section aria-labelledby="game-reviews-title" class="game-reviews-section hidden" id="game-reviews-section">
-<div class="game-reviews-inner">
-<div class="game-reviews-heading">
+<main class="standalone-page-main flex-1 w-full"><section aria-labelledby="how-order-title" class="home-discovery-section" id="home-how-to-order">
+<div class="home-section-heading">
 <div>
-<div class="game-reviews-kicker">
-<i aria-hidden="true" class="fa-solid fa-star"></i>
-                        Ulasan pelanggan
-                    </div>
-<h2 class="game-reviews-title" id="game-reviews-title">Ulasan Game</h2>
-<div class="game-reviews-summary">
-<strong id="inline-review-average">—</strong>
-<span class="inline-review-summary-stars" id="inline-review-summary-stars">
-<i aria-hidden="true" class="fa-solid fa-spinner fa-spin"></i>
-</span>
-<span id="inline-review-total">Memuat ulasan...</span>
+<div class="home-section-kicker">
+<i aria-hidden="true" class="fa-solid fa-list-check"></i>
+                    Mudah dan transparan
+                </div>
+<h2 class="home-section-title" id="how-order-title">CARA ORDER</h2>
+<p class="home-section-description">
+                    Pilih layanan, cek kembali pesanan, lalu lanjutkan langsung ke WhatsApp admin.
+                </p>
 </div>
 </div>
-<button aria-controls="inline-review-form-wrap" aria-expanded="false" class="inline-review-form-toggle" id="inline-review-form-toggle" onclick="toggleInlineReviewForm()" type="button">
-<i aria-hidden="true" class="fa-solid fa-pen"></i>
-                    Tulis Ulasan
-                </button>
+<div class="how-order-grid">
+<article class="how-order-card">
+<span aria-hidden="true" class="how-order-number">01</span>
+<span class="how-order-icon"><i aria-hidden="true" class="fa-solid fa-gamepad"></i></span>
+<h3>Pilih Game</h3>
+<p>Buka game yang ingin kamu pesan dari daftar Semua Game.</p>
+</article>
+<article class="how-order-card">
+<span aria-hidden="true" class="how-order-number">02</span>
+<span class="how-order-icon"><i aria-hidden="true" class="fa-solid fa-box-open"></i></span>
+<h3>Pilih Paket Joki</h3>
+<p>Pilih satu atau beberapa paket sesuai kebutuhan.</p>
+</article>
+<article class="how-order-card">
+<span aria-hidden="true" class="how-order-number">03</span>
+<span class="how-order-icon"><i aria-hidden="true" class="fa-solid fa-receipt"></i></span>
+<h3>Cek Ringkasan</h3>
+<p>Pastikan nama paket dan total pembayaran sudah sesuai.</p>
+</article>
+<article class="how-order-card">
+<span aria-hidden="true" class="how-order-number">04</span>
+<span class="how-order-icon"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i></span>
+<h3>Order via WhatsApp</h3>
+<p>Kirim rincian otomatis dan lanjutkan pembayaran dengan admin di WhatsApp.</p>
+</article>
 </div>
-<div class="inline-review-state" id="inline-review-loading">
-<i aria-hidden="true" class="fa-solid fa-spinner fa-spin"></i>
-                Memuat ulasan...
-            </div>
-<div class="inline-review-state hidden" id="inline-review-empty">
-                Belum ada ulasan untuk game ini.
-            </div>
-<div class="inline-review-state hidden" id="inline-review-error">
-                Ulasan belum dapat dimuat.
-            </div>
-<div aria-live="polite" class="review-marquee-viewport hidden" id="review-marquee-viewport">
-<div class="review-marquee-track" id="review-marquee-track"></div>
-</div>
-<div class="inline-review-form-wrap hidden" id="inline-review-form-wrap">
-<form class="inline-review-form" id="inline-review-form">
-<div class="inline-review-field">
-<label for="inline-review-name">Nama kamu</label>
-<input autocomplete="name" id="inline-review-name" maxlength="50" placeholder="Contoh: Andi" required="" type="text"/>
-</div>
-<fieldset class="inline-review-rating-field">
-<legend>Berikan rating</legend>
-<div class="inline-review-star-input" id="inline-review-star-input">
-<button aria-label="1 bintang" data-inline-rating="1" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="2 bintang" data-inline-rating="2" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="3 bintang" data-inline-rating="3" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="4 bintang" data-inline-rating="4" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="5 bintang" data-inline-rating="5" type="button"><i class="fa-solid fa-star"></i></button>
-</div>
-<input id="inline-review-rating" type="hidden" value="0"/>
-<span id="inline-review-rating-label">Belum memilih rating</span>
-</fieldset>
-<div class="inline-review-field inline-review-comment-field">
-<div class="inline-review-label-row">
-<label for="inline-review-comment">Komentar</label>
-<span id="inline-review-character-count">0/300</span>
-</div>
-<textarea id="inline-review-comment" maxlength="300" minlength="5" placeholder="Ceritakan pengalaman menggunakan layanan ini..." required="" rows="4"></textarea>
-</div>
-<div class="inline-review-form-notice hidden" id="inline-review-form-notice" role="status"></div>
-<button class="inline-review-submit" id="inline-review-submit" type="submit">
-<i aria-hidden="true" class="fa-solid fa-paper-plane"></i>
-<span>Kirim Ulasan</span>
-</button>
-</form>
-</div>
-</div>
-</section>
-<button aria-label="Kembali ke daftar paket" class="review-back-button hidden" id="review-back-button" onclick="scrollBackToPackages()" title="Kembali ke paket" type="button">
-<i aria-hidden="true" class="fa-solid fa-arrow-up"></i>
-<span>Kembali ke Paket</span>
-</button>
-<div aria-live="polite" class="mobile-order-dock hidden" id="mobile-order-dock">
-<div class="mobile-order-dock-inner">
-<div aria-hidden="true" class="mobile-order-sheet" id="mobile-order-sheet">
-<div class="mobile-order-sheet-content">
-<div class="mobile-order-sheet-title">
-<span>Ringkasan Pesanan</span>
-<span id="mobile-order-sheet-count">0 paket</span>
-</div>
-<div class="mobile-order-sheet-list" id="mobile-order-sheet-list"></div>
-<div class="mobile-order-sheet-total">
-<span>Subtotal</span>
-<strong id="mobile-order-sheet-subtotal">Rp 0</strong>
-</div>
-</div>
-</div>
-<div class="mobile-order-compact">
-<img alt="Game yang dipilih" class="mobile-order-thumb" decoding="async" id="mobile-order-game-image" loading="lazy" onerror="handleProductImageError(this)" referrerpolicy="no-referrer" src=""/>
-<div class="mobile-order-game">
-<div class="mobile-order-game-name" id="mobile-order-game-name">Pilih paket joki</div>
-<div class="mobile-order-game-meta" id="mobile-order-game-meta">Belum ada joki dipilih</div>
-</div>
-<button aria-controls="mobile-order-sheet" aria-expanded="false" aria-label="Lihat rincian pesanan" class="mobile-order-toggle" id="mobile-order-toggle" onclick="toggleMobileOrderSheet()" type="button">
-<i aria-hidden="true" class="fa-solid fa-chevron-up"></i>
-</button>
-</div>
-<div class="mobile-order-action-wrap">
-<button class="mobile-order-action" disabled="" id="mobile-order-cart-button" onclick="processCheckoutWA()" type="button">
-<i aria-hidden="true" class="fa-brands fa-whatsapp"></i>
-<span id="mobile-order-cart-label">Pilih Paket Dahulu</span>
-</button>
-</div>
-</div>
-</div>
-<div class="fixed inset-0 z-50 hidden bg-slate-950/85 flex items-center justify-center p-4" id="cart-modal">
-<div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[85vh]">
-<div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
-<h3 class="font-bold text-slate-100 text-base flex items-center">
-<i class="fa-solid fa-shopping-cart text-cyan-400 mr-2"></i> Detail Keranjang Belanja
-                </h3>
-<button class="text-slate-400 hover:text-rose-400 p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer" onclick="closeCartModal()">
-<i class="fa-solid fa-xmark text-lg"></i>
-</button>
-</div>
-<div class="p-4 overflow-y-auto space-y-3 flex-1 min-h-[150px]" id="modal-cart-items"></div>
-<div class="p-4 border-t border-slate-800 bg-slate-950/40">
-<div class="flex justify-between items-center mb-4">
-<span class="text-xs md:text-sm text-slate-400 font-medium">Total Pembayaran:</span>
-<span class="text-lg font-extrabold text-cyan-400" id="modal-total-price">Rp 0</span>
-</div>
-<div class="grid grid-cols-2 gap-2">
-<button class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-3 rounded-xl transition cursor-pointer" onclick="closeCartModal()">
-                        Kembali Pilih
-                    </button>
-<button class="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold text-xs py-3 rounded-xl transition cursor-pointer flex items-center justify-center" onclick="processCheckoutWA()">
-<i class="fa-brands fa-whatsapp text-xs md:text-sm mr-1.5"></i> Order via WA
-                    </button>
-</div>
-</div>
-</div>
-</div>
-<div aria-labelledby="review-modal-title" aria-modal="true" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/85 p-3 md:p-6" id="review-modal" role="dialog">
-<div class="review-modal-panel">
-<div class="flex items-start justify-between gap-4 border-b border-slate-800 px-4 py-4 md:px-6">
-<div class="min-w-0">
-<p class="mb-1 text-[11px] font-bold uppercase tracking-[.16em] text-cyan-400">
-                        Ulasan pelanggan
-                    </p>
-<h2 class="truncate text-base font-extrabold text-white md:text-xl" id="review-modal-title">
-                        Paket Joki
-                    </h2>
-<p class="mt-1 truncate text-xs text-slate-400" id="review-product-meta"></p>
-</div>
-<button aria-label="Tutup ulasan" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-800 hover:text-white cursor-pointer" id="review-modal-close" type="button">
-<i aria-hidden="true" class="fa-solid fa-xmark"></i>
-</button>
-</div>
-<div class="review-scrollbar grid min-h-0 flex-1 overflow-y-auto md:grid-cols-[330px_minmax(0,1fr)]">
-<aside class="border-b border-slate-800 bg-slate-950/35 p-4 md:border-b-0 md:border-r md:p-6">
-<div class="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
-<div class="flex items-end gap-2">
-<strong class="text-3xl font-extrabold text-white" id="review-average">0.0</strong>
-<span class="mb-1 text-xs text-slate-400">dari 5</span>
-</div>
-<div aria-label="Rata-rata rating" class="mt-1 flex gap-1 text-sm text-slate-600" id="review-summary-stars"></div>
-<p class="mt-2 text-xs text-slate-400" id="review-total">Belum ada ulasan</p>
-</div>
-<form class="mt-5 space-y-4" id="review-form">
-<input id="review-product-id" type="hidden"/>
-<div>
-<label class="mb-1.5 block text-xs font-bold text-slate-200" for="review-name">
-                                Nama kamu
-                            </label>
-<input autocomplete="name" class="review-input px-3 py-2.5 text-sm" id="review-name" maxlength="50" name="nama" placeholder="Contoh: Andi" required="" type="text"/>
-</div>
-<fieldset>
-<legend class="mb-2 text-xs font-bold text-slate-200">Berikan rating</legend>
-<div aria-label="Pilih rating 1 sampai 5" class="flex gap-1.5" id="review-star-input">
-<button aria-label="1 bintang" class="review-star-button" data-rating="1" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="2 bintang" class="review-star-button" data-rating="2" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="3 bintang" class="review-star-button" data-rating="3" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="4 bintang" class="review-star-button" data-rating="4" type="button"><i class="fa-solid fa-star"></i></button>
-<button aria-label="5 bintang" class="review-star-button" data-rating="5" type="button"><i class="fa-solid fa-star"></i></button>
-</div>
-<input id="review-rating" name="rating" type="hidden" value="0"/>
-<p class="mt-1.5 text-[11px] text-slate-500" id="review-rating-label">Belum memilih rating</p>
-</fieldset>
-<div>
-<div class="mb-1.5 flex items-center justify-between gap-3">
-<label class="text-xs font-bold text-slate-200" for="review-comment">
-                                    Komentar
-                                </label>
-<span class="text-[10px] text-slate-500" id="review-character-count">0/300</span>
-</div>
-<textarea class="review-input resize-none px-3 py-2.5 text-sm leading-relaxed" id="review-comment" maxlength="300" minlength="5" name="komentar" placeholder="Ceritakan pengalaman menggunakan layanan ini..." required="" rows="4"></textarea>
-</div>
-<div class="hidden rounded-lg border px-3 py-2.5 text-xs leading-relaxed" id="review-form-notice" role="status"></div>
-<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-400 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer" id="review-submit-button" type="submit">
-<i aria-hidden="true" class="fa-solid fa-paper-plane"></i>
-<span>Kirim Ulasan</span>
-</button>
-</form>
-</aside>
-<section class="min-w-0 p-4 md:p-6">
-<div class="mb-4 flex items-center justify-between gap-3">
-<h3 class="text-sm font-extrabold text-white md:text-base">Komentar pelanggan</h3>
-<button class="flex items-center gap-1.5 rounded-lg border border-slate-700 px-2.5 py-1.5 text-[11px] font-bold text-slate-300 transition hover:border-cyan-500/50 hover:text-cyan-300 cursor-pointer" id="review-refresh-button" type="button">
-<i aria-hidden="true" class="fa-solid fa-rotate-right"></i>
-                            Muat ulang
-                        </button>
-</div>
-<div aria-live="polite" class="space-y-3" id="review-list">
-<div class="flex items-center justify-center py-12 text-sm text-slate-400">
-<i aria-hidden="true" class="fa-solid fa-spinner fa-spin mr-2"></i>
-                            Memuat ulasan...
-                        </div>
-</div>
-</section>
-</div>
-</div>
-</div>
+</section></main>
+
+
+
+
+
+
+
+
+
 <a aria-label="Chat Customer Service WILLPEDIA melalui WhatsApp" class="whatsapp-cs" href="https://wa.me/6281357706121?text=Halo%20Admin%20WILLPEDIA%2C%20saya%20butuh%20bantuan%20untuk%20memilih%20paket%20joki." rel="noopener noreferrer" target="_blank" title="Chat Customer Service">
 <span aria-hidden="true" class="whatsapp-cs__bubble">
 <span class="whatsapp-cs__title">Butuh bantuan memilih joki?</span>
@@ -397,6 +213,7 @@
 </span>
 </a>
 <div class="fixed top-24 right-6 z-50 flex flex-col gap-3 pointer-events-none" id="toast-container"></div>
+
 <footer class="deferred-section bg-slate-950 border-t border-slate-800 mt-20">
 <div class="max-w-6xl mx-auto px-6 py-12">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">

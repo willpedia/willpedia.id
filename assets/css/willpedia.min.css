@@ -1640,11 +1640,83 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
 }
 
 
+/* ==========================================================
+   WILLPEDIA V4 — HALAMAN RINGKAS + FIX CURRENCY + LOGO MOBILE
+   ========================================================== */
+/* navbar-shell sengaja tidak menangkap klik, jadi menu yang menjadi sibling navbar
+   harus mengaktifkan pointer events sendiri. */
+#navbar-shell > #currency-menu,
+.currency-menu{
+  pointer-events:auto!important;
+}
+.currency-menu{
+  top:68px!important;
+  z-index:160!important;
+}
+@media (min-width:1024px){
+  .currency-menu{top:116px!important;}
+}
 
-/* WILLPEDIA MOBILE V3: Paket terlaris hanya dirender di desktop. */
-@media (max-width: 767px) {
-  #weekly-popular-section {
-    display: none !important;
-    content-visibility: hidden !important;
+/* Logo mobile diperbesar tanpa mengubah tinggi navbar atau tombol lain. */
+@media (max-width:1023px){
+  .compact-mobile-brand img,
+  .storefront-mobile-brand img{
+    width:78px!important;
+    height:50px!important;
+    flex:0 0 78px!important;
+    max-width:78px!important;
   }
+}
+@media (max-width:380px){
+  .compact-mobile-brand img,
+  .storefront-mobile-brand img{
+    width:66px!important;
+    height:46px!important;
+    flex-basis:66px!important;
+    max-width:66px!important;
+  }
+  .storefront-mobile-navbar .compact-mobile-currency.currency-active-button{
+    min-width:100px!important;
+  }
+}
+@media (max-width:330px){
+  .compact-mobile-brand img,
+  .storefront-mobile-brand img{
+    width:58px!important;
+    height:44px!important;
+    flex-basis:58px!important;
+    max-width:58px!important;
+  }
+  .storefront-mobile-navbar .compact-mobile-currency.currency-active-button{
+    min-width:94px!important;
+    padding-right:7px!important;
+    padding-left:7px!important;
+    gap:5px!important;
+  }
+}
+
+/* Halaman Cara Order dan Rating berdiri sendiri di bawah navbar fixed. */
+.standalone-page-main{
+  width:100%;
+  min-height:calc(100vh - var(--fixed-navbar-clearance));
+  padding-top:calc(var(--fixed-navbar-clearance) + 30px);
+}
+.standalone-page-main > .home-discovery-section,
+.standalone-page-main > .all-game-ratings-section{
+  margin-top:0!important;
+}
+@media (max-width:767px){
+  .standalone-page-main{
+    padding-top:calc(var(--fixed-navbar-clearance) + 18px);
+  }
+}
+
+/* Indikator menu aktif untuk halaman terpisah. */
+body[data-page="howto"] .storefront-nav-link[href="cara-order/"],
+body[data-page="ratings"] .storefront-nav-link[href="rating/"]{
+  color:var(--gi-white,#f8fafc)!important;
+}
+body[data-page="howto"] .storefront-nav-link[href="cara-order/"]::after,
+body[data-page="ratings"] .storefront-nav-link[href="rating/"]::after{
+  background:var(--gi-gold,#f4c64e)!important;
 }
