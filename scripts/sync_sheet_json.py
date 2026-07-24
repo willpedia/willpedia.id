@@ -4,9 +4,7 @@
 Hasil sinkronisasi:
 - data/popular.json: enam produk populer + ringkasan rating seluruh game.
 - data/<game>.json: produk satu game + ringkasan rating game tersebut.
-
-Komentar pelanggan tidak disimpan ke JSON publik ini. Komentar baru diambil dari
-Apps Script setelah pengunjung menekan tombol untuk melihat ulasan.
+- data/reviews.json: komentar pelanggan yang sudah tersedia dari Apps Script.
 """
 from __future__ import annotations
 
@@ -77,25 +75,84 @@ def fetch_products(params: dict[str, str]) -> dict[str, Any]:
     return payload
 
 
-def fetch_rating_summaries() -> dict[str, dict[str, Any]]:
-    """Ambil ringkasan rating seluruh game, tanpa menyimpan komentar ke JSON."""
+def _first_list(*values: Any) -> list[Any]:
+    for value in values:
+        if isinstance(value, list):
+            return value
+    return []
+
+
+def _normalize_review(item: Any, game_name: str = "") -> dict[str, Any] | None:
+    if not isinstance(item, dict):
+        return None
+    normalized_game = str(
+        item.get("Game")
+        or item.get("game")
+        or item.get("__gameName")
+        or game_name
+        or "Game"
+    ).strip().upper()
+    return {
+        **item,
+        "Nama": item.get("Nama") or item.get("nama") or item.get("name") or "Pengguna",
+        "Rating": item.get("Rating") if item.get("Rating") is not None else item.get("rating", 0),
+        "Komentar": item.get("Komentar") or item.get("komentar") or item.get("comment") or item.get("ulasan") or "",
+        "Tanggal": item.get("Tanggal") or item.get("tanggal") or item.get("date") or "",
+        "Game": normalized_game,
+        "__gameName": normalized_game,
+    }
+
+
+def fetch_review_data() -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
+    """Ambil ringkasan rating dan komentar yang tersedia dari Apps Script."""
     payload = request_json({"action": "all_game_reviews"})
     raw_games = payload.get("games")
     if not isinstance(raw_games, dict):
         raise ValueError("Respons rating tidak memiliki object games.")
 
     summaries: dict[str, dict[str, Any]] = {}
+    reviews: list[dict[str, Any]] = []
     for game_key, game_name in GAME_NAMES.items():
         raw = raw_games.get(game_name, {})
         if not isinstance(raw, dict):
             raw = {}
-        total = int(float(raw.get("jumlah_ulasan") or 0))
-        average = float(raw.get("rata_rata") or 0)
+        raw_comments = _first_list(
+            raw.get("comments"), raw.get("komentar"), raw.get("ulasan"), raw.get("reviews")
+        )
+        normalized_comments = [
+            review for item in raw_comments
+            if (review := _normalize_review(item, game_name)) is not None
+        ]
+        reviews.extend(normalized_comments)
+        total = int(float(raw.get("jumlah_ulasan") or raw.get("total") or len(normalized_comments) or 0))
+        average = float(raw.get("rata_rata") or raw.get("average") or raw.get("rating") or 0)
         summaries[game_key] = {
             "average": round(average, 1),
             "total": max(0, total),
         }
-    return summaries
+
+    top_level_comments = _first_list(
+        payload.get("comments"), payload.get("reviews"), payload.get("ulasan")
+    )
+    reviews.extend(
+        review for item in top_level_comments
+        if (review := _normalize_review(item)) is not None
+    )
+
+    deduplicated: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+    for review in reviews:
+        key = (
+            str(review.get("Game", "")).lower(),
+            str(review.get("Nama", "")).lower(),
+            str(review.get("Komentar", "")).lower(),
+            str(review.get("Tanggal", "")).lower(),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduplicated.append(review)
+    return summaries, deduplicated
 
 
 def serialize(payload: dict[str, Any]) -> str:
@@ -146,11 +203,11 @@ def main() -> int:
     changed = 0
 
     try:
-        ratings = fetch_rating_summaries()
+        ratings, reviews = fetch_review_data()
 
         popular = fetch_products({"action": "popular"})
         popular["ratings"] = ratings
-        # Tidak ikut menyimpan comments dari endpoint rating.
+        changed += int(write_if_changed(DATA_DIR / "reviews.json", serialize({"success": True, "reviews": reviews})))
         changed += int(write_if_changed(DATA_DIR / "popular.json", serialize(popular)))
         changed += int(embed_popular_payload(popular))
 
