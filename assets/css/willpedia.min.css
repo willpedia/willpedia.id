@@ -1516,9 +1516,8 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 /* WILLPEDIA PERFORMANCE PATCH 2026-07-24
    Stabilizes above-the-fold content and prevents icon/font layout jumps. */
 .fa-solid,.fa-regular,.fa-brands,.fas,.far,.fab{display:inline-block;min-width:1em;text-align:center}
-#weekly-popular-section,#game-menu-view{content-visibility:visible!important;contain:none!important}
+@media (min-width:768px){#weekly-popular-section,#game-menu-view{content-visibility:visible!important;contain:none!important}.weekly-popular-product-card{content-visibility:visible!important;contain:none!important}}
 #weekly-popular-container{align-items:stretch;min-height:51rem}
-.weekly-popular-product-card{content-visibility:visible!important;contain:none!important}
 .popular-skeleton-card{position:relative;min-width:0;min-height:16.5rem;overflow:hidden;border:1px solid rgba(148,163,184,.18);border-radius:1rem;background:linear-gradient(145deg,rgba(42,18,28,.96),rgba(25,15,26,.96));box-shadow:0 10px 24px rgba(2,6,23,.18)}
 .popular-skeleton-media{height:5.8rem;background:linear-gradient(110deg,rgba(30,41,59,.85) 20%,rgba(51,65,85,.75) 42%,rgba(30,41,59,.85) 64%);background-size:220% 100%}
 .popular-skeleton-body{display:flex;min-height:10.7rem;flex-direction:column;justify-content:space-between;gap:.8rem;padding:.85rem}
@@ -1645,3 +1644,74 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 }
 
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-4 — LOW-END SCROLL PATCH
+   Defers off-screen paint and removes costly fixed-layer effects.
+   ========================================================== */
+@media (max-width: 767px) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  #game-menu-view,
+  #home-how-to-order,
+  #all-game-ratings-section,
+  footer.deferred-section {
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: 1px 720px !important;
+  }
+
+  .product-card,
+  .nominal-card,
+  .game-menu-card,
+  .weekly-popular-product-card,
+  .all-game-rating-card,
+  .all-game-comment-card {
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+  }
+
+  .review-back-button,
+  #willpedia-page-progress {
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html.is-low-power-device body.gradient-bg {
+    background-image: none !important;
+    background-color: var(--gi-deepest, #00171d) !important;
+  }
+
+  html.is-low-power-device #navbar.storefront-navbar,
+  html.is-low-power-device .storefront-mobile-navbar,
+  html.is-low-power-device .mobile-order-dock-inner,
+  html.is-low-power-device .review-back-button,
+  html.is-low-power-device .whatsapp-cs__icon {
+    box-shadow: none !important;
+  }
+
+  html.is-low-power-device .whatsapp-cs__label {
+    display: none !important;
+  }
+
+  html.is-low-power-device .product-card,
+  html.is-low-power-device .nominal-card,
+  html.is-low-power-device .weekly-popular-card,
+  html.is-low-power-device .game-menu-card,
+  html.is-low-power-device .all-game-rating-card,
+  html.is-low-power-device .all-game-comment-card {
+    background-image: none !important;
+    transition: none !important;
+  }
+
+  html.is-low-power-device .nominal-card,
+  html.is-low-power-device .weekly-popular-card,
+  html.is-low-power-device .all-game-comment-card {
+    background-color: #19101a !important;
+  }
+}
