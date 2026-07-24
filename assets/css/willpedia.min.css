@@ -1715,3 +1715,15 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     background-color: #19101a !important;
   }
 }
+
+/* WILLPEDIA PERFORMANCE-5 — POPULAR PACKAGE LIMIT
+   Mobile menampilkan 4 kartu (2x2), desktop tetap 6 kartu. */
+@media (max-width: 767px) {
+  #weekly-popular-container {
+    min-height: 34rem !important;
+  }
+
+  #weekly-popular-container > .popular-skeleton-card:nth-child(n + 5) {
+    display: none !important;
+  }
+}
