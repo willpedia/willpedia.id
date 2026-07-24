@@ -2538,3 +2538,140 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     display: none !important;
   }
 }
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-14 — GAME PAGE MOBILE TOP LITE
+   Shared external CSS for all game index pages. Removes costly
+   layered gradients/shadows around the fixed navbar and game
+   hero while preserving the Willpedia look.
+   ========================================================== */
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    margin-bottom: .7rem !important;
+    padding-right: .75rem !important;
+    padding-left: .75rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-card {
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .18) !important;
+    border-radius: 1rem !important;
+    background: #002b35 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    isolation: auto !important;
+    contain: layout paint style !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-card::before,
+  body[data-page="game"] .detail-hero-card::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-row {
+    gap: .65rem !important;
+    padding: .72rem .76rem .58rem !important;
+    border: 0 !important;
+  }
+
+  body[data-page="game"] .detail-hero-image {
+    width: 54px !important;
+    height: 54px !important;
+    max-width: 54px !important;
+    flex: 0 0 54px !important;
+    border: 1px solid rgba(244, 198, 78, .24) !important;
+    border-radius: .72rem !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-title {
+    font-size: 1rem !important;
+    line-height: 1.12 !important;
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-subtitle {
+    margin-top: .18rem !important;
+    font-size: .58rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-stats {
+    margin-top: .34rem !important;
+    font-size: .56rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-badges {
+    gap: .35rem !important;
+    padding: .52rem .7rem !important;
+    border-top: 1px solid rgba(255, 255, 255, .06) !important;
+    background: #002630 !important;
+  }
+
+  body[data-page="game"] .detail-hero-badge {
+    min-height: 1.55rem !important;
+    padding: .28rem .43rem !important;
+    border: 1px solid rgba(103, 232, 249, .16) !important;
+    border-radius: 9999px !important;
+    background: #003642 !important;
+    box-shadow: none !important;
+    filter: none !important;
+    font-size: .49rem !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-panel {
+    width: auto !important;
+    min-height: 3.45rem !important;
+    margin: .6rem .7rem .7rem !important;
+    padding: .58rem .68rem !important;
+    border: 1px solid rgba(100, 116, 139, .26) !important;
+    border-radius: .82rem !important;
+    background: #061e29 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    contain: layout paint style !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-score {
+    font-size: 1.42rem !important;
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-stars,
+  body[data-page="game"] .mobile-game-review-meta,
+  body[data-page="game"] .mobile-game-review-action {
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-stars .fa-spin {
+    animation: none !important;
+  }
+
+  body[data-page="game"] #category-filter-section,
+  body[data-page="game"] .category-filter-shell {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  html.willpedia-low-power body[data-page="game"] .detail-hero-badges {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html.willpedia-low-power body[data-page="game"] .detail-hero-badge {
+    min-width: 0 !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+}
