@@ -2,8 +2,8 @@ name: Sinkronkan Sheet ke JSON
 
 on:
   schedule:
-    # GitHub menjalankan cron dalam UTC. Sinkronisasi diminta setiap 5 menit.
-    # Eksekusi terjadwal bisa terlambat beberapa menit saat GitHub sedang sibuk.
+    # GitHub Actions memakai waktu UTC.
+    # Jadwal dapat terlambat beberapa menit ketika antrean GitHub sedang ramai.
     - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
@@ -22,7 +22,8 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+
     steps:
       - name: Ambil repository
         uses: actions/checkout@v4
@@ -36,20 +37,36 @@ jobs:
 
       - name: Ambil data Sheet dan buat JSON
         env:
-          # Opsional: buat Repository variable bernama APPS_SCRIPT_URL untuk mengganti URL bawaan.
+          # Opsional: buat Repository variable APPS_SCRIPT_URL
+          # untuk mengganti URL bawaan di script Python.
           APPS_SCRIPT_URL: ${{ vars.APPS_SCRIPT_URL }}
         run: |
-          if [ -z "$APPS_SCRIPT_URL" ]; then unset APPS_SCRIPT_URL; fi
+          if [ -z "$APPS_SCRIPT_URL" ]; then
+            unset APPS_SCRIPT_URL
+          fi
           python scripts/sync_sheet_json.py
 
-      - name: Commit hanya bila data berubah
+      - name: Commit hanya bila hasil sinkronisasi berubah
+        shell: bash
         run: |
-          if git diff --quiet -- data/*.json; then
-            echo "Tidak ada perubahan produk atau rating."
+          FILES=(
+            "data/popular.json"
+            "data/reviews.json"
+            "data/genshin.json"
+            "data/hsr.json"
+            "data/zzz.json"
+            "data/wuwa.json"
+            "index.html"
+          )
+
+          if [ -z "$(git status --porcelain -- "${FILES[@]}")" ]; then
+            echo "Tidak ada perubahan produk, rating, komentar, atau data populer."
             exit 0
           fi
+
           git config user.name "willpedia-sheet-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/*.json
-          git commit -m "chore: sinkronkan pricelist dan rating dari Google Sheet"
+
+          git add -- "${FILES[@]}"
+          git commit -m "chore: sinkronkan pricelist, rating, komentar, dan produk populer"
           git push
