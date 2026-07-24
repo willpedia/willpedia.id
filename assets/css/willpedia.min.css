@@ -1639,3 +1639,12 @@ body[data-page="game"] .storefront-nav-link.nav-games::after{
   }
 }
 
+
+
+/* WILLPEDIA MOBILE V3: Paket terlaris hanya dirender di desktop. */
+@media (max-width: 767px) {
+  #weekly-popular-section {
+    display: none !important;
+    content-visibility: hidden !important;
+  }
+}
