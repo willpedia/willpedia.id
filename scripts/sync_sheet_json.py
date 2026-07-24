@@ -51,6 +51,8 @@ IMAGE_DOWNLOAD_WORKERS = max(1, min(16, int(os.environ.get("IMAGE_DOWNLOAD_WORKE
 IMAGE_DOWNLOAD_TIMEOUT = max(5, min(60, int(os.environ.get("IMAGE_DOWNLOAD_TIMEOUT", "20"))))
 IMAGE_MAX_BYTES = max(1_000_000, int(os.environ.get("IMAGE_MAX_BYTES", "15000000")))
 IMAGE_REFRESH_DAYS = max(1, int(os.environ.get("IMAGE_REFRESH_DAYS", "30")))
+IMAGE_DOWNLOAD_RETRIES = max(1, min(5, int(os.environ.get("IMAGE_DOWNLOAD_RETRIES", "3"))))
+FANDOM_API_TIMEOUT = max(5, min(60, int(os.environ.get("FANDOM_API_TIMEOUT", "20"))))
 
 # Perlindungan tambahan terhadap gambar dengan dimensi ekstrem.
 Image.MAX_IMAGE_PIXELS = 50_000_000
@@ -91,7 +93,7 @@ def request_json(params: dict[str, str]) -> dict[str, Any]:
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Willpedia-GitHub-Sync/4.0",
+            "User-Agent": "Willpedia-GitHub-Sync/5.0",
             "Accept": "application/json",
         },
     )
@@ -288,14 +290,14 @@ def _canonical_image_url(url: str) -> str:
 
 def _load_image_manifest() -> dict[str, Any]:
     if not IMAGE_MANIFEST_FILE.exists():
-        return {"version": 1, "images": {}}
+        return {"version": 2, "images": {}}
     try:
         payload = json.loads(IMAGE_MANIFEST_FILE.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return {"version": 1, "images": {}}
+        return {"version": 2, "images": {}}
     if not isinstance(payload, dict) or not isinstance(payload.get("images"), dict):
-        return {"version": 1, "images": {}}
-    payload["version"] = 1
+        return {"version": 2, "images": {}}
+    payload["version"] = 2
     return payload
 
 
@@ -310,6 +312,140 @@ def _manifest_entry_is_fresh(entry: Any, target: Path) -> bool:
     except ValueError:
         return False
     return datetime.now(timezone.utc) - checked < timedelta(days=IMAGE_REFRESH_DAYS)
+
+
+
+FANDOM_SPECIAL_REDIRECT_RE = re.compile(
+    r"^/wiki/Special:Redirect/file/(?P<filename>.+)$",
+    flags=re.IGNORECASE,
+)
+
+
+def _open_with_retry(
+    request: urllib.request.Request,
+    *,
+    timeout: int,
+    attempts: int = IMAGE_DOWNLOAD_RETRIES,
+) -> Any:
+    """Buka URL dengan retry untuk timeout, 429, dan error server sementara."""
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            return urllib.request.urlopen(request, timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            # 4xx selain 408/425/429 biasanya permanen dan tidak perlu diulang.
+            if exc.code not in {408, 425, 429} and not 500 <= exc.code <= 599:
+                raise
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            last_error = exc
+
+        if attempt < attempts:
+            # Backoff singkat supaya workflow tidak membanjiri server sumber.
+            time.sleep(min(4.0, 0.75 * (2 ** (attempt - 1))))
+
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError("Permintaan gagal tanpa detail error.")
+
+
+def _fandom_special_redirect_parts(url: str) -> tuple[str, str] | None:
+    """Ambil host wiki dan nama file dari URL Fandom Special:Redirect/file."""
+    parsed = urllib.parse.urlsplit(url)
+    host = parsed.netloc.lower().split(":", 1)[0]
+    if not host.endswith(".fandom.com"):
+        return None
+
+    match = FANDOM_SPECIAL_REDIRECT_RE.match(parsed.path)
+    if not match:
+        return None
+
+    filename = urllib.parse.unquote(match.group("filename")).strip().replace("_", " ")
+    # Nama file MediaWiki tidak boleh kosong dan tidak boleh menyisipkan path lain.
+    if not filename or "/" in filename or "\\" in filename:
+        return None
+    return host, filename
+
+
+def _extract_imageinfo_url(payload: Any) -> str:
+    """Ambil thumburl/url dari respons action=query&prop=imageinfo."""
+    if not isinstance(payload, dict):
+        raise ValueError("Respons API Fandom bukan object JSON.")
+
+    error = payload.get("error")
+    if isinstance(error, dict):
+        code = str(error.get("code") or "api-error")
+        info = str(error.get("info") or "MediaWiki API mengembalikan error.")
+        raise ValueError(f"Fandom API {code}: {info}")
+
+    query = payload.get("query")
+    if not isinstance(query, dict):
+        raise ValueError("Respons API Fandom tidak memiliki query.")
+
+    pages = query.get("pages")
+    page_values: list[Any]
+    if isinstance(pages, list):
+        page_values = pages
+    elif isinstance(pages, dict):
+        page_values = list(pages.values())
+    else:
+        page_values = []
+
+    for page in page_values:
+        if not isinstance(page, dict) or page.get("missing") is not None:
+            continue
+        imageinfo = page.get("imageinfo")
+        if not isinstance(imageinfo, list) or not imageinfo:
+            continue
+        info = imageinfo[0]
+        if not isinstance(info, dict):
+            continue
+        candidate = str(info.get("thumburl") or info.get("url") or "").strip()
+        if candidate.startswith("//"):
+            candidate = "https:" + candidate
+        if candidate.startswith("https://"):
+            return candidate
+
+    raise ValueError("File Fandom tidak ditemukan atau tidak memiliki URL gambar.")
+
+
+def _resolve_fandom_file_url(source_url: str) -> str:
+    """Ubah URL Special:Redirect/file menjadi URL gambar langsung via MediaWiki API."""
+    parts = _fandom_special_redirect_parts(source_url)
+    if parts is None:
+        return source_url
+
+    host, filename = parts
+    api_url = f"https://{host}/api.php?" + urllib.parse.urlencode({
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "imageinfo",
+        "iiprop": "url|mime|size",
+        # Minta thumbnail dari server wiki agar transfer pertama lebih kecil.
+        "iiurlwidth": str(IMAGE_MAX_DIMENSION),
+        "redirects": "1",
+        "titles": f"File:{filename}",
+    })
+    request = urllib.request.Request(
+        api_url,
+        headers={
+            "User-Agent": "Willpedia-GitHub-Sync/5.0 (product image cache)",
+            "Accept": "application/json",
+            "Cache-Control": "no-cache",
+        },
+    )
+    with _open_with_retry(
+        request,
+        timeout=FANDOM_API_TIMEOUT,
+        attempts=IMAGE_DOWNLOAD_RETRIES,
+    ) as response:
+        raw = _read_limited_response(response)
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError("Respons API Fandom bukan JSON yang valid.") from exc
+    return _extract_imageinfo_url(payload)
 
 
 def _read_limited_response(response: Any) -> bytes:
@@ -335,25 +471,64 @@ def _read_limited_response(response: Any) -> bytes:
 
 
 def _download_image_bytes(url: str) -> tuple[bytes, str]:
-    parsed = urllib.parse.urlsplit(url)
-    referer = f"{parsed.scheme}://{parsed.netloc}/"
+    # URL Special:Redirect/file milik Fandom adalah halaman perantara. Resolusi
+    # melalui MediaWiki API mencegah HTML/anti-bot ikut dianggap sebagai gambar.
+    resolved_url = url
+    resolution_error: Exception | None = None
+    try:
+        resolved_url = _resolve_fandom_file_url(url)
+    except Exception as exc:
+        # Tetap coba URL asli sebagai fallback agar satu kegagalan API tidak
+        # langsung menggagalkan gambar yang mungkin masih bisa di-redirect.
+        resolution_error = exc
+        resolved_url = url
+
+    parsed = urllib.parse.urlsplit(resolved_url)
+    referer_host = parsed.netloc
+    original_parts = _fandom_special_redirect_parts(url)
+    if original_parts is not None:
+        referer_host = original_parts[0]
+    referer = f"https://{referer_host}/" if referer_host else "https://willpedia.com/"
+
     request = urllib.request.Request(
-        url,
+        resolved_url,
         headers={
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
             ),
-            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+            "Accept": "image/avif,image/webp,image/apng,image/png,image/jpeg,image/*;q=0.8,*/*;q=0.2",
             "Referer": referer,
             "Cache-Control": "no-cache",
         },
     )
-    with urllib.request.urlopen(request, timeout=IMAGE_DOWNLOAD_TIMEOUT) as response:
-        final_url = response.geturl()
-        data = _read_limited_response(response)
+    try:
+        with _open_with_retry(
+            request,
+            timeout=IMAGE_DOWNLOAD_TIMEOUT,
+            attempts=IMAGE_DOWNLOAD_RETRIES,
+        ) as response:
+            final_url = response.geturl()
+            content_type = str(response.headers.get("Content-Type") or "").lower()
+            data = _read_limited_response(response)
+    except Exception as exc:
+        if resolution_error is not None:
+            raise ValueError(
+                f"Resolusi Fandom gagal ({resolution_error}); unduhan URL asli juga gagal ({exc})."
+            ) from exc
+        raise
+
     if not data:
         raise ValueError("Respons gambar kosong.")
+    if content_type and not (
+        content_type.startswith("image/")
+        or "application/octet-stream" in content_type
+        or "binary/octet-stream" in content_type
+    ):
+        detail = f" Content-Type={content_type}."
+        if resolution_error is not None:
+            detail += f" Resolusi Fandom sebelumnya gagal: {resolution_error}."
+        raise ValueError("Respons URL bukan file gambar." + detail)
     return data, final_url
 
 
@@ -539,11 +714,13 @@ def _apply_local_product_images(
                 # Fallback aman: tetap gunakan URL sumber bila cache belum berhasil.
                 product["Gambar"] = source_url
 
-    manifest["version"] = 1
+    manifest["version"] = 2
     manifest["settings"] = {
         "max_dimension": IMAGE_MAX_DIMENSION,
         "quality": IMAGE_QUALITY,
         "refresh_days": IMAGE_REFRESH_DAYS,
+        "download_retries": IMAGE_DOWNLOAD_RETRIES,
+        "fandom_api": True,
     }
     return manifest, downloaded, reused, failed
 
