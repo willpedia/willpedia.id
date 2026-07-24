@@ -2094,3 +2094,221 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
     font-size: .46rem !important;
   }
 }
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-8 — FIX COMPACT MOBILE PRODUCT CARDS
+   The compact markup is already unique, so these rules no longer
+   depend on body[data-page="game"]. This prevents the old 16rem
+   nominal-card minimum height from winning on standalone game pages.
+   ========================================================== */
+@media (max-width: 767px) {
+  #product-container:has(.mobile-compact-product-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: .55rem !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 7.55rem !important;
+    max-height: 7.55rem !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    border: 1px solid rgba(184, 215, 223, .16) !important;
+    border-radius: .82rem !important;
+    background: linear-gradient(150deg, rgba(3, 66, 78, .96), rgba(0, 25, 31, .99)) !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    content-visibility: visible !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: auto 121px !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #product-container .mobile-compact-product-card:hover,
+  #product-container .mobile-compact-product-card.show:hover {
+    border-color: rgba(184, 215, 223, .16) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    display: flex !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 5.55rem !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    padding: .43rem .48rem .32rem !important;
+  }
+
+  #product-container .mobile-compact-product-title {
+    display: -webkit-box !important;
+    min-height: 1.55rem !important;
+    max-height: 1.55rem !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    color: #f8fafc !important;
+    font-size: .61rem !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+    overflow-wrap: anywhere !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  #product-container .mobile-compact-product-pricing {
+    display: flex !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    gap: .4rem !important;
+    margin-top: .28rem !important;
+  }
+
+  #product-container .mobile-compact-product-icon-wrap {
+    display: flex !important;
+    width: 1.55rem !important;
+    height: 1.55rem !important;
+    flex: 0 0 1.55rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .2) !important;
+    border-radius: .38rem !important;
+    background: rgba(0, 20, 27, .82) !important;
+  }
+
+  #product-container .mobile-compact-product-image {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    object-fit: cover !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  #product-container .mobile-compact-product-image.is-contain {
+    padding: .12rem !important;
+    object-fit: contain !important;
+  }
+
+  #product-container .mobile-compact-price-stack {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-price {
+    margin: 0 !important;
+    overflow: hidden !important;
+    color: #f4c64e !important;
+    font-size: .69rem !important;
+    font-weight: 900 !important;
+    line-height: 1.08 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-old-price {
+    margin: .12rem 0 0 !important;
+    overflow: hidden !important;
+    color: #9b6075 !important;
+    font-size: .46rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-product-footer {
+    display: flex !important;
+    min-height: 2rem !important;
+    height: 2rem !important;
+    flex: 0 0 2rem !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: .3rem !important;
+    padding: .25rem .3rem !important;
+    border-top: 1px solid rgba(255, 255, 255, .06) !important;
+    background: rgba(255, 255, 255, .07) !important;
+  }
+
+  #product-container .mobile-compact-discount {
+    display: inline-flex !important;
+    min-width: 2.45rem !important;
+    min-height: 1.22rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .16rem .3rem !important;
+    border: 1px solid rgba(244, 198, 78, .35) !important;
+    border-radius: .34rem !important;
+    color: #162127 !important;
+    background: #f4c64e !important;
+    font-size: .46rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-discount.is-empty {
+    visibility: hidden !important;
+  }
+
+  #product-container .mobile-compact-select-button,
+  #product-container .mobile-compact-product-card .nominal-select-button {
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 3.15rem !important;
+    min-height: 1.28rem !important;
+    height: 1.28rem !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .2rem !important;
+    margin: 0 !important;
+    padding: .18rem .36rem !important;
+    border-radius: .34rem !important;
+    font-size: .46rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #product-container .mobile-compact-select-button .add-cart-icon {
+    margin: 0 !important;
+    font-size: .45rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #product-container:has(.mobile-compact-product-card) {
+    gap: .43rem !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 7.25rem !important;
+    max-height: 7.25rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 5.25rem !important;
+    padding: .38rem .42rem .28rem !important;
+  }
+
+  #product-container .mobile-compact-product-title {
+    font-size: .57rem !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-price {
+    font-size: .64rem !important;
+  }
+}
