@@ -34,9 +34,8 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 DEFAULT_APPS_SCRIPT_URL = (
     "https://script.google.com/macros/s/"
-    "AKfycbwGaPhB5omhJZEvwjrbGozIlm56OkOxlRDD8-TMICjOAix2BqN1DiKeNXD3M7oxTluaXQ/exec"
+    "AKfycbwIZhqOx-MxwBMx5f8I8e4vgf977cySOK6byaqAZfyI7qQst8I2ED9qyKJX6aqugOI/exec"
 )
-
 
 BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
@@ -638,6 +637,39 @@ def _infer_product_game_key(product: dict[str, Any], fallback: str) -> str:
     return "shared"
 
 
+def _prune_stale_image_cache(
+    images: dict[str, Any],
+    active_manifest_keys: set[str],
+) -> int:
+    """Hapus entri dan file cache yang sudah tidak dipakai produk aktif."""
+    retained_paths = {
+        str(entry.get("path") or "")
+        for key, entry in images.items()
+        if key in active_manifest_keys and isinstance(entry, dict)
+    }
+    image_root = IMAGE_ROOT.resolve()
+    removed = 0
+
+    for manifest_key, entry in list(images.items()):
+        if manifest_key in active_manifest_keys:
+            continue
+
+        relative_path = str(entry.get("path") or "") if isinstance(entry, dict) else ""
+        if relative_path and relative_path not in retained_paths:
+            target = (ROOT / relative_path).resolve()
+            if (
+                target.is_relative_to(image_root)
+                and target.suffix.lower() == ".webp"
+                and target.is_file()
+            ):
+                target.unlink()
+
+        images.pop(manifest_key, None)
+        removed += 1
+
+    return removed
+
+
 def _apply_local_product_images(
     payloads: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, Any], int, int, int]:
@@ -715,6 +747,14 @@ def _apply_local_product_images(
             elif source_url:
                 # Fallback aman: tetap gunakan URL sumber bila cache belum berhasil.
                 product["Gambar"] = source_url
+
+    active_manifest_keys = {
+        f"{game_key}:{_cache_key(canonical)}"
+        for game_key, canonical in jobs
+    }
+    pruned = _prune_stale_image_cache(images, active_manifest_keys)
+    if pruned:
+        print(f"Cache gambar tidak terpakai dihapus: {pruned}")
 
     manifest["version"] = 2
     manifest["settings"] = {
