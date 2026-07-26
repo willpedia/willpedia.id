@@ -1559,9 +1559,8 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
 /* WILLPEDIA PERFORMANCE PATCH 2026-07-24
    Stabilizes above-the-fold content and prevents icon/font layout jumps. */
 .fa-solid,.fa-regular,.fa-brands,.fas,.far,.fab{display:inline-block;min-width:1em;text-align:center}
-#weekly-popular-section,#game-menu-view{content-visibility:visible!important;contain:none!important}
+@media (min-width:768px){#weekly-popular-section,#game-menu-view{content-visibility:visible!important;contain:none!important}.weekly-popular-product-card{content-visibility:visible!important;contain:none!important}}
 #weekly-popular-container{align-items:stretch;min-height:51rem}
-.weekly-popular-product-card{content-visibility:visible!important;contain:none!important}
 .popular-skeleton-card{position:relative;min-width:0;min-height:16.5rem;overflow:hidden;border:1px solid rgba(148,163,184,.18);border-radius:1rem;background:linear-gradient(145deg,rgba(42,18,28,.96),rgba(25,15,26,.96));box-shadow:0 10px 24px rgba(2,6,23,.18)}
 .popular-skeleton-media{height:5.8rem;background:linear-gradient(110deg,rgba(30,41,59,.85) 20%,rgba(51,65,85,.75) 42%,rgba(30,41,59,.85) 64%);background-size:220% 100%}
 .popular-skeleton-body{display:flex;min-height:10.7rem;flex-direction:column;justify-content:space-between;gap:.8rem;padding:.85rem}
@@ -1665,7 +1664,6 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 }
 
-
 /* =============================================
    WILLPEDIA LOADING LITE V6
    Mengurangi repaint skeleton khusus mobile.
@@ -1689,11 +1687,2260 @@ body[data-page="ratings"] .storefront-nav-link.nav-ratings::after{
   }
 }
 
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-4 — LOW-END SCROLL PATCH
+   Defers off-screen paint and removes costly fixed-layer effects.
+   ========================================================== */
+@media (max-width: 767px) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  body,
+  body.gradient-bg,
+  .gradient-bg {
+    background-attachment: scroll !important;
+    background-image:
+      linear-gradient(
+        180deg,
+        #064857 0%,
+        #012c36 24%,
+        #001f27 54%,
+        #00171d 78%,
+        #001217 100%
+      ) !important;
+  }
+
+  #game-menu-view,
+  #home-how-to-order,
+  #all-game-ratings-section,
+  footer.deferred-section {
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: 1px 720px !important;
+  }
+
+  .product-card,
+  .nominal-card,
+  .game-menu-card,
+  .weekly-popular-product-card,
+  .all-game-rating-card,
+  .all-game-comment-card {
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+  }
+
+  .review-back-button,
+  #willpedia-page-progress {
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html.is-low-power-device body.gradient-bg {
+    background-image: none !important;
+    background-color: var(--gi-deepest, #00171d) !important;
+    background-attachment: scroll !important;
+  }
+
+  html.is-low-power-device #navbar.storefront-navbar,
+  html.is-low-power-device .storefront-mobile-navbar,
+  html.is-low-power-device .mobile-order-dock-inner,
+  html.is-low-power-device .review-back-button,
+  html.is-low-power-device .whatsapp-cs__icon {
+    box-shadow: none !important;
+  }
+
+  html.is-low-power-device .whatsapp-cs__label {
+    display: none !important;
+  }
+
+  html.is-low-power-device .product-card,
+  html.is-low-power-device .nominal-card,
+  html.is-low-power-device .weekly-popular-card,
+  html.is-low-power-device .game-menu-card,
+  html.is-low-power-device .all-game-rating-card,
+  html.is-low-power-device .all-game-comment-card {
+    background-image: none !important;
+    transition: none !important;
+  }
+
+  html.is-low-power-device .nominal-card,
+  html.is-low-power-device .weekly-popular-card,
+  html.is-low-power-device .all-game-comment-card {
+    background-color: #19101a !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-6 — COMPACT POPULAR CARDS ON MOBILE
+   4 cards, 2x2, image + title only. Desktop remains unchanged.
+   ========================================================== */
+@media (max-width: 767px) {
+  #weekly-popular-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: start !important;
+    min-height: 0 !important;
+    gap: .7rem !important;
+  }
+
+  #weekly-popular-container[data-popular-layout="compact"] {
+    content-visibility: visible !important;
+    contain: layout paint style !important;
+  }
+
+  #weekly-popular-container > .popular-skeleton-card:nth-child(n+5) {
+    display: none !important;
+  }
+
+  .weekly-popular-compact-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(244, 198, 78, .28);
+    border-radius: .9rem;
+    background: #00212a;
+    box-shadow: 0 7px 16px rgba(0, 8, 12, .18);
+    content-visibility: auto;
+    contain: layout paint style;
+  }
+
+  .weekly-popular-compact-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border: 0;
+    border-radius: inherit;
+    color: inherit;
+    background: transparent;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .weekly-popular-compact-button:active {
+    transform: scale(.985);
+  }
+
+  .weekly-popular-compact-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 88px;
+    overflow: hidden;
+    background: #00171d;
+  }
+
+  .weekly-popular-compact-media::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 28px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 23, 29, .34), transparent);
+  }
+
+  .weekly-popular-compact-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .weekly-popular-compact-image.is-contain {
+    object-fit: contain;
+    padding: .3rem;
+    background: #00171d;
+  }
+
+  .weekly-popular-compact-game,
+  .weekly-popular-compact-discount {
+    position: absolute;
+    z-index: 2;
+    top: .42rem;
+    display: inline-flex;
+    max-width: calc(100% - 3.6rem);
+    min-height: 1.25rem;
+    align-items: center;
+    padding: .22rem .38rem;
+    overflow: hidden;
+    border-radius: .38rem;
+    font-size: .48rem;
+    font-weight: 900;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weekly-popular-compact-game {
+    left: .42rem;
+    color: #fff3b5;
+    background: rgba(0, 23, 29, .9);
+  }
+
+  .weekly-popular-compact-discount {
+    right: .42rem;
+    color: #fff;
+    background: #be123c;
+  }
+
+  .weekly-popular-compact-content {
+    display: grid;
+    min-height: 72px;
+    padding: .58rem .65rem .62rem;
+    background: #002b35;
+  }
+
+  .weekly-popular-compact-name {
+    display: -webkit-box;
+    min-height: 2.1rem;
+    overflow: hidden;
+    color: #f5f8f8;
+    font-size: .72rem;
+    font-weight: 850;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .weekly-popular-compact-price {
+    align-self: end;
+    margin-top: .35rem;
+    color: #f4c64e;
+    font-size: .72rem;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+
+  .weekly-popular-compact-title {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: .58rem .68rem;
+    color: #172126;
+    background: linear-gradient(135deg, #ffe58a, #f4c64e 58%, #d99a1d);
+  }
+
+  .weekly-popular-compact-title > span {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    font-size: .72rem;
+    font-weight: 900;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Skeleton follows the same compact 2x2 footprint before data is ready. */
+  #weekly-popular-container > .popular-skeleton-card {
+    min-height: 136px !important;
+    border-radius: .9rem !important;
+    box-shadow: none !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-media {
+    height: 88px !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-body {
+    display: block !important;
+    min-height: 48px !important;
+    padding: .68rem !important;
+    background: linear-gradient(135deg, rgba(255, 229, 138, .72), rgba(244, 198, 78, .72));
+  }
+
+  #weekly-popular-container .popular-skeleton-line.is-title {
+    width: 78% !important;
+    height: .72rem !important;
+    background: rgba(23, 33, 38, .28) !important;
+  }
+
+  #weekly-popular-container .popular-skeleton-line:not(.is-title),
+  #weekly-popular-container .popular-skeleton-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .weekly-popular-compact-media {
+    height: 80px;
+  }
+
+  .weekly-popular-compact-title {
+    min-height: 46px;
+    padding: .52rem .58rem;
+  }
+
+  .weekly-popular-compact-title > span {
+    font-size: .67rem;
+  }
+
+  .weekly-popular-compact-name,
+  .weekly-popular-compact-price {
+    font-size: .67rem;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-7 — COMPACT GAME PRODUCT CARDS
+   Mobile only: 2-column cards with title, small icon, pricing,
+   discount and compact select action. Desktop remains unchanged.
+   ========================================================== */
+@media (max-width: 767px) {
+  body[data-page="game"] #product-container {
+    gap: .58rem !important;
+    align-items: stretch;
+  }
+
+  body[data-page="game"] #product-container .mobile-load-more-wrap {
+    grid-column: 1 / -1;
+    padding-top: .35rem;
+  }
+
+  body[data-page="game"] .mobile-compact-product-card {
+    position: relative;
+    display: flex !important;
+    min-width: 0;
+    min-height: 8.7rem !important;
+    height: auto !important;
+    flex-direction: column !important;
+    overflow: hidden;
+    padding: 0 !important;
+    border: 1px solid rgba(184, 215, 223, .14) !important;
+    border-radius: .9rem !important;
+    background:
+      linear-gradient(150deg, rgba(3, 66, 78, .94), rgba(0, 25, 31, .98)) !important;
+    box-shadow: none !important;
+    content-visibility: auto;
+    contain: layout paint style;
+    contain-intrinsic-size: 145px 140px !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .mobile-compact-product-main {
+    display: flex;
+    min-width: 0;
+    min-height: 6.45rem;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: .68rem .68rem .55rem;
+  }
+
+  body[data-page="game"] .mobile-compact-product-title {
+    display: -webkit-box;
+    min-height: 2.05rem;
+    overflow: hidden;
+    color: #f8fafc !important;
+    font-size: .68rem !important;
+    font-weight: 800;
+    line-height: 1.28;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  body[data-page="game"] .mobile-compact-product-pricing {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: .5rem;
+    margin-top: .48rem;
+  }
+
+  body[data-page="game"] .mobile-compact-product-icon-wrap {
+    display: flex;
+    width: 1.85rem;
+    height: 1.85rem;
+    flex: 0 0 1.85rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(244, 198, 78, .20);
+    border-radius: .5rem;
+    background: rgba(0, 20, 27, .82);
+  }
+
+  body[data-page="game"] .mobile-compact-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  body[data-page="game"] .mobile-compact-product-image.is-contain {
+    object-fit: contain;
+    padding: .18rem;
+  }
+
+  body[data-page="game"] .mobile-compact-price-stack {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  body[data-page="game"] .mobile-compact-price-stack .nominal-card-price {
+    overflow: hidden;
+    color: #f4c64e !important;
+    font-size: .78rem !important;
+    font-weight: 900;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body[data-page="game"] .mobile-compact-price-stack .nominal-card-old-price {
+    margin-top: .17rem;
+    overflow: hidden;
+    color: #b36b83 !important;
+    font-size: .52rem !important;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration-thickness: 1px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body[data-page="game"] .mobile-compact-product-footer {
+    display: flex;
+    min-height: 2.05rem;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: .35rem;
+    padding: .28rem .38rem;
+    border-top: 1px solid rgba(255, 255, 255, .055);
+    background: rgba(255, 255, 255, .075);
+  }
+
+  body[data-page="game"] .mobile-compact-discount {
+    display: inline-flex;
+    min-width: 2.65rem;
+    min-height: 1.35rem;
+    align-items: center;
+    justify-content: center;
+    padding: .2rem .38rem;
+    border: 1px solid rgba(244, 198, 78, .36);
+    border-radius: .38rem;
+    color: #162127;
+    background: #f4c64e;
+    font-size: .5rem;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  body[data-page="game"] .mobile-compact-discount.is-empty {
+    visibility: hidden;
+  }
+
+  body[data-page="game"] .mobile-compact-select-button {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 3.35rem;
+    min-height: 1.48rem !important;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: .28rem;
+    margin: 0 !important;
+    padding: .25rem .45rem !important;
+    border-radius: .4rem !important;
+    font-size: .5rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .mobile-compact-select-button .add-cart-icon {
+    margin: 0 !important;
+    font-size: .5rem;
+  }
+
+  body[data-page="game"] .mobile-compact-select-button.is-in-cart,
+  body[data-page="game"] .mobile-compact-select-button:disabled {
+    opacity: .72;
+  }
+}
+
+@media (max-width: 360px) {
+  body[data-page="game"] #product-container {
+    gap: .45rem !important;
+  }
+
+  body[data-page="game"] .mobile-compact-product-main {
+    min-height: 6.15rem;
+    padding: .6rem .58rem .48rem;
+  }
+
+  body[data-page="game"] .mobile-compact-product-title {
+    min-height: 1.95rem;
+    font-size: .62rem !important;
+  }
+
+  body[data-page="game"] .mobile-compact-product-pricing {
+    gap: .4rem;
+  }
+
+  body[data-page="game"] .mobile-compact-product-icon-wrap {
+    width: 1.65rem;
+    height: 1.65rem;
+    flex-basis: 1.65rem;
+  }
+
+  body[data-page="game"] .mobile-compact-price-stack .nominal-card-price {
+    font-size: .7rem !important;
+  }
+
+  body[data-page="game"] .mobile-compact-discount {
+    min-width: 2.35rem;
+    padding-inline: .28rem;
+    font-size: .46rem;
+  }
+
+  body[data-page="game"] .mobile-compact-select-button {
+    min-width: 3rem;
+    padding-inline: .34rem !important;
+    font-size: .46rem !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-8 — FIX COMPACT MOBILE PRODUCT CARDS
+   The compact markup is already unique, so these rules no longer
+   depend on body[data-page="game"]. This prevents the old 16rem
+   nominal-card minimum height from winning on standalone game pages.
+   ========================================================== */
+@media (max-width: 767px) {
+  #product-container:has(.mobile-compact-product-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: .55rem !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 8.4rem !important;
+    max-height: 8.4rem !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    border: 1px solid rgba(184, 215, 223, .16) !important;
+    border-radius: .82rem !important;
+    background: linear-gradient(150deg, rgba(3, 66, 78, .96), rgba(0, 25, 31, .99)) !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    content-visibility: visible !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: auto 135px !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #product-container .mobile-compact-product-card:hover,
+  #product-container .mobile-compact-product-card.show:hover {
+    border-color: rgba(184, 215, 223, .16) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    display: flex !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 5.9rem !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    padding: .52rem .55rem .36rem !important;
+  }
+
+  #product-container .mobile-compact-product-title {
+    display: -webkit-box !important;
+    min-height: 1.72rem !important;
+    max-height: 1.72rem !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    color: #f8fafc !important;
+    font-size: .68rem !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+    overflow-wrap: anywhere !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  #product-container .mobile-compact-product-pricing {
+    display: flex !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    gap: .4rem !important;
+    margin-top: .28rem !important;
+  }
+
+  #product-container .mobile-compact-product-icon-wrap {
+    display: flex !important;
+    width: 1.72rem !important;
+    height: 1.72rem !important;
+    flex: 0 0 1.72rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .2) !important;
+    border-radius: .38rem !important;
+    background: rgba(0, 20, 27, .82) !important;
+  }
+
+  #product-container .mobile-compact-product-image {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    object-fit: cover !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  #product-container .mobile-compact-product-image.is-contain {
+    padding: .12rem !important;
+    object-fit: contain !important;
+  }
+
+  #product-container .mobile-compact-price-stack {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-price {
+    margin: 0 !important;
+    overflow: hidden !important;
+    color: #f4c64e !important;
+    font-size: .74rem !important;
+    font-weight: 900 !important;
+    line-height: 1.08 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-old-price {
+    margin: .12rem 0 0 !important;
+    overflow: hidden !important;
+    color: #9b6075 !important;
+    font-size: .52rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-product-footer {
+    display: flex !important;
+    min-height: 2.5rem !important;
+    height: 2.5rem !important;
+    flex: 0 0 2.5rem !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: .3rem !important;
+    padding: .28rem .36rem !important;
+    border-top: 1px solid rgba(255, 255, 255, .06) !important;
+    background: rgba(255, 255, 255, .07) !important;
+  }
+
+  #product-container .mobile-compact-discount {
+    display: inline-flex !important;
+    min-width: 2.45rem !important;
+    min-height: 1.5rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .16rem .3rem !important;
+    border: 1px solid rgba(244, 198, 78, .35) !important;
+    border-radius: .34rem !important;
+    color: #162127 !important;
+    background: #f4c64e !important;
+    font-size: .52rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-discount.is-empty {
+    visibility: hidden !important;
+  }
+
+  #product-container .mobile-compact-select-button,
+  #product-container .mobile-compact-product-card .nominal-select-button {
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 3.15rem !important;
+    min-height: 1.9rem !important;
+    height: 1.9rem !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .2rem !important;
+    margin: 0 !important;
+    padding: .28rem .48rem !important;
+    border-radius: .34rem !important;
+    font-size: .56rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #product-container .mobile-compact-select-button .add-cart-icon {
+    margin: 0 !important;
+    font-size: .55rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #product-container:has(.mobile-compact-product-card) {
+    gap: .43rem !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 8.1rem !important;
+    max-height: 8.1rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 5.6rem !important;
+    padding: .46rem .48rem .32rem !important;
+  }
+
+  #product-container .mobile-compact-product-title {
+    font-size: .63rem !important;
+  }
+
+  #product-container .mobile-compact-price-stack .nominal-card-price {
+    font-size: .69rem !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-11 — MOBILE HOME GAME CARDS REFINE
+   Game selection appears before a compact popular section.
+   ========================================================== */
+@media (max-width: 767px) {
+  #weekly-popular-section {
+    display: block !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 3.25rem !important;
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: 1px 480px !important;
+  }
+
+  #game-menu-view {
+    margin-top: 1.4rem !important;
+    margin-bottom: 3.25rem !important;
+    padding-left: .75rem !important;
+    padding-right: .75rem !important;
+  }
+
+  #game-menu-view > .mb-5 {
+    margin-bottom: .78rem !important;
+  }
+
+  #game-menu-view .home-section-description,
+  #game-menu-view > .mb-5 > p {
+    display: none !important;
+  }
+
+  .game-menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .65rem !important;
+    align-items: start !important;
+  }
+
+  .game-menu-card {
+    position: relative !important;
+    display: block !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    aspect-ratio: 10 / 12.6 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .24) !important;
+    border-radius: 1rem !important;
+    background: radial-gradient(circle at 50% 0%, rgba(14, 105, 124, .22), transparent 38%),
+                linear-gradient(160deg, rgba(0, 40, 49, .98), rgba(0, 18, 24, .98)) !important;
+    box-shadow: 0 10px 24px rgba(0, 8, 12, .22) !important;
+    transform: none !important;
+    transition: none !important;
+    content-visibility: auto !important;
+    contain: layout paint style !important;
+    contain-intrinsic-size: 160px 202px !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .game-menu-card::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background: linear-gradient(180deg, rgba(0, 23, 29, .02) 0%, rgba(0, 23, 29, .06) 42%, rgba(0, 23, 29, .22) 78%, rgba(0, 23, 29, .36) 100%) !important;
+  }
+
+  .game-menu-card:active {
+    transform: scale(.985) !important;
+  }
+
+  .game-menu-image {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    filter: saturate(1.02) contrast(1.03) !important;
+    transform: none !important;
+    transition: none !important;
+    background: #00171d !important;
+  }
+
+  .game-menu-content {
+    position: absolute !important;
+    z-index: 2 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    display: flex !important;
+    width: 100% !important;
+    min-height: 3.45rem !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    padding: .62rem .72rem !important;
+    color: #172126 !important;
+    background: linear-gradient(135deg, #ffe58a 0%, #f4c64e 58%, #d99a1d 100%) !important;
+    border-top: 1px solid rgba(255, 229, 138, .14) !important;
+  }
+
+  .game-menu-content > span:first-child {
+    display: block !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .game-menu-name {
+    display: -webkit-box !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    color: #172126 !important;
+    font-size: .78rem !important;
+    font-weight: 900 !important;
+    line-height: 1.16 !important;
+    letter-spacing: .01em !important;
+    text-shadow: none !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .game-menu-meta {
+    display: block !important;
+    margin-top: .18rem !important;
+    color: rgba(23, 33, 38, .82) !important;
+    font-size: .56rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: .01em !important;
+    text-shadow: none !important;
+  }
+
+  .game-menu-arrow {
+    display: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #game-menu-view {
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+
+  .game-menu-grid {
+    gap: .55rem !important;
+  }
+
+  .game-menu-card {
+    aspect-ratio: 10 / 12.2 !important;
+  }
+
+  .game-menu-content {
+    min-height: 3.25rem !important;
+    padding: .56rem .62rem !important;
+  }
+
+  .game-menu-name {
+    font-size: .72rem !important;
+  }
+
+  .game-menu-meta {
+    font-size: .52rem !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-13 — MOBILE NAVBAR + HERO SCROLL LITE
+   The mobile navbar no longer changes visual state during
+   scrolling. Hero and fixed navbar use simpler paint layers.
+   ========================================================== */
+@media (max-width: 767px) {
+  #navbar-shell {
+    contain: layout paint style !important;
+    backface-visibility: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #navbar.storefront-navbar,
+  .storefront-mobile-navbar {
+    background-color: #00212a !important;
+    background-image: none !important;
+    border-bottom: 1px solid rgba(244, 198, 78, .16) !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  #navbar.storefront-navbar.bg-slate-950\/95,
+  #navbar.storefront-navbar.bg-white\/5,
+  #navbar.storefront-navbar.shadow-xl {
+    background-color: #00212a !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  #main-hero-banner {
+    isolation: auto !important;
+    contain: layout paint style !important;
+    border: 1px solid rgba(244, 198, 78, .16) !important;
+    border-radius: .8rem !important;
+    box-shadow: none !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+  }
+
+  #main-hero-banner .hero-static-picture,
+  #main-hero-banner .hero-static-picture > img,
+  #main-hero-banner .hero-image-carousel-picture {
+    contain: paint !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+    backface-visibility: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #main-hero-banner::before,
+  #main-hero-banner::after,
+  #main-hero-banner .hero-image-carousel-progress,
+  #main-hero-banner .hero-image-carousel-dots {
+    display: none !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-14 — GAME PAGE MOBILE TOP LITE
+   Shared external CSS for all game index pages. Removes costly
+   layered gradients/shadows around the fixed navbar and game
+   hero while preserving the Willpedia look.
+   ========================================================== */
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    margin-bottom: .7rem !important;
+    padding-right: .75rem !important;
+    padding-left: .75rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-card {
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .18) !important;
+    border-radius: 1rem !important;
+    background: #002b35 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    isolation: auto !important;
+    contain: layout paint style !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-card::before,
+  body[data-page="game"] .detail-hero-card::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-row {
+    gap: .65rem !important;
+    padding: .72rem .76rem .58rem !important;
+    border: 0 !important;
+  }
+
+  body[data-page="game"] .detail-hero-image {
+    width: 54px !important;
+    height: 54px !important;
+    max-width: 54px !important;
+    flex: 0 0 54px !important;
+    border: 1px solid rgba(244, 198, 78, .24) !important;
+    border-radius: .72rem !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-title {
+    font-size: 1rem !important;
+    line-height: 1.12 !important;
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .detail-hero-subtitle {
+    margin-top: .18rem !important;
+    font-size: .58rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-stats {
+    margin-top: .34rem !important;
+    font-size: .56rem !important;
+  }
+
+  body[data-page="game"] .detail-hero-badges {
+    gap: .35rem !important;
+    padding: .52rem .7rem !important;
+    border-top: 1px solid rgba(255, 255, 255, .06) !important;
+    background: #002630 !important;
+  }
+
+  body[data-page="game"] .detail-hero-badge {
+    min-height: 1.55rem !important;
+    padding: .28rem .43rem !important;
+    border: 1px solid rgba(103, 232, 249, .16) !important;
+    border-radius: 9999px !important;
+    background: #003642 !important;
+    box-shadow: none !important;
+    filter: none !important;
+    font-size: .49rem !important;
+    transition: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-panel {
+    width: auto !important;
+    min-height: 3.45rem !important;
+    margin: .6rem .7rem .7rem !important;
+    padding: .58rem .68rem !important;
+    border: 1px solid rgba(100, 116, 139, .26) !important;
+    border-radius: .82rem !important;
+    background: #061e29 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    contain: layout paint style !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-score {
+    font-size: 1.42rem !important;
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-stars,
+  body[data-page="game"] .mobile-game-review-meta,
+  body[data-page="game"] .mobile-game-review-action {
+    text-shadow: none !important;
+  }
+
+  body[data-page="game"] .mobile-game-review-stars .fa-spin {
+    animation: none !important;
+  }
+
+  body[data-page="game"] #category-filter-section,
+  body[data-page="game"] .category-filter-shell {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  html.willpedia-low-power body[data-page="game"] .detail-hero-badges {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html.willpedia-low-power body[data-page="game"] .detail-hero-badge {
+    min-width: 0 !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-15 — TAP CARD + SHOWCASE GAME HERO
+   Mobile package cards add directly to cart when the card is
+   tapped. The old top review panel is removed. Game pages use
+   a lightweight image-first showcase hero inspired by storefront
+   banners, with Willpedia teal/gold styling.
+   ========================================================== */
+.game-showcase-hero {
+  overflow: hidden;
+  border: 1px solid rgba(244, 198, 78, .2);
+  border-radius: 1.25rem;
+  background: #001f28;
+  box-shadow: 0 16px 38px rgba(0, 8, 12, .24);
+}
+
+.game-showcase-banner {
+  position: relative;
+  min-height: 270px;
+  overflow: hidden;
+  background: #101517;
+}
+
+.game-showcase-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 13, 18, .03) 0%, rgba(0, 13, 18, .2) 38%, rgba(0, 13, 18, .93) 72%, rgba(0, 13, 18, .98) 100%);
+}
+
+.game-showcase-banner-image {
+  width: 100%;
+  height: 100%;
+  min-height: 270px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.game-showcase-copy {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 4.5%;
+  width: min(42%, 430px);
+  transform: translateY(-50%);
+}
+
+.game-showcase-kicker {
+  display: block;
+  color: #cbd5e1;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.game-showcase-title {
+  margin-top: .32rem;
+  color: #f4c64e;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 950;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+
+.game-showcase-description {
+  margin-top: .55rem;
+  color: #dbe5e8;
+  font-size: .76rem;
+  font-weight: 550;
+  line-height: 1.55;
+}
+
+.game-showcase-cta {
+  display: inline-flex;
+  margin-top: .72rem;
+  padding-bottom: .12rem;
+  border-bottom: 2px solid #f4c64e;
+  color: #ffe58a;
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+.game-showcase-bottom {
+  display: grid;
+  grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  align-items: stretch;
+  background: #00212a;
+}
+
+.game-showcase-identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem 1rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  background: #001a21;
+}
+
+.game-showcase-logo {
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  object-fit: cover;
+  border: 1px solid rgba(244,198,78,.3);
+  border-radius: .9rem;
+  background: #00171d;
+}
+
+.game-showcase-brand-copy {
+  display: block;
+  min-width: 0;
+}
+
+.game-showcase-brand-copy strong {
+  display: block;
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: .84rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-showcase-brand-copy > span {
+  display: block;
+  margin-top: .22rem;
+  color: #94a3b8;
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.game-showcase-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: .4rem;
+  padding: .72rem .9rem;
+}
+
+.game-showcase-benefit {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: .42rem;
+  color: #e6f4f7;
+  font-size: .62rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.game-showcase-benefit i {
+  flex: 0 0 auto;
+  color: #f4c64e;
+}
+
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    padding-right: .65rem !important;
+    padding-left: .65rem !important;
+  }
+
+  .game-showcase-hero {
+    border-radius: .95rem;
+    box-shadow: none;
+    contain: layout paint style;
+  }
+
+  .game-showcase-banner {
+    min-height: 172px;
+  }
+
+  .game-showcase-banner::after {
+    background: linear-gradient(90deg, rgba(0, 13, 18, .03) 0%, rgba(0, 13, 18, .24) 42%, rgba(0, 13, 18, .9) 72%, rgba(0, 13, 18, .97) 100%);
+  }
+
+  .game-showcase-banner-image {
+    min-height: 172px;
+    object-position: 34% center;
+    filter: none;
+  }
+
+  .game-showcase-copy {
+    right: .68rem;
+    width: 46%;
+  }
+
+  .game-showcase-kicker {
+    font-size: .48rem;
+    letter-spacing: .08em;
+  }
+
+  .game-showcase-title {
+    margin-top: .18rem;
+    font-size: .88rem;
+    line-height: 1.05;
+  }
+
+  .game-showcase-description {
+    display: -webkit-box;
+    margin-top: .34rem;
+    overflow: hidden;
+    font-size: .52rem;
+    line-height: 1.38;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .game-showcase-cta {
+    margin-top: .42rem;
+    font-size: .5rem;
+  }
+
+  .game-showcase-bottom {
+    display: block;
+  }
+
+  .game-showcase-identity {
+    gap: .62rem;
+    padding: .62rem .7rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .game-showcase-logo {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: .68rem;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .68rem;
+  }
+
+  .game-showcase-brand-copy > span {
+    font-size: .52rem;
+  }
+
+  .game-showcase-benefits {
+    gap: .18rem;
+    padding: .56rem .42rem;
+  }
+
+  .game-showcase-benefit {
+    gap: .24rem;
+    font-size: .46rem;
+    line-height: 1.2;
+  }
+
+  .game-showcase-benefit i {
+    font-size: .55rem;
+  }
+
+  body[data-page="game"] .mobile-game-review-panel {
+    display: none !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 8.4rem !important;
+    max-height: 8.4rem !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  #product-container .mobile-compact-product-card:active {
+    transform: scale(.985) !important;
+  }
+
+  #product-container .mobile-compact-product-card:focus-visible {
+    outline: 2px solid rgba(244,198,78,.8) !important;
+    outline-offset: 2px !important;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart {
+    border-color: rgba(244,198,78,.7) !important;
+    background: linear-gradient(150deg, rgba(5, 80, 91, .98), rgba(0, 31, 39, .99)) !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 5.9rem !important;
+    padding: .52rem .55rem .36rem !important;
+  }
+
+  #product-container .mobile-compact-product-footer {
+    min-height: 2.5rem !important;
+    height: 2.5rem !important;
+    flex-basis: 2.5rem !important;
+    padding: .28rem .36rem !important;
+  }
+
+  #product-container .mobile-compact-card-status {
+    display: inline-flex !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: .22rem !important;
+    color: #d9e9ed !important;
+    font-size: .44rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart .mobile-compact-card-status {
+    color: #ffe58a !important;
+  }
+
+  #product-container .mobile-compact-card-status i {
+    font-size: .45rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-showcase-banner,
+  .game-showcase-banner-image {
+    min-height: 162px;
+  }
+
+  .game-showcase-copy {
+    right: .55rem;
+    width: 47%;
+  }
+
+  .game-showcase-title {
+    font-size: .8rem;
+  }
+
+  .game-showcase-description {
+    font-size: .48rem;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 8.1rem !important;
+    max-height: 8.1rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 5.6rem !important;
+  }
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-16 — GAME HERO SIZE + STYLE TUNING
+   Fix oversized mobile hero by forcing explicit banner height,
+   and restyle to match the reference with a shorter top banner,
+   overlapping thumbnail, and a tighter info section.
+   ========================================================== */
+.game-showcase-banner {
+  height: 270px !important;
+  min-height: 0 !important;
+}
+
+.game-showcase-banner-image {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+@media (max-width: 767px) {
+  body[data-page="game"] #selected-game-hero {
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+
+  .game-showcase-hero {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+
+  .game-showcase-banner {
+    height: 138px !important;
+    min-height: 138px !important;
+  }
+
+  .game-showcase-banner::after {
+    background: linear-gradient(90deg, rgba(0, 10, 14, .05) 0%, rgba(0, 10, 14, .16) 32%, rgba(0, 10, 14, .72) 68%, rgba(0, 10, 14, .92) 100%) !important;
+  }
+
+  .game-showcase-banner-image {
+    width: 100% !important;
+    height: 138px !important;
+    min-height: 138px !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .game-showcase-copy {
+    top: 50% !important;
+    right: .72rem !important;
+    left: auto !important;
+    width: 43% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .game-showcase-kicker {
+    font-size: .42rem !important;
+    letter-spacing: .08em !important;
+  }
+
+  .game-showcase-title {
+    margin-top: .15rem !important;
+    font-size: .88rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .game-showcase-description {
+    display: -webkit-box !important;
+    margin-top: .24rem !important;
+    overflow: hidden !important;
+    font-size: .49rem !important;
+    line-height: 1.26 !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .game-showcase-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-top: .32rem !important;
+    padding: .18rem .48rem !important;
+    border: 1px solid rgba(244, 198, 78, .82) !important;
+    border-radius: 999px !important;
+    background: rgba(244, 198, 78, .12) !important;
+    color: #ffe58a !important;
+    font-size: .48rem !important;
+    font-weight: 900 !important;
+    line-height: 1.1 !important;
+  }
+
+  .game-showcase-bottom {
+    position: relative !important;
+    display: block !important;
+    background: linear-gradient(180deg, #062028 0%, #001c24 100%) !important;
+  }
+
+  .game-showcase-identity {
+    position: relative !important;
+    display: block !important;
+    min-height: 84px !important;
+    padding: .78rem .72rem .42rem .72rem !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
+  }
+
+  .game-showcase-logo {
+    position: absolute !important;
+    top: -24px !important;
+    left: .72rem !important;
+    width: 68px !important;
+    height: 68px !important;
+    flex-basis: 68px !important;
+    border-radius: .95rem !important;
+    box-shadow: 0 8px 18px rgba(0, 8, 12, .22) !important;
+  }
+
+  .game-showcase-brand-copy {
+    display: block !important;
+    padding-left: 84px !important;
+    padding-top: .02rem !important;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .84rem !important;
+    line-height: 1.12 !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+  }
+
+  .game-showcase-brand-copy > span {
+    margin-top: .18rem !important;
+    font-size: .56rem !important;
+    color: #d6e0e3 !important;
+  }
+
+  .game-showcase-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: .28rem !important;
+    padding: .2rem .48rem .56rem !important;
+  }
+
+  .game-showcase-benefit {
+    justify-content: flex-start !important;
+    gap: .24rem !important;
+    padding: .34rem .34rem !important;
+    border: 1px solid rgba(255, 255, 255, .07) !important;
+    border-radius: .72rem !important;
+    background: rgba(255, 255, 255, .02) !important;
+    font-size: .46rem !important;
+    line-height: 1.15 !important;
+    text-align: left !important;
+  }
+
+  .game-showcase-benefit span {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .game-showcase-benefit i {
+    font-size: .56rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-showcase-banner {
+    height: 132px !important;
+    min-height: 132px !important;
+  }
+
+  .game-showcase-banner-image {
+    height: 132px !important;
+    min-height: 132px !important;
+  }
+
+  .game-showcase-copy {
+    right: .62rem !important;
+    width: 44% !important;
+  }
+
+  .game-showcase-title {
+    font-size: .82rem !important;
+  }
+
+  .game-showcase-brand-copy strong {
+    font-size: .78rem !important;
+  }
+
+  .game-showcase-benefit {
+    font-size: .43rem !important;
+  }
+}
+
+
+/* PERFORMANCE-18 responsive game hero banners */
+.game-showcase-banner-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-19 — MOBILE HERO INFO CARD LIFT
+   Raise the lower game info card closer to the banner on mobile.
+   ========================================================== */
+@media (max-width: 767px) {
+  .game-showcase-bottom {
+    margin-top: -10px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .game-showcase-identity {
+    min-height: 74px !important;
+    padding: .56rem .72rem .3rem .72rem !important;
+  }
+
+  .game-showcase-logo {
+    top: -28px !important;
+  }
+
+  .game-showcase-brand-copy {
+    padding-top: 0 !important;
+  }
+
+  .game-showcase-benefits {
+    padding: .12rem .48rem .48rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-showcase-bottom {
+    margin-top: -8px !important;
+  }
+
+  .game-showcase-identity {
+    min-height: 70px !important;
+    padding: .5rem .64rem .26rem .64rem !important;
+  }
+
+  .game-showcase-logo {
+    left: .64rem !important;
+    top: -26px !important;
+  }
+
+  .game-showcase-brand-copy {
+    padding-left: 80px !important;
+  }
+
+  .game-showcase-benefits {
+    padding: .1rem .42rem .42rem !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-22 — MOBILE MENU + PACKAGE DETAILS
+   Keep the navigation panel outside navbar paint containment and
+   preserve a short package description on compact mobile cards.
+   ========================================================== */
+@media (max-width: 767px) {
+  #navbar-shell {
+    contain: none !important;
+    overflow: visible !important;
+  }
+
+  #navbar,
+  .storefront-mobile-navbar,
+  .storefront-mobile-top {
+    overflow: visible !important;
+  }
+
+  #mobile-nav-menu {
+    position: fixed !important;
+    z-index: 1000 !important;
+    top: calc(64px + env(safe-area-inset-top)) !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    max-height: calc(100dvh - 76px - env(safe-area-inset-top)) !important;
+    margin: 0 !important;
+    overscroll-behavior: contain;
+  }
+
+  #mobile-nav-menu.hidden {
+    display: none !important;
+  }
+
+  #mobile-nav-menu:not(.hidden) {
+    display: grid !important;
+  }
+
+  #product-container .mobile-compact-product-card {
+    height: 10.4rem !important;
+    max-height: 10.4rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 7.9rem !important;
+  }
+
+  #product-container .mobile-compact-product-description {
+    display: -webkit-box !important;
+    min-height: 1.62rem !important;
+    max-height: 1.62rem !important;
+    margin: .25rem 0 0 !important;
+    overflow: hidden !important;
+    color: #b8d7df !important;
+    font-size: .55rem !important;
+    font-weight: 550 !important;
+    line-height: 1.4 !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  #product-container .mobile-compact-product-pricing {
+    margin-top: .3rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #product-container .mobile-compact-product-card {
+    height: 10.1rem !important;
+    max-height: 10.1rem !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    height: 7.6rem !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-23 — TAP THE WHOLE PACKAGE CARD
+   The mobile card itself adds a package to cart. Discount moves
+   to the top-right and the separate select footer is removed.
+   ========================================================== */
+@media (max-width: 767px) {
+  #product-container .mobile-compact-product-card {
+    height: 8.7rem !important;
+    max-height: 8.7rem !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+  }
+
+  #product-container .mobile-compact-product-card:active {
+    transform: scale(.985) !important;
+  }
+
+  #product-container .mobile-compact-product-card:focus-visible {
+    outline: 2px solid rgba(244, 198, 78, .85) !important;
+    outline-offset: 2px !important;
+  }
+
+  #product-container .mobile-compact-product-main {
+    width: 100% !important;
+    height: 100% !important;
+    padding: .62rem .58rem .55rem !important;
+  }
+
+  #product-container .mobile-compact-product-title {
+    padding-right: 2.65rem !important;
+  }
+
+  #product-container .mobile-compact-discount {
+    position: absolute !important;
+    z-index: 2 !important;
+    top: .48rem !important;
+    right: .48rem !important;
+    min-width: 2.25rem !important;
+    min-height: 1.35rem !important;
+    padding: .16rem .3rem !important;
+    border: 1px solid rgba(255, 229, 138, .5) !important;
+    border-radius: 9999px !important;
+    color: #172027 !important;
+    background: #f4c64e !important;
+    font-size: .52rem !important;
+    font-weight: 950 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart::after {
+    content: "✓ Di keranjang";
+    position: absolute;
+    right: .5rem;
+    bottom: .45rem;
+    color: #ffe58a;
+    font-size: .5rem;
+    font-weight: 900;
+  }
+
+  #product-container .mobile-compact-product-card.is-in-cart {
+    cursor: default !important;
+  }
+
+  #product-container .mobile-compact-product-footer,
+  #product-container .mobile-compact-select-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #product-container .mobile-compact-product-card {
+    height: 8.45rem !important;
+    max-height: 8.45rem !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-24 — RATINGS FORM + MOBILE COMMENTS
+   Add a dedicated review composer and restore natural touch
+   scrolling inside the customer comment viewport.
+   ========================================================== */
+.ratings-review-compose {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(244, 198, 78, .2);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(2, 55, 66, .72), rgba(0, 24, 30, .94));
+}
+.ratings-review-compose-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ratings-review-compose-kicker {
+  color: #ffe58a;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.ratings-review-compose h2 {
+  margin-top: .28rem;
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 900;
+}
+.ratings-review-compose p {
+  margin-top: .3rem;
+  color: #9cbed0;
+  font-size: .68rem;
+  line-height: 1.5;
+}
+.ratings-review-toggle,
+.ratings-review-submit {
+  display: inline-flex;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  border-radius: .75rem;
+  font-size: .7rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.ratings-review-toggle {
+  flex: 0 0 auto;
+  padding: .65rem .85rem;
+  border: 1px solid rgba(244, 198, 78, .32);
+  color: #172126;
+  background: #f4c64e;
+}
+.ratings-review-form-wrap {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(184, 215, 223, .13);
+}
+.ratings-review-form-wrap.hidden {
+  display: none !important;
+}
+.ratings-review-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+.ratings-review-field,
+.ratings-review-rating-field {
+  min-width: 0;
+}
+.ratings-review-field label,
+.ratings-review-rating-field legend {
+  display: block;
+  margin-bottom: .4rem;
+  color: #dff4f7;
+  font-size: .66rem;
+  font-weight: 800;
+}
+.ratings-review-field input,
+.ratings-review-field select,
+.ratings-review-field textarea {
+  width: 100%;
+  border: 1px solid rgba(184, 215, 223, .18);
+  border-radius: .68rem;
+  color: #f8fafc;
+  background: rgba(0, 23, 29, .82);
+  font-size: .72rem;
+}
+.ratings-review-field input,
+.ratings-review-field select {
+  min-height: 2.55rem;
+  padding: 0 .7rem;
+}
+.ratings-review-field textarea {
+  padding: .65rem .7rem;
+  resize: vertical;
+}
+.ratings-review-comment-field,
+.ratings-review-notice,
+.ratings-review-submit {
+  grid-column: 1 / -1;
+}
+.ratings-review-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ratings-review-label-row span,
+#ratings-review-rating-label {
+  color: #9cbed0;
+  font-size: .58rem;
+}
+.ratings-review-stars {
+  display: flex;
+  gap: .3rem;
+}
+.ratings-review-stars button {
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: .55rem;
+  color: #397a87;
+  background: rgba(0, 23, 29, .82);
+  cursor: pointer;
+}
+.ratings-review-stars button.is-active {
+  color: #f4c64e;
+  background: rgba(244, 198, 78, .1);
+}
+.ratings-review-notice {
+  padding: .65rem .75rem;
+  border-radius: .68rem;
+  font-size: .68rem;
+}
+.ratings-review-notice.hidden {
+  display: none !important;
+}
+.ratings-review-notice.is-success {
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, .1);
+}
+.ratings-review-notice.is-error {
+  color: #fecdd3;
+  background: rgba(244, 63, 94, .1);
+}
+.ratings-review-submit {
+  width: 100%;
+  border: 0;
+  color: #172126;
+  background: #f4c64e;
+}
+@media (max-width: 767px) {
+  .ratings-review-compose-head {
+    align-items: flex-start;
+  }
+  .ratings-review-toggle {
+    min-width: 6.1rem;
+    padding: .55rem .65rem;
+  }
+  .ratings-review-form {
+    grid-template-columns: 1fr;
+  }
+  .ratings-review-comment-field,
+  .ratings-review-notice,
+  .ratings-review-submit {
+    grid-column: auto;
+  }
+  body[data-page="ratings"] .all-game-comments-viewport {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    touch-action: auto !important;
+    overscroll-behavior-x: contain !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  body[data-page="ratings"] .all-game-comments-track.is-manual-scroll {
+    width: max-content !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-25 — DESKTOP HOME/RATINGS EXPERIENCE
+   Match desktop game cards to the mobile visual, keep desktop
+   comments moving, and place toast notifications below navbar.
+   ========================================================== */
+#toast-container {
+  top: calc(var(--fixed-navbar-clearance, 96px) + .75rem) !important;
+  right: 1rem !important;
+  z-index: 220 !important;
+}
+
+@media (min-width: 768px) {
+  .game-menu-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  .game-menu-card {
+    aspect-ratio: 10 / 12.6 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(244, 198, 78, .24) !important;
+    border-radius: 1rem !important;
+    background: linear-gradient(160deg, rgba(0, 40, 49, .98), rgba(0, 18, 24, .98)) !important;
+  }
+
+  .game-menu-card::after {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 23, 29, .08) 58%, rgba(0, 23, 29, .28) 100%) !important;
+  }
+
+  .game-menu-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .game-menu-content {
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    min-height: 4rem !important;
+    align-items: center !important;
+    padding: .72rem .85rem !important;
+    background: linear-gradient(135deg, #ffe58a 0%, #f4c64e 58%, #d99a1d 100%) !important;
+  }
+
+  .game-menu-content > span:first-child {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .game-menu-name {
+    color: #172126 !important;
+    font-size: .86rem !important;
+    font-weight: 900 !important;
+    line-height: 1.16 !important;
+    text-shadow: none !important;
+  }
+
+  .game-menu-meta {
+    margin-top: .2rem !important;
+    color: rgba(23, 33, 38, .82) !important;
+    font-size: .6rem !important;
+    font-weight: 800 !important;
+    text-shadow: none !important;
+  }
+
+  .game-menu-arrow {
+    display: none !important;
+  }
+
+  .desktop-home-ratings {
+    display: block !important;
+    margin-top: 1rem !important;
+    margin-bottom: 4rem !important;
+  }
+
+  body[data-page="home"] .all-game-comments-viewport,
+  body[data-page="ratings"] .all-game-comments-viewport {
+    overflow: hidden !important;
+    touch-action: auto !important;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent) !important;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent) !important;
+  }
+
+  body[data-page="home"] .all-game-comments-track:not(.is-manual-scroll),
+  body[data-page="ratings"] .all-game-comments-track:not(.is-manual-scroll) {
+    display: flex !important;
+    width: max-content !important;
+    animation: allGameCommentsMarquee var(--all-game-comments-duration, 52s) linear infinite !important;
+    will-change: transform !important;
+  }
+
+  body[data-page="home"] .all-game-comments-track:not(.is-manual-scroll) .all-game-comments-group,
+  body[data-page="ratings"] .all-game-comments-track:not(.is-manual-scroll) .all-game-comments-group {
+    display: flex !important;
+    width: max-content !important;
+    flex: none !important;
+    gap: .75rem !important;
+    padding-right: .75rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktop-home-ratings {
+    display: none !important;
+  }
+
+  body[data-page="ratings"] .all-game-comments-viewport {
+    position: relative !important;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    touch-action: pan-x !important;
+    cursor: grab;
+  }
+
+  body[data-page="ratings"] .all-game-comments-track.is-manual-scroll,
+  body[data-page="ratings"] .all-game-comments-track.is-manual-scroll .all-game-comments-group {
+    width: max-content !important;
+    min-width: max-content !important;
+  }
+}
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-27 — POPULAR PACKAGE GAME LABEL
+   Place the game name directly below the package name on both
+   desktop and mobile popular-package cards.
+   ========================================================== */
+.weekly-popular-product-game {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: .25rem;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  color: #b8d7df;
+  background: transparent;
+  font-size: .54rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .weekly-popular-compact-content {
+    align-content: start;
+  }
+
+  .weekly-popular-compact-content .weekly-popular-compact-game {
+    position: static !important;
+    display: block !important;
+    width: fit-content;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin-top: .25rem;
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+    color: #b8d7df !important;
+    background: transparent !important;
+    font-size: .54rem !important;
+    font-weight: 750 !important;
+    line-height: 1.2 !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weekly-popular-compact-price {
+    margin-top: .42rem;
+  }
+
+  .weekly-popular-compact-description {
+    display: -webkit-box;
+    min-height: 1.55rem;
+    max-height: 1.55rem;
+    margin-top: .28rem;
+    overflow: hidden;
+    color: #9cbed0;
+    font-size: .54rem;
+    font-weight: 550;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .weekly-popular-compact-content {
+    min-height: 94px;
+  }
+}
 </style>
 
 
 
-<script defer="" src="assets/js/willpedia.min.js?v=20260724-performance-3"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260726-performance-29"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="howto">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
