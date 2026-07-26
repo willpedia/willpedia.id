@@ -4136,9 +4136,161 @@ body[data-page="game"] .detail-hero-badges {
     max-height: 15.05rem !important;
   }
 }
+
+/* ==========================================================
+   WILLPEDIA PERFORMANCE-34 — VOUCHER CHECKOUT
+   Shared voucher controls for desktop summary, modal, and mobile dock.
+   ========================================================== */
+.voucher-box {
+  margin-top: .8rem;
+  padding: .78rem;
+  border: 1px solid rgba(244, 198, 78, .2);
+  border-radius: .8rem;
+  background: rgba(0, 23, 29, .48);
+}
+
+.voucher-box-modal {
+  margin-top: 0;
+  margin-bottom: .85rem;
+}
+
+.voucher-label {
+  display: block;
+  margin-bottom: .42rem;
+  color: #b8d7df;
+  font-size: .65rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.voucher-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .45rem;
+}
+
+.voucher-input {
+  width: 100%;
+  min-width: 0;
+  height: 2.45rem;
+  padding: 0 .72rem;
+  border: 1px solid rgba(184, 215, 223, .22);
+  border-radius: .58rem;
+  outline: none;
+  color: #f8fafc;
+  background: #00171d;
+  font-size: .7rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.voucher-input::placeholder {
+  color: #66838b;
+  text-transform: none;
+}
+
+.voucher-input:focus {
+  border-color: rgba(244, 198, 78, .72);
+  box-shadow: 0 0 0 3px rgba(244, 198, 78, .09);
+}
+
+.voucher-apply {
+  min-width: 5.3rem;
+  height: 2.45rem;
+  padding: 0 .7rem;
+  border: 1px solid rgba(244, 198, 78, .48);
+  border-radius: .58rem;
+  color: #172126;
+  background: #f4c64e;
+  font-size: .61rem;
+  font-weight: 950;
+  touch-action: manipulation;
+}
+
+.voucher-apply:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.voucher-apply.is-applied {
+  color: #ffe58a;
+  background: rgba(244, 198, 78, .12);
+}
+
+.voucher-status {
+  min-height: 1rem;
+  margin-top: .4rem;
+  color: #78949b;
+  font-size: .59rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.voucher-status.is-success {
+  color: #86efac;
+}
+
+.voucher-status.is-error {
+  color: #fda4af;
+}
+
+.voucher-status.is-info {
+  color: #fde68a;
+}
+
+.voucher-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  margin-top: .4rem;
+  color: #94a3b8;
+  font-size: .66rem;
+  font-weight: 700;
+}
+
+.voucher-price-row.hidden {
+  display: none !important;
+}
+
+.voucher-price-row strong {
+  color: #86efac;
+  font-weight: 900;
+}
+
+.voucher-price-total {
+  padding-top: .45rem;
+  border-top: 1px solid rgba(184, 215, 223, .1);
+  color: #dbeafe;
+}
+
+.voucher-price-total strong {
+  color: #ffe58a;
+  font-size: .76rem;
+}
+
+@media (max-width: 767px) {
+  .voucher-box {
+    padding: .68rem;
+  }
+
+  .voucher-box-mobile {
+    margin-top: .65rem;
+  }
+
+  .voucher-input,
+  .voucher-apply {
+    height: 2.3rem;
+  }
+
+  .voucher-apply {
+    min-width: 4.85rem;
+  }
+}
 </style>
 <link as="fetch" crossorigin="anonymous" href="data/hsr.json" rel="preload"/>
-<script defer="" src="assets/js/willpedia.min.js?v=20260726-performance-33"></script>
+<script defer="" src="assets/js/willpedia.min.js?v=20260726-performance-34"></script>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-game="hsr" data-page="game">
 <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -4385,6 +4537,16 @@ body[data-page="game"] .detail-hero-badges {
 <span>Subtotal</span>
 <strong id="mobile-order-sheet-subtotal">Rp 0</strong>
 </div>
+<div class="voucher-box voucher-box-mobile">
+<label class="voucher-label" for="mobile-voucher-input">Kode Voucher</label>
+<div class="voucher-control">
+<input autocomplete="off" class="voucher-input" data-voucher-input="mobile" id="mobile-voucher-input" maxlength="40" oninput="handleVoucherInput(event)" placeholder="Masukkan kode" type="text"/>
+<button class="voucher-apply" data-voucher-apply="" onclick="applyVoucher('mobile')" type="button"><span data-voucher-button-label="">GUNAKAN</span></button>
+</div>
+<p aria-live="polite" class="voucher-status" data-voucher-status=""></p>
+<div class="voucher-price-row hidden" data-voucher-discount-row=""><span>Potongan voucher</span><strong data-voucher-discount="">-Rp 0</strong></div>
+<div class="voucher-price-row voucher-price-total"><span>Total akhir</span><strong data-voucher-final-total="">Rp 0</strong></div>
+</div>
 </div>
 </div>
 <div class="mobile-order-compact">
@@ -4417,6 +4579,15 @@ body[data-page="game"] .detail-hero-badges {
 </div>
 <div class="p-4 overflow-y-auto space-y-3 flex-1 min-h-[150px]" id="modal-cart-items"></div>
 <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+<div class="voucher-box voucher-box-modal">
+<label class="voucher-label" for="modal-voucher-input">Kode Voucher</label>
+<div class="voucher-control">
+<input autocomplete="off" class="voucher-input" data-voucher-input="modal" id="modal-voucher-input" maxlength="40" oninput="handleVoucherInput(event)" placeholder="Masukkan kode" type="text"/>
+<button class="voucher-apply" data-voucher-apply="" onclick="applyVoucher('modal')" type="button"><span data-voucher-button-label="">GUNAKAN</span></button>
+</div>
+<p aria-live="polite" class="voucher-status" data-voucher-status=""></p>
+<div class="voucher-price-row hidden" data-voucher-discount-row=""><span>Potongan voucher</span><strong data-voucher-discount="">-Rp 0</strong></div>
+</div>
 <div class="flex justify-between items-center mb-4">
 <span class="text-xs md:text-sm text-slate-400 font-medium">Total Pembayaran:</span>
 <span class="text-lg font-extrabold text-cyan-400" id="modal-total-price">Rp 0</span>

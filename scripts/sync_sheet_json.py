@@ -34,8 +34,10 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 DEFAULT_APPS_SCRIPT_URL = (
     "https://script.google.com/macros/s/"
-    "AKfycbwWfP0jLzMPt1w5F2s5e_XxTrpy90jYET9M-KoNke5vY-nv8s7dL_jTysmcL5YIkLuAYA/exec"
+    "AKfycbwGaPhB5omhJZEvwjrbGozIlm56OkOxlRDD8-TMICjOAix2BqN1DiKeNXD3M7oxTluaXQ/exec"
 )
+
+
 BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
