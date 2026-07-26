@@ -51,9 +51,9 @@
     <link href="logowill.png" rel="icon" type="image/png" />
     <link href="logowill.png" rel="shortcut icon" />
     <link href="logowill.png" rel="apple-touch-icon" />
-    <link href="assets/css/willpedia.min.css?v=20260726-cleanup-1" rel="stylesheet" />
+    <link href="assets/css/willpedia.min.css?v=20260727-search-52" rel="stylesheet" />
 
-    <script defer="" src="assets/js/willpedia.min.js?v=20260726-performance-45"></script>
+    <script defer="" src="assets/js/willpedia.min.js?v=20260727-search-52"></script>
   </head>
   <body class="gradient-bg text-white min-h-screen flex flex-col justify-between" data-page="howto">
     <div class="fixed top-0 left-0 right-0 z-50 w-full" id="navbar-shell">
@@ -89,9 +89,11 @@
                   <input
                     autocomplete="off"
                     class="joki-search-input"
+                    enterkeyhint="search"
                     id="joki-search-input"
+                    inputmode="search"
                     placeholder="Cari game atau paket joki"
-                    type="search"
+                    type="text"
                   />
                   <button
                     aria-label="Hapus pencarian"
@@ -338,9 +340,11 @@
           <label class="sr-only" for="mobile-search-input">Cari game atau paket joki</label>
           <input
             autocomplete="off"
+            enterkeyhint="search"
             id="mobile-search-input"
+            inputmode="search"
             placeholder="Cari game atau paket joki..."
-            type="search"
+            type="text"
           />
           <button
             aria-label="Hapus pencarian"
@@ -354,7 +358,7 @@
         <div class="mobile-search-heading">
           <span id="mobile-search-list-title">Populer</span>
           <button aria-label="Tutup panel pencarian" onclick="closeMobileSearch()" type="button">
-            <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+            <i aria-hidden="true" class="fa-solid fa-chevron-up"></i>
           </button>
         </div>
         <div aria-live="polite" class="mobile-popular-games" id="mobile-popular-games"></div>
@@ -373,7 +377,7 @@
               Mudah dan transparan
             </div>
             <h1 class="home-section-title" id="how-order-title">
-              CARA ORDER JOKI DI WILLPEDIA
+              Cara Order Joki Game di Willpedia
             </h1>
             <p class="home-section-description">
               Pilih layanan, cek kembali pesanan, lalu lanjutkan langsung ke WhatsApp admin.

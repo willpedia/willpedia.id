@@ -48,6 +48,14 @@ POPULAR_DATA_END = "<!-- WILLPEDIA_POPULAR_DATA_END -->"
 
 IMAGE_MAX_DIMENSION = max(240, int(os.environ.get("IMAGE_MAX_DIMENSION", "480")))
 IMAGE_QUALITY = max(45, min(90, int(os.environ.get("IMAGE_QUALITY", "76"))))
+POPULAR_THUMBNAIL_DIMENSION = max(
+    240,
+    min(IMAGE_MAX_DIMENSION, int(os.environ.get("POPULAR_THUMBNAIL_DIMENSION", "360"))),
+)
+POPULAR_THUMBNAIL_QUALITY = max(
+    45,
+    min(90, int(os.environ.get("POPULAR_THUMBNAIL_QUALITY", "70"))),
+)
 IMAGE_DOWNLOAD_WORKERS = max(1, min(16, int(os.environ.get("IMAGE_DOWNLOAD_WORKERS", "8"))))
 IMAGE_DOWNLOAD_TIMEOUT = max(5, min(60, int(os.environ.get("IMAGE_DOWNLOAD_TIMEOUT", "20"))))
 IMAGE_MAX_BYTES = max(1_000_000, int(os.environ.get("IMAGE_MAX_BYTES", "15000000")))
@@ -670,6 +678,69 @@ def _prune_stale_image_cache(
     return removed
 
 
+def _apply_popular_thumbnails(popular_payload: dict[str, Any]) -> int:
+    """Buat thumbnail ringan khusus kartu populer tanpa mengubah gambar utama."""
+    products = popular_payload.get("products")
+    if not isinstance(products, list):
+        return 0
+
+    image_root = IMAGE_ROOT.resolve()
+    active_thumbnail_paths: set[Path] = set()
+    changed = 0
+
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+
+        relative_source = str(_first_value(product, PRODUCT_IMAGE_KEYS) or "")
+        source = (ROOT / relative_source).resolve()
+        if (
+            not relative_source.startswith("assets/images/products/")
+            or not source.is_relative_to(image_root)
+            or not source.is_file()
+        ):
+            product.pop("Gambar_Thumbnail", None)
+            continue
+
+        target = source.with_name(f"{source.stem}-thumb.webp")
+        active_thumbnail_paths.add(target)
+
+        with Image.open(source) as source_image:
+            image = ImageOps.exif_transpose(source_image).copy()
+        has_alpha = image.mode in {"RGBA", "LA"} or (
+            image.mode == "P" and "transparency" in image.info
+        )
+        image = image.convert("RGBA" if has_alpha else "RGB")
+        image.thumbnail(
+            (POPULAR_THUMBNAIL_DIMENSION, POPULAR_THUMBNAIL_DIMENSION),
+            Image.Resampling.LANCZOS,
+        )
+        output = io.BytesIO()
+        image.save(
+            output,
+            format="WEBP",
+            quality=POPULAR_THUMBNAIL_QUALITY,
+            method=6,
+            optimize=True,
+        )
+        encoded = output.getvalue()
+
+        if not target.exists() or target.read_bytes() != encoded:
+            temporary = target.with_suffix(".webp.tmp")
+            temporary.write_bytes(encoded)
+            temporary.replace(target)
+            changed += 1
+
+        product["Gambar_Thumbnail"] = target.relative_to(ROOT).as_posix()
+
+    for stale_thumbnail in IMAGE_ROOT.rglob("*-thumb.webp"):
+        if stale_thumbnail.resolve() not in active_thumbnail_paths:
+            stale_thumbnail.unlink()
+            changed += 1
+
+    return changed
+
+
 def _apply_local_product_images(
     payloads: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, Any], int, int, int]:
@@ -832,6 +903,7 @@ def main() -> int:
         # memakai file yang sama bila canonical URL-nya identik.
         all_payloads = {**game_payloads, "popular": popular}
         manifest, downloaded, reused, failed = _apply_local_product_images(all_payloads)
+        popular_thumbnails_changed = _apply_popular_thumbnails(popular)
 
         changed += int(write_if_changed(
             DATA_DIR / "reviews.json",
@@ -857,6 +929,7 @@ def main() -> int:
     print(
         "Sinkronisasi selesai. "
         f"{changed} file data berubah; gambar baru/diperbarui={downloaded}, "
+        f"thumbnail populer berubah={popular_thumbnails_changed}, "
         f"cache digunakan={reused}, gagal={failed}."
     )
     return 0
