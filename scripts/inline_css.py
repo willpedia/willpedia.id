@@ -26,7 +26,15 @@ def main() -> int:
     inline_css = css.replace('url("../webfonts/', 'url("assets/webfonts/').replace(
         "url('../webfonts/", "url('assets/webfonts/"
     )
-    style = f'<style id="willpedia-critical-css">{inline_css}</style>'
+    # Pertahankan CSS inline tetap mudah dibaca di seluruh halaman HTML.
+    indented_css = "\n".join(
+        f"      {line}" if line else "" for line in inline_css.splitlines()
+    )
+    style = (
+        '<style id="willpedia-critical-css">\n'
+        f"{indented_css}\n"
+        "    </style>"
+    )
 
     pages = [ROOT / "index.html", *sorted(ROOT.glob("*/index.html"))]
     for page in pages:

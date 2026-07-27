@@ -33,8 +33,12 @@ from typing import Any
 from PIL import Image, ImageOps, UnidentifiedImageError
 
 DEFAULT_API_URL = "https://api.willpedia.com"
+DEFAULT_FALLBACK_API_URL = "https://willpedia-api.wily-roxy69.workers.dev"
 
-BASE_URL = os.environ.get("WILLPEDIA_API_URL", DEFAULT_API_URL).strip()
+BASE_URL = os.environ.get("WILLPEDIA_API_URL", DEFAULT_API_URL).strip().rstrip("/")
+FALLBACK_BASE_URL = os.environ.get(
+    "WILLPEDIA_API_FALLBACK_URL", DEFAULT_FALLBACK_API_URL
+).strip().rstrip("/")
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 HOME_FILE = ROOT / "index.html"
@@ -69,6 +73,15 @@ GAME_NAMES: dict[str, str] = {
     "wuwa": "WUTHERING WAVES",
 }
 
+EXPECTED_POPULAR_PRODUCT_IDS = (
+    "WUWA-P003",
+    "ZZZ-P004",
+    "HSR-P003",
+    "GI-P004",
+    "GI-P026",
+    "WUWA-P047",
+)
+
 PRODUCT_ID_KEYS = ("ID", "Id", "id", "Kode", "kode")
 PRODUCT_NAME_KEYS = ("Nama_Paket", "Nama Paket", "nama_paket", "name", "Nama")
 PRODUCT_IMAGE_KEYS = (
@@ -98,26 +111,66 @@ PUBLIC_PRODUCT_KEYS = (
 )
 
 
-def request_json(params: dict[str, str]) -> dict[str, Any]:
-    query = dict(params)
+def _build_api_url(base_url: str, params: dict[str, str]) -> str:
+    parsed = urllib.parse.urlsplit(base_url)
+    query = dict(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
+    query.update(params)
     query["_sync"] = str(int(time.time()))
-    url = f"{BASE_URL}?{urllib.parse.urlencode(query)}"
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Willpedia-GitHub-Sync/5.0",
-            "Accept": "application/json",
-        },
+    return urllib.parse.urlunsplit(
+        (parsed.scheme, parsed.netloc, parsed.path or "/", urllib.parse.urlencode(query), "")
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        raw = response.read().decode("utf-8")
+
+
+def _request_json_from(base_url: str, params: dict[str, str]) -> dict[str, Any]:
+    url = _build_api_url(base_url, params)
+    headers = {
+        "User-Agent": "Willpedia-GitHub-Sync/6.0",
+        "Accept": "application/json",
+        "X-Willpedia-Client": "github-sync",
+    }
+    request = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(request, timeout=60) as response:
+            raw = response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        try:
+            response_body = exc.read().decode("utf-8", errors="replace").strip()
+        except Exception:
+            response_body = ""
+        detail = f"HTTP {exc.code} dari {urllib.parse.urlsplit(base_url).netloc}"
+        if response_body:
+            detail += f": {response_body[:300]}"
+        raise ValueError(detail) from exc
+
     payload = json.loads(raw)
     if not isinstance(payload, dict):
-        raise ValueError("Respons Apps Script bukan object JSON.")
+        raise ValueError("Respons API bukan object JSON.")
     if payload.get("success") is False:
-        raise ValueError(str(payload.get("message") or "Apps Script mengembalikan error."))
+        raise ValueError(str(payload.get("message") or "API mengembalikan error."))
     return payload
 
+
+def request_json(params: dict[str, str]) -> dict[str, Any]:
+    endpoints = []
+    for candidate in (BASE_URL, FALLBACK_BASE_URL):
+        if candidate and candidate not in endpoints:
+            endpoints.append(candidate)
+
+    errors: list[str] = []
+    for index, endpoint in enumerate(endpoints):
+        try:
+            return _request_json_from(endpoint, params)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, ValueError) as exc:
+            errors.append(str(exc))
+            if index + 1 < len(endpoints):
+                print(
+                    f"API {urllib.parse.urlsplit(endpoint).netloc} gagal; mencoba endpoint fallback.",
+                    file=sys.stderr,
+                )
+                continue
+            break
+
+    raise ValueError(" | ".join(errors) or "Semua endpoint API gagal diakses.")
 
 def _first_value(record: dict[str, Any], keys: tuple[str, ...]) -> Any:
     for key in keys:
@@ -154,6 +207,47 @@ def fetch_products(params: dict[str, str]) -> dict[str, Any]:
     payload["products"] = _clean_products(payload.get("products"))
     payload["success"] = True
     return payload
+
+
+def normalize_popular_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    products = payload.get("products")
+    if not isinstance(products, list):
+        raise ValueError("Payload popular tidak memiliki array products.")
+
+    product_map: dict[str, dict[str, Any]] = {}
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+        product_id = str(product.get("ID") or "").strip().upper()
+        if product_id and product_id not in product_map:
+            product_map[product_id] = product
+
+    missing = [product_id for product_id in EXPECTED_POPULAR_PRODUCT_IDS if product_id not in product_map]
+    if missing:
+        raise ValueError(
+            "Paket populer tidak lengkap. ID yang belum ditemukan: " + ", ".join(missing)
+        )
+
+    payload["products"] = [product_map[product_id] for product_id in EXPECTED_POPULAR_PRODUCT_IDS]
+    return payload
+
+
+def build_popular_payload(
+    game_payloads: dict[str, dict[str, Any]],
+    ratings: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    products: list[dict[str, Any]] = []
+    for game_key in GAME_FILES:
+        payload = game_payloads.get(game_key, {})
+        game_products = payload.get("products") if isinstance(payload, dict) else []
+        if isinstance(game_products, list):
+            products.extend(item for item in game_products if isinstance(item, dict))
+
+    return normalize_popular_payload({
+        "success": True,
+        "products": products,
+        "ratings": ratings,
+    })
 
 
 def _first_list(*values: Any) -> list[Any]:
@@ -753,7 +847,7 @@ def _strip_internal_product_fields(payloads: dict[str, dict[str, Any]]) -> None:
 
 def serialize(payload: dict[str, Any]) -> str:
     # Deterministik: file tidak berubah jika produk/rating tidak berubah.
-    return json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n"
+    return json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
 
 def write_if_changed(path: Path, content: str) -> bool:
@@ -779,12 +873,14 @@ def embed_popular_payload(payload: dict[str, Any]) -> bool:
     if start < 0 or end < 0:
         raise ValueError("Marker data populer tidak ditemukan di index.html.")
     safe_json = json.dumps(
-        payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True
+        payload, ensure_ascii=False, indent=2, sort_keys=True
     ).replace("</", "<\\/")
+    indented_json = "\n".join(f"      {line}" for line in safe_json.splitlines())
     block = (
         f"{POPULAR_DATA_START}\n"
-        f"    <script id=\"willpedia-popular-data\" type=\"application/json\">"
-        f"{safe_json}</script>\n"
+        f"    <script id=\"willpedia-popular-data\" type=\"application/json\">\n"
+        f"{indented_json}\n"
+        f"    </script>\n"
         f"    {POPULAR_DATA_END}"
     )
     updated = html[:start] + block + html[end + len(POPULAR_DATA_END):]
@@ -792,19 +888,21 @@ def embed_popular_payload(payload: dict[str, Any]) -> bool:
 
 
 def main() -> int:
-    parsed_api_url = urllib.parse.urlparse(BASE_URL)
-
     allowed_api_hosts = {
         "willpedia-api.wily-roxy69.workers.dev",
         "api.willpedia.com",
     }
 
-    if (
-        parsed_api_url.scheme != "https"
-        or parsed_api_url.hostname not in allowed_api_hosts
+    for variable_name, api_url in (
+        ("WILLPEDIA_API_URL", BASE_URL),
+        ("WILLPEDIA_API_FALLBACK_URL", FALLBACK_BASE_URL),
     ):
-        print("WILLPEDIA_API_URL tidak valid.", file=sys.stderr)
-        return 2
+        if not api_url:
+            continue
+        parsed_api_url = urllib.parse.urlparse(api_url)
+        if parsed_api_url.scheme != "https" or parsed_api_url.hostname not in allowed_api_hosts:
+            print(f"{variable_name} tidak valid.", file=sys.stderr)
+            return 2
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     IMAGE_ROOT.mkdir(parents=True, exist_ok=True)
@@ -813,14 +911,14 @@ def main() -> int:
     try:
         ratings, reviews = fetch_review_data()
 
-        # Ambil semua payload dahulu agar cache gambar dapat dibuat satu kali per URL unik.
-        popular = fetch_products({"action": "popular"})
-        popular["ratings"] = ratings
+        # Ambil setiap game satu kali. Paket populer kemudian disusun dari payload
+        # tersebut agar tidak perlu request API tambahan dan urutannya selalu konsisten.
         game_payloads: dict[str, dict[str, Any]] = {}
         for game_key in GAME_FILES:
             payload = fetch_products({"action": "products", "game": game_key})
             payload["rating"] = ratings.get(game_key, {"average": 0, "total": 0})
             game_payloads[game_key] = payload
+        popular = build_popular_payload(game_payloads, ratings)
 
         # Popular diproses sebagai grup tersendiri, tetapi URL yang sudah ada di game tetap
         # memakai file yang sama bila canonical URL-nya identik.

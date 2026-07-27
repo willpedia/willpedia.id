@@ -11550,29 +11550,52 @@ body[data-page="game"] .detail-hero-badges {
     box-shadow: none !important;
   }
 }
+}
 
-/* ==========================================================
-   WILLPEDIA PERFORMANCE-38 — CONSISTENT HOME SECTION DIVIDERS
-   Lightweight one-pixel separators for every main home block.
-   ========================================================== */
-body[data-page="home"] #weekly-popular-section::before,
-body[data-page="home"] #game-menu-view::before,
-body[data-page="home"] .mobile-home-how-order::before,
-body[data-page="home"] #all-game-ratings-section::before {
-  content: "";
-  display: block;
-  width: min(100%, 72rem);
-  height: 1px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(90deg, transparent, rgba(244, 198, 78, 0.62), transparent);
-  opacity: 0.6;
+/* WILLPEDIA SEARCH + MOBILE INPUT FIX 2026-07-28 */
+body.search-results-active #all-game-ratings-section,
+body.search-results-active #game-reviews-section {
+  display: none !important;
 }
 
 @media (max-width: 767px) {
-  body[data-page="home"] #weekly-popular-section::before,
-  body[data-page="home"] #game-menu-view::before,
-  body[data-page="home"] .mobile-home-how-order::before,
-  body[data-page="home"] #all-game-ratings-section::before {
-    margin-bottom: 1rem;
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 16px !important;
   }
 }
+
+
+
+/* WILLPEDIA SEARCH X REMOVAL + POPULAR SEPARATOR FIX 2026-07-28 */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+input[type="search"]::-ms-clear,
+input[type="search"]::-ms-reveal {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.joki-search-clear,
+.mobile-search-clear,
+.mobile-search-heading button[aria-label="Tutup panel pencarian"] {
+  display: none !important;
+}
+.mobile-search-heading {
+  justify-content: flex-start !important;
+}
+#game-menu-view::before {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+}
+

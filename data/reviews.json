@@ -1,1 +1,22 @@
-{"ratings":{"genshin":{"average":0.0,"total":0},"hsr":{"average":0.0,"total":0},"wuwa":{"average":0.0,"total":0},"zzz":{"average":0.0,"total":0}},"reviews":[],"success":true}
+{
+  "ratings": {
+    "genshin": {
+      "average": 0.0,
+      "total": 0
+    },
+    "hsr": {
+      "average": 0.0,
+      "total": 0
+    },
+    "wuwa": {
+      "average": 0.0,
+      "total": 0
+    },
+    "zzz": {
+      "average": 0.0,
+      "total": 0
+    }
+  },
+  "reviews": [],
+  "success": true
+}
