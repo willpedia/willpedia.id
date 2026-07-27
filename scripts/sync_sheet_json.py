@@ -7,7 +7,6 @@ Hasil sinkronisasi:
 - data/reviews.json: komentar pelanggan yang sudah tersedia dari Apps Script.
 - data/product-images.json: manifest cache gambar produk lokal.
 - assets/images/products/: thumbnail WebP produk yang dioptimalkan.
-- index.html dan rating/index.html: snapshot rating/ulasan tertanam agar tampil instan.
 
 Gambar produk tetap bersumber dari URL di Google Sheet, tetapi GitHub Actions akan
 mengunduh, mengecilkan, mengonversi ke WebP, dan memakai file lokal apabila proses
@@ -33,33 +32,19 @@ from typing import Any
 
 from PIL import Image, ImageOps, UnidentifiedImageError
 
-DEFAULT_APPS_SCRIPT_URL = (
-    "https://script.google.com/macros/s/"
-    "AKfycbx3RywcEzWmMpu2I_-aQ6GRhC_K_w6MOOZcXcKfLB_rJ0BI_Z5cI9vxj_cfbUxBaK_Enw/exec"
-)
+DEFAULT_API_URL = "https://willpedia-api.wily-roxy69.workers.dev"
 
-BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
+BASE_URL = os.environ.get("WILLPEDIA_API_URL", DEFAULT_API_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 HOME_FILE = ROOT / "index.html"
-RATING_FILE = ROOT / "rating" / "index.html"
 IMAGE_ROOT = ROOT / "assets" / "images" / "products"
 IMAGE_MANIFEST_FILE = DATA_DIR / "product-images.json"
 POPULAR_DATA_START = "<!-- WILLPEDIA_POPULAR_DATA_START -->"
 POPULAR_DATA_END = "<!-- WILLPEDIA_POPULAR_DATA_END -->"
-REVIEWS_DATA_START = "<!-- WILLPEDIA_REVIEWS_DATA_START -->"
-REVIEWS_DATA_END = "<!-- WILLPEDIA_REVIEWS_DATA_END -->"
 
 IMAGE_MAX_DIMENSION = max(240, int(os.environ.get("IMAGE_MAX_DIMENSION", "480")))
 IMAGE_QUALITY = max(45, min(90, int(os.environ.get("IMAGE_QUALITY", "76"))))
-POPULAR_THUMBNAIL_DIMENSION = max(
-    240,
-    min(IMAGE_MAX_DIMENSION, int(os.environ.get("POPULAR_THUMBNAIL_DIMENSION", "360"))),
-)
-POPULAR_THUMBNAIL_QUALITY = max(
-    45,
-    min(90, int(os.environ.get("POPULAR_THUMBNAIL_QUALITY", "70"))),
-)
 IMAGE_DOWNLOAD_WORKERS = max(1, min(16, int(os.environ.get("IMAGE_DOWNLOAD_WORKERS", "8"))))
 IMAGE_DOWNLOAD_TIMEOUT = max(5, min(60, int(os.environ.get("IMAGE_DOWNLOAD_TIMEOUT", "20"))))
 IMAGE_MAX_BYTES = max(1_000_000, int(os.environ.get("IMAGE_MAX_BYTES", "15000000")))
@@ -97,6 +82,20 @@ PRODUCT_IMAGE_KEYS = (
     "Image URL",
 )
 SOURCE_IMAGE_KEYS = ("Gambar_Sumber", "gambar_sumber", "Source_Image", "source_image")
+PUBLIC_PRODUCT_KEYS = (
+    "ID",
+    "Nama_Paket",
+    "Deskripsi",
+    "Game",
+    "Game_Key",
+    "Kategori",
+    "Harga_Asli",
+    "Harga_Diskon",
+    "Status",
+    "Gambar",
+    "Tampilan_Gambar",
+    "Posisi_Gambar",
+)
 
 
 def request_json(params: dict[str, str]) -> dict[str, Any]:
@@ -129,7 +128,7 @@ def _first_value(record: dict[str, Any], keys: tuple[str, ...]) -> Any:
 
 
 def _clean_products(products: Any) -> list[dict[str, Any]]:
-    """Hilangkan baris kosong seperti ID placeholder tanpa nama paket."""
+    """Hilangkan baris kosong dan kolom internal dari payload produk publik."""
     if not isinstance(products, list):
         raise ValueError("Respons Apps Script tidak memiliki array products.")
     cleaned: list[dict[str, Any]] = []
@@ -142,7 +141,11 @@ def _clean_products(products: Any) -> list[dict[str, Any]]:
             if product_id:
                 print(f"Lewati baris produk kosong: {product_id}")
             continue
-        cleaned.append(item)
+        cleaned.append({
+            key: item[key]
+            for key in PUBLIC_PRODUCT_KEYS
+            if key in item
+        })
     return cleaned
 
 
@@ -192,7 +195,6 @@ def _normalize_review(item: Any, game_name: str = "") -> dict[str, Any] | None:
         or "Game"
     )
     return {
-        **item,
         "Nama": item.get("Nama") or item.get("nama") or item.get("name") or "Pengguna",
         "Rating": item.get("Rating") if item.get("Rating") is not None else item.get("rating", 0),
         "Komentar": item.get("Komentar") or item.get("komentar") or item.get("comment") or item.get("ulasan") or "",
@@ -649,102 +651,6 @@ def _infer_product_game_key(product: dict[str, Any], fallback: str) -> str:
     return "shared"
 
 
-def _prune_stale_image_cache(
-    images: dict[str, Any],
-    active_manifest_keys: set[str],
-) -> int:
-    """Hapus entri dan file cache yang sudah tidak dipakai produk aktif."""
-    retained_paths = {
-        str(entry.get("path") or "")
-        for key, entry in images.items()
-        if key in active_manifest_keys and isinstance(entry, dict)
-    }
-    image_root = IMAGE_ROOT.resolve()
-    removed = 0
-
-    for manifest_key, entry in list(images.items()):
-        if manifest_key in active_manifest_keys:
-            continue
-
-        relative_path = str(entry.get("path") or "") if isinstance(entry, dict) else ""
-        if relative_path and relative_path not in retained_paths:
-            target = (ROOT / relative_path).resolve()
-            if (
-                target.is_relative_to(image_root)
-                and target.suffix.lower() == ".webp"
-                and target.is_file()
-            ):
-                target.unlink()
-
-        images.pop(manifest_key, None)
-        removed += 1
-
-    return removed
-
-
-def _apply_popular_thumbnails(popular_payload: dict[str, Any]) -> int:
-    """Buat thumbnail ringan khusus kartu populer tanpa mengubah gambar utama."""
-    products = popular_payload.get("products")
-    if not isinstance(products, list):
-        return 0
-
-    image_root = IMAGE_ROOT.resolve()
-    active_thumbnail_paths: set[Path] = set()
-    changed = 0
-
-    for product in products:
-        if not isinstance(product, dict):
-            continue
-
-        relative_source = str(_first_value(product, PRODUCT_IMAGE_KEYS) or "")
-        source = (ROOT / relative_source).resolve()
-        if (
-            not relative_source.startswith("assets/images/products/")
-            or not source.is_relative_to(image_root)
-            or not source.is_file()
-        ):
-            product.pop("Gambar_Thumbnail", None)
-            continue
-
-        target = source.with_name(f"{source.stem}-thumb.webp")
-        active_thumbnail_paths.add(target)
-
-        with Image.open(source) as source_image:
-            image = ImageOps.exif_transpose(source_image).copy()
-        has_alpha = image.mode in {"RGBA", "LA"} or (
-            image.mode == "P" and "transparency" in image.info
-        )
-        image = image.convert("RGBA" if has_alpha else "RGB")
-        image.thumbnail(
-            (POPULAR_THUMBNAIL_DIMENSION, POPULAR_THUMBNAIL_DIMENSION),
-            Image.Resampling.LANCZOS,
-        )
-        output = io.BytesIO()
-        image.save(
-            output,
-            format="WEBP",
-            quality=POPULAR_THUMBNAIL_QUALITY,
-            method=6,
-            optimize=True,
-        )
-        encoded = output.getvalue()
-
-        if not target.exists() or target.read_bytes() != encoded:
-            temporary = target.with_suffix(".webp.tmp")
-            temporary.write_bytes(encoded)
-            temporary.replace(target)
-            changed += 1
-
-        product["Gambar_Thumbnail"] = target.relative_to(ROOT).as_posix()
-
-    for stale_thumbnail in IMAGE_ROOT.rglob("*-thumb.webp"):
-        if stale_thumbnail.resolve() not in active_thumbnail_paths:
-            stale_thumbnail.unlink()
-            changed += 1
-
-    return changed
-
-
 def _apply_local_product_images(
     payloads: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, Any], int, int, int]:
@@ -823,14 +729,6 @@ def _apply_local_product_images(
                 # Fallback aman: tetap gunakan URL sumber bila cache belum berhasil.
                 product["Gambar"] = source_url
 
-    active_manifest_keys = {
-        f"{game_key}:{_cache_key(canonical)}"
-        for game_key, canonical in jobs
-    }
-    pruned = _prune_stale_image_cache(images, active_manifest_keys)
-    if pruned:
-        print(f"Cache gambar tidak terpakai dihapus: {pruned}")
-
     manifest["version"] = 2
     manifest["settings"] = {
         "max_dimension": IMAGE_MAX_DIMENSION,
@@ -840,6 +738,17 @@ def _apply_local_product_images(
         "fandom_api": True,
     }
     return manifest, downloaded, reused, failed
+
+
+def _strip_internal_product_fields(payloads: dict[str, dict[str, Any]]) -> None:
+    """Pastikan URL sumber/cache internal tidak masuk JSON atau HTML publik."""
+    for payload in payloads.values():
+        products = payload.get("products")
+        if not isinstance(products, list):
+            continue
+        for product in products:
+            if isinstance(product, dict):
+                product.pop("Gambar_Sumber", None)
 
 
 def serialize(payload: dict[str, Any]) -> str:
@@ -860,62 +769,41 @@ def write_if_changed(path: Path, content: str) -> bool:
     return True
 
 
-def embed_json_payload(
-    path: Path,
-    payload: dict[str, Any],
-    start_marker: str,
-    end_marker: str,
-    script_id: str,
-) -> bool:
-    """Tanam payload JSON di antara marker HTML secara deterministik."""
-    if not path.exists():
-        raise ValueError(f"{path.relative_to(ROOT)} tidak ditemukan untuk penyisipan data.")
-    html = path.read_text(encoding="utf-8")
-    start = html.find(start_marker)
-    end = html.find(end_marker, start + len(start_marker))
+def embed_popular_payload(payload: dict[str, Any]) -> bool:
+    """Tanam data populer ke index.html agar halaman home tidak perlu fetch saat dibuka."""
+    if not HOME_FILE.exists():
+        raise ValueError("index.html tidak ditemukan untuk penyisipan data populer.")
+    html = HOME_FILE.read_text(encoding="utf-8")
+    start = html.find(POPULAR_DATA_START)
+    end = html.find(POPULAR_DATA_END, start + len(POPULAR_DATA_START))
     if start < 0 or end < 0:
-        raise ValueError(f"Marker data tidak ditemukan di {path.relative_to(ROOT)}.")
+        raise ValueError("Marker data populer tidak ditemukan di index.html.")
     safe_json = json.dumps(
         payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True
     ).replace("</", "<\\/")
     block = (
-        f"{start_marker}\n"
-        f"    <script id=\"{script_id}\" type=\"application/json\">"
+        f"{POPULAR_DATA_START}\n"
+        f"    <script id=\"willpedia-popular-data\" type=\"application/json\">"
         f"{safe_json}</script>\n"
-        f"    {end_marker}"
+        f"    {POPULAR_DATA_END}"
     )
-    updated = html[:start] + block + html[end + len(end_marker):]
-    return write_if_changed(path, updated)
-
-
-def embed_popular_payload(payload: dict[str, Any]) -> bool:
-    """Tanam data populer ke index.html agar halaman home tidak perlu fetch saat dibuka."""
-    return embed_json_payload(
-        HOME_FILE,
-        payload,
-        POPULAR_DATA_START,
-        POPULAR_DATA_END,
-        "willpedia-popular-data",
-    )
-
-
-def embed_reviews_payload(payload: dict[str, Any]) -> int:
-    """Tanam snapshot rating/ulasan ke home dan halaman Rating & Ulasan."""
-    return sum(
-        int(embed_json_payload(
-            path,
-            payload,
-            REVIEWS_DATA_START,
-            REVIEWS_DATA_END,
-            "willpedia-reviews-data",
-        ))
-        for path in (HOME_FILE, RATING_FILE)
-    )
+    updated = html[:start] + block + html[end + len(POPULAR_DATA_END):]
+    return write_if_changed(HOME_FILE, updated)
 
 
 def main() -> int:
-    if not BASE_URL.startswith("https://script.google.com/"):
-        print("APPS_SCRIPT_URL tidak valid.", file=sys.stderr)
+    parsed_api_url = urllib.parse.urlparse(BASE_URL)
+
+    allowed_api_hosts = {
+        "willpedia-api.wily-roxy69.workers.dev",
+        "api.willpedia.com",
+    }
+
+    if (
+        parsed_api_url.scheme != "https"
+        or parsed_api_url.hostname not in allowed_api_hosts
+    ):
+        print("WILLPEDIA_API_URL tidak valid.", file=sys.stderr)
         return 2
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -924,7 +812,6 @@ def main() -> int:
 
     try:
         ratings, reviews = fetch_review_data()
-        reviews_payload = {"success": True, "ratings": ratings, "reviews": reviews}
 
         # Ambil semua payload dahulu agar cache gambar dapat dibuat satu kali per URL unik.
         popular = fetch_products({"action": "popular"})
@@ -939,16 +826,15 @@ def main() -> int:
         # memakai file yang sama bila canonical URL-nya identik.
         all_payloads = {**game_payloads, "popular": popular}
         manifest, downloaded, reused, failed = _apply_local_product_images(all_payloads)
-        popular_thumbnails_changed = _apply_popular_thumbnails(popular)
+        _strip_internal_product_fields(all_payloads)
 
         changed += int(write_if_changed(
             DATA_DIR / "reviews.json",
-            serialize(reviews_payload),
+            serialize({"success": True, "ratings": ratings, "reviews": reviews}),
         ))
         changed += int(write_if_changed(DATA_DIR / "popular.json", serialize(popular)))
         changed += int(write_if_changed(IMAGE_MANIFEST_FILE, serialize(manifest)))
         changed += int(embed_popular_payload(popular))
-        changed += embed_reviews_payload(reviews_payload)
 
         for game_key, filename in GAME_FILES.items():
             changed += int(write_if_changed(DATA_DIR / filename, serialize(game_payloads[game_key])))
@@ -966,7 +852,6 @@ def main() -> int:
     print(
         "Sinkronisasi selesai. "
         f"{changed} file data berubah; gambar baru/diperbarui={downloaded}, "
-        f"thumbnail populer berubah={popular_thumbnails_changed}, "
         f"cache digunakan={reused}, gagal={failed}."
     )
     return 0
