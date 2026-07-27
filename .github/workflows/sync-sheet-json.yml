@@ -41,17 +41,16 @@ jobs:
 
       - name: Ambil data Sheet, optimalkan gambar, dan buat JSON
         env:
-          # Opsional: buat Repository variable APPS_SCRIPT_URL
-          # untuk mengganti URL bawaan di script Python.
-          APPS_SCRIPT_URL: ${{ vars.APPS_SCRIPT_URL }}
+          # Opsional: gunakan api.willpedia.com setelah custom domain aktif.
+          WILLPEDIA_API_URL: ${{ vars.WILLPEDIA_API_URL }}
           IMAGE_MAX_DIMENSION: "480"
           IMAGE_QUALITY: "76"
           IMAGE_DOWNLOAD_WORKERS: "8"
           IMAGE_DOWNLOAD_TIMEOUT: "20"
           IMAGE_REFRESH_DAYS: "30"
         run: |
-          if [ -z "$APPS_SCRIPT_URL" ]; then
-            unset APPS_SCRIPT_URL
+          if [ -z "$WILLPEDIA_API_URL" ]; then
+            unset WILLPEDIA_API_URL
           fi
           python scripts/sync_sheet_json.py
 
