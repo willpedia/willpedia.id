@@ -7,6 +7,7 @@ Hasil sinkronisasi:
 - data/reviews.json: komentar pelanggan yang sudah tersedia dari Apps Script.
 - data/product-images.json: manifest cache gambar produk lokal.
 - assets/images/products/: thumbnail WebP produk yang dioptimalkan.
+- index.html dan rating/index.html: snapshot rating/ulasan tertanam agar tampil instan.
 
 Gambar produk tetap bersumber dari URL di Google Sheet, tetapi GitHub Actions akan
 mengunduh, mengecilkan, mengonversi ke WebP, dan memakai file lokal apabila proses
@@ -34,17 +35,20 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 DEFAULT_APPS_SCRIPT_URL = (
     "https://script.google.com/macros/s/"
-    "AKfycbwIZhqOx-MxwBMx5f8I8e4vgf977cySOK6byaqAZfyI7qQst8I2ED9qyKJX6aqugOI/exec"
+    "AKfycbx3RywcEzWmMpu2I_-aQ6GRhC_K_w6MOOZcXcKfLB_rJ0BI_Z5cI9vxj_cfbUxBaK_Enw/exec"
 )
 
 BASE_URL = os.environ.get("APPS_SCRIPT_URL", DEFAULT_APPS_SCRIPT_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 HOME_FILE = ROOT / "index.html"
+RATING_FILE = ROOT / "rating" / "index.html"
 IMAGE_ROOT = ROOT / "assets" / "images" / "products"
 IMAGE_MANIFEST_FILE = DATA_DIR / "product-images.json"
 POPULAR_DATA_START = "<!-- WILLPEDIA_POPULAR_DATA_START -->"
 POPULAR_DATA_END = "<!-- WILLPEDIA_POPULAR_DATA_END -->"
+REVIEWS_DATA_START = "<!-- WILLPEDIA_REVIEWS_DATA_START -->"
+REVIEWS_DATA_END = "<!-- WILLPEDIA_REVIEWS_DATA_END -->"
 
 IMAGE_MAX_DIMENSION = max(240, int(os.environ.get("IMAGE_MAX_DIMENSION", "480")))
 IMAGE_QUALITY = max(45, min(90, int(os.environ.get("IMAGE_QUALITY", "76"))))
@@ -856,26 +860,57 @@ def write_if_changed(path: Path, content: str) -> bool:
     return True
 
 
-def embed_popular_payload(payload: dict[str, Any]) -> bool:
-    """Tanam data populer ke index.html agar halaman home tidak perlu fetch saat dibuka."""
-    if not HOME_FILE.exists():
-        raise ValueError("index.html tidak ditemukan untuk penyisipan data populer.")
-    html = HOME_FILE.read_text(encoding="utf-8")
-    start = html.find(POPULAR_DATA_START)
-    end = html.find(POPULAR_DATA_END, start + len(POPULAR_DATA_START))
+def embed_json_payload(
+    path: Path,
+    payload: dict[str, Any],
+    start_marker: str,
+    end_marker: str,
+    script_id: str,
+) -> bool:
+    """Tanam payload JSON di antara marker HTML secara deterministik."""
+    if not path.exists():
+        raise ValueError(f"{path.relative_to(ROOT)} tidak ditemukan untuk penyisipan data.")
+    html = path.read_text(encoding="utf-8")
+    start = html.find(start_marker)
+    end = html.find(end_marker, start + len(start_marker))
     if start < 0 or end < 0:
-        raise ValueError("Marker data populer tidak ditemukan di index.html.")
+        raise ValueError(f"Marker data tidak ditemukan di {path.relative_to(ROOT)}.")
     safe_json = json.dumps(
         payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True
     ).replace("</", "<\\/")
     block = (
-        f"{POPULAR_DATA_START}\n"
-        f"    <script id=\"willpedia-popular-data\" type=\"application/json\">"
+        f"{start_marker}\n"
+        f"    <script id=\"{script_id}\" type=\"application/json\">"
         f"{safe_json}</script>\n"
-        f"    {POPULAR_DATA_END}"
+        f"    {end_marker}"
     )
-    updated = html[:start] + block + html[end + len(POPULAR_DATA_END):]
-    return write_if_changed(HOME_FILE, updated)
+    updated = html[:start] + block + html[end + len(end_marker):]
+    return write_if_changed(path, updated)
+
+
+def embed_popular_payload(payload: dict[str, Any]) -> bool:
+    """Tanam data populer ke index.html agar halaman home tidak perlu fetch saat dibuka."""
+    return embed_json_payload(
+        HOME_FILE,
+        payload,
+        POPULAR_DATA_START,
+        POPULAR_DATA_END,
+        "willpedia-popular-data",
+    )
+
+
+def embed_reviews_payload(payload: dict[str, Any]) -> int:
+    """Tanam snapshot rating/ulasan ke home dan halaman Rating & Ulasan."""
+    return sum(
+        int(embed_json_payload(
+            path,
+            payload,
+            REVIEWS_DATA_START,
+            REVIEWS_DATA_END,
+            "willpedia-reviews-data",
+        ))
+        for path in (HOME_FILE, RATING_FILE)
+    )
 
 
 def main() -> int:
@@ -889,6 +924,7 @@ def main() -> int:
 
     try:
         ratings, reviews = fetch_review_data()
+        reviews_payload = {"success": True, "ratings": ratings, "reviews": reviews}
 
         # Ambil semua payload dahulu agar cache gambar dapat dibuat satu kali per URL unik.
         popular = fetch_products({"action": "popular"})
@@ -907,11 +943,12 @@ def main() -> int:
 
         changed += int(write_if_changed(
             DATA_DIR / "reviews.json",
-            serialize({"success": True, "ratings": ratings, "reviews": reviews}),
+            serialize(reviews_payload),
         ))
         changed += int(write_if_changed(DATA_DIR / "popular.json", serialize(popular)))
         changed += int(write_if_changed(IMAGE_MANIFEST_FILE, serialize(manifest)))
         changed += int(embed_popular_payload(popular))
+        changed += embed_reviews_payload(reviews_payload)
 
         for game_key, filename in GAME_FILES.items():
             changed += int(write_if_changed(DATA_DIR / filename, serialize(game_payloads[game_key])))
