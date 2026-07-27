@@ -32,7 +32,7 @@ from typing import Any
 
 from PIL import Image, ImageOps, UnidentifiedImageError
 
-DEFAULT_API_URL = "https://willpedia-api.wily-roxy69.workers.dev"
+DEFAULT_API_URL = "DEFAULT_API_URL = "https://api.willpedia.com"
 
 BASE_URL = os.environ.get("WILLPEDIA_API_URL", DEFAULT_API_URL).strip()
 ROOT = Path(__file__).resolve().parents[1]
