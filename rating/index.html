@@ -51,11 +51,11 @@
     <link href="logowill.png" rel="icon" type="image/png" />
     <link href="logowill.png" rel="shortcut icon" />
     <link href="logowill.png" rel="apple-touch-icon" />
-    <link href="assets/css/willpedia.min.css?v=20260727-console-fix-56" rel="stylesheet" />
+    <link href="assets/css/willpedia.min.css?v=20260727-aria-fix-57" rel="stylesheet" />
     <!-- WILLPEDIA_REVIEWS_DATA_START -->
     <script id="willpedia-reviews-data" type="application/json">{"ratings":{"genshin":{"average":4.5,"total":4},"hsr":{"average":5.0,"total":1},"wuwa":{"average":5.0,"total":1},"zzz":{"average":5.0,"total":1}},"reviews":[{"Game":"GENSHIN IMPACT","ID_Komentar":"KMT-731DFF26","ID_Produk":"GI-P001","Komentar":"ceritakan pengalaman mu","Nama":"Pelix","Rating":5,"Tanggal":"25 Jul 2026","__gameName":"GENSHIN IMPACT"},{"Game":"GENSHIN IMPACT","ID_Komentar":"KMT-B18BFBB9","ID_Produk":"GI-P001","Komentar":"Patah2 woy","Nama":"Rupel","Rating":3,"Tanggal":"24 Jul 2026","__gameName":"GENSHIN IMPACT"},{"Game":"GENSHIN IMPACT","ID_Komentar":"KMT-CF0FC807","ID_Produk":"GI-P001","Komentar":"web site hebat","Nama":"iwak","Rating":5,"Tanggal":"24 Jul 2026","__gameName":"GENSHIN IMPACT"},{"Game":"GENSHIN IMPACT","ID_Komentar":"KMT-5C6EA86D","ID_Produk":"GI-P001","Komentar":"hebat","Nama":"Willy","Rating":5,"Tanggal":"24 Jul 2026","__gameName":"GENSHIN IMPACT"},{"Game":"HONKAI STAR RAIL","ID_Komentar":"KMT-352E207B","ID_Produk":"HSR-P001","Komentar":"hebat","Nama":"Alphi","Rating":5,"Tanggal":"24 Jul 2026","__gameName":"HONKAI STAR RAIL"},{"Game":"ZENLESS ZONE ZERO","ID_Komentar":"KMT-4D970C8B","ID_Produk":"ZZZ-P002","Komentar":"hebat","Nama":"Felix","Rating":5,"Tanggal":"24 Jul 2026","__gameName":"ZENLESS ZONE ZERO"},{"Game":"WUTHERING WAVES","ID_Komentar":"KMT-E80E53B9","ID_Produk":"WUWA-P001","Komentar":"hebat","Nama":"Ayame","Rating":5,"Tanggal":"24 Jul 2026","__gameName":"WUTHERING WAVES"}],"success":true}</script>
     <!-- WILLPEDIA_REVIEWS_DATA_END -->
-    <script defer="" src="assets/js/willpedia.min.js?v=20260727-console-fix-56"></script>
+    <script defer="" src="assets/js/willpedia.min.js?v=20260727-aria-fix-57"></script>
   </head>
   <body
     class="gradient-bg text-white min-h-screen flex flex-col justify-between"
@@ -136,7 +136,7 @@
           </div>
           <div class="storefront-bottom-row">
             <div class="storefront-bottom-inner">
-              <div aria-label="Menu utama" class="storefront-menu-left">
+              <div aria-label="Menu utama" class="storefront-menu-left" role="group">
                 <a class="storefront-nav-link nav-home" href="/"
                   ><i aria-hidden="true" class="fa-solid fa-house"></i><span>Beranda</span></a
                 >
@@ -382,7 +382,7 @@
               Berdasarkan ulasan
             </div>
             <h1 class="all-game-ratings-title" id="all-game-ratings-title">
-              RATING DAN ULASAN PELANGGAN
+              RATING DAN ULASAN PELANGGAN 
             </h1>
             <p class="all-game-ratings-description" id="all-game-ratings-description">
               Nilai dihitung dari data rating pelanggan pada setiap game. Ketuk salah satu game
@@ -443,7 +443,7 @@
               </div>
               <fieldset class="ratings-review-rating-field">
                 <legend>Berikan rating</legend>
-                <div aria-label="Pilih rating" class="ratings-review-stars">
+                <div aria-label="Pilih rating" class="ratings-review-stars" role="group">
                   <button aria-label="1 bintang" data-ratings-review-rating="1" type="button">
                     <i class="fa-solid fa-star"></i>
                   </button>
@@ -531,6 +531,7 @@
               aria-live="off"
               class="all-game-comments-viewport hidden"
               id="all-game-comments-viewport"
+              role="region"
             >
               <div class="all-game-comments-track" id="all-game-comments-track"></div>
             </div>

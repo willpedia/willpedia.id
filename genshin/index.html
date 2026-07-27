@@ -51,9 +51,9 @@
     <link href="logowill.png" rel="icon" type="image/png" />
     <link href="logowill.png" rel="shortcut icon" />
     <link href="logowill.png" rel="apple-touch-icon" />
-    <link href="assets/css/willpedia.min.css?v=20260727-console-fix-56" rel="stylesheet" />
+    <link href="assets/css/willpedia.min.css?v=20260727-aria-fix-57" rel="stylesheet" />
     <link as="fetch" crossorigin="anonymous" href="data/genshin.json" rel="preload" />
-    <script defer="" src="assets/js/willpedia.min.js?v=20260727-console-fix-56"></script>
+    <script defer="" src="assets/js/willpedia.min.js?v=20260727-aria-fix-57"></script>
   </head>
   <body
     class="gradient-bg text-white min-h-screen flex flex-col justify-between"
@@ -135,7 +135,7 @@
           </div>
           <div class="storefront-bottom-row">
             <div class="storefront-bottom-inner">
-              <div aria-label="Menu utama" class="storefront-menu-left">
+              <div aria-label="Menu utama" class="storefront-menu-left" role="group">
                 <a class="storefront-nav-link nav-home" href="/"
                   ><i aria-hidden="true" class="fa-solid fa-house"></i><span>Beranda</span></a
                 >
@@ -725,6 +725,7 @@
                 aria-label="Rata-rata rating"
                 class="mt-1 flex gap-1 text-sm text-slate-600"
                 id="review-summary-stars"
+                role="img"
               ></div>
               <p class="mt-2 text-xs text-slate-400" id="review-total">Belum ada ulasan</p>
             </div>
@@ -751,6 +752,7 @@
                   aria-label="Pilih rating 1 sampai 5"
                   class="flex gap-1.5"
                   id="review-star-input"
+                  role="group"
                 >
                   <button
                     aria-label="1 bintang"
