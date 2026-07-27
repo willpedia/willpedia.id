@@ -1,0 +1,48 @@
+name: Deploy website aman ke GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ambil repository
+        uses: actions/checkout@v4
+
+      - name: Siapkan hanya file publik
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/data
+
+          cp index.html CNAME robots.txt sitemap.xml _site/
+          cp banner-desktop.webp banner-mobile.webp logo.webp logowill.png _site/
+          cp -R assets cara-order genshin hsr rating wuwa zzz _site/
+          cp data/genshin.json data/hsr.json data/popular.json \
+             data/reviews.json data/wuwa.json data/zzz.json _site/data/
+          touch _site/.nojekyll
+
+      - name: Unggah artefak Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Terbitkan ke GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
