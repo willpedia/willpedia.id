@@ -1,5 +1,25 @@
 {
   "images": {
+    "genshin:0360889ca66d4fd7f03c": {
+      "bytes": 19074,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/74/Lokapala_Jungle.png/revision/latest/scale-to-width-down/480?cb=20220824053302",
+      "height": 270,
+      "path": "assets/images/products/genshin/0360889ca66d4fd7f03c.webp",
+      "sha256": "390f8d35fc320a0a3e3397e29375a587a8d3e060a76ce0059500ad39aaf447d3",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Lokapala%20Jungle.png",
+      "width": 480
+    },
+    "genshin:0441c085a7b05e691ecd": {
+      "bytes": 15746,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/1/10/Ashavan_Realm.png/revision/latest/scale-to-width-down/480?cb=20220824050905",
+      "height": 270,
+      "path": "assets/images/products/genshin/0441c085a7b05e691ecd.webp",
+      "sha256": "33e7b44583c35cc20fea5dec552d1bfb580cc4e63096efe00919ae1f7becf7b1",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Ashavan%20Realm.png",
+      "width": 480
+    },
     "genshin:0f7ed238c5e9b8135203": {
       "bytes": 5604,
       "checked_at": "2026-07-24T07:29:39Z",
@@ -30,6 +50,26 @@
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Guide%20to%20Freedom.png",
       "width": 256
     },
+    "genshin:1505eb82f3906d4a2c31": {
+      "bytes": 16864,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/5/57/Toyac_Springs.png/revision/latest/scale-to-width-down/480?cb=20250823152506",
+      "height": 270,
+      "path": "assets/images/products/genshin/1505eb82f3906d4a2c31.webp",
+      "sha256": "f8216ea74361f87eb66d0104de6039478aa3240ea75d2ae0fd378ad193b64fa3",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Toyac%20Springs.png",
+      "width": 480
+    },
+    "genshin:17835acef9b5c898f0b5": {
+      "bytes": 8210,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/e/e0/Tsurumi_Island.png/revision/latest/scale-to-width-down/480?cb=20230910105754",
+      "height": 270,
+      "path": "assets/images/products/genshin/17835acef9b5c898f0b5.webp",
+      "sha256": "19b3382a69d4c03da7e53828d87cf2af4bb4f26009d77eb51ab2a95672ef5f10",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Tsurumi%20Island.png",
+      "width": 480
+    },
     "genshin:188f6e9efdc59ba28dba": {
       "bytes": 6610,
       "checked_at": "2026-07-24T07:29:41Z",
@@ -40,6 +80,16 @@
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Slime%20Concentrate.png",
       "width": 256
     },
+    "genshin:1b0998ae0c62560ea82c": {
+      "bytes": 14680,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/71/Ardravi_Valley.png/revision/latest/scale-to-width-down/480?cb=20220824043837",
+      "height": 270,
+      "path": "assets/images/products/genshin/1b0998ae0c62560ea82c.webp",
+      "sha256": "a4405d550fe77c9f4f1f1541a46bed5fee2886f566999cf168afb7015a2e6290",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Ardravi%20Valley.png",
+      "width": 480
+    },
     "genshin:1e3ee21b5c99d51c91f4": {
       "bytes": 11182,
       "checked_at": "2026-07-24T07:01:41Z",
@@ -48,6 +98,36 @@
       "path": "assets/images/products/genshin/1e3ee21b5c99d51c91f4.webp",
       "sha256": "67d45336df0784033a33370507b1cfaea8410a4c6a74a90974c1945a8432b1e0",
       "source": "https://img.game8.co/3924067/df81e1f8cf8a1b130981694736e5aff8.png/show",
+      "width": 480
+    },
+    "genshin:1e8e09a2b2f9cd8dbed8": {
+      "bytes": 11338,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/8/81/Mt._Laixin.png/revision/latest/scale-to-width-down/480?cb=20240528020241",
+      "height": 270,
+      "path": "assets/images/products/genshin/1e8e09a2b2f9cd8dbed8.webp",
+      "sha256": "b0fccd8425633e0ce226e58272fae934259cacad849838187b47f9f388e10cb3",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Mt.%20Laixin.png",
+      "width": 480
+    },
+    "genshin:2467a77e822af6601569": {
+      "bytes": 4510,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/33/Dunanna_Pit.png/revision/latest/scale-to-width-down/480?cb=20260702200609",
+      "height": 271,
+      "path": "assets/images/products/genshin/2467a77e822af6601569.webp",
+      "sha256": "5a69a616afae69375fc732280035e25a1dcdbcd5c67be56b9429659f3cf4b9a4",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Dunanna%20Pit.png",
+      "width": 480
+    },
+    "genshin:2610682d0292edc9813a": {
+      "bytes": 3562,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/6/68/Nostoi_Region.png/revision/latest/scale-to-width-down/480?cb=20240426042619",
+      "height": 270,
+      "path": "assets/images/products/genshin/2610682d0292edc9813a.webp",
+      "sha256": "36f82619c97ad747c05a1e3b3fac65763af251fe1e82539c23bbd4082527d74f",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Nostoi%20Region.png",
       "width": 480
     },
     "genshin:298e22dd7b2a5d41f590": {
@@ -60,6 +140,26 @@
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Slime%20Condensate.png",
       "width": 256
     },
+    "genshin:29ac325535dbb3909055": {
+      "bytes": 11110,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/6/66/Kannazuka.png/revision/latest/scale-to-width-down/480?cb=20210805073159",
+      "height": 270,
+      "path": "assets/images/products/genshin/29ac325535dbb3909055.webp",
+      "sha256": "dc6ef6d9bda6a62681c67569e252fac81452f22b67cc4c18f50352c9d9a7e7c7",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Kannazuka.png",
+      "width": 480
+    },
+    "genshin:2bec6c1fb9fd92ca43a8": {
+      "bytes": 10332,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/3a/Paha_Isle.png/revision/latest/scale-to-width-down/480?cb=20250723015115",
+      "height": 270,
+      "path": "assets/images/products/genshin/2bec6c1fb9fd92ca43a8.webp",
+      "sha256": "47433feccf2cf262f1c0c34b231d45480eec24c3a65d7b481ca2ea3b1e4e3d88",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Paha%20Isle.png",
+      "width": 480
+    },
     "genshin:2dcb128ba8e3aa99288b": {
       "bytes": 10808,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -68,6 +168,16 @@
       "path": "assets/images/products/genshin/2dcb128ba8e3aa99288b.webp",
       "sha256": "9d2901937e900115cdcfedf711915bfc90d088a95016d3277e6ddbc703291478",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7U62GywveYNN1mwagto023Yglfuf0Pn2NahN93Q6xBFIhpgZFwnDdZ0&s=10",
+      "width": 480
+    },
+    "genshin:2f90a392a1885d5b12c4": {
+      "bytes": 11648,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/9/95/Yashiori_Island.png/revision/latest/scale-to-width-down/480?cb=20220629031943",
+      "height": 270,
+      "path": "assets/images/products/genshin/2f90a392a1885d5b12c4.webp",
+      "sha256": "18a87ae080176b1aebe1e258ae307d2db69df97d338b1d8cd577608d37958716",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Yashiori%20Island.png",
       "width": 480
     },
     "genshin:2fe6fe9ef971120abaf3": {
@@ -89,6 +199,26 @@
       "sha256": "c13c0af6c555fa2b1ea2e714e8f76be012da0020462af653797d093079ad702b",
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Crown%20of%20Insight.png",
       "width": 256
+    },
+    "genshin:3191930010f845cb7c5c": {
+      "bytes": 9308,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/4f/Realm_of_Farakhkert.png/revision/latest/scale-to-width-down/480?cb=20230412034530",
+      "height": 270,
+      "path": "assets/images/products/genshin/3191930010f845cb7c5c.webp",
+      "sha256": "4dd8ca65acff8a458d80326c226efb816011be3865f20ad67dff0c74272ec465",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Realm%20of%20Farakhkert.png",
+      "width": 480
+    },
+    "genshin:328e4dc778c1c78d250e": {
+      "bytes": 8332,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/4a/Gavireh_Lajavard.png/revision/latest/scale-to-width-down/480?cb=20260403050401",
+      "height": 271,
+      "path": "assets/images/products/genshin/328e4dc778c1c78d250e.webp",
+      "sha256": "f3f409f7a66849d6cbc2d5f506518f613f3c59f378902889426be0c4cf0cbbf0",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Gavireh%20Lajavard.png",
+      "width": 480
     },
     "genshin:35a3ef12de1ed4f79257": {
       "bytes": 9040,
@@ -140,6 +270,36 @@
       "source": "https://gamebrott.com/wp-content/uploads/2024/04/2-3-1024x567.webp",
       "width": 480
     },
+    "genshin:3fb9d804d3139057178e": {
+      "bytes": 7416,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/e/e8/Ochkanatlan.png/revision/latest/scale-to-width-down/480?cb=20250823152212",
+      "height": 270,
+      "path": "assets/images/products/genshin/3fb9d804d3139057178e.webp",
+      "sha256": "40ddc94f368cc345834c63b6593bc9ce8f088339508c6e7f945e170d5e01329f",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Ochkanatlan.png",
+      "width": 480
+    },
+    "genshin:42dba552912b1b926110": {
+      "bytes": 9408,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/f/f4/Ashveil_Peak.png/revision/latest/scale-to-width-down/480?cb=20260124162650",
+      "height": 270,
+      "path": "assets/images/products/genshin/42dba552912b1b926110.webp",
+      "sha256": "8c122afe4ee35c6d37f9cc0e62a02ad3c4e12f1e00e5aa95af7acbd48df42f76",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Ashveil%20Peak.png",
+      "width": 480
+    },
+    "genshin:435722192b742e857a5c": {
+      "bytes": 11028,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/30/Chenyu_Vale_Upper_Vale.png/revision/latest/scale-to-width-down/480?cb=20240429001736",
+      "height": 270,
+      "path": "assets/images/products/genshin/435722192b742e857a5c.webp",
+      "sha256": "ec8e2ec4f8e1237e16c379930ad58f74608c9902ef5605867ef5f715561ea87b",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Chenyu%20Vale%20Upper%20Vale.png",
+      "width": 480
+    },
     "genshin:471d72c4c06a78905572": {
       "bytes": 17542,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -148,6 +308,36 @@
       "path": "assets/images/products/genshin/471d72c4c06a78905572.webp",
       "sha256": "0abdd1c8cb049c5a9a07ea55d84f9e1322c2243c4290db11812187ade2323b9b",
       "source": "https://imageio.forbes.com/specials-images/imageserve/64959ab810280e5b948f46c2/fontaine1/0x0.jpg",
+      "width": 480
+    },
+    "genshin:497648204ec6a02fbe38": {
+      "bytes": 12936,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/6/69/Wavechaser_Plain.png/revision/latest/scale-to-width-down/480?cb=20260124163002",
+      "height": 270,
+      "path": "assets/images/products/genshin/497648204ec6a02fbe38.webp",
+      "sha256": "e30ef391c381abaa0267946f9b99ee60785dc2eb822ac60dc15dae431687b68a",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Wavechaser%20Plain.png",
+      "width": 480
+    },
+    "genshin:4a20d0071c1f3172081d": {
+      "bytes": 14346,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/b/b8/Quahuacan_Cliff.png/revision/latest/scale-to-width-down/480?cb=20250823152232",
+      "height": 270,
+      "path": "assets/images/products/genshin/4a20d0071c1f3172081d.webp",
+      "sha256": "c971c02ab902d83c317cc65b4ea47798d745af3b42a1255cb42eea2f16aa1b40",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Quahuacan%20Cliff.png",
+      "width": 480
+    },
+    "genshin:4ba0268d5d62c53bf022": {
+      "bytes": 13678,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/43/Coatepec_Mountain.png/revision/latest/scale-to-width-down/480?cb=20250823152114",
+      "height": 270,
+      "path": "assets/images/products/genshin/4ba0268d5d62c53bf022.webp",
+      "sha256": "b235787d4c46b377d66e08e9f332f28e97719ae62966306279375370deaa1cc3",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Coatepec%20Mountain.png",
       "width": 480
     },
     "genshin:55d6834cd85b1814d1d4": {
@@ -160,6 +350,46 @@
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Slime%20Secretions.png",
       "width": 256
     },
+    "genshin:5a087af1a7b1699be13c": {
+      "bytes": 5616,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/3c/Lunar_Highlands.png/revision/latest/scale-to-width-down/480?cb=20260702204848",
+      "height": 271,
+      "path": "assets/images/products/genshin/5a087af1a7b1699be13c.webp",
+      "sha256": "090b31bfa4bd8c33b65dcfbd9e746d6d204811daa6117a5017c45566b51dfbb7",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Lunar%20Highlands.png",
+      "width": 480
+    },
+    "genshin:5ba4feca2c0a6df8cd75": {
+      "bytes": 8808,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/a/ad/Land_of_Upper_Setekh.png/revision/latest/scale-to-width-down/480?cb=20220930025751",
+      "height": 270,
+      "path": "assets/images/products/genshin/5ba4feca2c0a6df8cd75.webp",
+      "sha256": "860dabd0f53f785146eee8f113e825c6373834a8fef767bd17f536caefd9d01a",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Land%20of%20Upper%20Setekh.png",
+      "width": 480
+    },
+    "genshin:5f75f3b2c72235b4d88c": {
+      "bytes": 10196,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/1/1a/Erinnyes_Forest.png/revision/latest/scale-to-width-down/480?cb=20231108175129",
+      "height": 270,
+      "path": "assets/images/products/genshin/5f75f3b2c72235b4d88c.webp",
+      "sha256": "da19d82cd81afb669fad7d21dbb0fd3d29b41be81a4fbb0c991f542fecf0a55a",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Erinnyes%20Forest.png",
+      "width": 480
+    },
+    "genshin:61182eb8a3be7f24f2f2": {
+      "bytes": 22660,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/3a/Tequemecan_Valley.png/revision/latest/scale-to-width-down/480?cb=20250823152326",
+      "height": 270,
+      "path": "assets/images/products/genshin/61182eb8a3be7f24f2f2.webp",
+      "sha256": "7061748fee3f328ef7da09e6152758d650be61d0c0967b4b3bece8b241c5f689",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Tequemecan%20Valley.png",
+      "width": 480
+    },
     "genshin:642664a15e52e45eaaca": {
       "bytes": 12956,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -170,6 +400,156 @@
       "source": "https://static0.polygonimages.com/wordpress/wp-content/uploads/chorus/uploads/chorus_asset/file/23985256/20220825183253.png?w=1600&h=900&fit=cro",
       "width": 480
     },
+    "genshin:69305dfb564d3fd30857": {
+      "bytes": 12620,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/a/a0/Avidya_Forest.png/revision/latest/scale-to-width-down/480?cb=20220824043540",
+      "height": 270,
+      "path": "assets/images/products/genshin/69305dfb564d3fd30857.webp",
+      "sha256": "9e229a68f3be9655259f1a3b625cca0e52c6d30272845bf1d64e832b3db91b7e",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Avidya%20Forest.png",
+      "width": 480
+    },
+    "genshin:6e3bc3a65f3f45f6254d": {
+      "bytes": 17436,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/2/25/Windwail_Highland.png/revision/latest/scale-to-width-down/480?cb=20220628014722",
+      "height": 270,
+      "path": "assets/images/products/genshin/6e3bc3a65f3f45f6254d.webp",
+      "sha256": "edc930aa5182bfefb56b9d7865413cf17f3c470d88610ca4ca9b35383b12d31f",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Windwail%20Highland.png",
+      "width": 480
+    },
+    "genshin:6f62b961a65d959ad333": {
+      "bytes": 9712,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/c/cb/Land_of_Lower_Setekh.png/revision/latest/scale-to-width-down/480?cb=20220930025754",
+      "height": 270,
+      "path": "assets/images/products/genshin/6f62b961a65d959ad333.webp",
+      "sha256": "f664a601b58061aed56e1437b6e7037ade5568e68a41cb63d064a74343a9c958",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Land%20of%20Lower%20Setekh.png",
+      "width": 480
+    },
+    "genshin:6fa40be0d646706fd110": {
+      "bytes": 11462,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/5/55/Liffey_Region.png/revision/latest/scale-to-width-down/480?cb=20230929174823",
+      "height": 270,
+      "path": "assets/images/products/genshin/6fa40be0d646706fd110.webp",
+      "sha256": "6ef85ca89ec94390b996c6f7a70f038d6a94ddb3d7e4d214391530d275d20cb0",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Liffey%20Region.png",
+      "width": 480
+    },
+    "genshin:6fce144ccac6fffa503f": {
+      "bytes": 12326,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/9/95/Vissudha_Field.png/revision/latest/scale-to-width-down/480?cb=20220824044648",
+      "height": 270,
+      "path": "assets/images/products/genshin/6fce144ccac6fffa503f.webp",
+      "sha256": "d8982cbd5258eef912c882c6b9277589bf3bd05575f1ba01818f60c38f64b9f6",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Vissudha%20Field.png",
+      "width": 480
+    },
+    "genshin:728de7573dbad6e51bb4": {
+      "bytes": 8580,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/d/dd/Court_of_Fontaine_Region.png/revision/latest/scale-to-width-down/480?cb=20230818145847",
+      "height": 270,
+      "path": "assets/images/products/genshin/728de7573dbad6e51bb4.webp",
+      "sha256": "24b305887213b4f74cf38e2e7a5130819e716a5d84c200a59905f49d531fc428",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Court%20of%20Fontaine%20Region.png",
+      "width": 480
+    },
+    "genshin:74cdbcacf712c2752438": {
+      "bytes": 5488,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/3b/Dark_Side_of_the_Moon.png/revision/latest/scale-to-width-down/480?cb=20260702204043",
+      "height": 271,
+      "path": "assets/images/products/genshin/74cdbcacf712c2752438.webp",
+      "sha256": "1ab3b1b5dd49a4b9cde2586386afd88a128303bf27293a23023226d5c87a2a55",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Dark%20Side%20of%20the%20Moon.png",
+      "width": 480
+    },
+    "genshin:75b34c699fb199975b88": {
+      "bytes": 13426,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/1/14/Sea_of_Clouds.png/revision/latest/scale-to-width-down/480?cb=20211003085639",
+      "height": 270,
+      "path": "assets/images/products/genshin/75b34c699fb199975b88.webp",
+      "sha256": "f7eb289f854a558a6d0513c961f6b5b220eb8ab95a364d1819a947277bd63f36",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Sea%20of%20Clouds.png",
+      "width": 480
+    },
+    "genshin:78e6f5652bd3bd13c1a6": {
+      "bytes": 8060,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/c/c0/Sea_of_Bygone_Eras.png/revision/latest/scale-to-width-down/480?cb=20240426043920",
+      "height": 270,
+      "path": "assets/images/products/genshin/78e6f5652bd3bd13c1a6.webp",
+      "sha256": "13e1cbbb8668573e33af50d0deaa05486f7562ea4ac9e1b6e3b290f673d71c32",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Sea%20of%20Bygone%20Eras.png",
+      "width": 480
+    },
+    "genshin:7a9fd6159ffe0d855e37": {
+      "bytes": 11690,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/8/80/Atocpan.png/revision/latest/scale-to-width-down/480?cb=20250809132800",
+      "height": 270,
+      "path": "assets/images/products/genshin/7a9fd6159ffe0d855e37.webp",
+      "sha256": "45ea2f5ed94cc2602218c9ebbea34e220185f99e4321649cc3e7ed2884a12bfd",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Atocpan.png",
+      "width": 480
+    },
+    "genshin:7b411bb770233632454b": {
+      "bytes": 6880,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/9/97/Moontide_Sea.png/revision/latest/scale-to-width-down/480?cb=20260702202717",
+      "height": 271,
+      "path": "assets/images/products/genshin/7b411bb770233632454b.webp",
+      "sha256": "ac373ce24d0a20ad894b62015e7e9fd50ce7197cbf0172d54db8e28203c9e837",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Moontide%20Sea.png",
+      "width": 480
+    },
+    "genshin:7dbcb56cdc310be08c50": {
+      "bytes": 17532,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/8/88/Tezcatepetonco_Range.png/revision/latest/scale-to-width-down/480?cb=20250823152415",
+      "height": 270,
+      "path": "assets/images/products/genshin/7dbcb56cdc310be08c50.webp",
+      "sha256": "46b1185b9f8cf6f6c63404f30db4403548a0e7288fee846400ab718be9d906b0",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Tezcatepetonco%20Range.png",
+      "width": 480
+    },
+    "genshin:81a7e48b7d6b73457c91": {
+      "bytes": 20184,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/2/2a/Easybreeze_Holiday_Resort.png/revision/latest/scale-to-width-down/480?cb=20250809134100",
+      "height": 270,
+      "path": "assets/images/products/genshin/81a7e48b7d6b73457c91.webp",
+      "sha256": "ddbac9755e57ed2f45ff128ef26a49394fdee496c9c8cc1d411840095fb1c17d",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Easybreeze%20Holiday%20Resort.png",
+      "width": 480
+    },
+    "genshin:82c5e97d03d28a290adb": {
+      "bytes": 19824,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/5/5c/Starfell_Valley.png/revision/latest/scale-to-width-down/480?cb=20220628011343",
+      "height": 270,
+      "path": "assets/images/products/genshin/82c5e97d03d28a290adb.webp",
+      "sha256": "59da756815798426abdfecf5e3289d0c19341022a5e8ad0686f62ee9f05a7b92",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Starfell%20Valley.png",
+      "width": 480
+    },
+    "genshin:83e42b8423128827157b": {
+      "bytes": 12922,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/70/Morte_Region.png/revision/latest/scale-to-width-down/480?cb=20231109165424",
+      "height": 270,
+      "path": "assets/images/products/genshin/83e42b8423128827157b.webp",
+      "sha256": "5e376402cc795a3638088ad01b3dc641e23a4b6b7daebbd9dc48375a747972dd",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Morte%20Region.png",
+      "width": 480
+    },
     "genshin:862bd93691ad64f40284": {
       "bytes": 22988,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -178,6 +558,36 @@
       "path": "assets/images/products/genshin/862bd93691ad64f40284.webp",
       "sha256": "0b6674b4d01b391d10d6974c56c47b3d959f647d262bd62f8d0a603df61e0327",
       "source": "https://gamebrott.com/wp-content/uploads/2021/04/Tenshukaku-Inazuma-City.jpg",
+      "width": 480
+    },
+    "genshin:887429564d083ba0d77e": {
+      "bytes": 7244,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/30/Voidsea_Outlook.png/revision/latest/scale-to-width-down/480?cb=20260116172649",
+      "height": 270,
+      "path": "assets/images/products/genshin/887429564d083ba0d77e.webp",
+      "sha256": "83bd7e259bcc8ab7848666f6f61e5e1bf2bd36ed3f407f3bd368dabfa1658e80",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Voidsea%20Outlook.png",
+      "width": 480
+    },
+    "genshin:8b7cfa52fdcb7f5ea694": {
+      "bytes": 9552,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/a/a7/Chenyu_Vale_Southern_Mountain.png/revision/latest/scale-to-width-down/480?cb=20240206133848",
+      "height": 270,
+      "path": "assets/images/products/genshin/8b7cfa52fdcb7f5ea694.webp",
+      "sha256": "a0a5d92cc1e411ea57c3e4c1b226cf71bf977d64a3cb2c7dec7ebbdc26395c97",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Chenyu%20Vale%20Southern%20Mountain.png",
+      "width": 480
+    },
+    "genshin:92f95256e592f8097566": {
+      "bytes": 8464,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/46/Desert_of_Hadramaveth.png/revision/latest/scale-to-width-down/480?cb=20230118060117",
+      "height": 270,
+      "path": "assets/images/products/genshin/92f95256e592f8097566.webp",
+      "sha256": "95f4946502eca804d924d040c38a2c20a197d9ce3d806e36b5926b9a21bce364",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Desert%20of%20Hadramaveth.png",
       "width": 480
     },
     "genshin:93e7d4fac872da010802": {
@@ -200,6 +610,16 @@
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Hurricane%20Seed.png",
       "width": 256
     },
+    "genshin:9880d1d33aa746fa37c2": {
+      "bytes": 15562,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/39/Qiongji_Estuary.png/revision/latest/scale-to-width-down/480?cb=20220612172107",
+      "height": 270,
+      "path": "assets/images/products/genshin/9880d1d33aa746fa37c2.webp",
+      "sha256": "0145769d973197a578417985088f794d67c77feeb6df6fc53faab226d07af742",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Qiongji%20Estuary.png",
+      "width": 480
+    },
     "genshin:993c4e434b17ee75ff40": {
       "bytes": 11312,
       "checked_at": "2026-07-24T07:29:42Z",
@@ -209,6 +629,26 @@
       "sha256": "444565bec2ccdbb5df6020c37ddd620a7019ce05cf905dba55461fd5dcb3c16e",
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Windwheel%20Aster.png",
       "width": 256
+    },
+    "genshin:9f821a8a6be2d8a67bd0": {
+      "bytes": 16052,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Vanarana.png/revision/latest/scale-to-width-down/480?cb=20240308190015",
+      "height": 270,
+      "path": "assets/images/products/genshin/9f821a8a6be2d8a67bd0.webp",
+      "sha256": "2a4621c9fe8e554d587bf01247526dddfc8d7905abb71871979ed1959e2757cb",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Vanarana.png",
+      "width": 480
+    },
+    "genshin:a0ba65ff2b453b3ce5fd": {
+      "bytes": 16388,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/4e/Galesong_Hill.png/revision/latest/scale-to-width-down/480?cb=20220612160601",
+      "height": 270,
+      "path": "assets/images/products/genshin/a0ba65ff2b453b3ce5fd.webp",
+      "sha256": "79a6b965c58ad5840f9fc4d03b20c3364d95f292a9948dd0f87ec47590c0b16e",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Galesong%20Hill.png",
+      "width": 480
     },
     "genshin:a390ed8a7313f60643d0": {
       "bytes": 16630,
@@ -230,6 +670,16 @@
       "source": "https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O",
       "width": 480
     },
+    "genshin:a6ca612978364f4dd605": {
+      "bytes": 18600,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/c/ca/Beryl_Region.png/revision/latest/scale-to-width-down/480?cb=20240428174801",
+      "height": 270,
+      "path": "assets/images/products/genshin/a6ca612978364f4dd605.webp",
+      "sha256": "09ef86f61f53ab7b6f26c943e113441e7b0a0e1be67518b10f8e91b877d6f8e5",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Beryl%20Region.png",
+      "width": 480
+    },
     "genshin:a8aaa2857e7aee1cb8ae": {
       "bytes": 8598,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -239,6 +689,16 @@
       "sha256": "19dfc02ba5f85e1e9b800780d2f5a142df75a830bd6f5bc6e32fc9b852f883b9",
       "source": "https://static.wikia.nocookie.net/gensin-impact/images/0/04/Ley_Line_Blossom_Revelation.png/revision/latest/scale-to-width-down/250?cb=20250430170440",
       "width": 250
+    },
+    "genshin:a8b5eb8b7eacf844f837": {
+      "bytes": 13902,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/e/e1/Watatsumi_Island.png/revision/latest/scale-to-width-down/480?cb=20220629032726",
+      "height": 270,
+      "path": "assets/images/products/genshin/a8b5eb8b7eacf844f837.webp",
+      "sha256": "216863aaa2f7255f3d36558f0039ed1d8b590ca0f1d068848bc0539f2e887c6f",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Watatsumi%20Island.png",
+      "width": 480
     },
     "genshin:a9ff0b0b4a93cfde3f71": {
       "bytes": 19180,
@@ -269,6 +729,16 @@
       "sha256": "73da0d2998f0222ec2684c16b17bed3b92ae231840b1a024339e726f47479ba8",
       "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Item%20Philosophies%20of%20Freedom.png",
       "width": 256
+    },
+    "genshin:ad14b00b45482e882c78": {
+      "bytes": 19432,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/b/bc/Brightcrown_Mountains.png/revision/latest/scale-to-width-down/480?cb=20220628020411",
+      "height": 270,
+      "path": "assets/images/products/genshin/ad14b00b45482e882c78.webp",
+      "sha256": "e535bd05c06ab97db607d407c0dd1a19ddb245598d02fd832ee547249f6778bf",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Brightcrown%20Mountains.png",
+      "width": 480
     },
     "genshin:b351da6678fa0a2f1528": {
       "bytes": 10376,
@@ -310,6 +780,76 @@
       "source": "https://static.wikia.nocookie.net/gensin-impact/images/a/ae/Nod-Krai.png/revision/latest?cb=20250920170317",
       "width": 480
     },
+    "genshin:b6f290ca8d24516178e6": {
+      "bytes": 19582,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/5/51/Lisha.png/revision/latest/scale-to-width-down/480?cb=20211003090127",
+      "height": 270,
+      "path": "assets/images/products/genshin/b6f290ca8d24516178e6.webp",
+      "sha256": "156586d76b1ea6377217f8aaa72406b4c871f08498fda0f01fdf27fb5036115e",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Lisha.png",
+      "width": 480
+    },
+    "genshin:b7bda3dde7871a337580": {
+      "bytes": 13188,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/7e/Lempo_Isle.png/revision/latest/scale-to-width-down/480?cb=20250723014742",
+      "height": 270,
+      "path": "assets/images/products/genshin/b7bda3dde7871a337580.webp",
+      "sha256": "7d4cb070bcffdc7c01b84bcd4461d1c735b9d7237a82b828363d78175b00c3d1",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Lempo%20Isle.png",
+      "width": 480
+    },
+    "genshin:c22c8880db94f813babc": {
+      "bytes": 12166,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/8/85/Temple_of_Space.png/revision/latest/scale-to-width-down/480?cb=20260420160019",
+      "height": 270,
+      "path": "assets/images/products/genshin/c22c8880db94f813babc.webp",
+      "sha256": "c35bdcc15f7773d3cd33abc5522e06c5697cf947bb6a30c6e43d4bb7b7fdd6e3",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Temple%20of%20Space.png",
+      "width": 480
+    },
+    "genshin:c28917ebf70a30f3b4c9": {
+      "bytes": 4548,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/5/5b/Hypostyle_Desert.png/revision/latest/scale-to-width-down/480?cb=20220930025755",
+      "height": 270,
+      "path": "assets/images/products/genshin/c28917ebf70a30f3b4c9.webp",
+      "sha256": "8bdeacda93cdd5c4951d57b99f5f90d2ea217cb9bd4a30a779341bf9a88f9d13",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Hypostyle%20Desert.png",
+      "width": 480
+    },
+    "genshin:d0c066ad352a1e4e3266": {
+      "bytes": 13516,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/3/35/Lost_Nursery.png/revision/latest/scale-to-width-down/480?cb=20220827095533",
+      "height": 270,
+      "path": "assets/images/products/genshin/d0c066ad352a1e4e3266.webp",
+      "sha256": "60255de6a99f125e558a7c9c1310387ad71e3efec04f7e69655736ca5127aaf1",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Lost%20Nursery.png",
+      "width": 480
+    },
+    "genshin:d3c3688ca72ab89be4fd": {
+      "bytes": 8890,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/d/d9/Hiisi_Island.png/revision/latest/scale-to-width-down/480?cb=20250723014758",
+      "height": 270,
+      "path": "assets/images/products/genshin/d3c3688ca72ab89be4fd.webp",
+      "sha256": "b6528f4f1ba9c8d210705ede86cb274da92f2593a59faa9a846bf0ee2fbf4e21",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Hiisi%20Island.png",
+      "width": 480
+    },
+    "genshin:d535661429c9f2e5400c": {
+      "bytes": 13210,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/4/43/Ancient_Sacred_Mountain.png/revision/latest/scale-to-width-down/480?cb=20250809132724",
+      "height": 270,
+      "path": "assets/images/products/genshin/d535661429c9f2e5400c.webp",
+      "sha256": "f83fcbe9ba26fd3cff04d348fc1f5bb4530e495039cb11983e3c604f949f3577",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Ancient%20Sacred%20Mountain.png",
+      "width": 480
+    },
     "genshin:d594e805c200b2f7adbc": {
       "bytes": 11602,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -320,6 +860,26 @@
       "source": "https://gladiatorboost.com/wp-content/uploads/2025/02/Genshin-impact-Imaginarium-Theater-Guide-Feb-25.jpg",
       "width": 480
     },
+    "genshin:d7e34e255e5feb378021": {
+      "bytes": 12446,
+      "checked_at": "2026-08-03T07:11:54Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/c/c7/Narukami_Island.png/revision/latest/scale-to-width-down/480?cb=20220629031545",
+      "height": 270,
+      "path": "assets/images/products/genshin/d7e34e255e5feb378021.webp",
+      "sha256": "2bf70261436a00b31998da74fcc95a6e3f31e9ac39c4e9775d1a9e0ebf39cce2",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Narukami%20Island.png",
+      "width": 480
+    },
+    "genshin:d900175bea57eed50234": {
+      "bytes": 17018,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/b/b2/Bishui_Plain.png/revision/latest/scale-to-width-down/480?cb=20220612170745",
+      "height": 270,
+      "path": "assets/images/products/genshin/d900175bea57eed50234.webp",
+      "sha256": "01b3d1ef18320abf1a2eab0a5f7f30e84b6485ae5d791dfad6ca5ca00a93121d",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Bishui%20Plain.png",
+      "width": 480
+    },
     "genshin:dbc5ecc8d157575c073a": {
       "bytes": 10914,
       "checked_at": "2026-07-24T07:01:41Z",
@@ -328,6 +888,16 @@
       "path": "assets/images/products/genshin/dbc5ecc8d157575c073a.webp",
       "sha256": "c574ab82edd25509c983102c7ad256513cfd423dd259fbbed14e04860ae2f33b",
       "source": "https://upload-os-bbs.hoyolab.com/upload/2022/09/28/184271592/5d43e4ed7a24c88fedb79055199578eb_818356091767012619.jpg",
+      "width": 480
+    },
+    "genshin:dce70a9405172c615bdd": {
+      "bytes": 12488,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/d/d5/Windrest_Peak.png/revision/latest/scale-to-width-down/480?cb=20260403104814",
+      "height": 270,
+      "path": "assets/images/products/genshin/dce70a9405172c615bdd.webp",
+      "sha256": "b7ca6cb072680e06846c22d3118d3d21ac233ccc41d85f62e06b12486d11d27b",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Windrest%20Peak.png",
       "width": 480
     },
     "genshin:e010909e73028742d823": {
@@ -360,6 +930,46 @@
       "source": "https://upload-os-bbs.hoyolab.com/upload/2022/07/03/8009863/a9caa1f3d5f91da76d171f3ead00c229_2402242947900811680.png",
       "width": 480
     },
+    "genshin:eed51942850a0da915bc": {
+      "bytes": 8230,
+      "checked_at": "2026-08-03T07:11:55Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/2/29/Seirai_Island.png/revision/latest/scale-to-width-down/480?cb=20210820155804",
+      "height": 270,
+      "path": "assets/images/products/genshin/eed51942850a0da915bc.webp",
+      "sha256": "00a563ad0aaeb0dbc5b8bbca1e6491e9ad0d28d5191829bef96bc80ee4f88231",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Seirai%20Island.png",
+      "width": 480
+    },
+    "genshin:f0c1ca8ac51f698c09aa": {
+      "bytes": 16244,
+      "checked_at": "2026-08-03T07:11:53Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/9/9b/Minlin.png/revision/latest/scale-to-width-down/480?cb=20220612171059",
+      "height": 270,
+      "path": "assets/images/products/genshin/f0c1ca8ac51f698c09aa.webp",
+      "sha256": "b8ded1faf7122553d3f7df86ee9b7acd1039f7293eb3fc5c92a23a089266b682",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Minlin.png",
+      "width": 480
+    },
+    "genshin:f257ecaa9a6f2c2176e3": {
+      "bytes": 18484,
+      "checked_at": "2026-08-03T07:11:57Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/7d/Basin_of_Unnumbered_Flames.png/revision/latest/scale-to-width-down/480?cb=20250823152028",
+      "height": 270,
+      "path": "assets/images/products/genshin/f257ecaa9a6f2c2176e3.webp",
+      "sha256": "bcc13a88d4081f9186389f7f710d38543b1c8773861811a26e50b002b8a198e4",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Basin%20of%20Unnumbered%20Flames.png",
+      "width": 480
+    },
+    "genshin:f4a4ea1124eb5a2c1a8d": {
+      "bytes": 17124,
+      "checked_at": "2026-08-03T07:11:58Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/7/70/Fontaine_Research_Institute_of_Kinetic_Energy_Engineering_Region.png/revision/latest/scale-to-width-down/480?cb=20240428185128",
+      "height": 270,
+      "path": "assets/images/products/genshin/f4a4ea1124eb5a2c1a8d.webp",
+      "sha256": "5b56a8c033ea3aaee3d77cadf5f0dbfffd1972297b3341258d0eb7040e430aaf",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Fontaine%20Research%20Institute%20of%20Kinetic%20Energy%20Engineering%20Region.png",
+      "width": 480
+    },
     "genshin:f8c9d29c8d5809fbf2c5": {
       "bytes": 16276,
       "checked_at": "2026-07-24T07:01:41Z",
@@ -368,6 +978,16 @@
       "path": "assets/images/products/genshin/f8c9d29c8d5809fbf2c5.webp",
       "sha256": "ee935523db7ccc40b92a5f7455060ccb2946a0140bd322914813787d2331f54a",
       "source": "https://sirusgaming.com/wp-content/uploads/2022/04/genshin-time-trial-challenge-chasm.jpg",
+      "width": 480
+    },
+    "genshin:fe8c13e377da14f46c6d": {
+      "bytes": 8766,
+      "checked_at": "2026-08-03T07:11:56Z",
+      "final_url": "https://static.wikia.nocookie.net/gensin-impact/images/b/b6/Belleau_Region.png/revision/latest/scale-to-width-down/480?cb=20230818145900",
+      "height": 270,
+      "path": "assets/images/products/genshin/fe8c13e377da14f46c6d.webp",
+      "sha256": "7096c34f6349276333282edc2ad6598be8f48e384f4715e61f944cb59f2c91e9",
+      "source": "https://genshin-impact.fandom.com/wiki/Special:Redirect/file/Belleau%20Region.png",
       "width": 480
     },
     "hsr:01a148294f6059b864cf": {
@@ -440,6 +1060,16 @@
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Event%20Cosmicon%2C%20Roll%20On%21.png",
       "width": 480
     },
+    "hsr:0aaa603337e8a6e5a8b1": {
+      "bytes": 9356,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/af/Version_Highlight_Fallen_Star%27s_Cradle.png/revision/latest/scale-to-width-down/1200?cb=20260703202339",
+      "height": 270,
+      "path": "assets/images/products/hsr/0aaa603337e8a6e5a8b1.webp",
+      "sha256": "79e96fd7e90bca96774b47fb69b9299d3b59dba93f89166dc846f6d9cb0c29c5",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/af/Version_Highlight_Fallen_Star%27s_Cradle.png/revision/latest/scale-to-width-down/1200?cb=20260703202339",
+      "width": 480
+    },
     "hsr:0ccb515045294613c6dd": {
       "bytes": 17262,
       "checked_at": "2026-07-24T07:01:43Z",
@@ -459,6 +1089,26 @@
       "sha256": "eedd7f899f5b5f702bb82d76ee3c8a7bc6c058860911f288323b2bd2ce2fab03",
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Icon%20Map%20Companion%20Mission%20Step.png",
       "width": 52
+    },
+    "hsr:0ebf6629269dd0efcff4": {
+      "bytes": 21142,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://upload-os-bbs.hoyolab.com/upload/2026/05/28/c7a065d3573f75162813783ee378132e_7673924785740265185.jpg",
+      "height": 270,
+      "path": "assets/images/products/hsr/0ebf6629269dd0efcff4.webp",
+      "sha256": "647f129b43b7f461000791c519a4ef3f300fc1d99268860a15339c998bb325fd",
+      "source": "https://upload-os-bbs.hoyolab.com/upload/2026/05/28/c7a065d3573f75162813783ee378132e_7673924785740265185.jpg",
+      "width": 480
+    },
+    "hsr:104b70e22ae78221f939": {
+      "bytes": 13738,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a7/Version_Highlight_Desolate_Maw%27s_Demonhold.png/revision/latest/scale-to-width-down/1200?cb=20260703202340",
+      "height": 270,
+      "path": "assets/images/products/hsr/104b70e22ae78221f939.webp",
+      "sha256": "b54f50d1aeae0766ff653663275936084d65682a855a6abae2147ca0ef28e6e3",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a7/Version_Highlight_Desolate_Maw%27s_Demonhold.png/revision/latest/scale-to-width-down/1200?cb=20260703202340",
+      "width": 480
     },
     "hsr:114743b8376c956297d9": {
       "bytes": 11662,
@@ -528,6 +1178,16 @@
       "path": "assets/images/products/hsr/16ca7cac4d80596d8053.webp",
       "sha256": "7ee23b6f9b4c6027ed7977bb93475b45b370bac52c9da9b0e43580b14fbfc436",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFtAr8ux0rn6w0-wRMBuIaP0qcBa01bfWrxixWvtH2Fw&s=10",
+      "width": 480
+    },
+    "hsr:19d9b205138be18b444d": {
+      "bytes": 17078,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e3/Event_Chrysos_Awoo_Championship.png/revision/latest?cb=20251215122526",
+      "height": 270,
+      "path": "assets/images/products/hsr/19d9b205138be18b444d.webp",
+      "sha256": "69412f941dc69e75da7ca7e01428ed18dff262bc71b9fcb0024d863b197bace7",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e3/Event_Chrysos_Awoo_Championship.png/revision/latest?cb=20251215122526",
       "width": 480
     },
     "hsr:1a51e7bf70d4f95b896b": {
@@ -610,6 +1270,26 @@
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Area_Dream_of_Gnawing_Oak.png",
       "width": 480
     },
+    "hsr:2df7b09eeda37621a9d5": {
+      "bytes": 8420,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/c/cc/Official_Website_Penacony.png/revision/latest/scale-to-width-down/250?cb=20240825090841",
+      "height": 141,
+      "path": "assets/images/products/hsr/2df7b09eeda37621a9d5.webp",
+      "sha256": "f392f54a8e5b0a6977b63203bd5b39afca3e07922746658d428345e82187edd9",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/c/cc/Official_Website_Penacony.png/revision/latest/scale-to-width-down/250?cb=20240825090841",
+      "width": 250
+    },
+    "hsr:2eb50d470faaac72cbb6": {
+      "bytes": 12604,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/3c/Event_Remnants_of_Twilight.png/revision/latest?cb=20260106041748",
+      "height": 270,
+      "path": "assets/images/products/hsr/2eb50d470faaac72cbb6.webp",
+      "sha256": "adf20456b0c9399e50ed85e74b4a863e65f77263991567f0f65fa8065c54094a",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/3c/Event_Remnants_of_Twilight.png/revision/latest?cb=20260106041748",
+      "width": 480
+    },
     "hsr:2f02ce7fbfa16d93458e": {
       "bytes": 12800,
       "checked_at": "2026-07-24T07:01:44Z",
@@ -670,6 +1350,16 @@
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/5/5d/Area_%22Universal_Matrix%22_Great_Tomb_of_the_Nameless_Titan.png/revision/latest?cb=20250930062920",
       "width": 480
     },
+    "hsr:40b423a597580e5730cb": {
+      "bytes": 11628,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXZS8HJxxPL0IqYLS8pa-wq8kozzXUXP9TXSKV4GC9BQ&s=10",
+      "height": 269,
+      "path": "assets/images/products/hsr/40b423a597580e5730cb.webp",
+      "sha256": "68209b3fe4b01c4e078ba60750a5b6e5341a2575ac2c2b980dc1cc00c7d1c9be",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXZS8HJxxPL0IqYLS8pa-wq8kozzXUXP9TXSKV4GC9BQ&s=10",
+      "width": 480
+    },
     "hsr:43f44e62f1e0c914795d": {
       "bytes": 21778,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -679,6 +1369,16 @@
       "sha256": "50fff85cd89d50621af606b603ebae0bc96938c33c3f84f0498f4189ce1df91e",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBbfbo99tE5UrA3Pj_LJBGoJ6QQNeTge4uu7qPEYyXjICjwWZElCid9c&s=10",
       "width": 447
+    },
+    "hsr:4588b2b063d9ea8d7294": {
+      "bytes": 22378,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/63/Event_Wispae_Amusement_Park.png/revision/latest?cb=20260623045234",
+      "height": 270,
+      "path": "assets/images/products/hsr/4588b2b063d9ea8d7294.webp",
+      "sha256": "d675f3e9f95ab7d167eb10fe9c066cdedd24d07317c36fac8abcf189ffcc6525",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/63/Event_Wispae_Amusement_Park.png/revision/latest?cb=20260623045234",
+      "width": 480
     },
     "hsr:45d94bd572f508edce8e": {
       "bytes": 6586,
@@ -710,6 +1410,16 @@
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Item_Traveler's_Guide.png",
       "width": 256
     },
+    "hsr:505ec0bfbefc5cc74857": {
+      "bytes": 11342,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/d0/Area_Seafeld_TV_Tower.png/revision/latest?cb=20260604143354",
+      "height": 270,
+      "path": "assets/images/products/hsr/505ec0bfbefc5cc74857.webp",
+      "sha256": "24e2516a95e9ea1bb3c7d9798245a156b85ece65f05394f7b447b77f2786a01a",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/d0/Area_Seafeld_TV_Tower.png/revision/latest?cb=20260604143354",
+      "width": 480
+    },
     "hsr:51674310821700f52a27": {
       "bytes": 15372,
       "checked_at": "2026-07-24T07:29:50Z",
@@ -728,6 +1438,16 @@
       "path": "assets/images/products/hsr/52c364175066ce1466c3.webp",
       "sha256": "10aeedd48a13929ce2bd77f030f801f5528188e6a7109debbcd1e9d8d50ef412",
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Event%20Simulated%20Universe%20Swarm%20Disaster.png",
+      "width": 480
+    },
+    "hsr:5335093b33206780ce8c": {
+      "bytes": 10156,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://upload-static.hoyoverse.com/hoyolab-wiki/2023/08/26/28140447/3f45d949f8228ef14047137249f521fe_1651357900601499277.png?x-oss-process=image%2Fformat%2Cwebp",
+      "height": 270,
+      "path": "assets/images/products/hsr/5335093b33206780ce8c.webp",
+      "sha256": "2e5f244a9eafc0191a243cf11d8fcec21a560bd1b846131738fc79f46c659e79",
+      "source": "https://upload-static.hoyoverse.com/hoyolab-wiki/2023/08/26/28140447/3f45d949f8228ef14047137249f521fe_1651357900601499277.png?x-oss-process=image%2Fformat%2Cwebp",
       "width": 480
     },
     "hsr:552a29b7e408b99c2156": {
@@ -810,6 +1530,26 @@
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Area_Artisanship_Commission.png",
       "width": 480
     },
+    "hsr:662ab15892d482f0c43f": {
+      "bytes": 6082,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/34/Area_Inkford_Hermitage.png/revision/latest?cb=20260604143316",
+      "height": 270,
+      "path": "assets/images/products/hsr/662ab15892d482f0c43f.webp",
+      "sha256": "be1f877a1f1c1fd0fa6f818d11fbf60f960469f9ea4c27a135e7b9e159ac8c59",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/34/Area_Inkford_Hermitage.png/revision/latest?cb=20260604143316",
+      "width": 480
+    },
+    "hsr:67ab0b1da33747e00352": {
+      "bytes": 9336,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/f4/World_Planarcadia_Preview_3.png/revision/latest/scale-to-width-down/250?cb=20251208054808",
+      "height": 141,
+      "path": "assets/images/products/hsr/67ab0b1da33747e00352.webp",
+      "sha256": "2c472fb30612f2f512ead6bb22d72fc84e2331267b931ae87a5e875e57d2b80d",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/f4/World_Planarcadia_Preview_3.png/revision/latest/scale-to-width-down/250?cb=20251208054808",
+      "width": 250
+    },
     "hsr:6bf88e9e97428d0a0adc": {
       "bytes": 17930,
       "checked_at": "2026-07-24T07:29:47Z",
@@ -860,6 +1600,16 @@
       "source": "https://honkai-star-rail.fandom.com/wiki/Special:Redirect/file/Event_Clockie_Dreamjoy_Memoir.png",
       "width": 480
     },
+    "hsr:736d3777f994243f3093": {
+      "bytes": 23598,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/dc/Splash_Screen_Sweet_Dreams_and_the_Holy_Grail.png/revision/latest?cb=20250711050304",
+      "height": 270,
+      "path": "assets/images/products/hsr/736d3777f994243f3093.webp",
+      "sha256": "502faa68f4dcaf06434c65200191d726c5b3eb7d08d6c0175c532b6b4dc9cbf3",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/dc/Splash_Screen_Sweet_Dreams_and_the_Holy_Grail.png/revision/latest?cb=20250711050304",
+      "width": 480
+    },
     "hsr:746a36fb750ac8c0d560": {
       "bytes": 13622,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -889,6 +1639,16 @@
       "sha256": "97273a08af1e0727519088d2b3df2bac0834d2860312a010c9c643fa37a2581e",
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/5/5f/Area_Shackling_Prison.png",
       "width": 480
+    },
+    "hsr:76e98ce37cc19210f03b": {
+      "bytes": 7156,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvGAchyyiMj5_uO6-fIcSiy5r8pS8aMsRosvNAuiqJIw&s",
+      "height": 168,
+      "path": "assets/images/products/hsr/76e98ce37cc19210f03b.webp",
+      "sha256": "f9c253d4b98bac7a42e69ef77fa46f9499155237690878e3cb336d2fb655f962",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvGAchyyiMj5_uO6-fIcSiy5r8pS8aMsRosvNAuiqJIw&s",
+      "width": 299
     },
     "hsr:7824bae1c10c9885c282": {
       "bytes": 25558,
@@ -1330,6 +2090,16 @@
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/47/Area_%22Bloodbathed_Battlefront%22_Castrum_Kremnos.png/revision/latest?cb=20250907165638",
       "width": 480
     },
+    "hsr:d0c25f1a9c56d9deb75f": {
+      "bytes": 22778,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e4/Event_Cosmic_Data_Roaming.png/revision/latest?cb=20260418092048",
+      "height": 270,
+      "path": "assets/images/products/hsr/d0c25f1a9c56d9deb75f.webp",
+      "sha256": "db0a858ca167853722d022ec9252805b651af776c52b80d5ddf96ee593d85df0",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e4/Event_Cosmic_Data_Roaming.png/revision/latest?cb=20260418092048",
+      "width": 480
+    },
     "hsr:d556dde35751ba8dce50": {
       "bytes": 17900,
       "checked_at": "2026-07-24T07:01:42Z",
@@ -1339,6 +2109,16 @@
       "sha256": "10d3ec1a21749f0e836813cedbf58191a2d29b2d0fee7894f9518ae3538833b5",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkikaOfpDDZWdhnrQBJzZChd5LDUzSbpWuvF__0CkqyQ&s=10",
       "width": 480
+    },
+    "hsr:d6e7e3bb15502743a77b": {
+      "bytes": 12348,
+      "checked_at": "2026-08-03T07:11:59Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjWPeUIDgMlxRENMFtdXO-iVHLqju3quxBzWbuWf1xcA&s",
+      "height": 168,
+      "path": "assets/images/products/hsr/d6e7e3bb15502743a77b.webp",
+      "sha256": "58bd6452b02696bad306bc3f66fe2d5a352e66c2fb6e4a14e5412a139c58a3c7",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjWPeUIDgMlxRENMFtdXO-iVHLqju3quxBzWbuWf1xcA&s",
+      "width": 299
     },
     "hsr:d81d9cc4cfa943c85473": {
       "bytes": 11030,
@@ -1358,6 +2138,16 @@
       "path": "assets/images/products/hsr/dc2569558b0904638d18.webp",
       "sha256": "fdf9f6dacb7e5ad9ce1e0569c4911bf6b466a176e8bf91cccfc3c8ea13585600",
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a1/Area_%22Memortis_Shore%22_Ruins_of_Time.png/revision/latest?cb=20251107011257",
+      "width": 480
+    },
+    "hsr:dc89cba96180b1b524ab": {
+      "bytes": 25728,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/26/807e520039a15abb43876a7067e74ff9_2250126543597986363.png",
+      "height": 273,
+      "path": "assets/images/products/hsr/dc89cba96180b1b524ab.webp",
+      "sha256": "194dec5e94d991040eead671fa25244628a84b04bec685d1af16434d56b08605",
+      "source": "https://webstatic.hoyoverse.com/upload/op-public/2022/09/26/807e520039a15abb43876a7067e74ff9_2250126543597986363.png",
       "width": 480
     },
     "hsr:dde497afdb7fe83ebe1b": {
@@ -1398,6 +2188,16 @@
       "path": "assets/images/products/hsr/e4300711c70729d48d57.webp",
       "sha256": "ddbd74db16cfe82b191a46c47b58b2d662a45c27da23f106d83c547b0ff9dff4",
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/94/Area_Aedes_Elysiae.png/revision/latest?cb=20250907164900",
+      "width": 480
+    },
+    "hsr:e4912a1e39f556201f7e": {
+      "bytes": 23162,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/ab/Event_Wispae_War_Saga.png/revision/latest?cb=20260324044714",
+      "height": 270,
+      "path": "assets/images/products/hsr/e4912a1e39f556201f7e.webp",
+      "sha256": "cfcc30e106a58759515e66443c400534291f5382724afea8641437b084eea906",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/ab/Event_Wispae_War_Saga.png/revision/latest?cb=20260324044714",
       "width": 480
     },
     "hsr:e5876073ca10caace625": {
@@ -1458,6 +2258,16 @@
       "path": "assets/images/products/hsr/eed9fa202c60477dc041.webp",
       "sha256": "7b332fe46a9288cb4741cba3547e99adf744c4d6368cb7763fac2dd0e804eada",
       "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/31/Area_A_Child%27s_Dream.png/revision/latest/scale-to-width-down/1200?cb=20260125115141",
+      "width": 480
+    },
+    "hsr:eedcac56598cb3fd8839": {
+      "bytes": 29952,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a9/Event_Cosmicon%2C_Roll_On_Again%21.png/revision/latest?cb=20260428040037",
+      "height": 270,
+      "path": "assets/images/products/hsr/eedcac56598cb3fd8839.webp",
+      "sha256": "0d4adb7cee234cf23079075b3686c0a7887ab5c7a00e44d39628fad1c10c929e",
+      "source": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a9/Event_Cosmicon%2C_Roll_On_Again%21.png/revision/latest?cb=20260428040037",
       "width": 480
     },
     "hsr:ef29feb5a8cddb36e33f": {
@@ -1640,6 +2450,16 @@
       "source": "https://static.wikia.nocookie.net/wutheringwaves/images/3/34/Giant_banyan.png/revision/latest?cb=20240610150635",
       "width": 480
     },
+    "wuwa:17e0796c8c98c41c0e46": {
+      "bytes": 8588,
+      "checked_at": "2026-08-03T07:12:02Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzN2_1WIzQr_eK0gbC84fE6cXpqhx683ugWPCdPUKsDg&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/17e0796c8c98c41c0e46.webp",
+      "sha256": "7fafb7a1002cf488b3960f3ecd90fc2a8ef49cc0f83fb6c08ce98a93fffa74aa",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzN2_1WIzQr_eK0gbC84fE6cXpqhx683ugWPCdPUKsDg&s",
+      "width": 299
+    },
     "wuwa:19309bfab46c66ce564d": {
       "bytes": 10820,
       "checked_at": "2026-07-24T07:30:04Z",
@@ -1649,6 +2469,16 @@
       "sha256": "f2ad34ce23eeac20c5b4d702088ed7685a27249c70b926d3661d2ce5d30d6914",
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Etching%20Plains.png",
       "width": 480
+    },
+    "wuwa:1a5d426e6a0f5cc70324": {
+      "bytes": 12154,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAOcOy_55JFxmUJsSlWpcw2he2352v9WGjqVm8KUHoQ&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/1a5d426e6a0f5cc70324.webp",
+      "sha256": "342da4e3a678a66edcac8697ac38a5c320018f89b81e10222493e727115a72c8",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAOcOy_55JFxmUJsSlWpcw2he2352v9WGjqVm8KUHoQ&s",
+      "width": 301
     },
     "wuwa:217d846bd83d42e24772": {
       "bytes": 14442,
@@ -1688,6 +2518,16 @@
       "path": "assets/images/products/wuwa/2b7ba882ba914e721e30.webp",
       "sha256": "2265a3d835cf21c9e36bb96d5687f2807a50ca7e66ea1562810e1f41462cc973",
       "source": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a6/Peaks_of_Prestige_Rekindled_Duel.jpg/revision/latest?cb=20251225051110",
+      "width": 480
+    },
+    "wuwa:2c1e2922bb44d0b5b7b7": {
+      "bytes": 13218,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV4JHTPCBpXEPzbrG8u2IlNPM8gSFhw36785LrFRPczg&s=10",
+      "height": 269,
+      "path": "assets/images/products/wuwa/2c1e2922bb44d0b5b7b7.webp",
+      "sha256": "6f54c9527dd9c950b5c307d529a1dcdf4b0c6f220b967d6a3086b615245ff517",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV4JHTPCBpXEPzbrG8u2IlNPM8gSFhw36785LrFRPczg&s=10",
       "width": 480
     },
     "wuwa:30de276aeaeb753caea5": {
@@ -1760,6 +2600,16 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Fabricatorium%20of%20the%20Deep.png",
       "width": 480
     },
+    "wuwa:4a6a35c75989f6dcf204": {
+      "bytes": 11494,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi4zeOykL7t0-UC34SIxRUSimYx7qgljfhHVtdMJS5NQ&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/4a6a35c75989f6dcf204.webp",
+      "sha256": "ed369dd450fb0994c68320c07a69645d60a97547c77a27df7135633194df9a80",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi4zeOykL7t0-UC34SIxRUSimYx7qgljfhHVtdMJS5NQ&s",
+      "width": 301
+    },
     "wuwa:4ae378d0313f71e7f30e": {
       "bytes": 9068,
       "checked_at": "2026-07-24T07:01:45Z",
@@ -1778,6 +2628,36 @@
       "path": "assets/images/products/wuwa/4e6ce0e502c557901069.webp",
       "sha256": "3f3cab899c084b7a45367d1d6f0106f0532279eb79d9f8837d16b58dce8bb53f",
       "source": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8f/Giant%27s_Gaze.png/revision/latest/scale-to-width-down/1200?cb=20260128183527",
+      "width": 480
+    },
+    "wuwa:5a38a567c5c956164131": {
+      "bytes": 11006,
+      "checked_at": "2026-08-03T07:12:04Z",
+      "final_url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0e/Silent_Crag.png/revision/latest?cb=20260501103444",
+      "height": 268,
+      "path": "assets/images/products/wuwa/5a38a567c5c956164131.webp",
+      "sha256": "e909dd41badaa3f690b392993cd3e8f57b633f1890b2a0ecd0c0fe71a1d015f2",
+      "source": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0e/Silent_Crag.png/revision/latest?cb=20260501103444",
+      "width": 480
+    },
+    "wuwa:5cadf17190bc085522f2": {
+      "bytes": 12404,
+      "checked_at": "2026-08-03T07:12:02Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTudZXOFgN-fz5bXNIFjEiP3r24w1g30-zm4rHWppIzAA&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/5cadf17190bc085522f2.webp",
+      "sha256": "7930739e4d4749cf1372731ce897021222e164932a7559749e8bc9456790bae8",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTudZXOFgN-fz5bXNIFjEiP3r24w1g30-zm4rHWppIzAA&s",
+      "width": 299
+    },
+    "wuwa:693d7673a934bbfed737": {
+      "bytes": 12060,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThxccDQoMb-e0C2mvWoKKck-1J6h_KuwyG0P67h6QIpQ&s=10",
+      "height": 269,
+      "path": "assets/images/products/wuwa/693d7673a934bbfed737.webp",
+      "sha256": "4536a82a56294becf34c22b2e3c97ebd56660ec8a95fecc79521977182952d1b",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThxccDQoMb-e0C2mvWoKKck-1J6h_KuwyG0P67h6QIpQ&s=10",
       "width": 480
     },
     "wuwa:6e71e5397185cb4101c4": {
@@ -1880,6 +2760,16 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Port%20City%20of%20Guixu.png",
       "width": 480
     },
+    "wuwa:8aaf1cc27a4aa1276185": {
+      "bytes": 33884,
+      "checked_at": "2026-08-03T07:12:06Z",
+      "final_url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/bd/Xuanfang_Hold.png",
+      "height": 270,
+      "path": "assets/images/products/wuwa/8aaf1cc27a4aa1276185.webp",
+      "sha256": "9f396df922c32b93f1b1b9674518c703f8cb76b8e86c0d5bee2754b0df73af43",
+      "source": "https://static.wikia.nocookie.net/wutheringwaves/images/b/bd/Xuanfang_Hold.png",
+      "width": 480
+    },
     "wuwa:8b0ab6ce7156035a16e5": {
       "bytes": 10894,
       "checked_at": "2026-07-24T07:30:06Z",
@@ -1928,6 +2818,16 @@
       "path": "assets/images/products/wuwa/92f77a41cce1abdabbb1.webp",
       "sha256": "d9bda277d4f93dd6aed154dea7b0955c9c52b890d008445e10a4b62d18efda5b",
       "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJAZm61Zuq34WqF3jm1bPJe_YdflksUv0SUNWT5E-91w&s=10",
+      "width": 480
+    },
+    "wuwa:9b9cc7edc9de851373fc": {
+      "bytes": 15550,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSLCrXp0rQvmXFHLgEMhGXEejb_-xnoDyyTFiKWFjF1w&s=10",
+      "height": 267,
+      "path": "assets/images/products/wuwa/9b9cc7edc9de851373fc.webp",
+      "sha256": "50a2880676759b893c7cbd05dbe59f1ea737c34bbacd58cc75641546de355af8",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSLCrXp0rQvmXFHLgEMhGXEejb_-xnoDyyTFiKWFjF1w&s=10",
       "width": 480
     },
     "wuwa:a081915ab34aade7d149": {
@@ -1990,6 +2890,16 @@
       "source": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f4/Heihaian2.png/revision/latest/scale-to-width-down/1200?cb=20250601135105",
       "width": 480
     },
+    "wuwa:c666d205547dc3a009f1": {
+      "bytes": 9546,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfd8nXewB5Okt3rQyihPhhvd1dVTwyM5ZKq2D1LepJ7A&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/c666d205547dc3a009f1.webp",
+      "sha256": "7fd3139e75e49230959e709be75f3dbc7942f33765628bf3c844db7766b7c4f4",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfd8nXewB5Okt3rQyihPhhvd1dVTwyM5ZKq2D1LepJ7A&s",
+      "width": 299
+    },
     "wuwa:c8b4cbde62b5e1399ba0": {
       "bytes": 7074,
       "checked_at": "2026-07-24T07:30:03Z",
@@ -1998,6 +2908,16 @@
       "path": "assets/images/products/wuwa/c8b4cbde62b5e1399ba0.webp",
       "sha256": "57d5cb5dcbfdee37455b9dff06b6ae20dacd5ce2cda76421b4d1cddece4ca235",
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Upphaf%20Forest%20Ruins.png",
+      "width": 480
+    },
+    "wuwa:c96ed4d1d3632bac4709": {
+      "bytes": 4938,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ec/The_Black_Shores.png/revision/latest/scale-to-width-down/1200?cb=20250624140738",
+      "height": 270,
+      "path": "assets/images/products/wuwa/c96ed4d1d3632bac4709.webp",
+      "sha256": "8308e8719f2fa8c7cd62e69e3fec6f40e6c62fcfa6e9223251ba863ac6220321",
+      "source": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ec/The_Black_Shores.png/revision/latest/scale-to-width-down/1200?cb=20250624140738",
       "width": 480
     },
     "wuwa:ca83965d551d9dd7e588": {
@@ -2020,6 +2940,16 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Central%20Plains.png",
       "width": 480
     },
+    "wuwa:cb8f559d8d668eea3416": {
+      "bytes": 12518,
+      "checked_at": "2026-08-03T07:12:04Z",
+      "final_url": "https://static.wikia.nocookie.net/wutheringwaves/images/c/c1/Mengzhou.png/revision/latest/scale-to-width/360?cb=20260626150837",
+      "height": 203,
+      "path": "assets/images/products/wuwa/cb8f559d8d668eea3416.webp",
+      "sha256": "bb77116b9f0794cfae8b15238834f16d4a5d9cc4f4dcdf68c88ed003af1434e8",
+      "source": "https://static.wikia.nocookie.net/wutheringwaves/images/c/c1/Mengzhou.png/revision/latest/scale-to-width/360?cb=20260626150837",
+      "width": 360
+    },
     "wuwa:cce4735e9a2627a797d0": {
       "bytes": 8070,
       "checked_at": "2026-07-24T07:30:01Z",
@@ -2028,6 +2958,16 @@
       "path": "assets/images/products/wuwa/cce4735e9a2627a797d0.webp",
       "sha256": "37f71063e72da518f22f9e7ee1634d778e155fae9f88ed9da092443600da29b7",
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Penitent's%20End.png",
+      "width": 480
+    },
+    "wuwa:ccefa04a5a0d71272a26": {
+      "bytes": 34102,
+      "checked_at": "2026-08-03T07:12:07Z",
+      "final_url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f6/Eastern_Xuan_Peaks.png/revision/latest?cb=20260710170213",
+      "height": 270,
+      "path": "assets/images/products/wuwa/ccefa04a5a0d71272a26.webp",
+      "sha256": "93509b7f99406aa0fa9ab7549faea9f066d50e9e829ff639aafb4979fa40c980",
+      "source": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f6/Eastern_Xuan_Peaks.png/revision/latest?cb=20260710170213",
       "width": 480
     },
     "wuwa:ccf0b9176971648ec4c2": {
@@ -2079,6 +3019,16 @@
       "sha256": "8b1a873e97f04ae03bb14b7ab088e3db9d8be53c242497c70584d1390815c0a9",
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Desorock%20Highland.png",
       "width": 480
+    },
+    "wuwa:d6b3f316d449b12f2084": {
+      "bytes": 10262,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThhdN0T3reVmSZ0ozaQaB6j44WNKMNIDeNAYC9s46SEQ&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/d6b3f316d449b12f2084.webp",
+      "sha256": "74cd9bab6dc00f76c348ca36b7364c8713b5654b86f588ac41514a2cf6c6dfa5",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThhdN0T3reVmSZ0ozaQaB6j44WNKMNIDeNAYC9s46SEQ&s",
+      "width": 299
     },
     "wuwa:daf80e88964b8ecd3df8": {
       "bytes": 23582,
@@ -2220,6 +3170,16 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Frostlands%20Transit%20Port.png",
       "width": 480
     },
+    "wuwa:f802a0ee999fea51e798": {
+      "bytes": 13510,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUNf1Pya0DxrMqSXmSUQqckZ08CHYUSY9sfjqHFKh2wg&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/f802a0ee999fea51e798.webp",
+      "sha256": "a39dde2e19d09c074d713bad8571b49d3fd3276ff61c992e56158cafe5780840",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUNf1Pya0DxrMqSXmSUQqckZ08CHYUSY9sfjqHFKh2wg&s",
+      "width": 301
+    },
     "wuwa:fa0ca559c653142ff4c1": {
       "bytes": 14714,
       "checked_at": "2026-07-24T07:30:08Z",
@@ -2229,6 +3189,16 @@
       "sha256": "26eba00214c0b50edf5a9a180204a1f113019d7e86314e268197b51773b8a6ff",
       "source": "https://wutheringwaves.fandom.com/wiki/Special:Redirect/file/Starward%20Riseway.png",
       "width": 480
+    },
+    "wuwa:fae256dd0c61cc2ad27a": {
+      "bytes": 7880,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtSodLe07CiOTQM-tzPnzI7T1jodNPiRCPj1uuAQ87QQ&s",
+      "height": 168,
+      "path": "assets/images/products/wuwa/fae256dd0c61cc2ad27a.webp",
+      "sha256": "5b93c9f237a41afb86136d55c9cb6b04715cc5e6e107a1c0d768df5dcf86b655",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtSodLe07CiOTQM-tzPnzI7T1jodNPiRCPj1uuAQ87QQ&s",
+      "width": 299
     },
     "wuwa:fe1a912e9a14bfed9ef5": {
       "bytes": 16518,
@@ -2250,6 +3220,16 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20Gravitational%20Attraction.png",
       "width": 480
     },
+    "zzz:06d502d7cb99b072511e": {
+      "bytes": 11302,
+      "checked_at": "2026-08-03T07:12:02Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTht8QC4ht_dqhmovdqLml3_TWjHJhrJMESxXZu9sAz7Q&s",
+      "height": 168,
+      "path": "assets/images/products/zzz/06d502d7cb99b072511e.webp",
+      "sha256": "eb46f9e26424a9961517ca1977a34bcaab88e1cf91a389cc0d90b3abc2541dda",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTht8QC4ht_dqhmovdqLml3_TWjHJhrJMESxXZu9sAz7Q&s",
+      "width": 299
+    },
     "zzz:088d0f6434ff25cd83e5": {
       "bytes": 7922,
       "checked_at": "2026-07-24T07:29:54Z",
@@ -2270,6 +3250,16 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Icon%20Dialogue%20Commission.png",
       "width": 50
     },
+    "zzz:1b7c215b70ab8de34a18": {
+      "bytes": 24220,
+      "checked_at": "2026-08-03T07:12:06Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/f4/Area_%28Hollow%29_Scamall_Hollow_Icon.png/revision/latest?cb=20260618093830",
+      "height": 456,
+      "path": "assets/images/products/zzz/1b7c215b70ab8de34a18.webp",
+      "sha256": "0447df39450e010cc2b673f49f8cba30ba33698dec6034454b6a1292fe58ae89",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Area%20%28Hollow%29%20Scamall%20Hollow%20Icon.png",
+      "width": 456
+    },
     "zzz:22028193921f00b294e8": {
       "bytes": 22514,
       "checked_at": "2026-07-24T07:29:53Z",
@@ -2278,6 +3268,26 @@
       "path": "assets/images/products/zzz/22028193921f00b294e8.webp",
       "sha256": "dcb92175589ca8fc3b6b5430ba8f792609dfa6411af72928f719c7e9d2e1d4a6",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20Chronicle%20of%20Simmering%20Flavors.png",
+      "width": 480
+    },
+    "zzz:2ea2d459c5e8b7f0c0d7": {
+      "bytes": 27526,
+      "checked_at": "2026-08-03T07:12:05Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/0a/Area_Booastrum_District_Icon.png/revision/latest?cb=20260618093829",
+      "height": 456,
+      "path": "assets/images/products/zzz/2ea2d459c5e8b7f0c0d7.webp",
+      "sha256": "4b3b8f115fa26e2b22be1fe059e759af023b6c462c64a6436e347935aea00094",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Area%20Booastrum%20District%20Icon.png",
+      "width": 456
+    },
+    "zzz:3068051697df5dccc732": {
+      "bytes": 5720,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/9a/Travel_Point_%28Hollow%29_Old_Building_Complex_Icon.png/revision/latest/scale-to-width-down/480?cb=20251015182348",
+      "height": 214,
+      "path": "assets/images/products/zzz/3068051697df5dccc732.webp",
+      "sha256": "7385d621386f51ae2d6a9330c3b2059da8eb7793639f0dceaae7a71fbb831d41",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Old%20Building%20Complex%20Icon.png",
       "width": 480
     },
     "zzz:31f466d4fa5a926b4c6a": {
@@ -2290,6 +3300,16 @@
       "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/0d/Zenless_Zone_Zero_App_Icon.png/revision/latest/scale-to-width/360?cb=20260313081252",
       "width": 360
     },
+    "zzz:328795ac0a0592e241f8": {
+      "bytes": 18478,
+      "checked_at": "2026-08-03T07:12:07Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/97/Port_Elpis_Overview.png/revision/latest/scale-to-width-down/480?cb=20250101225127",
+      "height": 306,
+      "path": "assets/images/products/zzz/328795ac0a0592e241f8.webp",
+      "sha256": "3f56bc9a005e3dad7db1f6c1397a8bc522aefb2661182ee80e0f411e30a8d7de",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Port%20Elpis%20Overview.png",
+      "width": 480
+    },
     "zzz:330e8691392625d84c7c": {
       "bytes": 23064,
       "checked_at": "2026-07-24T07:29:54Z",
@@ -2300,6 +3320,36 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20Sword%20Seeker%20Chronicles.png",
       "width": 480
     },
+    "zzz:3445016ca21c3054ae94": {
+      "bytes": 5360,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/4/41/Travel_Point_%28Hollow%29_Former_Employee_Community_Icon.png/revision/latest?cb=20250611065928",
+      "height": 160,
+      "path": "assets/images/products/zzz/3445016ca21c3054ae94.webp",
+      "sha256": "b27815723cd4cf404a1052cdc82e44f2ea67422ead925f3ab379ecad315f5564",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Former%20Employee%20Community%20Icon.png",
+      "width": 364
+    },
+    "zzz:38774952fdf9cc81b458": {
+      "bytes": 6494,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a0/Travel_Point_%28Restricted_Area%29_Energy_Hub_Icon.png/revision/latest/scale-to-width-down/480?cb=20260618094335",
+      "height": 214,
+      "path": "assets/images/products/zzz/38774952fdf9cc81b458.webp",
+      "sha256": "57de3c6932eb42d3bf26fb4265ca17f250c73d485fd87d1611d8f74ec32780d0",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Restricted%20Area%29%20Energy%20Hub%20Icon.png",
+      "width": 480
+    },
+    "zzz:391a55a53455bff0b574": {
+      "bytes": 31358,
+      "checked_at": "2026-08-03T07:12:02Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/04/A_Closer_Look_at_Roscaelifer_-_Velina_Airgid.png/revision/latest/scale-to-width-down/480?cb=20260605101957",
+      "height": 480,
+      "path": "assets/images/products/zzz/391a55a53455bff0b574.webp",
+      "sha256": "69e1074dcb1ae1ea6946b1dea56f0adde11eccdd4621856d348d3e8c53b13bd4",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/A%20Closer%20Look%20at%20Roscaelifer%20-%20Velina%20Airgid.png",
+      "width": 361
+    },
     "zzz:3c5027991f10ae0a529c": {
       "bytes": 13156,
       "checked_at": "2026-07-24T07:29:52Z",
@@ -2308,6 +3358,16 @@
       "path": "assets/images/products/zzz/3c5027991f10ae0a529c.webp",
       "sha256": "7e69cc7c0ab4a9a1e49b5ae4388ec07aaf22572c43439d74e7c15f0e7841e03b",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Area%20Sixth%20Street.png",
+      "width": 480
+    },
+    "zzz:40d250da07158d72b991": {
+      "bytes": 13378,
+      "checked_at": "2026-08-03T07:12:02Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/8/8f/Travel_Point_%28Hollow%29_Sunken_Corridor_Icon.png/revision/latest/scale-to-width-down/480?cb=20260618094336",
+      "height": 214,
+      "path": "assets/images/products/zzz/40d250da07158d72b991.webp",
+      "sha256": "70c48111239f6146558a5c82cdb544925b7502ba6b0958384e0b8a39b6fce540",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Sunken%20Corridor%20Icon.png",
       "width": 480
     },
     "zzz:510e5d6d5277db7309fb": {
@@ -2360,6 +3420,36 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Shiyu%20Defense.png",
       "width": 480
     },
+    "zzz:6671a7a765190692126d": {
+      "bytes": 16568,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/fd/Area_Brant_Street_Construction_Site.png/revision/latest/scale-to-width-down/480?cb=20260427102231",
+      "height": 306,
+      "path": "assets/images/products/zzz/6671a7a765190692126d.webp",
+      "sha256": "faeac6e2da2551276e8a6c85f45a72191df93983067c62bc38b7469e431079b4",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Area%20Brant%20Street%20Construction%20Site.png",
+      "width": 480
+    },
+    "zzz:690dc8870d90e6538e43": {
+      "bytes": 6108,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/94/Travel_Point_%28Hollow%29_Lumite_Mine_Icon.png/revision/latest/scale-to-width-down/480?cb=20260108042156",
+      "height": 214,
+      "path": "assets/images/products/zzz/690dc8870d90e6538e43.webp",
+      "sha256": "7a6a6832db94d8e2ebabea9fcd9cb43b435c5a433c09f5221d4aa85e1a6334c6",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Lumite%20Mine%20Icon.png",
+      "width": 480
+    },
+    "zzz:69400c22d614738f5e38": {
+      "bytes": 5420,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/f/f9/Travel_Point_%28Hollow%29_Former_Research_Center_Icon.png/revision/latest?cb=20250611070042",
+      "height": 160,
+      "path": "assets/images/products/zzz/69400c22d614738f5e38.webp",
+      "sha256": "16ab5da1e3ee87fa5e3a4731ee6056d028abf79527803799351e1d1fe3d81fc5",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Former%20Research%20Center%20Icon.png",
+      "width": 364
+    },
     "zzz:6babe537c53c44beba29": {
       "bytes": 24256,
       "checked_at": "2026-07-24T07:29:53Z",
@@ -2368,6 +3458,16 @@
       "path": "assets/images/products/zzz/6babe537c53c44beba29.webp",
       "sha256": "a4b9e1264c1c0b043ac10815f9a22e14c72b1d6bc8eeb7361306c93acdeb7d9a",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20A%20Harmony%20of%20Delusions.png",
+      "width": 480
+    },
+    "zzz:791e7c179635e4954ca4": {
+      "bytes": 6164,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/02/Travel_Point_%28Hollow%29_Old_Port_Factory_Icon.png/revision/latest/scale-to-width-down/480?cb=20260108042144",
+      "height": 214,
+      "path": "assets/images/products/zzz/791e7c179635e4954ca4.webp",
+      "sha256": "a5b3cf354880e4c7947a78db0296dac40690fee8b865a609ebc8573f260c6fa4",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Old%20Port%20Factory%20Icon.png",
       "width": 480
     },
     "zzz:79cfd71776ae196f66eb": {
@@ -2380,6 +3480,26 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Icon%20The%20Mystery%20of%20Arpeggio%20Fault.png",
       "width": 480
     },
+    "zzz:81afe1e30d01892127d9": {
+      "bytes": 5874,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGkxdhRz6ifi2rUNO0OUVkgC-d_l_3_ERLhd_4b8DqxQ&s",
+      "height": 179,
+      "path": "assets/images/products/zzz/81afe1e30d01892127d9.webp",
+      "sha256": "acd830de3ea984f2e567828b44e5c0e0175f2adf071b652f11bcdb65e57fa346",
+      "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGkxdhRz6ifi2rUNO0OUVkgC-d_l_3_ERLhd_4b8DqxQ&s",
+      "width": 280
+    },
+    "zzz:8978c5001a2d5dc4c752": {
+      "bytes": 6458,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/7/77/Travel_Point_%28Hollow%29_Community_Shipping_Depot_Icon.png/revision/latest/scale-to-width-down/480?cb=20250827180952",
+      "height": 214,
+      "path": "assets/images/products/zzz/8978c5001a2d5dc4c752.webp",
+      "sha256": "00b768b0b8386c6b32878b1e1302b39905911a2ea23286e873c57c744714d966",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Community%20Shipping%20Depot%20Icon.png",
+      "width": 480
+    },
     "zzz:975bc73a9a5aa2e8203f": {
       "bytes": 16954,
       "checked_at": "2026-07-24T07:29:52Z",
@@ -2388,6 +3508,26 @@
       "path": "assets/images/products/zzz/975bc73a9a5aa2e8203f.webp",
       "sha256": "487c84923562ee0a9e8596831ad733dac92f514d7ee1aa401739b660221aa7e9",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20The%20Day%20of%20Brilliant%20Wishes.png",
+      "width": 480
+    },
+    "zzz:988141dbf38e4ef12f29": {
+      "bytes": 26328,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/2a/Lemnian_Hallow.jpg/revision/latest/scale-to-width-down/480?cb=20240708112615",
+      "height": 269,
+      "path": "assets/images/products/zzz/988141dbf38e4ef12f29.webp",
+      "sha256": "5e44703ae58e8ceb9bc7b8419a4cef02448b580d23b3a4643d18a552322a007c",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Lemnian%20Hallow.jpg",
+      "width": 480
+    },
+    "zzz:9d13ac75304186c26433": {
+      "bytes": 6202,
+      "checked_at": "2026-08-03T07:12:03Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/23/Travel_Point_%28Restricted_Area%29_CCD_Icon.png/revision/latest/scale-to-width-down/480?cb=20260618094333",
+      "height": 214,
+      "path": "assets/images/products/zzz/9d13ac75304186c26433.webp",
+      "sha256": "4c373775ccabbb185bf38985708cb3f266f3409bd6f7c83b3051e796c5956e23",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Restricted%20Area%29%20CCD%20Icon.png",
       "width": 480
     },
     "zzz:9f6288443acd6670cc51": {
@@ -2430,6 +3570,26 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Icon%20Dialogue%20Story.png",
       "width": 50
     },
+    "zzz:bdbac9ffdb99383f6f0d": {
+      "bytes": 7592,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/2/29/Travel_Point_%28Hollow%29_Porcelume_Processing_Base_Icon.png/revision/latest/scale-to-width-down/480?cb=20260108042215",
+      "height": 214,
+      "path": "assets/images/products/zzz/bdbac9ffdb99383f6f0d.webp",
+      "sha256": "d465e96f636d15c12791ea79dce62c9f1450eabd84c68b3e37258ae59bbb5702",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Porcelume%20Processing%20Base%20Icon.png",
+      "width": 480
+    },
+    "zzz:be13ae57b7b31f71d7e0": {
+      "bytes": 15758,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/9/93/Janus_Quarter%27s_August_Street_Sub-Hollow.png/revision/latest/scale-to-width-down/480?cb=20220513183541",
+      "height": 336,
+      "path": "assets/images/products/zzz/be13ae57b7b31f71d7e0.webp",
+      "sha256": "b8ad44cdc9bc50686257967f278ad2f358207477eed955255aced95a208a1024",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Janus%20Quarter%27s%20August%20Street%20Sub-Hollow.png",
+      "width": 480
+    },
     "zzz:c183718678b36bd3d24a": {
       "bytes": 7704,
       "checked_at": "2026-07-24T07:29:55Z",
@@ -2449,6 +3609,36 @@
       "sha256": "cbf477439b9b34d8a6f58a0726bd1301aa9af4b75ee9c72861e802d7a2263a4c",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Icon%20Dialogue%20Agent.png",
       "width": 50
+    },
+    "zzz:cf7b1c8cf2aeefcb766f": {
+      "bytes": 8430,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/09/Area_Sixth_Street.png/revision/latest/scale-to-width/360?cb=20250618235419",
+      "height": 203,
+      "path": "assets/images/products/zzz/cf7b1c8cf2aeefcb766f.webp",
+      "sha256": "db7131cdbf185f5d549a96a16ef71799d436bf6fb8a4c6eb494cba4ac28c6c94",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/0/09/Area_Sixth_Street.png/revision/latest/scale-to-width/360?cb=20250618235419",
+      "width": 360
+    },
+    "zzz:d18613206c7c9c408607": {
+      "bytes": 9446,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a4/Area_Lumina_Square.png/revision/latest/scale-to-width/360?cb=20250618092654",
+      "height": 173,
+      "path": "assets/images/products/zzz/d18613206c7c9c408607.webp",
+      "sha256": "a009bbf6c77ee743b43ef47922a5da26eef939dfd1de85b99fb9be16034b4bdf",
+      "source": "https://static.wikia.nocookie.net/zenless-zone-zero/images/a/a4/Area_Lumina_Square.png/revision/latest/scale-to-width/360?cb=20250618092654",
+      "width": 360
+    },
+    "zzz:d468b7ca2126a310ddd6": {
+      "bytes": 5278,
+      "checked_at": "2026-08-03T07:12:00Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/1/1e/Travel_Point_%28Hollow%29_Central_Production_Area_Icon.png/revision/latest?cb=20250611065921",
+      "height": 160,
+      "path": "assets/images/products/zzz/d468b7ca2126a310ddd6.webp",
+      "sha256": "cf0752df6aff51f0761fbbd15904de7dcbb166d2518b298d51d3f8ec578c523d",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Central%20Production%20Area%20Icon.png",
+      "width": 364
     },
     "zzz:d57f0aa748c52fe276b0": {
       "bytes": 25072,
@@ -2470,6 +3660,16 @@
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20Elpis%20Ultimate%20Angler%20Championship.png",
       "width": 480
     },
+    "zzz:dae784824ced051de7c8": {
+      "bytes": 12046,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/e/ee/Travel_Point_%28Hollow%29_Qingming_Realm_Icon.png/revision/latest/scale-to-width-down/480?cb=20260108042132",
+      "height": 214,
+      "path": "assets/images/products/zzz/dae784824ced051de7c8.webp",
+      "sha256": "e84bfd38ebac57d7c1edbda8c2f21cfca97c9141be8335577ad363a744d20db5",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Qingming%20Realm%20Icon.png",
+      "width": 480
+    },
     "zzz:de39f00618fbce286b50": {
       "bytes": 13950,
       "checked_at": "2026-07-24T07:29:53Z",
@@ -2488,6 +3688,16 @@
       "path": "assets/images/products/zzz/e0009f27e1f320e08ad1.webp",
       "sha256": "754b32a19cd6554c7176a91d5de8b9f1ed15ad1ad232a67732016febbc051bd1",
       "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Event%20Tales%20of%20Midsummer%20Dreams.png",
+      "width": 480
+    },
+    "zzz:e7c26ca22db2c7794f32": {
+      "bytes": 11090,
+      "checked_at": "2026-08-03T07:12:01Z",
+      "final_url": "https://static.wikia.nocookie.net/zenless-zone-zero/images/5/5e/Travel_Point_%28Hollow%29_Timesworn_Hills_Icon.png/revision/latest/scale-to-width-down/480?cb=20251015182316",
+      "height": 214,
+      "path": "assets/images/products/zzz/e7c26ca22db2c7794f32.webp",
+      "sha256": "d15bd2c9d9c9f7f2f96ca82ee1aa93cc404be9caecf1bc70877b44565e8074b3",
+      "source": "https://zenless-zone-zero.fandom.com/wiki/Special:Redirect/file/Travel%20Point%20%28Hollow%29%20Timesworn%20Hills%20Icon.png",
       "width": 480
     },
     "zzz:ebb94be859d63a76c778": {
